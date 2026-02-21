@@ -367,7 +367,7 @@ const SKIN_CSS = {
 const getSkinCSS = (themeId) => SKIN_CSS[themeId] || SKIN_CSS.default;
 
 /* ═══════════════ CONSTANTS ═══════════════ */
-const STORE = { progress: 'ib-progress-v2', repo: 'ib-repo-v2', docs: 'ib-docs-v2', profile: 'ib-profile-v2', gamify: 'ib-gamify-v1', planner: 'ib-planner-v1', battlePlan: 'ib-battleplan-v1', rewards: 'ib-rewards-v1', rewardHistory: 'ib-reward-hist-v1', knowledgeBank: 'ib-knowledge-v2', gDrive: 'ib-gdrive-v1', remarkableSettings: 'ib-remarkable-v1', parentMode: 'ib-parent-mode-v1', questionDB: 'ib-qdb-v1', questionHistory: 'ib-qhist-v1', msnSessions: 'ib-msn-sessions-v1' };
+const STORE = { progress: 'ib-progress-v2', repo: 'ib-repo-v2', docs: 'ib-docs-v2', profile: 'ib-profile-v2', gamify: 'ib-gamify-v1', planner: 'ib-planner-v1', battlePlan: 'ib-battleplan-v1', rewards: 'ib-rewards-v1', rewardHistory: 'ib-reward-hist-v1', knowledgeBank: 'ib-knowledge-v2', gDrive: 'ib-gdrive-v1', remarkableSettings: 'ib-remarkable-v1', parentMode: 'ib-parent-mode-v1', questionDB: 'ib-qdb-v1', questionHistory: 'ib-qhist-v1', msnSessions: 'ib-msn-sessions-v1', crusadeMaster: 'ib-crusade-master-v1', crusadeActive: 'ib-crusade-active-v1', crusadeGhost: 'ib-crusade-ghost-v1', cognitiveLoad: 'ib-cognitive-load-v1', fogOfWarPref: 'ib-fog-of-war-v1' };
 
 // Generate Mission Serial Number: MSN-[SUBJ]-[YYYYMMDD]-[HHMM]-[4charHash]
 const generateMSN = (subjectName) => {
@@ -434,6 +434,200 @@ function compressForStorage(obj) {
   }
   return out;
 }
+/* ═══════════ v52 CRUSADE SYSTEM FUNCTIONS ═══════════ */
+
+function computeVelocity(mockGrade, targetGrade, daysUntilExam) {
+  if (!daysUntilExam || daysUntilExam <= 0) return 0;
+  const v = (targetGrade - mockGrade) / daysUntilExam;
+  return Math.max(0, v);
+}
+
+function generateBattlePlanData(profile, existingMaster) {
+  // Only generate if no master exists
+  if (existingMaster) return null;
+  const subjects = profile?.subjects || [];
+  const examDate = subjects.reduce((earliest, s) => {
+    const d = s.examDate ? new Date(s.examDate) : new Date('2026-05-16');
+    return !earliest || d < earliest ? d : earliest;
+  }, null) || new Date('2026-05-16');
+  const daysUntilExam = Math.max(1, Math.floor((examDate - Date.now()) / 86400000));
+  const scheduledDays = [];
+  const subjectVelocities = subjects.map(s => ({
+    name: s.name,
+    velocity: computeVelocity(s.currentGrade || 4, s.targetGrade || 7, daysUntilExam),
+    topics: Object.keys(SUBJECT_FRAMEWORKS).find(k =>
+      k.toLowerCase().includes((s.name || '').toLowerCase().split(' ')[0])
+    ) ? Object.keys(SUBJECT_FRAMEWORKS[Object.keys(SUBJECT_FRAMEWORKS).find(k =>
+      k.toLowerCase().includes((s.name || '').toLowerCase().split(' ')[0])
+    )]?.papers || {}) : ['General Review']
+  }));
+  const totalVelocity = subjectVelocities.reduce((s, v) => s + v.velocity, 0) || 1;
+  for (let day = 0; day < 90; day++) {
+    const rand = Math.random() * totalVelocity;
+    let cumulative = 0;
+    let chosen = subjectVelocities[0];
+    for (const sv of subjectVelocities) {
+      cumulative += sv.velocity;
+      if (rand <= cumulative) { chosen = sv; break; }
+    }
+    const topicIdx = day % (chosen.topics.length || 1);
+    scheduledDays.push({ day, subject: chosen.name, topic: chosen.topics[topicIdx] || 'General Review', paper: 'P2' });
+  }
+  return { scheduledDays, subjects: subjects.map(s => s.name), generatedAt: Date.now(), heresy: [], voxLog: [], synergyLinks: [], lastIntercept: null };
+}
+
+function runWeeklyInterceptData(crusadeActive, repo) {
+  if (!crusadeActive) return null;
+  const now = Date.now();
+  const lastIntercept = crusadeActive.lastIntercept || 0;
+  const daysSinceLast = (now - lastIntercept) / 86400000;
+  const today = new Date().getDay(); // 0=Sun
+  if (today !== 0 && daysSinceLast < 6) return null; // only run Sundays or if >6 days
+  const recentEntries = (repo || []).filter(r => r.date && (now - new Date(r.date)) < 7 * 86400000);
+  const clusters = {};
+  for (const entry of recentEntries) {
+    if (!entry.subject || !entry.grade) continue;
+    const key = `${entry.subject}__${entry.paperType || 'P2'}`;
+    if (!clusters[key]) clusters[key] = { subject: entry.subject, paper: entry.paperType || 'P2', scores: [], topics: [] };
+    const score = ((entry.grade || 1) / 7) * 100;
+    clusters[key].scores.push(score);
+    if (entry.questions) {
+      for (const q of entry.questions) {
+        if ((q.status === 'zero' || q.status === 'partial') && q.topic) clusters[key].topics.push(q.topic);
+      }
+    }
+  }
+  const heresyClusters = Object.values(clusters).filter(c => {
+    const avgScore = c.scores.reduce((a, b) => a + b, 0) / (c.scores.length || 1);
+    return avgScore < 70 && c.scores.length >= 2;
+  });
+  if (heresyClusters.length === 0) {
+    return { ...crusadeActive, lastIntercept: now };
+  }
+  const ghost = JSON.parse(JSON.stringify(crusadeActive));
+  const newActive = JSON.parse(JSON.stringify(crusadeActive));
+  const heresy = [...new Set([...(newActive.heresy || []), ...heresyClusters.map(c => c.subject)])];
+  // Replace next 3 scheduled days with remediation
+  const upcoming = (newActive.scheduledDays || []).filter(d => d.day >= Math.floor((now - Date.now()) / 86400000)).slice(0, 3);
+  for (let i = 0; i < Math.min(3, heresyClusters.length); i++) {
+    const slot = upcoming[i];
+    if (slot) slot.subject = heresyClusters[i].subject;
+  }
+  newActive.heresy = heresy;
+  newActive.lastIntercept = now;
+  return { newActive, ghost };
+}
+
+function deriveMissionSlatesData(crusadeActive, cognitiveLoad, repo) {
+  if (!crusadeActive?.scheduledDays?.length) return null;
+  const now = Date.now();
+  const today = new Date().toDateString();
+  // Find upcoming days
+  const upcoming = crusadeActive.scheduledDays.slice(0, 10);
+  // Alpha — primary mission (first upcoming, not fatigued)
+  const isFatigued = (subject) => {
+    const cl = cognitiveLoad?.[subject];
+    if (!cl?.fatigued) return false;
+    return cl.fatiguedUntil > now;
+  };
+  let alpha = upcoming.find(d => !isFatigued(d.subject)) || upcoming[0];
+  // Beta — heresy/intercept
+  const heresySubject = (crusadeActive.heresy || [])[0];
+  let beta = heresySubject
+    ? { subject: heresySubject, topic: 'Heresy Remediation', paper: 'P2', label: 'BETA', source: 'Intelligence Intercept' }
+    : (upcoming[1] ? { ...upcoming[1], label: 'BETA', source: 'Master Plan' } : null);
+  // Gamma — oldest untouched subject
+  const subjects = [...new Set((crusadeActive.scheduledDays || []).map(d => d.subject))];
+  const lastPracticed = {};
+  for (const entry of (repo || [])) {
+    if (entry.subject && entry.date) {
+      const t = new Date(entry.date).getTime();
+      if (!lastPracticed[entry.subject] || t > lastPracticed[entry.subject]) lastPracticed[entry.subject] = t;
+    }
+  }
+  const gammaSub = subjects.sort((a, b) => (lastPracticed[a] || 0) - (lastPracticed[b] || 0))[0];
+  let gamma = gammaSub ? { subject: gammaSub, topic: 'Maintenance Review', paper: 'P1', label: 'GAMMA', source: 'Maintenance Rite' } : null;
+  // Apply fatigue redirect
+  const applyFatigue = (slate, label, source) => {
+    if (!slate || !isFatigued(slate.subject)) return { ...slate, label, source };
+    const alt = subjects.find(s => s !== slate.subject && !isFatigued(s));
+    if (!alt) return { ...slate, label, source, fatigueRedirect: true, originalSubject: slate.subject };
+    return { subject: alt, topic: 'Low-Intensity Drill', paper: 'P1', label, source, fatigueRedirect: true, originalSubject: slate.subject };
+  };
+  alpha = applyFatigue(alpha, 'ALPHA', 'Tactical Mandate');
+  beta = applyFatigue(beta, 'BETA', beta?.source || 'Intelligence Intercept');
+  gamma = applyFatigue(gamma, 'GAMMA', 'Maintenance Rite');
+  // Synergy badges
+  const addSynergy = (slate) => {
+    if (!slate) return slate;
+    const link = (crusadeActive.synergyLinks || []).find(l => l.subjects?.includes(slate.subject));
+    if (link) return { ...slate, synergyLink: link };
+    return slate;
+  };
+  return { alpha: addSynergy(alpha), beta: addSynergy(beta), gamma: addSynergy(gamma) };
+}
+
+function parseReflectionVoxText(text) {
+  const subjectKeywords = ['math','mathematics','history','english','sports','sport','exercise','health','science'];
+  const urgencyKeywords = ['scared','terrified','struggling','worried','failing','hate','confused','lost','stressed','behind'];
+  const lower = (text || '').toLowerCase();
+  const matchedSubject = subjectKeywords.find(k => lower.includes(k));
+  const hasUrgency = urgencyKeywords.some(k => lower.includes(k));
+  if (matchedSubject && hasUrgency) return { adjustments: [{ subject: matchedSubject, multiplier: 1.5 }] };
+  return { adjustments: [] };
+}
+
+function detectSynergyLinksData(heresy, subjectFrameworks) {
+  const links = [];
+  const heresyTopics = heresy || [];
+  const subjects = Object.keys(subjectFrameworks || {});
+  for (const topic of heresyTopics) {
+    const matchingSubjects = subjects.filter(s => {
+      const papers = subjectFrameworks[s]?.papers || {};
+      return Object.keys(papers).some(p => p.toLowerCase().includes(topic.toLowerCase().split(' ')[0]));
+    });
+    if (matchingSubjects.length >= 2) {
+      links.push({ concept: topic, subjects: matchingSubjects, topics: matchingSubjects.map(s => topic) });
+    }
+  }
+  return links;
+}
+
+function calculateWarFitnessData(subject, repo) {
+  const now = Date.now();
+  const entries = (repo || []).filter(r => r.subject === subject && r.date && (now - new Date(r.date)) < 14 * 86400000);
+  const byPaper = { P1: [], P2: [], P3: [] };
+  for (const entry of entries) {
+    const p = entry.paperType?.toUpperCase();
+    const score = entry.totalMarks > 0 ? Math.round((entry.marksAwarded / entry.totalMarks) * 100) : ((entry.grade || 1) / 7) * 100;
+    const weighted = score * (entry.fogOfWar ? (entry.weightMultiplier || 2.0) : 1);
+    if (byPaper[p]) byPaper[p].push(weighted);
+    else byPaper['P2'].push(weighted);
+  }
+  const paperStatus = (scores) => {
+    if (!scores.length) return { avgScore: 0, entryCount: 0, status: 'No Data' };
+    const avg = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+    return { avgScore: avg, entryCount: scores.length, status: avg >= 70 ? 'Combat Ready' : avg >= 60 ? 'Developing' : 'Critical Gap' };
+  };
+  const p1 = paperStatus(byPaper.P1);
+  const p2 = paperStatus(byPaper.P2);
+  const p3 = paperStatus(byPaper.P3);
+  const allScores = [...byPaper.P1, ...byPaper.P2, ...byPaper.P3];
+  const overallReadiness = allScores.length ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : 0;
+  const criticalGaps = [p1, p2, p3].filter(p => p.status === 'Critical Gap').map((p, i) => ['P1','P2','P3'][i]);
+  return { subject, P1: p1, P2: p2, P3: p3, criticalGaps, overallReadiness };
+}
+
+function checkExamEveData(userSubjects) {
+  const now = Date.now();
+  for (const s of (userSubjects || [])) {
+    const examDate = s.examDate ? new Date(s.examDate) : new Date('2026-05-16');
+    const days = Math.floor((examDate - now) / 86400000);
+    if (days < 2) return true;
+  }
+  return false;
+}
+
 function decompressFromStorage(obj) {
   if (!obj || typeof obj !== 'object') return typeof obj === 'string' ? decompressText(obj) : obj;
   const out = Array.isArray(obj) ? [...obj] : { ...obj };
@@ -8259,6 +8453,22 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [viewingSession, setViewingSession] = useState(null); // session shown in overlay from Battle Log
   const [expandedSession, setExpandedSession] = useState(null); // expanded row in Battle Log (session id)
   const [highlightSession, setHighlightSession] = useState(null); // session to highlight in Battle Log
+  // v52 Crusade System state
+  const [crusadeMasterData, setCrusadeMasterData] = useState(null);
+  const [crusadeActiveData, setCrusadeActiveData] = useState(null);
+  const [crusadeGhostData, setCrusadeGhostData] = useState(null);
+  const [missionSlates, setMissionSlates] = useState(null);
+  // v52 Script 1 state
+  const [cognitiveLoadData, setCognitiveLoadData] = useState({});
+  const [fogOfWarActive, setFogOfWarActive] = useState(false);
+  // v52 Script 2 state
+  const [examEveActive, setExamEveActive] = useState(false);
+  const [warFitnessData, setWarFitnessData] = useState({});
+  const [dispatchGenerated, setDispatchGenerated] = useState(false);
+  const [dispatchData, setDispatchData] = useState(null);
+  const [studyThisQuestion, setStudyThisQuestion] = useState(null);
+  const [studyThisLoading, setStudyThisLoading] = useState(false);
+  const [studyThisResult, setStudyThisResult] = useState(null);
   const [battleLogFilter, setBattleLogFilter] = useState({ subject: 'all', paper: 'all', range: 'month' });
   const [battleLogSort, setBattleLogSort] = useState('newest');
   const [sitrepCollapsed, setSitrepCollapsed] = useState(false); // collapse/expand sitrep card
@@ -8714,11 +8924,71 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
       try { const r = await window.storage.get(STORE.remarkableSettings); if (r?.value) { const s = JSON.parse(r.value); setGdriveClientId(s.clientId || ''); setGdriveTodoFolderId(s.todoFolderId || ''); setGdriveDoneFolderId(s.doneFolderId || ''); setGvisionApiKey(s.visionApiKey || ''); } } catch {}
       try { const r = await window.storage.get(STORE.parentMode); if (r?.value) setParentMode(r.value === 'true'); } catch {}
       try { const r = await window.storage.get(STORE.questionHistory); if (r?.value) setQuestionHistory(JSON.parse(r.value)); } catch {}
+      // v52 Crusade / Fog / CognitiveLoad
+      try { const r = await window.storage.get(STORE.crusadeMaster); if (r?.value) setCrusadeMasterData(JSON.parse(r.value)); } catch {}
+      try { const r = await window.storage.get(STORE.crusadeActive); if (r?.value) setCrusadeActiveData(JSON.parse(r.value)); } catch {}
+      try { const r = await window.storage.get(STORE.crusadeGhost); if (r?.value) setCrusadeGhostData(JSON.parse(r.value)); } catch {}
+      try { const r = await window.storage.get(STORE.cognitiveLoad); if (r?.value) setCognitiveLoadData(JSON.parse(r.value)); } catch {}
+      try { const r = await window.storage.get(STORE.fogOfWarPref); if (r?.value) setFogOfWarActive(r.value === 'true'); } catch {}
       clearTimeout(safetyTimer);
       setProfileLoaded(true); setLoading(false);
     })();
     return () => clearTimeout(safetyTimer);
   }, []);
+
+  // v52 useEffect — Derive mission slates whenever crusade data or cognitive load changes
+  useEffect(() => {
+    if (!crusadeActiveData) { setMissionSlates(null); return; }
+    const slates = deriveMissionSlatesData(crusadeActiveData, cognitiveLoadData, repo);
+    setMissionSlates(slates);
+  }, [crusadeActiveData, cognitiveLoadData, repo]);
+
+  // v52 useEffect — Auto-init crusade when profile loads and no master exists
+  useEffect(() => {
+    if (!profile || crusadeMasterData) return;
+    const master = generateBattlePlanData(profile, crusadeMasterData);
+    if (!master) return;
+    const active = { ...master, scheduledDays: master.scheduledDays.slice() };
+    setCrusadeMasterData(master);
+    setCrusadeActiveData(active);
+    window.storage.set(STORE.crusadeMaster, JSON.stringify(master)).catch(() => {});
+    window.storage.set(STORE.crusadeActive, JSON.stringify(active)).catch(() => {});
+  }, [profile, crusadeMasterData]);
+
+  // v52 useEffect — STUDY THIS event listener
+  useEffect(() => {
+    const handler = (e) => {
+      setStudyThisQuestion(e.detail);
+      setStudyThisResult(null);
+      setStudyThisLoading(false);
+    };
+    window.addEventListener('ib-study-this', handler);
+    return () => window.removeEventListener('ib-study-this', handler);
+  }, []);
+
+  // v52 useEffect — Weekly intercept check on load
+  useEffect(() => {
+    if (!crusadeActiveData || !repo.length) return;
+    const result = runWeeklyInterceptData(crusadeActiveData, repo);
+    if (!result) return;
+    if (result.newActive) {
+      setCrusadeActiveData(result.newActive);
+      setCrusadeGhostData(result.ghost);
+      window.storage.set(STORE.crusadeActive, JSON.stringify(result.newActive)).catch(() => {});
+      window.storage.set(STORE.crusadeGhost, JSON.stringify(result.ghost)).catch(() => {});
+    } else {
+      // just updated lastIntercept
+      const updated = result;
+      setCrusadeActiveData(updated);
+      window.storage.set(STORE.crusadeActive, JSON.stringify(updated)).catch(() => {});
+    }
+  }, []);
+
+  // v52 useEffect — Exam Eve check
+  useEffect(() => {
+    if (!userSubjects.length) return;
+    setExamEveActive(checkExamEveData(userSubjects));
+  }, [userSubjects]);
 
   const saveProfile = useCallback(async (p) => { try { await window.storage.set(STORE.profile, JSON.stringify(p)); setProfile(p); } catch(e) { console.error(e); } }, []);
 
@@ -8762,6 +9032,25 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const themeAch = theme.achievements || {};
   const saveProgress = useCallback(async (d) => { try { await window.storage.set(STORE.progress, JSON.stringify(d)); setProgress(d); } catch(e) { console.error(e); } }, []);
   const saveRepo = useCallback(async (r) => { try { await window.storage.set(STORE.repo, JSON.stringify(compressForStorage(r))); setRepo(r); } catch(e) { console.error(e); } }, []);
+
+  // v52 trackCognitiveLoad — called after each study session completes
+  const trackCognitiveLoad = useCallback(async (subject, grade, totalTimeMinutes) => {
+    const now = Date.now();
+    const intensity = (totalTimeMinutes >= 60 && grade <= 4) ? 'high' : (totalTimeMinutes >= 30 || grade <= 5) ? 'medium' : 'low';
+    setCognitiveLoadData(prev => {
+      const subj = prev[subject] || { sessions: [], fatigued: false, fatiguedUntil: 0 };
+      const recentSessions = [...(subj.sessions || []).filter(s => now - s.time < 86400000), { time: now, intensity }];
+      const highCount = recentSessions.filter(s => s.intensity === 'high').length;
+      const fatigued = highCount >= 3;
+      const fatiguedUntil = fatigued ? now + 6 * 3600000 : 0; // 6 hour rest
+      const updated = { ...prev, [subject]: { sessions: recentSessions, fatigued, fatiguedUntil, lastUpdated: now } };
+      window.storage.set(STORE.cognitiveLoad, JSON.stringify(updated)).catch(() => {});
+      if (fatigued) {
+        addToast(`⚠️ Vox-Silence: ${subject} fatigue detected. Recommend rest or low-intensity drill.`, 'warning');
+      }
+      return updated;
+    });
+  }, [addToast]);
   // P0 FIX B04: Store doc base64 separately to prevent storage overflow
   const saveDocs = useCallback(async (d) => {
     try {
@@ -12472,6 +12761,8 @@ For EACH question, you MUST provide:
         totalMarks: totalPossibleMarks || null, marksAwarded: totalMarksAwarded || null,
         questions: enrichedQuestions, summary: summaryParsed,
         grading: text, grade, totalTime, date: new Date().toISOString(),
+        fogOfWar: fogOfWarActive || false,
+        weightMultiplier: fogOfWarActive ? 2.0 : 1.0,
       });
       if (grade) await recordPractice(currentSubject.name, studyTopic, finalQs.length, grade);
       // Gamification
@@ -12487,6 +12778,10 @@ For EACH question, you MUST provide:
         }
       }
       addToast('Study session graded!');
+      // v52 — track cognitive load after session
+      if (currentSubject?.name && grade) {
+        trackCognitiveLoad(currentSubject.name, grade, Math.round(totalTime / 60));
+      }
 
       // Check if any parent-defined rewards are newly earned
       if (rewards.length > 0) {
@@ -13700,6 +13995,80 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
           if (plannerSubTab !== 'battleplan') return null;
 
           return <div className="mt-4 space-y-4">
+            {/* ══ v52 SEGMENTUM MAP ══ */}
+            {crusadeActiveData?.scheduledDays?.length > 0 && (
+              <div className="rounded-2xl p-4" style={{ background: '#0f1923', border: '1px solid #1e3a4a' }}>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-black uppercase tracking-widest text-cyan-400">⚙️ Segmentum Map</span>
+                  <span className="text-[10px] text-slate-500">Crusade velocity schedule</span>
+                </div>
+                {/* Subject velocity bars */}
+                <div className="space-y-2 mb-4">
+                  {[...new Set(crusadeActiveData.scheduledDays.slice(0, 30).map(d => d.subject))].map((subj, i) => {
+                    const subjectDays = crusadeActiveData.scheduledDays.filter(d => d.subject === subj).length;
+                    const totalDays = crusadeActiveData.scheduledDays.length || 1;
+                    const pct = Math.round((subjectDays / totalDays) * 100);
+                    const subjAccent = userSubjects.find(s => s.name === subj)?.accent || '#06b6d4';
+                    return (
+                      <div key={i} className="flex items-center gap-2">
+                        <div className="text-[10px] text-slate-300 w-24 truncate">{subj}</div>
+                        <div className="flex-1 h-2 rounded-full bg-slate-800 overflow-hidden">
+                          <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: subjAccent }} />
+                        </div>
+                        <div className="text-[10px] text-slate-400 w-8 text-right">{pct}%</div>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Next 7 days */}
+                <div className="grid grid-cols-7 gap-1">
+                  {crusadeActiveData.scheduledDays.slice(0, 7).map((day, di) => {
+                    const subjAccent = userSubjects.find(s => s.name === day.subject)?.accent || '#06b6d4';
+                    const isToday = di === 0;
+                    return (
+                      <div key={di} className="rounded-lg p-1.5 text-center" style={{ background: isToday ? `${subjAccent}30` : '#1e293b', border: `1px solid ${isToday ? subjAccent : '#334155'}` }}>
+                        <div className="text-[8px] text-slate-400">D{di + 1}</div>
+                        <div className="text-[10px] font-bold text-white truncate">{day.subject?.split(' ')[0]}</div>
+                        <div className="text-[8px] text-slate-500">{day.paper}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Reflection Vox */}
+                <div className="mt-3 pt-3 border-t border-slate-700">
+                  <div className="text-[10px] font-bold text-amber-400 mb-1.5">📡 Reflection Vox — Adjust Priorities</div>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="e.g. scared of maths, history feeling ok..."
+                      className="flex-1 text-xs bg-slate-800 text-slate-200 rounded-lg px-3 py-2 border border-slate-600 placeholder-slate-500 outline-none focus:border-cyan-500"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && e.target.value.trim()) {
+                          const result = parseReflectionVoxText(e.target.value);
+                          if (result.adjustments.length > 0) {
+                            const newActive = { ...crusadeActiveData };
+                            for (const adj of result.adjustments) {
+                              // Increase days for this subject in upcoming schedule
+                              const upcoming = newActive.scheduledDays.slice(0, 14);
+                              const boosted = upcoming.map(d => d.subject?.toLowerCase().includes(adj.subject) ? { ...d, boosted: true } : d);
+                              newActive.scheduledDays = [...boosted, ...newActive.scheduledDays.slice(14)];
+                            }
+                            setCrusadeActiveData(newActive);
+                            window.storage.set(STORE.crusadeActive, JSON.stringify(newActive)).catch(() => {});
+                            addToast('Vox received. Schedule adjusted. The Imperium responds.', 'success');
+                          } else {
+                            addToast('Vox unclear. Speak plainly, Operative.', 'info');
+                          }
+                          e.target.value = '';
+                        }
+                      }}
+                    />
+                    <button className="text-[10px] font-bold px-3 py-2 rounded-lg" style={{ background: '#06b6d4', color: '#0c4a6e' }}>Transmit</button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Header */}
             <Card smMode={isSM} accent={accent} className="p-4">
               <div className="flex items-center justify-between flex-wrap gap-3">
@@ -14378,6 +14747,36 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     })}
                   </div>
                 </Card>
+
+                {/* v52 FOG OF WAR TOGGLE */}
+                {combatStep === 1 && (
+                  <div className="rounded-2xl p-4 mb-3 flex items-start gap-3"
+                    style={{ background: fogOfWarActive ? '#7f1d1d20' : '#1e293b08', border: `1px solid ${fogOfWarActive ? '#ef444440' : '#94a3b820'}` }}>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className="text-sm font-bold" style={{ color: fogOfWarActive ? '#ef4444' : '#64748b' }}>
+                          💀 Fog of War
+                        </span>
+                        {fogOfWarActive && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider text-white" style={{ background: '#ef4444' }}>ACTIVE</span>}
+                      </div>
+                      <p className="text-[11px] text-slate-500 leading-relaxed">No hints · No mark schemes · Locked timer · Score ×2.0 weight</p>
+                      {fogOfWarActive && (
+                        <p className="text-[10px] text-red-400 mt-1 font-bold">⚔️ All glory to the warrior who fights blind</p>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => {
+                        const next = !fogOfWarActive;
+                        setFogOfWarActive(next);
+                        window.storage.set(STORE.fogOfWarPref, String(next)).catch(() => {});
+                      }}
+                      className="relative w-11 h-6 rounded-full transition-all flex-shrink-0 mt-1"
+                      style={{ background: fogOfWarActive ? '#ef4444' : '#cbd5e1' }}>
+                      <span className="absolute top-0.5 transition-all w-5 h-5 rounded-full bg-white shadow"
+                        style={{ left: fogOfWarActive ? '1.375rem' : '0.125rem' }} />
+                    </button>
+                  </div>
+                )}
 
                 {/* STEP 1 — Subject */}
                 {combatStep === 1 && (
@@ -16247,7 +16646,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             { id: 'activity',      label: '⚡ Chronos-Scan',      desc: 'Study activity log' },
             { id: 'readiness',     label: '🚦 Combat Readiness',  desc: 'Exam preparedness' },
             { id: 'fieldreports',  label: '📋 Field Reports',     desc: 'Exam history & patterns' },
-            { id: 'battlelog',     label: '⚔️ Battle Log',       desc: 'All exam sessions' }
+            { id: 'battlelog',     label: '⚔️ Battle Log',       desc: 'All exam sessions' },
+            { id: 'dispatch',      label: '📜 Imperial Dispatch', desc: 'Tutor-ready report' }
           ];
 
           // ─── COMBAT READINESS helpers ───────────────────────────────
@@ -17149,6 +17549,86 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                       );
                     })
                   }
+                </div>
+              );
+            })()}
+
+            {/* ══ v52 IMPERIAL DISPATCH ══ */}
+            {intelSubTab === 'dispatch' && (() => {
+              const dispSubjects = userSubjects.filter(s => !['TOK','Extended Essay'].includes(s.name));
+              const generateDispatch = async () => {
+                setDispatchGenerated(false);
+                setDispatchData(null);
+                const fitness = {};
+                for (const s of dispSubjects) {
+                  fitness[s.name] = calculateWarFitnessData(s.name, repo);
+                }
+                const lines = [];
+                lines.push('IMPERIAL DISPATCH — Compiled by the Cogitators of the Strategium');
+                lines.push(`Date: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}`);
+                lines.push('');
+                lines.push('═══ SECTION I: COMBAT READINESS ═══');
+                for (const s of dispSubjects) {
+                  const f = fitness[s.name];
+                  lines.push(`${s.name}: ${f.overallReadiness}% (P1: ${f.P1.avgScore}%, P2: ${f.P2.avgScore}%, P3: ${f.P3.avgScore}%)`);
+                }
+                lines.push('');
+                lines.push('═══ SECTION II: DEFICIENCY GAPS ═══');
+                const heresy = crusadeActiveData?.heresy || [];
+                if (heresy.length) lines.push('Heresy Clusters: ' + heresy.join(', '));
+                else lines.push('No critical deficiency clusters identified.');
+                lines.push('');
+                lines.push('═══ SECTION III: TRAJECTORY ═══');
+                for (const s of dispSubjects) {
+                  const curGrade = getSubjectEffectiveGrade ? getSubjectEffectiveGrade(s.name, progress, userSubjects) : null;
+                  const target = s.targetGrade || 7;
+                  const gap = curGrade ? (target - curGrade).toFixed(1) : 'N/A';
+                  lines.push(`${s.name}: Current ~${curGrade || '?'} → Target ${target} | Gap: ${gap}`);
+                }
+                lines.push('');
+                lines.push('═══ SECTION IV: TUTOR DIRECTIVES ═══');
+                for (const s of dispSubjects) {
+                  const f = fitness[s.name];
+                  if (f.criticalGaps.length > 0) {
+                    lines.push(`⚠️ ${s.name}: Critical gap in ${f.criticalGaps.join(', ')} — increase practice frequency`);
+                  }
+                }
+                if (!dispSubjects.some(s => fitness[s.name].criticalGaps.length > 0)) {
+                  lines.push('All subjects maintaining acceptable readiness. Continue current cadence.');
+                }
+                const dispText = lines.join('\n');
+                setDispatchData(dispText);
+                setDispatchGenerated(true);
+              };
+              return (
+                <div className="space-y-4">
+                  <div className="rounded-2xl p-4" style={{ background: '#1a1209', border: '1px solid #92400e40' }}>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-black uppercase tracking-widest" style={{ color: '#f59e0b' }}>📜 Imperial Dispatch</span>
+                      <span className="text-[10px] text-slate-500">Tutor-ready performance report</span>
+                    </div>
+                    <p className="text-[11px] text-slate-400 mb-4">Compiles readiness, deficiency gaps, trajectory and tutor directives from all active subjects.</p>
+                    <div className="flex gap-2">
+                      <button onClick={generateDispatch}
+                        className="px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider"
+                        style={{ background: '#f59e0b', color: '#78350f' }}>
+                        ⚙️ Generate Dispatch
+                      </button>
+                      {dispatchGenerated && dispatchData && (
+                        <button
+                          onClick={() => { navigator.clipboard.writeText(dispatchData); addToast('Dispatch copied to clipboard', 'success'); }}
+                          className="px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider"
+                          style={{ background: '#1e3a4a', color: '#06b6d4', border: '1px solid #06b6d440' }}>
+                          📋 Copy to Clipboard
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  {dispatchGenerated && dispatchData && (
+                    <div className="rounded-2xl p-4" style={{ background: '#fef9f0', border: '1px solid #f59e0b30' }}>
+                      <pre className="text-[11px] text-slate-700 whitespace-pre-wrap font-mono leading-relaxed">{dispatchData}</pre>
+                    </div>
+                  )}
                 </div>
               );
             })()}
@@ -19511,12 +19991,39 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
           const hour = now.getHours();
           const greeting = hour < 12 ? '🌅 Good morning' : hour < 17 ? '☀️ Good afternoon' : '🌙 Good evening';
           const smGreeting = isSM ? (hour < 12 ? '⚡ Auspex Online' : hour < 17 ? '🎯 Vox-Cast Greeting' : '🌒 Night Watch') : greeting;
+          // v52 Exam Eve Protocol banner
+          const examEveBanner = examEveActive ? (
+            <div className="rounded-2xl p-4 mb-3" style={{ background: 'linear-gradient(135deg, #7f1d1d, #1a0505)', border: '2px solid #ef4444', boxShadow: '0 0 20px #ef444440' }}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xl">⚡</span>
+                <span className="text-sm font-black uppercase tracking-widest text-red-400">FINAL STAND PROTOCOL</span>
+              </div>
+              <p className="text-xs text-red-200 mb-3">Exam is within 48 hours. This is not a drill. The Imperium watches.</p>
+              <div className="grid grid-cols-2 gap-2">
+                <button onClick={() => { setStudyTopic('Full Paper Review'); safeSetTab('study'); }}
+                  className="p-3 rounded-xl text-center"
+                  style={{ background: '#ef4444', color: '#fff' }}>
+                  <div className="text-lg mb-1">⚔️</div>
+                  <div className="text-xs font-black">Final Stand</div>
+                  <div className="text-[10px] opacity-80">Full paper under pressure</div>
+                </button>
+                <button onClick={() => { setStudyTopic('Confidence Review'); safeSetTab('study'); }}
+                  className="p-3 rounded-xl text-center"
+                  style={{ background: '#1e3a4a', border: '1px solid #06b6d4', color: '#06b6d4' }}>
+                  <div className="text-lg mb-1">🛡️</div>
+                  <div className="text-xs font-black">Confidence Booster</div>
+                  <div className="text-[10px] opacity-80">Review strong topics only</div>
+                </button>
+              </div>
+            </div>
+          ) : null;
 
           // Today's planner tasks
           const todayKey = dayKey();
           const todayTasks = planner?.days?.[todayKey] || [];
           const doneTasks = todayTasks.filter(t => t.done);
           const pendingTasks = todayTasks.filter(t => !t.done);
+          // Note: examEveBanner is defined above and rendered at top of return below
 
           // Traffic lights per subject (same logic as Chapter Master)
           const trafficLight = (curG, tgtG) => calcTrafficLight(curG, tgtG, isSM);
@@ -19577,6 +20084,8 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
 
           return (
           <div className="space-y-4">
+            {/* v52 Exam Eve Protocol */}
+            {examEveBanner}
 
             {/* ── ICON OF THE CRUSADER ── */}
             <div className="rounded-2xl overflow-hidden bg-white" style={{ border: `1.5px solid ${accent}25`, boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}>
@@ -19774,12 +20283,84 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
             </Card>
             </div>{/* end side-by-side grid */}
 
+            {/* ══ v52 MISSION SLATES ══ */}
+            {missionSlates && (
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 px-1">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">⚔️ Mission Slates</span>
+                  <div className="h-px flex-1 bg-slate-200" />
+                  <span className="text-[9px] text-slate-400">Crusade mandates</span>
+                </div>
+                {[missionSlates.alpha, missionSlates.beta, missionSlates.gamma].filter(Boolean).map((slate, idx) => {
+                  const slateColors = { ALPHA: { bg: '#78350f', border: '#f59e0b', accent: '#f59e0b', label: '#fef3c7' }, BETA: { bg: '#7f1d1d', border: '#ef4444', accent: '#ef4444', label: '#fee2e2' }, GAMMA: { bg: '#0f4c75', border: '#06b6d4', accent: '#06b6d4', label: '#cffafe' } };
+                  const sc = slateColors[slate.label] || slateColors.ALPHA;
+                  return (
+                    <div key={idx} className="rounded-2xl p-4 relative overflow-hidden"
+                      style={{ background: `${sc.bg}dd`, border: `1px solid ${sc.border}40`, backdropFilter: 'blur(8px)' }}>
+                      {/* Warhammer texture overlay */}
+                      <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)', backgroundSize: '8px 8px' }} />
+                      <div className="relative">
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider"
+                              style={{ background: sc.accent, color: '#000' }}>{slate.label}</span>
+                            {slate.synergyLink && (
+                              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider"
+                                style={{ background: '#7c3aed', color: '#ede9fe' }}>⚛ CROSS-SUBJECT</span>
+                            )}
+                            {slate.fatigueRedirect && (
+                              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase"
+                                style={{ background: '#374151', color: '#9ca3af' }}>↻ REDIRECTED</span>
+                            )}
+                          </div>
+                          <span className="text-[9px] text-slate-400 italic">{slate.source}</span>
+                        </div>
+                        <div className="text-base font-black text-white mb-0.5">{slate.subject}</div>
+                        <div className="text-xs text-slate-300 mb-1">{slate.topic} · {slate.paper}</div>
+                        {slate.synergyLink && (
+                          <div className="text-[10px] mb-2 px-2 py-1 rounded" style={{ background: '#7c3aed20', color: '#c4b5fd' }}>
+                            ⚛ Linked with: {slate.synergyLink.subjects?.filter(s => s !== slate.subject).join(', ')}
+                          </div>
+                        )}
+                        {slate.fatigueRedirect && (
+                          <div className="text-[10px] mb-2" style={{ color: '#9ca3af' }}>
+                            Original: {slate.originalSubject} (Vox-Silence active)
+                          </div>
+                        )}
+                        <button
+                          onClick={() => {
+                            const si = userSubjects.findIndex(s => s.name === slate.subject);
+                            if (si >= 0) setActiveSubjectIdx(si);
+                            setStudyTopic(slate.topic || '');
+                            safeSetTab('study');
+                          }}
+                          className="text-[11px] font-black px-4 py-1.5 rounded-lg uppercase tracking-wider transition-all hover:opacity-80"
+                          style={{ background: sc.accent, color: '#000' }}>
+                          ⚔️ Deploy
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+                {/* Fatigue Vox-Silence warning */}
+                {Object.entries(cognitiveLoadData).some(([, cl]) => cl.fatigued && cl.fatiguedUntil > Date.now()) && (
+                  <div className="rounded-xl p-3 flex items-start gap-2"
+                    style={{ background: '#78350f20', border: '1px solid #f59e0b30' }}>
+                    <span className="text-base">⚠️</span>
+                    <div>
+                      <div className="text-xs font-bold text-amber-400">Vox-Silence Detected</div>
+                      <div className="text-[10px] text-slate-400">High fatigue in: {Object.entries(cognitiveLoadData).filter(([, cl]) => cl.fatigued && cl.fatiguedUntil > Date.now()).map(([s]) => s).join(', ')}. Low-intensity drill recommended.</div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* ── BRIDGE SUB-TABS ── */}
             <div className="flex gap-1 p-1 rounded-xl" style={{ background: isSM ? 'rgba(0,80,80,0.08)' : '#f1f5f9', border: isSM ? '1px solid rgba(0,200,200,0.15)' : '1px solid #e2e8f0' }}>
               {[
                 { id: 'tempo',     label: '📊 Chronos-Scan',     desc: 'Study activity' },
-                { id: 'readiness', label: '🚦 Combat Readiness',  desc: 'Exam preparedness' },
-                { id: 'deploy',    label: '⚡ Quick Deploy',      desc: 'Jump to section' }
+                { id: 'readiness', label: '🚦 Combat Readiness',  desc: 'Exam preparedness' }
               ].map(bt => (
                 <button key={bt.id} onClick={() => setBridgeSubTab(bt.id)}
                   className="flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all"
@@ -19916,29 +20497,6 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
               );
             })()}
 
-            {/* ── v37 QUICK DEPLOY ── */}
-            {bridgeSubTab === 'deploy' && <Card smMode={isSM} accent={accent} className="p-5">
-              <div className="flex items-center gap-2 mb-4">
-                <Zap className="w-4 h-4" style={{ color: accent }} />
-                <h3 className="text-sm font-semibold text-slate-700">{isSM ? 'Quick Deploy' : 'Quick Start'}</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <button onClick={() => { setWarRoomSubTab('combat'); safeSetTab('study'); }}
-                  className="p-5 rounded-xl text-left"
-                  style={{ background: accent, color: '#fff' }}>
-                  <div className="text-2xl mb-2">📝</div>
-                  <div className="text-sm font-bold">New Session</div>
-                  <div className="text-[10px] opacity-80 mt-0.5">Start a new exam or drill</div>
-                </button>
-                <button onClick={() => safeSetTab('planner')}
-                  className="p-5 rounded-xl text-left"
-                  style={{ background: `${accent}12`, border: `1px solid ${accent}25`, color: accent }}>
-                  <div className="text-2xl mb-2">🗺️</div>
-                  <div className="text-sm font-bold">Battle Plan</div>
-                  <div className="text-[10px] opacity-80 mt-0.5">Weekly study schedule</div>
-                </button>
-              </div>
-            </Card>}
 
             {/* ── INVESTMENT LOOP (Eyal: reward history + streak) ── */}
             {(streak > 0 || gamify.totalQuestions > 0) && (
@@ -20266,6 +20824,93 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
         })()}
 
         </>)}
+        {/* ══ v52 STUDY THIS OVERLAY ══ */}
+        {studyThisQuestion && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}>
+            <div className="w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ background: '#0a0d12', border: '1px solid #1e3a4a' }}>
+              {/* Header */}
+              <div className="px-5 py-4 flex items-center justify-between" style={{ background: '#E74C3C', borderBottom: '1px solid #992d2d' }}>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">💀</span>
+                  <div>
+                    <div className="text-sm font-black text-white uppercase tracking-wider">STUDY THIS</div>
+                    <div className="text-[10px] text-red-200">Pivot Point Analysis</div>
+                  </div>
+                </div>
+                <button onClick={() => { setStudyThisQuestion(null); setStudyThisResult(null); }}
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all text-sm font-bold">✕</button>
+              </div>
+              {/* Question */}
+              <div className="px-5 pt-4 pb-3">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1.5">Question {studyThisQuestion?.question?.num}</div>
+                <div className="text-xs text-slate-300 leading-relaxed max-h-28 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                  {studyThisQuestion?.question?.text?.slice(0, 300)}{studyThisQuestion?.question?.text?.length > 300 ? '...' : ''}
+                </div>
+                {studyThisQuestion?.question?.topic && (
+                  <div className="mt-2 text-[10px] px-2 py-0.5 rounded inline-block" style={{ background: '#E74C3C20', color: '#E74C3C' }}>
+                    📌 {studyThisQuestion.question.topic}
+                  </div>
+                )}
+              </div>
+              {/* Action Button */}
+              {!studyThisLoading && !studyThisResult && (
+                <div className="px-5 pb-4">
+                  <button
+                    onClick={async () => {
+                      setStudyThisLoading(true);
+                      try {
+                        const q = studyThisQuestion.question;
+                        const subj = studyThisQuestion.session?.subject || q?.subject || 'this subject';
+                        const sys = `You are an expert IB tutor performing a Pivot Point Analysis. Be concise, direct, and actionable. Use Warhammer-flavored language sparingly.`;
+                        const prompt = `Pivot Point Analysis for: "${q?.text?.slice(0, 400) || 'this question'}" (${subj}, ${q?.marks || '?'} marks)
+Student scored poorly on this. Provide:
+1. WHY they likely failed (2-3 bullet points)
+2. THE CONCEPT to master (core idea in 1-2 sentences)  
+3. HOW TO ANSWER (3-step approach for this question type)
+4. REMEMBER THIS (1 memorable rule)`;
+                        const result = await callClaude(sys, prompt, 600);
+                        setStudyThisResult(result);
+                        // Save to knowledge bank
+                        const entry = { id: Date.now().toString(), subject: subj, topic: q?.topic || q?.text?.slice(0, 50), analysis: result, date: new Date().toISOString(), heresy: true };
+                        const newBank = [...(knowledgeBank || []), entry];
+                        setKnowledgeBank(newBank);
+                        window.storage.set(STORE.knowledgeBank, JSON.stringify(compressForStorage(newBank))).catch(() => {});
+                        addToast('Analysis saved to Knowledge Bank', 'success');
+                      } catch(e) {
+                        setStudyThisResult('The cogitators failed: ' + e.message);
+                      }
+                      setStudyThisLoading(false);
+                    }}
+                    className="w-full py-3 rounded-xl text-sm font-black uppercase tracking-wider"
+                    style={{ background: '#E74C3C', color: '#fff' }}>
+                    ⚙️ Run Pivot Point Analysis
+                  </button>
+                </div>
+              )}
+              {studyThisLoading && (
+                <div className="px-5 pb-4 flex items-center justify-center gap-2">
+                  <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
+                  <span className="text-xs text-slate-400">Cogitators analysing...</span>
+                </div>
+              )}
+              {studyThisResult && (
+                <div className="px-5 pb-4 space-y-3">
+                  <div className="rounded-xl p-3 max-h-56 overflow-y-auto text-xs text-slate-300 leading-relaxed" style={{ background: '#111827', border: '1px solid #1f2937', scrollbarWidth: 'thin' }}>
+                    {studyThisResult}
+                  </div>
+                  <button
+                    onClick={() => { setStudyThisQuestion(null); setStudyThisResult(null); }}
+                    className="w-full py-2.5 rounded-xl text-sm font-bold text-white"
+                    style={{ background: '#1e293b', border: '1px solid #334155' }}>
+                    ✓ Understood — Dismiss
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         </main>
         <footer className="border-t border-slate-200 py-4 text-center"><p className="text-xs text-slate-500">IB Mastery 2026 · Powered by Claude AI</p></footer>
       </div>
@@ -20434,10 +21079,54 @@ function ExamDebrief({ session, accent = '#3b82f6', isSM = false, onNewSession, 
       {/* Section D — Targeted Drill */}
       {!readOnly && questions.some(q => q.status === 'partial' || q.status === 'zero') && (
         <button onClick={() => onDrill?.()}
-          className="w-full py-3 rounded-2xl text-sm font-bold text-white"
+          className="w-full py-3 rounded-2xl text-sm font-bold text-white mb-3"
           style={{ background: '#ef4444' }}>
           ⚔️ Launch Targeted Drill — Fix My Weak Areas
         </button>
+      )}
+
+      {/* Section E — PointsRibbon */}
+      {questions.length > 0 && (
+        <div className="rounded-2xl border border-slate-200 overflow-hidden mb-3">
+          <div className="px-4 py-2.5 border-b border-slate-100 flex items-center justify-between">
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Points Ribbon</span>
+            <span className="text-[10px] text-slate-400">Tap any red dot → Pivot Point Analysis</span>
+          </div>
+          <div className="px-4 py-3 flex flex-wrap gap-1.5">
+            {questions.map((q, i) => {
+              const pct = q.marks > 0 ? Math.round((q.marksAwarded / q.marks) * 100) : 0;
+              const col = pct >= 85 ? '#27AE60' : pct >= 60 ? '#F39C12' : '#E74C3C';
+              const isRed = pct < 60;
+              return (
+                <div key={i} className="flex flex-col items-center gap-0.5">
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white cursor-default"
+                    style={{ background: col }}
+                    title={`Q${q.num}: ${q.marksAwarded ?? '?'}/${q.marks ?? '?'} (${pct}%)`}>
+                    {q.num}
+                  </div>
+                  {isRed && !readOnly && (
+                    <button
+                      onClick={() => {
+                        if (typeof window !== 'undefined') {
+                          window.dispatchEvent(new CustomEvent('ib-study-this', { detail: { question: q, session } }));
+                        }
+                      }}
+                      className="text-[8px] font-bold px-1 py-0.5 rounded text-white leading-none"
+                      style={{ background: '#E74C3C' }}>
+                      STUDY
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <div className="px-4 py-2 border-t border-slate-50 flex gap-4 text-[10px] text-slate-400">
+            <span><span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1"></span>85%+</span>
+            <span><span className="inline-block w-2 h-2 rounded-full bg-amber-400 mr-1"></span>60–85%</span>
+            <span><span className="inline-block w-2 h-2 rounded-full mr-1" style={{background:'#E74C3C'}}></span>&lt;60% — tap STUDY</span>
+          </div>
+        </div>
       )}
 
       {/* Old-format fallback: teacherSummary without questions array */}
