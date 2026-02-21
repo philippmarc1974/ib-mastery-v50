@@ -10835,9 +10835,12 @@ Include questions that specifically address the TYPES of errors this student mak
       // Generate Mission Serial Number for this exam session
       const msn = generateMSN(currentSubject?.name);
       setCurrentMSN(msn);
+      const examDateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
       const newSessions = { ...msnSessions, [msn]: {
         msn, subject: currentSubject?.name, subjectLevel: currentSubject?.level,
         preset: studyPreset, date: new Date().toISOString(),
+        paperType: studyPaperType || null,
+        examName: `${currentSubject?.name} — ${studyPaperType || STUDY_PRESETS[studyPreset]?.label || 'Exam'} — ${examDateStr}`,
         questionCount: qs.length, topics: studyTopics,
         questions: qs.map(q => ({ id: q.id, num: q.num, text: q.text?.slice(0, 300), marks: q.marks }))
       }};
@@ -15364,66 +15367,96 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
 
                   return (
                     <Card smMode={isSM} accent="#f97316" className="p-4">
-                      <div className="flex items-center gap-2 mb-3">
+                      {/* Header */}
+                      <div className="flex items-center gap-2 mb-1">
                         <span className="text-base">📥</span>
                         <span className="text-sm font-bold text-slate-800">Pending Exams</span>
-                        {pendingExams.length > 0 && <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: '#f97316' }}>{pendingExams.length}</span>}
+                        {pendingExams.length > 0 && (
+                          <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: '#f97316' }}>{pendingExams.length}</span>
+                        )}
+                        {recentGraded.length > 0 && (
+                          <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white ml-1" style={{ background: '#10b981' }}>{recentGraded.length} graded</span>
+                        )}
                       </div>
                       {pendingExams.length > 0 && (
-                        <p className="text-xs text-slate-500 mb-3">These exams are awaiting your answers. Upload your completed work to get graded.</p>
+                        <p className="text-xs text-slate-400 mb-3 mt-1">Exams awaiting your answers — upload scan or type directly in the app.</p>
                       )}
+
                       <div className="space-y-2">
+                        {/* ── PENDING (awaiting upload) ── */}
                         {pendingExams.map((s, i) => {
                           const cat = IB_CATALOGUE[s.subject] || {};
                           const subAccent = cat.defaultAccent || '#f97316';
                           const daysAgo = Math.round((Date.now() - new Date(s.date)) / 86400000);
+                          const dateLabel = daysAgo === 0 ? 'Today' : daysAgo === 1 ? 'Yesterday' : `${daysAgo}d ago`;
+                          const totalMarks = (s.questions || []).reduce((sum, q) => sum + (q.marks || 0), 0);
+                          // Helper to load session into study tab
+                          const loadSession = (mode) => {
+                            setCurrentMSN(s.msn);
+                            setCurrentSubject(userSubjects.find(sub => sub.name === s.subject) || userSubjects[0]);
+                            setStudyPreset(s.preset || 'full');
+                            setStudyTopics(s.topics || []);
+                            setStudyTopic((s.topics || []).join(' + ') || 'Exam');
+                            setStudyQuestions((s.questions || []).map(q => ({ ...q, answer: '', timeSpent: 0 })));
+                            setStudyMode(mode);
+                            setExamUploadData(null);
+                            setStudyResults(null);
+                            setStudyResultGrade(null);
+                            safeSetTab('study');
+                          };
                           return (
-                            <div key={i} className="flex items-center gap-3 p-3 rounded-xl border" style={{ background: '#fff8f0', borderColor: '#f9731630' }}>
-                              {/* Pulsing amber status dot */}
-                              <span className="relative flex-shrink-0">
-                                <span className="flex h-3 w-3">
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                            <div key={i} className="rounded-xl border overflow-hidden" style={{ borderColor: '#f9731640' }}>
+                              {/* Top bar — subject + status */}
+                              <div className="flex items-center gap-2 px-3 py-2" style={{ background: '#fff8f0' }}>
+                                {/* Pulsing amber dot */}
+                                <span className="relative flex-shrink-0">
+                                  <span className="flex h-2.5 w-2.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                                  </span>
                                 </span>
-                              </span>
-                              <div className="text-xl flex-shrink-0">{cat.icon || '📄'}</div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="text-xs font-bold text-slate-800">{s.subject} {(s.subjectLevel || '').toUpperCase()}</span>
-                                  {s.paperType && <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 font-bold">{s.paperType}</span>}
-                                  <span className="font-mono text-[10px] text-slate-400">{s.msn}</span>
-                                </div>
-                                <div className="text-[10px] text-slate-500 mt-0.5">
-                                  {s.questionCount} questions · {s.preset ? STUDY_PRESETS[s.preset]?.label || s.preset : 'Exam'} · {daysAgo === 0 ? 'Today' : daysAgo === 1 ? 'Yesterday' : `${daysAgo} days ago`}
-                                </div>
-                                {s.topics?.length > 0 && (
-                                  <div className="text-[10px] text-slate-400 mt-0.5 truncate">{s.topics.join(', ')}</div>
-                                )}
-                                <div className="text-[10px] text-amber-600 font-semibold mt-0.5">⏳ Awaiting your answers</div>
+                                <span className="text-xs font-bold text-slate-700 flex-1 truncate">
+                                  {s.examName || `${s.subject} — ${s.paperType || 'Exam'} — ${dateLabel}`}
+                                </span>
+                                <span className="text-[10px] text-amber-600 font-semibold flex-shrink-0">⏳ Awaiting answers</span>
                               </div>
-                              <div className="flex items-center gap-1.5 flex-shrink-0">
-                                {/* Upload button — loads this session and opens upload grading */}
+                              {/* Meta row */}
+                              <div className="flex items-center gap-3 px-3 py-2 bg-white border-t border-amber-50">
+                                <span className="text-lg flex-shrink-0">{cat.icon || '📄'}</span>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex flex-wrap items-center gap-1.5">
+                                    <span className="text-[10px] font-bold text-slate-600">{s.subject} {(s.subjectLevel || '').toUpperCase()}</span>
+                                    {s.paperType && <span className="text-[10px] px-1.5 py-0.5 rounded-md font-bold" style={{ background: '#fef3c7', color: '#92400e' }}>{s.paperType}</span>}
+                                    <span className="text-[10px] text-slate-400">·</span>
+                                    <span className="text-[10px] text-slate-400">{s.questionCount || 0} q{(s.questionCount || 0) !== 1 ? 's' : ''}</span>
+                                    {totalMarks > 0 && <><span className="text-[10px] text-slate-400">·</span><span className="text-[10px] text-slate-400">{totalMarks} marks</span></>}
+                                    <span className="text-[10px] text-slate-400">·</span>
+                                    <span className="text-[10px] text-slate-400">{dateLabel}</span>
+                                  </div>
+                                  {s.topics?.length > 0 && (
+                                    <div className="text-[10px] text-slate-400 mt-0.5 truncate">{s.topics.join(', ')}</div>
+                                  )}
+                                </div>
+                              </div>
+                              {/* Action buttons */}
+                              <div className="flex items-center gap-2 px-3 py-2.5 bg-white border-t border-slate-100">
+                                {/* Type Answers — go straight to live session */}
                                 <button
-                                  onClick={() => {
-                                    setCurrentMSN(s.msn);
-                                    setCurrentSubject(userSubjects.find(sub => sub.name === s.subject) || userSubjects[0]);
-                                    setStudyPreset(s.preset || 'full');
-                                    setStudyTopics(s.topics || []);
-                                    setStudyTopic((s.topics || []).join(' + ') || 'Exam');
-                                    setStudyQuestions((s.questions || []).map(q => ({ ...q, answer: '', timeSpent: 0 })));
-                                    setStudyMode('ready');
-                                    setExamUploadData(null);
-                                    setStudyResults(null);
-                                    setStudyResultGrade(null);
-                                    safeSetTab('study');
-                                    addToast(`Loaded ${s.msn} — upload your completed answers below`, 'success');
-                                  }}
-                                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-white transition-all hover:opacity-90"
+                                  onClick={() => { loadSession('active'); addToast(`Session loaded — type your answers below`, 'success'); }}
+                                  className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-bold text-white transition-all hover:opacity-90"
                                   style={{ background: subAccent }}>
-                                  <Upload className="w-3 h-3" />
-                                  Upload
+                                  <Type className="w-3 h-3" />
+                                  Type Answers
                                 </button>
-                                {/* Delete button */}
+                                {/* Upload Scan */}
+                                <button
+                                  onClick={() => { loadSession('ready'); addToast(`Session loaded — upload your scan or photo below`, 'success'); }}
+                                  className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-bold transition-all hover:opacity-90"
+                                  style={{ background: `${subAccent}15`, color: subAccent, border: `1px solid ${subAccent}40` }}>
+                                  <Upload className="w-3 h-3" />
+                                  Upload Scan
+                                </button>
+                                {/* Delete */}
                                 <button
                                   onClick={() => {
                                     const updated = { ...msnSessions };
@@ -15431,41 +15464,63 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                                     saveMsnSessions(updated);
                                     addToast(`Removed ${s.msn}`, 'info');
                                   }}
-                                  className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all"
-                                  title="Remove">
+                                  className="p-2 rounded-lg text-slate-300 hover:text-red-500 hover:bg-red-50 transition-all flex-shrink-0"
+                                  title="Remove this pending exam">
                                   <Trash2 className="w-3.5 h-3.5" />
                                 </button>
                               </div>
                             </div>
                           );
                         })}
-                        {/* Recently graded — show "Graded ✓" + View Results */}
-                        {recentGraded.map((s, i) => {
-                          const cat = IB_CATALOGUE[s.subject] || {};
-                          const daysAgo = Math.round((Date.now() - new Date(s.date)) / 86400000);
-                          return (
-                            <div key={`graded-${i}`} className="flex items-center gap-3 p-3 rounded-xl border" style={{ background: '#f0fdf4', borderColor: '#86efac40' }}>
-                              <span className="flex h-3 w-3 flex-shrink-0">
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                              </span>
-                              <div className="text-xl flex-shrink-0">{cat.icon || '📄'}</div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="text-xs font-bold text-slate-800">{s.subject}</span>
-                                  {s.paperType && <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 font-bold">{s.paperType}</span>}
+
+                        {/* ── RECENTLY GRADED ── */}
+                        {recentGraded.length > 0 && (
+                          <div className="pt-1">
+                            {pendingExams.length > 0 && (
+                              <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-2 px-1">Recently Graded</div>
+                            )}
+                            {recentGraded.map((s, i) => {
+                              const cat = IB_CATALOGUE[s.subject] || {};
+                              const daysAgo = Math.round((Date.now() - new Date(s.date)) / 86400000);
+                              const dateLabel = daysAgo === 0 ? 'Today' : daysAgo === 1 ? 'Yesterday' : `${daysAgo}d ago`;
+                              const markPct = s.totalMarks ? Math.round((s.marksAwarded / s.totalMarks) * 100) : null;
+                              const gradeCol = !s.grade ? '#64748b' : s.grade >= 6 ? '#10b981' : s.grade >= 4 ? '#f59e0b' : '#ef4444';
+                              return (
+                                <div key={`graded-${i}`} className="flex items-center gap-3 p-3 rounded-xl border" style={{ background: '#f0fdf4', borderColor: '#86efac50' }}>
+                                  {/* Green solid dot */}
+                                  <span className="flex h-2.5 w-2.5 flex-shrink-0">
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                                  </span>
+                                  <span className="text-lg flex-shrink-0">{cat.icon || '📄'}</span>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex flex-wrap items-center gap-1.5">
+                                      <span className="text-xs font-bold text-slate-700">{s.subject}</span>
+                                      {s.paperType && <span className="text-[10px] px-1.5 py-0.5 rounded-md font-bold bg-emerald-100 text-emerald-700">{s.paperType}</span>}
+                                      <span className="text-[10px] text-slate-400">{dateLabel}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 mt-0.5">
+                                      <span className="text-[10px] font-bold" style={{ color: gradeCol }}>✅ Grade {s.grade || '?'}/7</span>
+                                      {markPct !== null && <span className="text-[10px] text-slate-400">{s.marksAwarded}/{s.totalMarks} marks ({markPct}%)</span>}
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-col gap-1.5 flex-shrink-0">
+                                    <button
+                                      onClick={() => { setScriptumTab('battlelog'); safeSetTab('intel'); setHighlightSession(s.id); }}
+                                      className="px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all hover:opacity-90"
+                                      style={{ background: '#10b98115', color: '#059669', border: '1px solid #10b98130' }}>
+                                      View Results →
+                                    </button>
+                                    <button
+                                      onClick={() => { setScriptumTab('battlelog'); safeSetTab('intel'); setHighlightSession(s.id); }}
+                                      className="text-[10px] text-center text-slate-400 hover:text-slate-600 transition-colors">
+                                      Open in Battle Log →
+                                    </button>
+                                  </div>
                                 </div>
-                                <div className="text-[10px] text-slate-500 mt-0.5">{daysAgo === 0 ? 'Today' : daysAgo === 1 ? 'Yesterday' : `${daysAgo} days ago`}</div>
-                                <div className="text-[10px] text-emerald-600 font-semibold mt-0.5">✅ Graded — Grade {s.grade || '?'}/7</div>
-                              </div>
-                              <button
-                                onClick={() => { setScriptumTab('battlelog'); safeSetTab('intel'); setHighlightSession(s.id); }}
-                                className="flex-shrink-0 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all hover:opacity-90"
-                                style={{ background: '#10b98115', color: '#059669', border: '1px solid #10b98130' }}>
-                                View Results →
-                              </button>
-                            </div>
-                          );
-                        })}
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
                     </Card>
                   );
