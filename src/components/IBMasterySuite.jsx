@@ -38,23 +38,23 @@ const SKIN_CSS = {
     .skin-header .text-slate-400 { color: #64748b !important; }
   `,
   spacemarine: `
-    /* ─── SPACE MARINE HUD — Light readable + tactical accents ─── */
+    /* ─── SPACE MARINE HUD — Clean light with tactical dark header ─── */
     .skin-content {
       --card-bg: #ffffff;
-      --card-border: #c8dce8;
-      --card-shadow: 0 2px 8px rgba(0,80,80,0.08), 0 0 0 1px rgba(0,180,180,0.06);
-      --stat-bg: #f0f7f7;
-      --stat-border: #c8dce8;
-      --bar-bg: #dce8ee;
-      --bar-fill: linear-gradient(90deg, #005f5f, #00cccc, #00aaaa);
-      --input-bg: #f4f8fa;
-      --input-border: #b0c4ce;
-      --hover-bg: #e8f4f4;
+      --card-border: #e2e8f0;
+      --card-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+      --stat-bg: #f8fafc;
+      --stat-border: #e2e8f0;
+      --bar-bg: #e2e8f0;
+      --bar-fill: linear-gradient(90deg, #3b82f6, #60a5fa);
+      --input-bg: #f8fafc;
+      --input-border: #cbd5e1;
+      --hover-bg: #f1f5f9;
       --text-primary: #0f172a;
       --text-secondary: #334155;
       --text-muted: #64748b;
       --text-faint: #94a3b8;
-      --divider: #d0e0e8;
+      --divider: #e2e8f0;
       color: #1e293b;
     }
     .skin-content h1, .skin-content h2, .skin-content h3, .skin-content h4 { color: #0f172a !important; }
@@ -70,11 +70,10 @@ const SKIN_CSS = {
     .sm-card {
       border-radius: 0 !important;
       clip-path: polygon(14px 0%, 100% 0%, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0% 100%, 0% 14px) !important;
-      border: 1.5px solid #88b8c8 !important;
+      border: 1.5px solid #cbd5e1 !important;
       box-shadow:
-        0 2px 12px rgba(0,100,100,0.1),
-        0 1px 0 rgba(0,200,200,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.5) !important;
+        0 2px 8px rgba(0,0,0,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.8) !important;
       background: #ffffff !important;
     }
     .sm-card::before {
@@ -83,7 +82,7 @@ const SKIN_CSS = {
       top: 6px; left: 6px;
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #88b8c8, #5a8898);
+      background: radial-gradient(circle at 35% 35%, #94a3b8, #64748b);
       box-shadow:
         0 1px 2px rgba(0,0,0,0.5),
         inset 0 1px 1px rgba(255,255,255,0.2);
@@ -96,9 +95,9 @@ const SKIN_CSS = {
       bottom: 6px; right: 6px;
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #88b8c8, #5a8898);
+      background: radial-gradient(circle at 35% 35%, #94a3b8, #64748b);
       box-shadow:
-        0 1px 2px rgba(0,0,0,0.5),
+        0 1px 2px rgba(0,0,0,0.3),
         inset 0 1px 1px rgba(255,255,255,0.2);
       z-index: 2;
       pointer-events: none;
@@ -114,8 +113,8 @@ const SKIN_CSS = {
     .sm-input {
       border-radius: 0 !important;
       clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px) !important;
-      background: #f4f8fa !important;
-      border: 1.5px solid #88b8c8 !important;
+      background: #f8fafc !important;
+      border: 1.5px solid #cbd5e1 !important;
       color: #1e293b !important;
     }
     .sm-input::placeholder { color: #4b5563 !important; }
@@ -262,12 +261,12 @@ const SKIN_CSS = {
       border-right: 1px solid rgba(0,255,255,0.10) !important;
     }
 
-    /* SM accent borders for dark environment */
-    .skin-content .border-slate-200 { border-color: #b0ccd6 !important; }
-    .skin-content .border-slate-300 { border-color: #98b8c4 !important; }
-    .skin-content .border-slate-100 { border-color: #c8dce6 !important; }
-    .skin-content .hover\\:bg-slate-50:hover { background-color: rgba(0,255,255,0.05) !important; }
-    .skin-content .hover\\:bg-slate-100:hover { background-color: rgba(0,255,255,0.06) !important; }
+    /* SM accent borders — clean slate (no teal tinting) */
+    .skin-content .border-slate-200 { border-color: #e2e8f0 !important; }
+    .skin-content .border-slate-300 { border-color: #cbd5e1 !important; }
+    .skin-content .border-slate-100 { border-color: #f1f5f9 !important; }
+    .skin-content .hover\\:bg-slate-50:hover { background-color: #f8fafc !important; }
+    .skin-content .hover\\:bg-slate-100:hover { background-color: #f1f5f9 !important; }
 
     /* Toast overrides */
     .sm-toast {
@@ -279,7 +278,7 @@ const SKIN_CSS = {
 
     /* Vignette edges */
     .sm-vignette {
-      box-shadow: inset 0 0 150px rgba(0,60,60,0.04), inset 0 0 60px rgba(0,60,60,0.02);
+      box-shadow: inset 0 0 150px rgba(0,0,0,0.02), inset 0 0 60px rgba(0,0,0,0.01);
     }
 
     /* Ambient plasma glow */
@@ -499,6 +498,55 @@ const gradeColor = (g) => {
   if (g >= 7) return '#10b981'; if (g >= 6) return '#3b82f6'; if (g >= 5) return '#60a5fa';
   if (g >= 4) return '#f59e0b'; if (g >= 3) return '#f97316'; return '#ef4444';
 };
+
+// ── v50 helper functions ──
+const subjectColor = (name = '') => {
+  if (name.startsWith('Math')) return '#3b82f6';
+  if (name.startsWith('Sport') || name.startsWith('SEHS')) return '#10b981';
+  if (name.startsWith('English')) return '#8b5cf6';
+  if (name.startsWith('Hist')) return '#f59e0b';
+  return '#64748b';
+};
+
+const pctColor = (n) => n >= 70 ? '#10b981' : n >= 50 ? '#f59e0b' : '#ef4444';
+
+const deriveStatus = (awarded, total) => {
+  if (!total) return 'skipped';
+  if (awarded >= total) return 'full';
+  if (awarded > 0) return 'partial';
+  return 'zero';
+};
+
+const parseMarksFromGrading = (text, qNum) => {
+  const patterns = [
+    new RegExp(`Q${qNum}[:\\s]+([0-9]+)\\s*/\\s*([0-9]+)`),
+    new RegExp(`Question ${qNum}[:\\s]+([0-9]+)\\s*mark`),
+    new RegExp(`Q${qNum}.*?(\\d+)\\s*/\\s*\\d+\\s*mark`),
+  ];
+  for (const re of patterns) { const m = text.match(re); if (m) return parseInt(m[1]); }
+  return null;
+};
+
+const parseQuestionFeedback = (text, qNum) => {
+  const idx = text.search(new RegExp(`Q${qNum}[:\\s]|Question ${qNum}`));
+  if (idx < 0) return '';
+  const nextQ = text.search(new RegExp(`Q${qNum + 1}[:\\s]|Question ${qNum + 1}`));
+  return text.slice(idx, nextQ > idx ? nextQ : idx + 400).trim();
+};
+
+const parseSummary = (text) => {
+  const sections = { strengths: '', improvements: '', criticalGaps: '', actions: '' };
+  const lines = text.split('\n');
+  let cur = null;
+  for (const line of lines) {
+    if (/🟢|strength/i.test(line)) { cur = 'strengths'; continue; }
+    if (/🟡|improve|areas for/i.test(line)) { cur = 'improvements'; continue; }
+    if (/🔴|critical|zero/i.test(line)) { cur = 'criticalGaps'; continue; }
+    if (/🎯|action|next step/i.test(line)) { cur = 'actions'; continue; }
+    if (cur) sections[cur] += line + '\n';
+  }
+  return sections;
+};
 const fmtDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 const fmtTime = (d) => new Date(d).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 const dayKey = (d = new Date()) => d.toISOString().slice(0, 10);
@@ -602,8 +650,8 @@ const THEMES = {
   },
   spacemarine: {
     id: 'spacemarine', name: 'Space Marine HUD', desc: 'For the Emperor!', preview: '⚔️',
-    bg: '#e8f0f2',
-    cardBg: '#ffffff', cardBorder: '#b0ccd6',
+    bg: '#f1f5f9',
+    cardBg: '#ffffff', cardBorder: '#e2e8f0',
     accentOverride: '#00ffff',
     accentSecondary: '#d4a017',
     darkSkin: true,
@@ -1030,6 +1078,2450 @@ const IB_QUESTION_BANK = {
   }
 };
 
+
+/* v50 QUESTION_VAULT - 2430 IB questions: new bank + past papers, 2026 SEHS crosswalk */
+const QUESTION_VAULT = {
+  "Mathematics AI HL": [
+    {"id":"MATH_0001","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0002","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0003","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0004","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0005","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0006","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0007","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0008","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0009","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0010","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0011","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0012","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0013","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0014","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0015","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0016","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0017","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0018","topic":"Polynomial Functions","text":"Find all roots of the cubic polynomial p(x) = x³ - 6x² + 11x - 6 (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0019","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0020","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0021","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0022","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0023","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0024","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0025","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0026","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0027","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0028","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0029","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0030","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0031","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0032","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0033","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0034","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0035","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0036","topic":"Polynomial Functions","text":"Use the factor theorem to determine if (x-2) is a factor of f(x) = x⁴ - 3x³ - 2x² + 8x - 4 (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0037","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0038","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0039","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0040","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0041","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0042","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0043","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0044","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0045","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0046","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0047","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0048","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0049","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0050","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0051","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0052","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0053","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0054","topic":"Polynomial Functions","text":"Apply the remainder theorem to find the remainder when p(x) = 2x⁴ - 3x³ + x - 5 is divided by (x-2) (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0055","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0056","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0057","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0058","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0059","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0060","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0061","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0062","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0063","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0064","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0065","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0066","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0067","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0068","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0069","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0070","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0071","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0072","topic":"Polynomial Functions","text":"Sketch the graph of y = (x-1)²(x+2)(x-3) showing all key features (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0073","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0074","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0075","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0076","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0077","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0078","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0079","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0080","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0081","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0082","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0083","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0084","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0085","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0086","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0087","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0088","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0089","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0090","topic":"Polynomial Functions","text":"Analyze the end behavior and turning points of f(x) = -x⁵ + 4x³ - 3x (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0091","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0092","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0093","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0094","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0095","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0096","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0097","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0098","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0099","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0100","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0101","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0102","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0103","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0104","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0105","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0106","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0107","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0108","topic":"Rational Functions","text":"Find all vertical asymptotes of f(x) = (x² - 4)/(x² - 3x + 2) (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0109","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0110","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0111","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0112","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0113","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0114","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0115","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0116","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0117","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0118","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0119","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0120","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0121","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0122","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0123","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0124","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0125","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0126","topic":"Rational Functions","text":"Determine the horizontal asymptote of g(x) = (3x² + 2x - 1)/(2x² - x + 5) using limits (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0127","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0128","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0129","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0130","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0131","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0132","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0133","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0134","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0135","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0136","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0137","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0138","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0139","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0140","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0141","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0142","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0143","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0144","topic":"Rational Functions","text":"Decompose (5x + 7)/((x-1)(x+2)) into partial fractions (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0145","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0146","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0147","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0148","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0149","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0150","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0151","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0152","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0153","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0154","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0155","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0156","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0157","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0158","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0159","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0160","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0161","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0162","topic":"Rational Functions","text":"Sketch the graph of h(x) = (x-1)/(x(x+3)) showing asymptotes and intercepts (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0163","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0164","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0165","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0166","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0167","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0168","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0169","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0170","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0171","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0172","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0173","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0174","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0175","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0176","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0177","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0178","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0179","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0180","topic":"Rational Functions","text":"Solve the rational equation (x+1)/(x-2) = 3/(x+2) (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0181","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0182","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0183","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0184","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0185","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0186","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0187","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0188","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0189","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0190","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0191","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0192","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0193","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0194","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0195","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0196","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0197","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0198","topic":"Exponential Functions","text":"A population grows according to P(t) = 1000(1.05)^t. Find the population after 10 years and when it doubles (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0199","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0200","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0201","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0202","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0203","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0204","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0205","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0206","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0207","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0208","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0209","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0210","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0211","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0212","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0213","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0214","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0215","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0216","topic":"Exponential Functions","text":"Solve the exponential equation 2^(2x) - 5(2^x) + 4 = 0 (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0217","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0218","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0219","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0220","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0221","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0222","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0223","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0224","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0225","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0226","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0227","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0228","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0229","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0230","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0231","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0232","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0233","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0234","topic":"Exponential Functions","text":"The half-life of Carbon-14 is 5730 years. If a sample has 25% of its original amount, calculate its age (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0235","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0236","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0237","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0238","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0239","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0240","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0241","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0242","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0243","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0244","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0245","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0246","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0247","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0248","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0249","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0250","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0251","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0252","topic":"Exponential Functions","text":"A radioactive substance decays so that 90% remains after 1 year. When will 10% of the original remain? (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0253","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0254","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0255","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0256","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0257","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0258","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0259","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0260","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0261","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0262","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0263","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0264","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0265","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0266","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0267","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0268","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0269","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0270","topic":"Exponential Functions","text":"Find the domain and range of f(x) = 3^(x-2) + 1 and sketch its graph (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0271","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0272","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0273","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0274","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0275","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0276","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0277","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0278","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0279","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0280","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0281","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0282","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0283","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0284","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0285","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0286","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0287","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0288","topic":"Logarithmic Functions","text":"Simplify the expression log₃(27) + log₃(9) - log₃(3) using logarithm properties (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0289","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0290","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0291","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0292","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0293","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0294","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0295","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0296","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0297","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0298","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0299","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0300","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0301","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0302","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0303","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0304","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0305","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0306","topic":"Logarithmic Functions","text":"Solve the logarithmic equation log₂(x) + log₂(x+2) = 3 (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0307","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0308","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0309","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0310","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0311","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0312","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0313","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0314","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0315","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0316","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0317","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0318","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0319","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0320","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0321","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0322","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0323","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0324","topic":"Logarithmic Functions","text":"Express 2^x = 7 in logarithmic form and solve for x (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0325","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0326","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0327","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0328","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0329","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0330","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0331","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0332","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0333","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0334","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0335","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0336","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0337","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0338","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0339","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0340","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0341","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0342","topic":"Logarithmic Functions","text":"Solve 5^(2x) = 100 using logarithms and verify your answer (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0343","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0344","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0345","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0346","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0347","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0348","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0349","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0350","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0351","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0352","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0353","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0354","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0355","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0356","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0357","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0358","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0359","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0360","topic":"Logarithmic Functions","text":"Find the inverse function of f(x) = log₂(x-3) and determine its domain (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0361","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0362","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0363","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0364","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0365","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0366","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0367","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0368","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0369","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0370","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0371","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0372","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0373","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0374","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0375","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0376","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0377","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0378","topic":"Composite Functions","text":"Given f(x) = 2x + 1 and g(x) = x², find f(g(x)) and g(f(x)) (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0379","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0380","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0381","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0382","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0383","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0384","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0385","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0386","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0387","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0388","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0389","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0390","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0391","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0392","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0393","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0394","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0395","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0396","topic":"Composite Functions","text":"Determine whether the function h(x) = √(x² - 4) can be expressed as a composition of two functions (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0397","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0398","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0399","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0400","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0401","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0402","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0403","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0404","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0405","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0406","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0407","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0408","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0409","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0410","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0411","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0412","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0413","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0414","topic":"Composite Functions","text":"Find the domain of the composite function f(g(x)) where f(x) = 1/(x-2) and g(x) = √x (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0415","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0416","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0417","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0418","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0419","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0420","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0421","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0422","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0423","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0424","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0425","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0426","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0427","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0428","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0429","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0430","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0431","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0432","topic":"Composite Functions","text":"Given f(x) = x³ and g(x) = x - 1, find (f∘g)(x) and determine when (f∘g)(x) = 0 (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0433","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0434","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0435","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0436","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0437","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0438","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0439","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0440","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0441","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0442","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0443","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0444","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0445","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0446","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0447","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0448","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0449","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0450","topic":"Composite Functions","text":"Analyze the properties of the composite function and determine its range (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0451","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0452","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0453","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0454","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0455","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0456","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0457","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0458","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0459","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0460","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0461","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0462","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0463","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0464","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0465","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0466","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0467","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0468","topic":"Inverse Functions","text":"Find the inverse function of f(x) = (2x - 3)/(x + 1) (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0469","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0470","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0471","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0472","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0473","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0474","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0475","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0476","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0477","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0478","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0479","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0480","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0481","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0482","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0483","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 15)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0484","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 16)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0485","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0486","topic":"Inverse Functions","text":"Verify that f(x) = √(x - 2) and g(x) = x² + 2 are inverses (with appropriate domain restrictions) (Variation 18)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0487","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 1)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0488","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0489","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 3)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0490","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 4)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0491","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0492","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 6)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0493","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 7)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0494","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0495","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 9)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0496","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 10)","marks":5,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0497","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"MATH_0498","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 12)","marks":8,"pt":"P3","diff":"har","src":"bank"},
+    {"id":"MATH_0499","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 13)","marks":4,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"MATH_0500","topic":"Inverse Functions","text":"Find the domain and range of the inverse of f(x) = (x + 1)/(x - 1) (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"OLD_Mathematics AI_0","topic":"Statistics and Probability","text":"Juliet is a sociologist who wants to investigate if income affects happiness amongst doctors. This question asks you to review Juliet's methods and conclusions.\n\nJuliet obtained a list of email addresses of doctors who work in her city. ...","marks":24,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_1","topic":"Calculus","text":"Alessia is an ecologist working for Mediterranean fishing authorities. She is interested in whether the mackerel population density is likely to fall below 5000 mackerel per km³, as this is the minimum value required for sustainable fish...","marks":31,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_2","topic":"Calculus Applications","text":"This question considers the optimal route between two points, separated by several regions where different speeds are possible.\n\nHuw lives in a house, H, and he attends a school, S, where H and S are marked on the following diagram. The ...","marks":26,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_3","topic":"Statistics and Probability","text":"This question considers the analysis of several datasets of examination marks using a variety of standard procedures and also an unfamiliar statistical test.\n\nA class of eight students sits two examinations, one in French and one in Germ...","marks":29,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_4","topic":"Statistics and Probability","text":"The following question examines the changes in darts players' scores using two statistical tests.\n\nIn the sport of darts, players take turns throwing darts at a board in order to score points. A player's \"three dart average\" refers to th...","marks":24,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_5","topic":"Calculus","text":"The following question explores a possible method of drawing phase portraits for non-linear coupled systems, taking a predator-prey model as a particular example.\n\nGander Green wildlife park contains a population of Czech geese (x, measu...","marks":31,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_6","topic":"Calculus","text":"In this question you will use a historic method of calculating the cost of a barrel of wine to determine which shape of barrel gives the best value for money.\n\nIn Austria in the 17th century, one method for measuring the volume of a barr...","marks":26,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_7","topic":"Vectors","text":"In this question you will use vector methods to determine whether aircraft are obeying air traffic regulations.\n\nThe base of an air traffic control tower at an airport is taken as the origin of a coordinate system. An aircraft's position...","marks":29,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_8","topic":"Statistics and Probability","text":"The purpose of this question is to help a company decide whether or not they should use a new technique to make a component.\n\nA factory produces components for a tractor. They have designed a new technique to produce one of their compone...","marks":26,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_9","topic":"Calculus and Vectors","text":"A sports stadium has a T-shirt cannon which is used to launch T-shirts into the crowd. The purpose of this question is to determine whether a person sitting in a particular seat will ever receive a T-shirt.\n\nA T-shirt cannon is placed on...","marks":29,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_10","topic":"Trigonometric Functions and Modeling","text":"A suitable site for the landing of a spacecraft on the planet Mars is identified at a point, A. The shortest time from sunrise to sunset at point A must be found. Radians should be used throughout this question. All values given in the q...","marks":27,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_11","topic":"Statistics and Probability","text":"A firm wishes to review its recruitment processes. This question considers the validity and reliability of the methods used. Every year an accountancy firm recruits new employees for a trial period of one year from a large group of appli...","marks":28,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_12","topic":"Statistics and Probability","text":"This question uses statistical tests to investigate whether advertising leads to increased profits for a grocery store.\n\nAimmika is the manager of a grocery store in Nong Khai. She is carrying out a statistical analysis on the number of ...","marks":27,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_13","topic":"Graph Theory and Networks","text":"This question compares possible designs for a new computer network between multiple school buildings, and whether they meet specific requirements.\n\nA school's administration team decides to install new fibre-optic internet cables undergr...","marks":28,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_14","topic":"Statistics and Probability","text":"A group of students were asked how many hours per week they spent on social media. The results are shown in the following cumulative frequency graph.\n\n(a) Write down the median number of hours spent on social media per week. [1]\n\n(b) Fin...","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_15","topic":"Calculus","text":"Consider the function f(x) = x³ - 6x² + 9x + 1, for -1 ≤ x ≤ 4.\n\n(a) Sketch the graph of y = f(x) on the following set of axes.\n\n(b) Write down\n    (i) the x-intercept that lies between x = 0 and x = 1;\n    (ii) the local maximum point. ...","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_16","topic":"Statistics and Probability","text":"A factory produces boxes of cereal. The weight, W grams, of cereal in a box is normally distributed with mean 505 g and standard deviation 4 g.\n\n(a) A box of cereal is chosen at random. Find the probability that this box contains between...","marks":7,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_17","topic":"Statistics and Probability","text":"The table shows the relationship between the diameter, d cm, and the height, h cm, of some cylindrical containers.\n\n| d (cm) | 10 | 12 | 14 | 16 | 18 |\n|--------|----|----|----|----|----|\n| h (cm) | 20 | 14 | 10 | 8  | 6  |\n\n(a) Calculat...","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_18","topic":"Number and Algebra","text":"A geometric sequence has first term a = 8 and common ratio r = 1.5.\n\n(a) Find the 10th term of the sequence. [2]\n\n(b) Find the sum of the first 10 terms of the sequence. [2]\n\n(c) The sum of the first n terms of the sequence is greater th...","marks":7,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_19","topic":"Geometry and Trigonometry","text":"The following diagram shows triangle ABC with AB = 8 cm, BC = 10 cm and angle ABC = 70°.\n\n(a) Find AC. [3]\n\n(b) Find the area of triangle ABC. [3]\n\n(c) The point D lies on [AC] such that BD is perpendicular to AC. Find BD. [3]","marks":9,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_20","topic":"Geometry and Trigonometry","text":"A surveyor needs to determine the height of a building. She measures the angle of elevation to the top of the building from two points, A and B, on level ground. Point B is 50 m closer to the building than point A. The angle of elevation...","marks":7,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_21","topic":"Number and Algebra","text":"The function f is defined by f(x) = (x - 2)² + 3 for x ∈ ℝ.\n\n(a) Write down the coordinates of the vertex of the graph of y = f(x). [2]\n\n(b) Hence or otherwise, write down the range of f. [2]\n\n(c) Write down the equation of the axis of s...","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_22","topic":"Calculus","text":"The displacement, s metres, of a particle from a fixed point at time t seconds is given by s(t) = 2t³ - 15t² + 24t + 10, for t ≥ 0.\n\n(a) Find the displacement of the particle when t = 2. [2]\n\n(b) Find the velocity of the particle when t ...","marks":12,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_23","topic":"Number and Algebra","text":"A company manufactures smartphone cases. The cost, C dollars, of producing x cases per day is modelled by C(x) = 0.002x² + 2x + 500.\n\nThe company sells each case for $12.\n\n(a) Write down an expression for the revenue, R dollars, when x c...","marks":10,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_24","topic":"Algebra","text":"1. (a) Write down the value of log₂ 8. [1]\n(b) Hence or otherwise, solve log₂ 8 + log₂ x = 5. [3]","marks":4,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_25","topic":"Calculus","text":"2. Consider the function f(x) = 2x³ - 5x² - 4x + 3.\n(a) Find f'(x). [3]\n(b) Find the gradient of the graph of f at x = 2. [2]","marks":5,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_26","topic":"Statistics","text":"3. The following table shows the average monthly temperature, T, in degrees Celsius (°C), in Rio de Janeiro, Brazil.\n\n| Month (M) | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |\n|-----------|-----|-----|-----|--...","marks":6,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_27","topic":"Functions","text":"4. The function f is defined by f(x) = 3x - 5 for -2 ≤ x ≤ 4.\n(a) Write down the range of f. [2]\n(b) Find f⁻¹(x). [3]","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_28","topic":"Statistics","text":"5. A factory produces chocolate bars. The weights of the chocolate bars are normally distributed with mean 250 g and standard deviation 2.5 g.\n(a) A chocolate bar is selected at random. Find the probability that this chocolate bar weighs...","marks":4,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_29","topic":"Algebra","text":"6. The first three terms of an infinite geometric sequence are 64, -32, 16.\n(a) Write down the value of r. [1]\n(b) Find u₅. [2]\n(c) Find the sum to infinity of this sequence. [2]","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_30","topic":"Geometry","text":"7. A sphere has a radius of 5 cm.\n(a) Find the volume of the sphere. [2]\n(b) Find the surface area of the sphere. [2]","marks":4,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_31","topic":"Geometry","text":"8. The following diagram shows triangle ABC.\n\n[Diagram shows triangle ABC with AB = 8 cm, BC = 10 cm, and angle ABC = 50°]\n\n(a) Find AC. [3]\n(b) Find the area of triangle ABC. [3]","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_32","topic":"Functions","text":"9. Let f(x) = x² + 2x - 3 and g(x) = x + 1.\n(a) Find (f ∘ g)(x). [3]\n(b) Solve (f ∘ g)(x) = 0. [3]","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_33","topic":"Algebra","text":"10. Consider the function f(x) = ax² + bx + c. The graph of f passes through the points (-1, 8), (0, 3), and (2, 7).\n(a) Write down the value of c. [1]\n(b) Write down two equations in terms of a and b. [2]\n(c) Hence find the value of a a...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_34","topic":"Algebra","text":"11. The following table shows values of x and the corresponding values of y for the function y = ax² + b, where a and b are constants.\n\n| x | 0 | 1 | 2 | 3 |\n|---|---|---|---|---|\n| y | 5 | 8 | 17| 32|\n\n(a) Write down the value of b. [1]...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_35","topic":"Geometry","text":"12. The equation of a line L₁ is y = 2x + 3. The line L₂ is perpendicular to L₁ and passes through the point (4, 5).\n(a) Write down the gradient of L₂. [2]\n(b) Find the equation of L₂. Give your answer in the form y = mx + c. [2]","marks":4,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_36","topic":"Statistics","text":"13. A bag contains 5 red marbles and 3 blue marbles. Two marbles are drawn from the bag, one after the other, without replacement.\n(a) Draw a tree diagram to represent this information. [3]\n(b) Find the probability that both marbles draw...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_37","topic":"Functions","text":"14. Consider f(x) = 5 - 2x², for -3 ≤ x ≤ 3.\n(a) Sketch the graph of f on the grid below.\n\n[Grid provided with x-axis from -3 to 3 and y-axis from -20 to 10]\n\n[4]\n(b) This function can also be written in the form f(x) = -2(x - p)(x - q)....","marks":9,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_38","topic":"Functions","text":"15. The following diagram shows part of the graph of a quadratic function f.\n\n[Diagram shows a parabola with vertex at (2, -4) and y-intercept at (0, 0)]\n\nThe vertex is at (2, -4) and the graph passes through (0, 0).\n\n(a) Write down the ...","marks":9,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_39","topic":"Geometry and Trigonometry","text":"The diagram shows points in a park viewed from above, at a specific moment in time. The distance between two trees, at points A and B, is 6.36m. Odette is playing football in the park and is standing at point O, such that OA = 25.9m and ...","marks":13,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_40","topic":"Functions and Algebra","text":"A scientist is conducting an experiment on the growth of a certain species of bacteria. The population of the bacteria, P, can be modelled by the function P(t) = 1200 × k^t, t ≥ 0, where t is the number of hours since the experiment bega...","marks":12,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_41","topic":"Calculus","text":"A particular park consists of a rectangular garden, of area A m², and a concrete path surrounding it. The park has a total area of 1200 m². The width of the path at the north and south side of the park is 2 m. The width of the path at th...","marks":16,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_42","topic":"Graph Theory","text":"The following graph shows five cities of the USA connected by weighted edges representing the cheapest direct flights in dollars ($) between cities: Seattle, New York City, Los Angeles, Chicago, and Dallas. Edge weights shown: Seattle-Ne...","marks":19,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_43","topic":"Matrices and Markov Chains","text":"The three countries of Belgium, Germany and The Netherlands meet at a single point called Vaalserberg. To support future transport planning, a 10 km circle was drawn around Vaalserberg on a map. A study was carried out over five years to...","marks":14,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_44","topic":"Probability and Statistics","text":"The gardener in a local park suggested that the number of snails found in the park can be modelled by a Poisson distribution.\n\n(a) Suggest two observations that the gardener may have made that led him to suggest this model. [2]\n\n(b) Now ...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_45","topic":"Calculus and Differential Equations","text":"A biologist suggests that the rates of change of the population of fruit flies (after time t ≥ 0) in a particular ecosystem are given by the following equations, where x is the population of male fruit flies and y is the population of fe...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_46","topic":"Financial Mathematics","text":"Angel has $520 in his savings account. Angel considers investing the money for 5 years with a bank. The bank offers an annual interest rate of 1.2% compounded quarterly.\n(a) Calculate the amount of money Angel would have at the end of 5 ...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_47","topic":"Statistics and Probability","text":"The lengths of the seeds from a particular mango tree are approximated by a normal distribution with a mean of 4 cm and a standard deviation of 0.25 cm.\n\nA seed from this mango tree is chosen at random.\n(a) Calculate the probability that...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_48","topic":"Geometry and Trigonometry","text":"Ruhi buys a scoop of ice cream in the shape of a sphere with a radius of 3.4 cm. The ice cream is served in a cone, and it may be assumed that 1/8 of the volume of the ice cream is inside the cone.\n\n(a) Calculate the volume of ice cream ...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_49","topic":"Statistics and Probability","text":"Akar starts a new job in Australia and needs to travel daily from Wollongong to Sydney and back. He travels to work for 28 consecutive days and therefore makes 56 single journeys. Akar makes all journeys by bus. The probability that he i...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_50","topic":"Graph Theory","text":"The following directed, unweighted, graph shows a simplified road network on an island, connecting five small villages marked A to E.\n\n(a) Construct the adjacency matrix M for this network. [3]\n\nBeatriz the bus driver starts at village E...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_51","topic":"Statistics and Probability","text":"At a running club, Sung-Jin conducts a test to determine if there is any association between an athlete's age and their best time taken to run 100m. Eight athletes are chosen at random, and their details are shown below.\n\nAthlete   A   B...","marks":9,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_52","topic":"Algebra","text":"The matrices P = (3 0; 0 1) and Q = (1 2; 0 1) represent two transformations. A triangle T is transformed by P, and this image is then transformed by Q to form a new triangle, T'.\n\n(a) Find the single matrix that represents the transform...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_53","topic":"Vectors","text":"In this question, i denotes a unit vector due east, and j denotes a unit vector due north. Two ships, A and B, are each moving with constant velocities.\n\nThe position vector of ship A, at time t hours, is given as rA = (1 + 2t)i + (3 - 3...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_54","topic":"Statistics and Probability","text":"A random sample of eight packets of Apollo coffee granules are selected from a supermarket shelf. The weights of the coffee granules present in each packet are as follows:\n222 g   226 g   221 g   228 g   227 g   225 g   222 g   223 g\n\n(a...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_55","topic":"Calculus","text":"Let y = cos x and y = 1/2. The following diagram shows parts of the curves. P is the point of intersection of the two curves.\n\n(a) Use your graphic display calculator to find the coordinates of P. [2]\n\nThe shaded region is rotated 360° a...","marks":9,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_56","topic":"Calculus","text":"This question is about modelling the spread of a computer virus to predict the number of computers in a city which will be infected by the virus.\n\nA systems analyst defines the following variables in a model:\n• t is the number of days si...","marks":28,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_57","topic":"Geometry and Graph Theory","text":"This question is about a metropolitan area council planning a new town and the location of a new toxic waste dump.\n\nA metropolitan area in a country is modelled as a square. The area has four towns, located at the corners of the square. ...","marks":27,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_58","topic":"Statistics and Probability","text":"In this question, you will explore possible approaches to using historical sports results for making predictions about future sports matches.\n\nTwo friends, Peter and Helen, are discussing ways of predicting the outcomes of international ...","marks":29,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_59","topic":"Calculus","text":"Some medical conditions require patients to take medication regularly for long periods of time. In this question, you will explore the concentration of a medicinal drug in the body, when the drug is given repeatedly.\n\nOnce a drug enters ...","marks":26,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_60","topic":"Probability and Statistics","text":"In a given week, the number of students in a particular primary school that were absent due to headlice (H), influenza (I) and/or chickenpox (C) were recorded as follows. The primary school has 500 students. 35 students had headlice only...","marks":16,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_61","topic":"Geometry and Trigonometry","text":"Mai is at an amusement park. A map of part of the amusement park is represented on the following coordinate axes. Mai's favourite three attractions are positioned at A(0, 16), B(12, 20) and C(12, 0). All measurements are in metres.\n(a) W...","marks":14,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_62","topic":"Calculus","text":"The following diagram shows a model of the side view of a water slide. All lengths are measured in metres. The curved edge of the slide is modelled by f(x) = (1/4)x² for 0 ≤ x ≤ 4. The remainder of the slide is modelled by g(x) = -4x + 4...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_63","topic":"Probability and Statistics","text":"A recent study found that the heights of Dutch women can be modelled by a normal distribution with mean 170.7 cm and standard deviation 6.3 cm. A Dutch woman is chosen at random.\n(a) Calculate the probability that her height is\n(i) less ...","marks":19,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_64","topic":"Geometry and Trigonometry","text":"A skip is a container used to carry garbage away from a construction site. For safety reasons the garbage must not extend beyond the top of the skip. The maximum volume of garbage to be removed is therefore equal to the volume of the ski...","marks":16,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_65","topic":"Number and Algebra","text":"Daina makes pendulums to sell at a market. She plans to make 10 pendulums on the first day and, on each subsequent day, make 6 more than she did the day before.\n\n(a) Calculate the number of pendulums she would make on the 12th day. [3]\n(...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_66","topic":"Statistics and Probability","text":"It is claimed that a new remedy cures 82% of the patients with a particular medical problem. This remedy is to be used by 115 patients, and it is assumed that the 82% claim is true.\n\n(a) Find the probability that exactly 90 of these pati...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_67","topic":"Geometry and Trigonometry","text":"A farmer owns a field in the shape of a triangle ABC such that AB = 650 m, AC = 1005 m and BC = 1225 m.\n(a) Find the size of AĈB. [3]\nThe local town is planning to build a highway that will intersect the borders of the field at points D ...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_68","topic":"Statistics and Probability","text":"It is known that the weights of male Persian cats are normally distributed with mean 6.1 kg and variance 0.5² kg².\n(a) Sketch a diagram showing the above information. [2]\n(b) Find the proportion of male Persian cats weighing between 5.5 ...","marks":16,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_69","topic":"Calculus","text":"A hollow chocolate box is manufactured in the form of a right prism with a regular hexagonal base. The height of the prism is h cm, and the top and base of the prism have sides of length x cm.\n(a) Given that sin 60° = √3/2, show that the...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_70","topic":"Algebra","text":"In a small village there are two doctors' clinics, one owned by Doctor Black and the other owned by Doctor Green. It was noted after each year that 3.5% of Doctor Black's patients moved to Doctor Green's clinic and 5% of Doctor Green's p...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_71","topic":"Statistics and Probability","text":"Hank sets up a bird table in his garden to provide the local birds with some food. Hank notices that a specific bird, a large magpie, visits several times per month and he names him Bill. Hank models the number of times per month that Bi...","marks":14,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_72","topic":"Calculus","text":"A particle P moves along the x-axis. The velocity of P is v m s⁻¹ at time t seconds, where v = -2t² + 16t - 24 for t ≥ 0.\n(a) Find the times when P is at instantaneous rest. [2]\n(b) Find the magnitude of the particle's acceleration at 6 ...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_73","topic":"Calculus","text":"Consider the following system of coupled differential equations.\ndx/dt = -4x\ndy/dt = 3x - 2y\n(a) Find the eigenvalues and corresponding eigenvectors of the matrix ((-4, 0), (3, -2)). [6]\n(b) Hence, write down the general solution of the ...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_74","topic":"Graph Theory","text":"A hygiene inspector lives in Town A and must visit restaurants in five towns (B – F), before returning to A. The inspector must not repeat any of the towns. The distances, in km, between the six towns are shown in the table.\n\n[Table show...","marks":12,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_75","topic":"Matrices and Probability","text":"The drivers of a delivery company can park their vans overnight either at its headquarters or at home. Urvashi is a driver for the company. If Urvashi has parked her van overnight at headquarters on a given day, the probability that she ...","marks":16,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_76","topic":"Sequences and Probability","text":"The kth triangle number, Tₖ, is defined as Tₖ = Σᵣ₌₁ᵏ r.\n\n(a) (i) Calculate the value of the fifth triangle number, T₅. [2]\n    (ii) Determine the formula for Tₖ in the form ak² + bk. [2]\n(b) (i) Find the value of T₅ + T₄. [1]\n    (ii) F...","marks":14,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_77","topic":"Statistics and Probability","text":"Containment walls to protect against radiation are constructed from two parallel concrete slabs that have a layer of lead between them as shown in the diagram. The width of a concrete slab is modelled by a normal distribution with mean 3...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_78","topic":"Sequences and Series","text":"Scott purchases food for his dog in large bags and feeds the dog the same amount of dog food each day. The amount of dog food left in the bag at the end of each day can be modelled by an arithmetic sequence. On a particular day, Scott op...","marks":13,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_79","topic":"Calculus","text":"A cafe makes x litres of coffee each morning. The cafe's profit each morning, C, measured in dollars, is modelled by the following equation\nC = (x/10)(k² - (3/100)x²)\nwhere k is a positive constant.\n(a) Find an expression for dC/dx in te...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_80","topic":"Geometry and Trigonometry","text":"The Voronoi diagram below shows four supermarkets represented by points with coordinates A(0, 0), B(6, 0), C(0, 6) and D(2, 2). The vertices X, Y, Z are also shown. All distances are measured in kilometres.\n[diagram not to scale showing ...","marks":18,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_81","topic":"Calculus and Functions","text":"A student investigating the relationship between chemical reactions and temperature finds the Arrhenius equation on the internet.\nk = Ae^(-c/T)\nThis equation links a variable k with the temperature T, where A and c are positive constants...","marks":15,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_82","topic":"Linear Algebra","text":"A geneticist uses a Markov chain model to investigate changes in a specific gene in a cell as it divides. Every time the cell divides, the gene may mutate between its normal state and other states.\nThe model is of the form\n(X(n+1), Z(n+1...","marks":12,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_83","topic":"Vectors and Kinematics","text":"At an archery tournament, a particular competition sees a ball launched into the air while an archer attempts to hit it with an arrow.\nThe path of the ball is modelled by the equation\n(x, y)ᵀ = (5, 0)ᵀ + t(uₓ, uᵧ - 5t)ᵀ\nwhere x is the ho...","marks":21,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_84","topic":"Differential Equations","text":"An environmental scientist is asked by a river authority to model the effect of a leak from a power plant on the mercury levels in a local river. The variable x measures the concentration of mercury in micrograms per litre.\nThe situation...","marks":16,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_85","topic":"Statistics and Probability","text":"Xavie conducted a study to see if there is a relationship between the price of an apartment, y, and its distance, x, from the city centre of Melbourne. They took a random sample of six typical apartments along a train line in the city. X...","marks":19,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_86","topic":"Statistics and Probability","text":"The company Fred Express delivers packages. From past experience, the time taken, T, to deliver a package follows a normal distribution with mean 64 hours and standard deviation 12 hours.\n\n(a) State P(T < 64). [1]\n\n(b) Find P(44 < T < 64...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_87","topic":"Calculus","text":"A shop uses the following model to estimate n, the number of smoothies sold per day, in terms of x, the price of a single smoothie in pesos.\n\nn(x) = 40000/x²\n\nThe maximum number of smoothies the shop can make in a day is 400.\n\n(a) Find t...","marks":13,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_88","topic":"Statistics and Probability","text":"A type of generator will only function if a particular switch is working. The generator has a main switch, A, and a 'back up' switch, B.\n\nThe manufacturer claims the probability of switch A failing within one month of being fitted is 0.1...","marks":12,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_89","topic":"Calculus","text":"Andrew designs a fibreglass water slide for a water park.\n\nLet x be the horizontal distance, in metres, from the start of the water slide.\nLet h be the height, in metres, of the water slide above the horizontal ground.\n\nThe following dia...","marks":21,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_90","topic":"Statistics and Probability","text":"The mean annual temperatures for Earth, recorded at fifty-year intervals, are shown in the table.\n\nYear (x): 1708, 1758, 1808, 1858, 1908, 1958, 2008\nTemperature °C (y): 8.73, 9.22, 9.10, 9.12, 9.13, 9.45, 9.76\n\nTami creates a linear mod...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_91","topic":"Functions","text":"Consider the function f(x) = (3x - 1)/(x - 2) + 4. Part of the graph of y = f(x) is shown below.\n\n[Graph showing a rational function with a vertical asymptote and local minimum]\n\nThe function is defined for all values of x except for x =...","marks":16,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_92","topic":"Functions","text":"The depth of water, w metres, in a particular harbour can be modelled by the function w(t) = a cos(bt) + d where t is the length of time, in minutes, after 06:00.\n\nOn 20 January, the first high tide occurs at 06:00, at which time the dep...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_93","topic":"Statistics and Probability","text":"A large international sports tournament tests their athletes for banned substances. They interpret a positive test result as meaning that the athlete uses banned substances. A negative result means that they do not.\n\nThe probability that...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_94","topic":"Calculus","text":"A large closed container, in the shape of a half cylinder with a rectangular lid, is to be constructed with a volume of 0.8 m³. The container has a length of l metres and a radius of r metres.\n\n[Diagram showing half cylinder with length ...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_95","topic":"Financial Mathematics","text":"Give your answers in parts (a), (d)(i), (e) and (f) to the nearest dollar.\n\nDaisy invested 37 000 Australian dollars (AUD) in a fixed deposit account with an annual interest rate of 6.4% compounded quarterly.\n\n(a) Calculate the value of ...","marks":19,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_96","topic":"Calculus","text":"The cross-sectional view of a tunnel is shown on the axes below. The line [AB] represents a vertical wall located at the left side of the tunnel. The height, in metres, of the tunnel above the horizontal ground is modelled by y = -0.1x³ ...","marks":16,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_97","topic":"Statistics","text":"The stopping distances for bicycles travelling at 20 km h⁻¹ are assumed to follow a normal distribution with mean 6.76 m and standard deviation 0.12 m.\n\n(a) Under this assumption, find, correct to four decimal places, the probability tha...","marks":13,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_98","topic":"Functions and Calculus","text":"Charlotte decides to model the shape of a cupcake to calculate its volume.\n\nFrom rotating a photograph of her cupcake she estimates that its cross-section passes through the points (0, 3.5), (4, 6), (6.5, 4), (7, 3) and (7.5, 0), where a...","marks":14,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_99","topic":"Matrices and Markov Chains","text":"Long term experience shows that if it is sunny on a particular day in Vokram, then the probability that it will be sunny the following day is 0.8. If it is not sunny, then the probability that it will be sunny the following day is 0.3.\n\n...","marks":13,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_100","topic":"Vectors and Calculus","text":"An ice-skater is skating such that her position vector when viewed from above at time t seconds can be modelled by\n\n(x / y) = (a e^(bt) cos t / a e^(bt) sin t)\n\nwith respect to a rectangular coordinate system from a point O, where the no...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_101","topic":"Differential Equations","text":"A biologist introduces 100 rabbits to an island and records the size of their population (x) over a period of time. The population growth of the rabbits can be approximately modelled by the following differential equation, where t is tim...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_102","topic":"Graph Theory","text":"The vertices in the following graph represent seven towns. The edges represent their connecting roads. The weight on each edge represents the distance, in kilometres, between the two connected towns.\n\n[Graph showing vertices A, B, C, D, ...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_103","topic":"Statistics","text":"Goran is interested in the number of sightings of a particular bird each week in the 50 weeks following the first day of September. He collects some data which is shown in the table.\n\nNumber of sightings: 0, 1, 2, 3, 4, 5, More than 5\nNu...","marks":15,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_104","topic":"Calculus","text":"A model speedboat has its position, at time t seconds t ≥ 0, defined by\n\ndx/dt = 5x - 0.05y,\ndy/dt = 5y + 0.05x,\n\nwhere x metres is the distance east and y metres is the distance north of a fixed point O.\n\n(a) Find the eigenvalues of A =...","marks":15,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_105","topic":"Geometry and Trigonometry","text":"A trapezoid, Q, has vertices (0, -1), (0, -2), (sin 15°, -3 - cos 15°), (sin 15°, -1 - cos 15°) as shown.\n\n(a) Show that the area of the trapezoid is (3/2)sin 15°. [2]\n\nA design is created with 24 elements. Each element is obtained by tr...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_106","topic":"Vectors","text":"A national park contains three mountains whose summits are at points A, B and C. According to a coordinate system, the position of A is (0, 0, 2.8) and the position of B is (7.2, 5.1, 2.4). All the values are in kilometres.\n(a) (i) Find ...","marks":12,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_107","topic":"Calculus","text":"Consider the differential equation dy/dx = 2x·e^y.\n(a) Identify which of the following diagrams, A, B or C, represents the slope field for the differential equation. Give a reason for your answer. [2]\nIt is given that, for a particular s...","marks":13,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_108","topic":"Statistics and Probability","text":"Taylor is playing a computer game in which they shoot at spaceships and battleships. The number of spaceships they hit per minute can be modelled by a Poisson distribution with mean 4.2. The number of battleships they hit per minute can ...","marks":13,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_109","topic":"Calculus","text":"The interior of a vase is modelled by rotating the region bounded by the curve y = (x+1)^(1/2), and the lines x = 0, y = 0 and y = 15, through 2π radians about the y-axis. The values of x and y are measured in centimetres. The vase is fi...","marks":14,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_110","topic":"Graph Theory and Markov Chains","text":"(a) Write down the adjacency matrix for the directed graph shown below. [2]\nA bird sits on one of three posts, labelled A, B and C, with B between A and C. When the bird moves, it will either fly to an adjacent post or return to the same...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_111","topic":"Statistics and Probability","text":"The scores of the eight highest scoring countries in the 2019 Eurovision song contest are shown in the following table.\n\nEurovision score:\nNetherlands 498\nItaly 472\nRussia 370\nSwitzerland 364\nSweden 334\nNorway 331\nNorth Macedonia 305\nAze...","marks":16,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_112","topic":"Geometry and Trigonometry, Calculus","text":"A sector of a circle, centre O and radius 4.5 m, is shown in the following diagram.\n\n[diagram not to scale showing sector with radius 4.5 and arc AB]\n\n(a) (i) Find the angle AÔB. [4]\n(ii) Find the area of the shaded segment. [4]\n\nA squar...","marks":17,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_113","topic":"Statistics and Probability","text":"A Principal would like to compare the students in his school with a national standard. He decides to give a test to eight students made up of four boys and four girls. One of the teachers offers to find the volunteers from his class.\n\n(a...","marks":13,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_114","topic":"Calculus","text":"A particle moves such that its displacement, x metres, from a point O at time t seconds is given by the differential equation\n\nd²x/dt² + 5(dx/dt) + 6x = 0\n\n(a) (i) Use the substitution y = dx/dt to show that this equation can be written ...","marks":13,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_115","topic":"Statistics and Probability","text":"The aircraft for a particular flight has 72 seats. The airline's records show that historically for this flight only 90% of the people who purchase a ticket arrive to board the flight. They assume this trend will continue and decide to s...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_116","topic":"Calculus and Functions","text":"Consider the curve y = √x.\n\n(a) (i) Find dy/dx. [1]\n(ii) Hence show that the equation of the tangent to the curve at the point (0.16, 0.4) is y = 1.25x + 0.2. [3]\n\nThe shape of a piece of metal can be modelled by the region bounded by th...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_117","topic":"Vectors and Matrices","text":"A transformation, T, of a plane is represented by r' = Pr + q, where P is a 2 × 2 matrix, q is a 2 × 1 vector, r is the position vector of a point in the plane and r' the position vector of its image under T.\n\nThe triangle OAB has coordi...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_118","topic":"Statistics and Probability","text":"At Mirabooka Primary School, a survey found that 68% of students have a dog and 36% of students have a cat. 14% of students have both a dog and a cat. This information can be represented in the following Venn diagram, where m, n, p and q...","marks":15,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_119","topic":"Geometry and Trigonometry","text":"Six restaurant locations (labelled A, B, C, D, E and F) are shown, together with their Voronoi diagram. All distances are measured in kilometres.\n\n(a) Elena wants to eat at the closest restaurant to her. Write down the restaurant she sho...","marks":13,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_120","topic":"Calculus","text":"Linda owns a field, represented by the shaded region R. The plan view of the field is shown in the following diagram, where both axes represent distance and are measured in metres. The segments [AB], [CD] and [AD] respectively represent ...","marks":17,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_121","topic":"Graph Theory","text":"A company has six offices, A, B, C, D, E and F. One of the company managers, Nanako, needs to visit the offices. She creates the following graph that shows the distances, in kilometres, between some of the offices.\n\n(a) Write down a Hami...","marks":14,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_122","topic":"Calculus","text":"Adesh is designing a glass. The glass has an inner surface and an outer surface. Part of the cross section of his design is shown in the following graph, where the shaded region represents the glass. The two surfaces meet at the top of t...","marks":13,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_123","topic":"Statistics and Probability","text":"A company makes doors for kitchen cupboards from two layers. The inside layer is wood, and its thickness is normally distributed with mean 7 mm and standard deviation 0.3 mm. The outside layer is plastic, and its thickness is normally di...","marks":18,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_124","topic":"Calculus and Vectors","text":"The position vector of a particle at time t is given by r = 3cos(3t)i + 4sin(3t)j. Displacement is measured in metres and time is measured in seconds.\n\n(a) (i) Find an expression for the velocity of the particle at time t. [2]\n(ii) Hence...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_125","topic":"Statistics","text":"The prices, in dollars, of 10 different garden chairs are: 79, 139, 255, 99, 50, 209, 229, 193, 69, 49. (a) Find the range of the prices of the 10 chairs. [2] (b) Use your graphic display calculator to find (i) the mean price of the chai...","marks":7,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_126","topic":"Trigonometry","text":"The diagram shows a toy crane. AB = 25 cm, AC = 15 cm and BÂC = 22°. (a) Calculate BC. [3] (b) Given that AB̂C is acute, calculate AB̂C. [3]","marks":6,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_127","topic":"Statistics","text":"Sunita sorts 300 peppers into sizes of small, medium or large. Some peppers are red, some are green, and some are yellow. The following table shows her results: Small Medium Large; Red 18 31 46; Green 26 32 21; Yellow 34 66 26. Sunita wa...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_128","topic":"Algebra","text":"At a particular building site, the number of square metres of bricks, n, that can be laid in one working day varies directly with the number of bricklayers, B. Five bricklayers can lay an area of 60 m² of bricks in one working day. (a) C...","marks":6,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_129","topic":"Financial Mathematics","text":"Imani invests $3000 in a bank that pays a nominal annual interest rate of 1.25% compounded monthly. (a) Calculate the amount of money Imani will have in the bank at the end of 6 years. Give your answer correct to two decimal places. [3] ...","marks":9,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_130","topic":"Probability","text":"Jerry makes handcrafted chocolates. On average, 1 in 25 of the chocolates that Jerry makes is flawed. Whether or not a chocolate is flawed is independent of all other chocolates. (a) In a batch of 20 chocolates, chosen at random, find th...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_131","topic":"Algebra","text":"The pH scale is a measure of the acidity of a solution. Its value is given by the formula pH = −log₁₀[H⁺], where [H⁺] is the concentration of hydrogen ions in the solution (measured in moles per litre). (a) Calculate the pH value if the ...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_132","topic":"Probability","text":"Gustav plays a game in which he first tosses an unbiased coin and then rolls an unbiased six-sided die. If the coin shows tails, the score on the die is Gustav's final number of points. If the coin shows heads, one is added to the score ...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_133","topic":"Algebra","text":"A marathon is a race over a distance of 42.195 km. Two runners, Eefje and Shumay, are training to run a marathon. The two runners train in different ways: • Eefje runs 5 km on the first day of training and then increases the distance she...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_134","topic":"Calculus","text":"The gradient of the normal to the curve y = ax² + bx − 10 at the point T(2, 4) is −1/3. Calculate the value of a and the value of b. [7]","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_135","topic":"Geometry","text":"A sheep is in a field in the shape of a triangle, ABC. AC = 21 metres, AB = 15 metres and CÂB = 78°. A goat is in an adjacent field in the shape of a sector of a circle with centre, A, and radius 8 metres. The fields are shown in the dia...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_136","topic":"Calculus","text":"A company is designing a new carpet. The intended design of the carpet is in the shape of a rectangle with a semi-circle at each end. The width of the rectangle is y metres and the diameter of each semi-circle is x metres, with x > 0 and...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_137","topic":"Number and algebra","text":"Zaha is designing a bridge to cross a river. She believes that the weight of the steel needed for this bridge is approximately 53 632 000 kg. The exact weight of the steel needed for the bridge is 55 625 000 kg.\n(a) Find the percentage e...","marks":5,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_138","topic":"Statistics and probability","text":"In a school, 200 students solved a problem in a mathematics competition. Their times to solve the problem were recorded and the following cumulative frequency graph was produced.\n[GRAPH: Cumulative frequency graph showing time (seconds) ...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_139","topic":"Statistics and probability","text":"The following frequency distribution table shows the test grades for a group of students.\n\nGrade: 1, 2, 3, 4, 5, 6, 7\nFrequency: 1, 4, 7, 9, p, 9, 4\n\nFor this distribution, the mean grade is 4.5.\n(a) Write down the total number of studen...","marks":4,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_140","topic":"Statistics and probability","text":"A company that owns many restaurants wants to determine if there are differences in the quality of the food cooked for three different meals: breakfast, lunch and dinner. Their quality assurance team randomly selects 500 items of food to...","marks":6,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_141","topic":"Geometry and trigonometry","text":"Ani owns four cafes represented by points A, B, C and D. Ani wants to divide the area into delivery regions. This process has been started in the following incomplete Voronoi diagram, where 1 unit represents 1 kilometre.\n[DIAGRAM: Coordi...","marks":6,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_142","topic":"Number and algebra","text":"A player throws a basketball. The height of the basketball is modelled by\nh(t) = -4.75t² + 8.75t + 1.5, t ≥ 0,\nwhere h is the height of the basketball above the ground, in metres, and t is the time, in seconds, after it was thrown.\n\n(a) ...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_143","topic":"Number and algebra","text":"Consider f(x) = (3x - 5)/(x - 2), x ≠ 2. The graph of f for 0 < x ≤ 5 is shown on the following axes.\n[GRAPH: Shows function graph on coordinate plane with x-axis from -5 to 5 and y-axis from -60 to 80]\n\n(a) (i) Sketch the graph of f, fo...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_144","topic":"Statistics and probability","text":"In a game, balls are thrown to hit a target. The random variable X is the number of times the target is hit in five attempts. The probability distribution for X is shown in the following table.\n\nx:           0     1    2     3    4    5\n...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_145","topic":"Calculus","text":"An engineer wants to calculate the cross-sectional area of a dam. The cross-section of the dam can be modelled by a curve and two straight lines as shown in the following diagram, where distances are measured in metres.\n[DIAGRAM: Coordin...","marks":9,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_146","topic":"Coordinate Geometry","text":"Two schools are represented by points A(2, 20) and B(14, 24) on the graph below. A road, represented by the line R with equation −x + y = 4, passes near the schools. An architect is asked to determine the location of a new bus stop on th...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_147","topic":"Functions","text":"A function is defined by f(x) = 2 − 12/(x + 5) for −7 ≤ x ≤ 7, x ≠ −5.\n(a) Find the range of f. [3]\n(b) Find an expression for the inverse function f⁻¹(x). The domain is not required. [3]\n(c) Write down the range of f⁻¹(x). [1]","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_148","topic":"Statistics","text":"At Springfield University, the weights, in kg, of 10 chinchilla rabbits and 10 sable rabbits were recorded. The aim was to find out whether chinchilla rabbits are generally heavier than sable rabbits. The results obtained are summarized ...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_149","topic":"Trigonometry","text":"The diagram below shows a helicopter hovering at point H, 380 m vertically above a lake. Point A is the point on the surface of the lake, directly below the helicopter. Minta is swimming at a constant speed in the direction of point A. M...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_150","topic":"Financial Mathematics","text":"Roger buys a new laptop for himself at a cost of £495. At the same time, he buys his daughter Chloe a higher specification laptop at a cost of £2200. It is anticipated that Roger's laptop will depreciate at a rate of 10% per year, wherea...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_151","topic":"Algebra","text":"Consider the function f(x) = ax² + bx + c. The graph of y = f(x) is shown in the diagram. The vertex of the graph has coordinates (0.5, −12.5). The graph intersects the x-axis at two points, (−2, 0) and (p, 0).\n(a) Find the value of p. [...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_152","topic":"Sequences and Series","text":"A meteorologist models the height of a hot air balloon launched from the ground. The model assumes the balloon travels vertically upwards and travels 450 metres in the first minute. Due to the decrease in temperature as the balloon rises...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_153","topic":"Vectors","text":"Two lines L₁ and L₂ are given by the following equations, where p ∈ ℝ.\n\nL₁: r = (2, p+9, −3) + λ(p, 2p, 4)\nL₂: r = (14, 7, p+12) + μ(p+4, 4, −7)\n\nIt is known that L₁ and L₂ are perpendicular.\n(a) Find the possible value(s) for p. [3]\n(b)...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_154","topic":"Statistics","text":"A newspaper vendor in Singapore is trying to predict how many copies of The Straits Times they will sell. The vendor forms a model to predict the number of copies sold each weekday. According to this model, they expect the same number of...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_155","topic":"Statistics","text":"A manufacturer of chocolates produces them in individual packets, claiming to have an average of 85 chocolates per packet. Talha bought 30 of these packets in order to check the manufacturer's claim. Given that the number of individual c...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_156","topic":"Graph Theory","text":"The diagram below shows a network of roads in a small village with the weights indicating the distance of each road, in metres, and junctions indicated with letters. Musab is required to deliver leaflets to every house on each road. He w...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_157","topic":"Complex Numbers","text":"It is given that z₁ = 3 cis(3π/4) and z₂ = 2 cis(nπ/16), n ∈ ℤ⁺.\n(a) In parts (a)(i) and (a)(ii), give your answers in the form re^(iθ), r ≥ 0, −π < θ ≤ π.\n(i) Find the value of z₁³.\n(ii) Find the value of (z₁/z₂)⁴ for n = 2. [5]\n(b) Fin...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_158","topic":"Graph Theory","text":"The graph below shows a small maze, in the form of a network of directed routes. The vertices A to F show junctions in the maze and the edges show the possible paths available from one vertex to another. A mouse is placed at vertex A and...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_159","topic":"Linear Algebra","text":"A geometric transformation T: (x, y) ↦ (x′, y′) is defined by\n\nT: (x′, y′) = (7  −10; 2  −3)(x, y) + (−5, 4).\n\n(a) Find the coordinates of the image of the point (6, −2). [2]\n(b) Given that T: (p, q) ↦ 2(p, q), find the value of p and th...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_160","topic":"Statistics","text":"The number of coffees sold per hour at an independent coffee shop is modelled by a Poisson distribution with a mean of 22 coffees per hour. Sheila, the shop's owner wants to increase the number of coffees sold in the shop. She decides to...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_161","topic":"Calculus","text":"A particle P moves in a straight line, such that its displacement x at time t (t ≥ 0) is defined by the differential equation ẋ = x cos t (e^(−sin t)). At time t = 0, x = 1/e.\n(a) By using Euler's method with a step length of 0.1, find a...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_162","topic":"Probability","text":"The following Venn diagram shows two independent events, R and S. The values in the diagram represent probabilities.\n\n[Venn diagram showing: U with R containing y and 0.2, S containing 0.6, and x outside both]\n\n(a) Find the value of x. [...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_163","topic":"Statistics","text":"A chocolate company plans to produce chocolate bars with special flavours. They survey 246 people to determine if there is any particular preference for one of the flavours.\n\nThe table below shows the information collected.\n\nHot chilli  ...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_164","topic":"Trigonometry","text":"Two AC (alternating current) electrical sources of equal frequencies are combined.\n\nThe voltage of the first source is modelled by the equation V = 30 sin(t + 60°).\nThe voltage of the second source is modelled by the equation V = 60 sin(...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_165","topic":"Calculus","text":"A spherical balloon is being inflated such that its volume is increasing at a rate of 15 cm³s⁻¹.\n\n(a) Find the radius of the balloon when its volume is 288π cm³. [2]\n(b) Hence or otherwise, find the rate of change of the radius at this i...","marks":5,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_166","topic":"Algebra","text":"The matrices P = [3 1; 0 2] and Q = [4 1; 1 3] represent two transformations.\n\nA triangle T is transformed by P, and this image is then transformed by Q to form a new triangle, T′.\n\n(a) Find the single matrix that represents the transfor...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_167","topic":"Calculus","text":"The following diagram shows parts of the curves of y = cos x and y = √x/2.\n\nP is the point of intersection of the two curves.\n\n[Diagram showing curves y = cos x and y = √x/2 intersecting at point P, with shaded region between them]\n\n(a) ...","marks":9,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_168","topic":"Calculus","text":"Consider the differential equation (x² + 1)dy/dx = 2xy, for x ≥ 0, y ≥ 1, where y = 1 when x = 0.\n\n(a) Explain why Euler's method cannot be used to find an approximate value for y when x = 0.1. [1]\n(b) By solving the differential equatio...","marks":6,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_169","topic":"Sequences and Series","text":"The annual growth of a tree is 80% of its growth during the previous year. This year the tree is 42 m in height and one year ago its height was 37 m.\n(a) Calculate the annual growth of the tree in the coming year. [2]\n(b) Calculate the h...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_170","topic":"Calculus","text":"Consider the differential equation dy/dx = xy + 1, given that y = 2 when x = 1. Use Euler's method with step size 0.1 to find the approximate value of y when x = 1.5. [4]","marks":4,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_171","topic":"Vectors","text":"The quadrilateral ABCD has coordinates A(1, 3, 5), B(4, 7, 5), C(5, 8, 7) and D(2, 4, 7).\n(a) Write down AD→. [1]\n(b) Calculate\n(i) the size of BÂD.\n(ii) the area of triangle BAD. [7]\n(c) Show that ABCD is a parallelogram. [2]","marks":10,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_172","topic":"Probability and Statistics","text":"The number of traffic accidents at a road junction is modelled by a Poisson distribution with a mean of 0.76 accidents per week.\n(a) Under this model, calculate the probability that\n(i) there are at least 2 accidents in a particular week...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_173","topic":"Calculus","text":"Consider the function f(x) = 3 - x², -√3 ≤ x ≤ √3.\n(a) Sketch the graph of y = f(x) on the following pair of axes. [2]\nThe area between the graph of y = f(x) and the x-axis is rotated through 360° about the x-axis.\n(b) (i) Write down an ...","marks":9,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_174","topic":"Calculus","text":"The diagram shows the curve with equation y_k = kx² - x, k > 0, which intersects the x-axis at the origin and at the point A_k(1/k, 0). The normal to the curve at A_k intersects the curve again at point B_k.\n(a) Show that the x-coordinat...","marks":9,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_175","topic":"Vectors","text":"A duck is sitting in a duck pond at point A(7, 4, 0) relative to an origin O, where lengths are measured in metres and time, t, is measured in seconds. It takes off and flies in a straight line with vector equation d = (7, 4, 0) + t(6, 6...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_176","topic":"Calculus","text":"A particle starts from rest at point O and moves in a straight line with velocity, v, given by v(t) = 3 + sin(t) - cos(t), t ≥ 0 where v is measured in metres per second and time, t (radians), is measured in seconds. The particle next co...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_177","topic":"Statistics and Modeling","text":"A cup of hot water is placed in a room and is left to cool for half an hour. Its temperature, measured in °C, is recorded every 5 minutes. The results are shown in the table.\nTime (mins): 5, 10, 15, 20, 25, 30\nTemperature (°C): 59, 52, 4...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_178","topic":"Complex Numbers","text":"Consider the complex number z = -1 + i.\n(a) Express z in the form re^(iθ) where -π < θ ≤ π. [2]\nA and B are the points on the Argand diagram that represent the complex numbers z and z², respectively. A is mapped onto B by the composition...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_179","topic":"Probability","text":"A group of 130 applicants applied for admission into either the Arts programme or the Sciences programme at a university. The outcomes of their applications are shown in the following table.\n\nAccepted | Rejected\nArts programme: 17 | 24\nS...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_180","topic":"Geometry and Trigonometry","text":"The owner of a convenience store installs two security cameras, represented by points C1 and C2. Both cameras point towards the centre of the store's cash register, represented by the point R.\n\nThe following diagram shows this informatio...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_181","topic":"Probability","text":"A polygraph test is used to determine whether people are telling the truth or not, but it is not completely accurate. When a person tells the truth, they have a 20% chance of failing the test. Each test outcome is independent of any prev...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_182","topic":"Calculus","text":"The graphs of y = 6 - x and y = 1.5x² - 2.5x + 3 intersect at (2, 4) and (-1, 7), as shown in the following diagrams.\n\nIn diagram 1, the region enclosed by the lines y = 6 - x, x = -1, x = 2 and the x-axis has been shaded.\n\n[diagram not ...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_183","topic":"Functions","text":"The graph below shows the average savings, S thousand dollars, of a group of university graduates as a function of t, the number of years after graduating from university.\n\n[Graph showing S vs t]\n\n(a) Write down one feature of this graph...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_184","topic":"Graph Theory","text":"Consider the following directed network.\n\n[Directed network diagram showing vertices A, B, C, D, E with directed edges]\n\n(a) Write down the adjacency matrix for this network. [2]\n\n(b) Determine the number of different walks of length 5 t...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_185","topic":"Sequences and Series","text":"The sum of an infinite geometric sequence is 9. The first term is 4 more than the second term. Find the third term. Justify your answer.","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_186","topic":"Geometry and Trigonometry","text":"The diagram shows a sector, OAB, of a circle with centre O and radius r, such that AÔB = θ.\n\n[diagram not to scale showing sector with radius r and angle θ]\n\nSam measured the value of r to be 2 cm and the value of θ to be 30°.\n\n(a) Use S...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_187","topic":"Statistics","text":"A psychologist records the number of digits (d) of π that a sample of IB Mathematics higher level candidates could recall.\n\nd:         2  3   4   5   6  7\nFrequency: 2  6  24  21  11  3\n\n(a) Find an unbiased estimate of the population me...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_188","topic":"Functions","text":"The function f(x) = ln(1/(x-2)) is defined for x > 2, x ∈ ℝ.\n\n(a) Find an expression for f⁻¹(x). You are not required to state a domain. [3]\n\n(b) Solve f(x) = f⁻¹(x). [2]","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_189","topic":"Financial Mathematics","text":"Juliana plans to invest money for 10 years in an account paying 3.5% interest, compounded annually. She expects the annual inflation rate to be 2% per year throughout the 10-year period.\n\nJuliana would like her investment to be worth a r...","marks":6,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_190","topic":"Statistics","text":"The sex of cuttlefish is difficult to determine visually, so it is often found by weighing the cuttlefish.\n\nThe weights of adult male cuttlefish are known to be normally distributed with mean 10 kg and standard deviation 0.5 kg.\n\nThe wei...","marks":6,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_191","topic":"Complex Numbers","text":"An electric circuit has two power sources. The voltage, V₁, provided by the first power source, at time t, is modelled by\n\nV₁ = Re(2e^(3ti)).\n\nThe voltage, V₂, provided by the second power source is modelled by\n\nV₂ = Re(5e^((3t+4)i)).\n\nT...","marks":5,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_192","topic":"Calculus","text":"The shape of a vase is formed by rotating a curve about the y-axis.\n\nThe vase is 10 cm high. The internal radius of the vase is measured at 2 cm intervals along the height:\n\nHeight (cm): 0  2  4  6  8  10\nRadius (cm): 4  6  8  7  3   5\n\n...","marks":4,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_193","topic":"Vectors and Matrices","text":"The equation of the line y = mx + c can be expressed in vector form r = a + λb.\n\n(a) Find the vectors a and b in terms of m and/or c. [2]\n\nThe matrix M is defined by (6 3; 4 2).\n\n(b) Find the value of det M. [1]\n\nThe line y = mx + c (whe...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_194","topic":"Calculus","text":"The position vector of a particle, P, relative to a fixed origin O at time t is given by\n\nOP→ = (sin(t²); cos(t²)).\n\n(a) Find the velocity vector of P. [2]\n\n(b) Show that the acceleration vector of P is never parallel to the position vec...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_195","topic":"Calculus","text":"The cross-section of a beach is modelled by the equation y = 0.02x² for 0 ≤ x ≤ 10 where y is the height of the beach (in metres) at a horizontal distance x metres from an origin.\n\nt is the time in hours after low tide.\n\nAt t = 0 the wat...","marks":8,"pt":"P1","diff":"4","src":"past"},
+    {"id":"OLD_Mathematics AI_196","topic":"Statistics","text":"The following data show the heights, in metres, of six players in a basketball team.\n1.67   1.60   1.68   2.31   2.31   2.19\n\n(a) For these six players, find\n(i) the mean height. [2]\n(ii) the median height. [1]\n(iii) the modal height. [1...","marks":7,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_197","topic":"Statistics","text":"A teacher surveys their students to find out if they have eaten at the local Thai and Indian cafés. The results of the survey are shown in the following Venn diagram.\n\n[Venn diagram showing: Thai café only: 10, Both: 8, Indian café only:...","marks":6,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_198","topic":"Algebra","text":"On 1 January 2025, the Faber Car Company will release a new car to global markets. The company expects to sell 40 cars in January 2025. The number of cars sold each month can be modelled by a geometric sequence where r = 1.1.\n\n(a) Use th...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_199","topic":"Functions","text":"A cell phone starts charging at 07:00. While being charged, the percentage of power, P, in the phone is modelled by the function P = 100 − 60 × a^(−t), where t is the number of hours after 07:00.\n\n(a) Find the percentage of power in the ...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_200","topic":"Financial Mathematics","text":"Maan deposited $100 000 into a savings account with a nominal annual interest rate of I% compounded monthly. At the end of the eighth year, the amount in the account had increased to $150 000.\n\n(a) Find the value of I. [3]\n\nMaan withdraw...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_201","topic":"Geometry","text":"Points A(3, 4), B(9, 6) and C(11, 2) are shown on the following diagram, along with the perpendicular bisectors of [AB], [AC] and [BC].\n\n[Diagram showing coordinate grid with points A, B, C and three perpendicular bisectors intersecting ...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_202","topic":"Functions","text":"The following graph shows the depth of water, d metres, in a river at t hours after 12:00. At 15:00, the depth of water reaches 7 m, its highest level. At 21:00, the depth of water drops to 1 m, its lowest level.\n\nThe depth can be modell...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_203","topic":"Algebra and Statistics","text":"The formula F = 1.8C + 32 is used to convert a temperature in degrees Celsius, C, to degrees Fahrenheit, F.\n\n(a) (i) Find a formula for converting a temperature in degrees Fahrenheit to degrees Celsius. [2]\n(ii) Find the temperature in d...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_204","topic":"Calculus","text":"Kyungyoon investigates the rate at which a cubical block of sugar dissolves in hot coffee. Initially, the cube has side lengths of 10 mm. This information is illustrated in the following diagrams.\n\n[Diagram showing cube with dimensions 1...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_205","topic":"Algebra","text":"When studying big cats, researchers use a model in which the mass (m kilograms) of an animal is directly proportional to the cube of its shoulder height (h metres).\n\n[Images of Cheetah and Lion]\n\nA cheetah has a mass of 64 kg and shoulde...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_206","topic":"Geometry and Trigonometry","text":"The following diagram shows a semicircle with centre O and diameter PQ. A rectangle OABC is also shown, such that AB = 8 and OA = 5.\n\n[Diagram showing semicircle with diameter PQ, centre O, and rectangle OABC inscribed with AB = 8 and OA...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_207","topic":"Statistics","text":"Zac raises funds for a library by running a game where players spin a needle. The final position of the needle results in an outcome where a player wins or loses money. The outcomes, with associated probabilities, are shown in the follow...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_208","topic":"Statistics and probability","text":"The decathlon is a competition where athletes compete in ten events. Two of those events are long jump and high jump. In both events, a greater distance means a better ranking. The table shows results for these two events at the World Ch...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_209","topic":"Geometry and trigonometry","text":"Point H on a hot-air balloon is sighted at the same time by two observers. One observer is at the top of a vertical building that is 156 metres tall. The other observer is at the base of the building.\n\nThe angle of elevation from point A...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_210","topic":"Financial mathematics","text":"On 1 January 2022, Mina deposited $1000 into a bank account with an annual interest rate of 4%, compounded monthly. At the end of January, and the end of every month after that, she deposits $100 into the same account.\n\n(a) Calculate the...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_211","topic":"Statistics and probability","text":"Carys believes that, on a memory retention test, the mean score of bilingual people (μb) will be higher than the mean score of monolingual people (μm). Carys gave a memory retention test to a random sample of students in her class. The r...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_212","topic":"Functions","text":"Line L₁ is tangent to the graph of a function f(x) at the point P(3, -1). Line L₂ is given by the equation y = (1/2)x - 5/2 and is perpendicular to L₁.\n\n(a) Write down the gradient of L₁. [1]\n(b) Find the equation of L₁ in the form y = m...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_213","topic":"Algebra","text":"When the brakes of a car are fully applied the car will continue to travel some distance before it completely stops. This stopping distance, d, in metres is directly proportional to the square of the speed of the car, v, in kilometres pe...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_214","topic":"Calculus","text":"A rectangular box, with an open top, is to be constructed from a piece of cardboard that measures 48 cm by 30 cm.\n\nSquares of equal size will be cut from the corners of the cardboard, as indicated by the shading in the diagram. The sides...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_215","topic":"Algebra","text":"\"Password entropy\" is a measure of the predictability of a computer password. The higher the entropy, the more difficult it is to guess the password.\n\nThe relationship between the password entropy, p, (measured in bits) and the number of...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_216","topic":"Calculus","text":"The cross section of a scale model of a hill is modelled by the following graph.\n\n[Graph showing a curve from (0,0) to (40,0) with peak around x=20]\n\nThe heights of the model are measured at horizontal intervals and are given in the tabl...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_217","topic":"Functions","text":"In a baseball game, Sakura is the batter standing beside home plate. The ball is thrown towards home plate along a path that can be modelled by the following function y = -0.045x + 2.\n\nIn this model, x is the horizontal distance of the b...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_218","topic":"Geometry and trigonometry","text":"Vertical posts are to be placed around the outer edge of a children's park. Each post is formed from a cuboid with a right square-based pyramid on top.\n\nThe cuboid part of the post is machine-made such that its width, and hence the width...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_219","topic":"Statistics and probability","text":"On a specific day, the speed of cars as they pass a speed camera can be modelled by a normal distribution with a mean of 67.3 km h⁻¹.\n\nA speed of 75.7 km h⁻¹ is two standard deviations from the mean.\n\n(a) Find the standard deviation for ...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_220","topic":"Geometry and trigonometry","text":"A boat travels 8 km on a bearing of 315° and then a further 6 km on a bearing of 045°.\n\nFind the bearing on which the boat should travel to return directly to the starting point. [5]","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_221","topic":"Statistics and Probability","text":"George goes fishing. From experience he knows that the mean number of fish he catches per hour is 1.1. It is assumed that the number of fish he catches can be modelled by a Poisson distribution. On a day in which George spends 8 hours fi...","marks":4,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Mathematics AI_222","topic":"Geometry","text":"The Voronoi diagram below shows three identical cellular phone towers, T1, T2 and T3. A fourth cellular phone tower, T4 is located in the shaded region. The dashed lines in the diagram below represent the edges in the Voronoi diagram. Ho...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_223","topic":"Algebra","text":"Charlie and Daniella each began a fitness programme. On day one, they both ran 500 m. On each subsequent day, Charlie ran 100 m more than the previous day whereas Daniella increased her distance by 2% of the distance ran on the previous ...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_224","topic":"Functions","text":"Professor Wei observed that students have difficulty remembering the information presented in his lectures. He modelled the percentage of information retained, R, by the function R(t) = 100e^(-pt), t ≥ 0, where t is the number of days af...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_225","topic":"Vectors","text":"A garden has a triangular sunshade suspended from three points A(2, 0, 2), B(8, 0, 2) and C(5, 4, 3), relative to an origin in the corner of the garden. All distances are measured in metres. (a) (i) Find CA→. (ii) Find CB→. [2] (b) Find ...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_226","topic":"Trigonometry","text":"A triangular field ABC is such that AB = 56 m and BC = 82 m, each measured correct to the nearest metre, and the angle at B is equal to 105°, measured correct to the nearest 5°. Calculate the maximum possible area of the field. [5]","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_227","topic":"Calculus","text":"Ellis designs a gift box. The top of the gift box is in the shape of a right-angled triangle GIK. A rectangular section HIJL is inscribed inside this triangle. The lengths of GH, JK, HL, and LJ are p cm, q cm, 8 cm and 6 cm respectively....","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_228","topic":"Statistics and Probability","text":"A game is played where two unbiased dice are rolled and the score in the game is the greater of the two numbers shown. If the two numbers are the same, then the score in the game is the number shown on one of the dice. A diagram showing ...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_229","topic":"Complex Numbers","text":"Consider w = iz + 1, where w, z ∈ ℂ. (a) Find w when (i) z = 2i. (ii) z = 1 + i. [3] Point z on the Argand diagram can be transformed to point w by two transformations. (b) Describe these two transformations and give the order in which t...","marks":8,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_230","topic":"Graph Theory","text":"An engineer plans to visit six oil rigs (A – F) in the Gulf of Mexico, starting and finishing at A. The travelling time, in minutes, between each of the rigs is shown in the table. The data above can be represented by a graph G. (a) (i) ...","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_231","topic":"Statistics and Probability","text":"A factory, producing plastic gifts for a fast food restaurant's Jolly meals, claims that just 1% of the toys produced are faulty. A restaurant manager wants to test this claim. A box of 200 toys is delivered to the restaurant. The manage...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_232","topic":"Calculus","text":"A tank of water initially contains 400 litres. Water is leaking from the tank such that after 10 minutes there are 324 litres remaining in the tank. The volume of water, V litres, remaining in the tank after t minutes, can be modelled by...","marks":8,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_233","topic":"Vectors","text":"A submarine is located in a sea at coordinates (0.8, 1.3, −0.3) relative to a ship positioned at the origin O. The x direction is due east, the y direction is due north and the z direction is vertically upwards. All distances are measure...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_234","topic":"Statistics and Probability","text":"The weights of apples from Tony's farm follow a normal distribution with mean 158 g and standard deviation 13 g. The apples are sold in bags that contain six apples. (a) Find the mean weight of a bag of apples. [2] (b) Find the standard ...","marks":6,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_235","topic":"Calculus","text":"The diagram shows the slope field for the differential equation dy/dx = sin(x + y), −4 ≤ x ≤ 5, 0 ≤ y ≤ 5. The graphs of the two solutions to the differential equation that pass through points (0, 1) and (0, 3) are shown. For the two sol...","marks":5,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_236","topic":"Graph Theory","text":"An ant is walking along the edges of a wire frame in the shape of a triangular prism. The vertices and edges of this frame can be represented by the graph below. (a) Write down the adjacency matrix, M, for this graph. [3] (b) Find the nu...","marks":5,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_237","topic":"Functions","text":"The graph of the function f(x) = ln x is translated by (a, b) so that it then passes through the points (0, 1) and (e³, 1 + ln 2). Find the value of a and the value of b. [7]","marks":7,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_238","topic":"Algebra","text":"The matrices P = (2 1; 0 3) and Q = (1 2; 3 0) represent two transformations. A triangle T is transformed by P, and this image is then transformed by Q to form a new triangle, T'. (a) Find the single matrix that represents the transforma...","marks":7,"pt":"P1","diff":"2","src":"past"},
+    {"id":"OLD_Mathematics AI_239","topic":"Calculus","text":"Let f = cos x and y = 1/2. The following diagram shows parts of the curves. P is the point of intersection of the two curves. (a) Use your graphic display calculator to find the coordinates of P. [2] The shaded region is rotated 360° abo...","marks":9,"pt":"P1","diff":"3","src":"past"},
+    {"id":"OLD_Mathematics AI_240","topic":"Coordinate Geometry and Interpolation","text":"Three towns have positions A(35, 26), B(11, 24), and C(28, 7) according to the coordinate system shown where distances are measured in miles. Dominique's farm is located at the position D(24, 19). (a) Find AD. (b) On a particular day, th...","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_241","topic":"Functions, tangents, asymptotes, and exponential functions","text":"Consider the function f(x) = 3x - 1 + 4/(x - 2). Part of the graph of y = f(x) is shown. The function is defined for all values of x except for x = a. (a) Write down the value of a. (b) Use your graphic display calculator to find the coo...","marks":16,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_242","topic":"Linear Algebra - Matrix Transformations","text":"The matrices P = (3 1; 0 2) and Q = (1 4; 0 1) represent two transformations. A triangle T is transformed by P, and this image is then transformed by Q to form a new triangle, T'. (a) Find the single matrix that represents the transforma...","marks":7,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_243","topic":"Statistics and Correlation","text":"After taking a mathematics test, Fatima wonders how many more marks she would have achieved if she had spent an extra 1.5 hours studying. To find out, she randomly selects five students from her class who took the same test and asks them...","marks":7,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_244","topic":"Calculus - Differential Equations","text":"Consider the differential equation dy/dx = x log₁₀(y), where x ≥ 0 and y > 0. Given that y = 1 when x = 0, use Euler's method with a step length of 0.1 to find an approximate value for y when x = 2.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_245","topic":"Geometry and Trigonometry - Triangle trigonometry","text":"The diagram shows a toy crane. AB = 25 cm, AC = 15 cm and angle BAC = 22°. (a) Calculate BC. (b) Given that angle ABC is acute, calculate angle ABC.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_246","topic":"Differential equations, slope fields","text":"Consider the differential equation dy/dx = 2xe^y.\n(a) Identify which of the following diagrams, A, B or C, represents the slope field for the differential equation. Give a reason for your answer.\n(b) It is given that, for a particular so...","marks":13,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_247","topic":"Calculus, Integration, Differentiation, Volume","text":"Andrew designs a fibreglass water slide for a water park. Let x be the horizontal distance, in metres, from the start of the water slide. Let h be the height, in metres, of the water slide above the horizontal ground. The diagram shows a...","marks":21,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Mathematics AI_248","topic":"Sequences and Probability","text":"The kth triangle number, Tₖ, is defined as Tₖ = Σᵣ₌₁ᵏ r. (a) (i) Calculate the value of the fifth triangle number, T₅. (ii) Determine the formula for Tₖ in the form ak² + bk. (b) (i) Find the value of T₅ + T₄. (ii) Find the simplest expr...","marks":14,"pt":null,"diff":"med","src":"past"},
+  ],
+  "Sports, Exercise & Health Science SL": [
+    {"id":"SPORTS_0001","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0002","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0003","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0004","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0005","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0006","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0007","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0008","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0009","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0010","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0011","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0012","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0013","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0014","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0015","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0016","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0017","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0018","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0019","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0020","topic":"ATP-PCr System","text":"Describe the ATP-PCr energy system and its role in providing rapid energy for explosive movements (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0021","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0022","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0023","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0024","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0025","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0026","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0027","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0028","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0029","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0030","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0031","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0032","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0033","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0034","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0035","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0036","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0037","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0038","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0039","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0040","topic":"ATP-PCr System","text":"Explain how ATP is regenerated from ADP and the role of phosphocreatine (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0041","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0042","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0043","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0044","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0045","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0046","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0047","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0048","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0049","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0050","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0051","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0052","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0053","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0054","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0055","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0056","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0057","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0058","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0059","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0060","topic":"ATP-PCr System","text":"Apply ATP-PCr system to specific high-intensity sports like 100m sprinting (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0061","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0062","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0063","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0064","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0065","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0066","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0067","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0068","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0069","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0070","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0071","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0072","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0073","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0074","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0075","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0076","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0077","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0078","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0079","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0080","topic":"ATP-PCr System","text":"Compare the efficiency and duration of ATP-PCr system with other energy systems (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0081","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0082","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0083","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0084","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0085","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0086","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0087","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0088","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0089","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0090","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0091","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0092","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0093","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0094","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0095","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0096","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0097","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0098","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0099","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0100","topic":"ATP-PCr System","text":"Analyze the limitations and time window of the ATP-PCr system in exercise (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0101","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0102","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0103","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0104","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0105","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0106","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0107","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0108","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0109","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0110","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0111","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0112","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0113","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0114","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0115","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0116","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0117","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0118","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0119","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0120","topic":"Anaerobic Glycolysis","text":"Describe the anaerobic glycolysis pathway and key enzymes involved (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0121","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0122","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0123","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0124","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0125","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0126","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0127","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0128","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0129","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0130","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0131","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0132","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0133","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0134","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0135","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0136","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0137","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0138","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0139","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0140","topic":"Anaerobic Glycolysis","text":"Explain lactate production and accumulation during high-intensity exercise (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0141","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0142","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0143","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0144","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0145","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0146","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0147","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0148","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0149","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0150","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0151","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0152","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0153","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0154","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0155","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0156","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0157","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0158","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0159","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0160","topic":"Anaerobic Glycolysis","text":"Analyze OBLA (Onset of Blood Lactate Accumulation) and its significance (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0161","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0162","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0163","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0164","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0165","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0166","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0167","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0168","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0169","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0170","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0171","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0172","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0173","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0174","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0175","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0176","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0177","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0178","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0179","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0180","topic":"Anaerobic Glycolysis","text":"Apply anaerobic glycolysis understanding to 400m running performance (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0181","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0182","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0183","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0184","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0185","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0186","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0187","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0188","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0189","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0190","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0191","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0192","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0193","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0194","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0195","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0196","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0197","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0198","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0199","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0200","topic":"Anaerobic Glycolysis","text":"Compare aerobic and anaerobic glycolysis in terms of efficiency and byproducts (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0201","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0202","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0203","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0204","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0205","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0206","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0207","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0208","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0209","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0210","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0211","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0212","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0213","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0214","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0215","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0216","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0217","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0218","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0219","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0220","topic":"Aerobic Respiration","text":"Describe the three stages of aerobic respiration and where they occur (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0221","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0222","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0223","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0224","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0225","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0226","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0227","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0228","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0229","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0230","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0231","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0232","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0233","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0234","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0235","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0236","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0237","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0238","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0239","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0240","topic":"Aerobic Respiration","text":"Explain the role of mitochondria in aerobic respiration (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0241","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0242","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0243","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0244","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0245","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0246","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0247","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0248","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0249","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0250","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0251","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0252","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0253","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0254","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0255","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0256","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0257","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0258","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0259","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0260","topic":"Aerobic Respiration","text":"Calculate ATP yield from glucose during aerobic respiration (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0261","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0262","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0263","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0264","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0265","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0266","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0267","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0268","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0269","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0270","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0271","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0272","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0273","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0274","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0275","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0276","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0277","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0278","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0279","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0280","topic":"Aerobic Respiration","text":"Apply aerobic metabolism understanding to endurance training (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0281","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0282","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0283","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0284","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0285","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0286","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0287","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0288","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0289","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0290","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0291","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0292","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0293","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0294","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0295","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0296","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0297","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0298","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0299","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0300","topic":"Aerobic Respiration","text":"Analyze oxidative phosphorylation and electron transport chain (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0301","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0302","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0303","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0304","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0305","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0306","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0307","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0308","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0309","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0310","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0311","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0312","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0313","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0314","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0315","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0316","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0317","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0318","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0319","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0320","topic":"Energy Continuum","text":"Explain the energy systems continuum and how systems overlap (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0321","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0322","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0323","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0324","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0325","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0326","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0327","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0328","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0329","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0330","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0331","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0332","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0333","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0334","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0335","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0336","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0337","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0338","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0339","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0340","topic":"Energy Continuum","text":"Identify predominant energy systems for different activities and intensities (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0341","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0342","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0343","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0344","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0345","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0346","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0347","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0348","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0349","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0350","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0351","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0352","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0353","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0354","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0355","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0356","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0357","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0358","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0359","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0360","topic":"Energy Continuum","text":"Analyze multiple energy systems contributing to a soccer match (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0361","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0362","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0363","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0364","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0365","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0366","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0367","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0368","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0369","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0370","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0371","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0372","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0373","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0374","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0375","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0376","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0377","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0378","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0379","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0380","topic":"Energy Continuum","text":"Apply continuum understanding to periodized training design (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0381","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0382","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0383","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 3)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0384","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 4)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0385","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 5)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0386","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0387","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0388","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0389","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 9)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0390","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 10)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0391","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 11)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0392","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0393","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0394","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0395","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 15)","marks":6,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0396","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 16)","marks":4,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0397","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 17)","marks":5,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0398","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0399","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0400","topic":"Energy Continuum","text":"Determine energy system contribution percentages for various sports (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0401","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0402","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0403","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 3)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0404","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 4)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0405","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 5)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0406","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0407","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0408","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0409","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 9)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0410","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 10)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0411","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 11)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0412","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0413","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0414","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0415","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 15)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0416","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 16)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0417","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 17)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0418","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0419","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0420","topic":"Lactate Threshold","text":"Define lactate threshold and explain its significance in endurance sports (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0421","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0422","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0423","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 3)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0424","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 4)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0425","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 5)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0426","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0427","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0428","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0429","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 9)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0430","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 10)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0431","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 11)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0432","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0433","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0434","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0435","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 15)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0436","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 16)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0437","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 17)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0438","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0439","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0440","topic":"Lactate Threshold","text":"Discuss physiological and training factors affecting lactate threshold (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0441","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0442","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0443","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 3)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0444","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 4)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0445","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 5)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0446","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0447","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0448","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0449","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 9)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0450","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 10)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0451","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 11)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0452","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0453","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0454","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0455","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 15)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0456","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 16)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0457","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 17)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0458","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0459","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0460","topic":"Lactate Threshold","text":"Describe methods for testing and determining an athlete's lactate threshold (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0461","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0462","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0463","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 3)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0464","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 4)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0465","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 5)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0466","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0467","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0468","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0469","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 9)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0470","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 10)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0471","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 11)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0472","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0473","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0474","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0475","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 15)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0476","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 16)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0477","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 17)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0478","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0479","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0480","topic":"Lactate Threshold","text":"Apply lactate threshold knowledge to interval training prescription (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0481","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 1)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0482","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 2)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0483","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 3)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0484","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 4)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0485","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 5)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0486","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 6)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0487","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 7)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0488","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 8)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0489","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 9)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0490","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 10)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0491","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 11)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0492","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 12)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0493","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 13)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0494","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 14)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"SPORTS_0495","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 15)","marks":6,"pt":"P1B Data","diff":"har","src":"bank"},
+    {"id":"SPORTS_0496","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 16)","marks":4,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0497","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 17)","marks":5,"pt":"P1B Data","diff":"med","src":"bank"},
+    {"id":"SPORTS_0498","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 18)","marks":7,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"SPORTS_0499","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 19)","marks":3,"pt":"P1A MCQ","diff":"eas","src":"bank"},
+    {"id":"SPORTS_0500","topic":"Lactate Threshold","text":"Explain how lactate threshold improvement contributes to performance gains (Variation 20)","marks":6,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"OLD_Sports Science_0","topic":"Optimizing physiological performance","text":"A study compared the effects of two recovery techniques on quadriceps muscle mass over a 12-week strength training programme. Twenty-one participants were randomly assigned to one of two groups: Active recovery (ACT), Cold water immersio...","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_1","topic":"Optimizing physiological performance","text":"(a) Define overreaching. [1] (b) Define overtraining. [1] (c) Discuss indicators of overtraining in an athlete. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_2","topic":"Optimizing physiological performance","text":"(a) Describe the formation of sweat. [2] (b) Explain the impact of high humidity on performance during a 10-kilometre race. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_3","topic":"Optimizing physiological performance","text":"(a) Define ergogenic aid. [1] (b) Evaluate the use of beta blockers by athletes. [4]","marks":5,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_4","topic":"Psychology of sport","text":"A study assessed the effectiveness of imagery during a six-week training programme. The muscle strength of the participants was measured while doing a single one-arm curl in a one-repetition maximum test (1RM) at the start of the study a...","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_5","topic":"Psychology of sport","text":"(a) Define motivation. [1] (b) Discuss possible impacts of extrinsic rewards on intrinsic motivation in sport. [3]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_6","topic":"Psychology of sport","text":"(a) Apply social learning theory to a novice who wants to learn from an experienced performer. [2] (b) Describe issues associated with the measurement of personality through questionnaires. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_7","topic":"Psychology of sport","text":"(a) Define anxiety. [1] (b) Evaluate possible emotions experienced by a soccer player preparing to take an important penalty kick. [4]","marks":5,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_8","topic":"Physical activity and health","text":"A study collected data on the number of people who did not participate in any physical exercise from 122 countries. The proportion of inactive people in each of four age groups was calculated according to their geographic region. (a)(i) ...","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_9","topic":"Physical activity and health","text":"(a) Outline two methods for determining obesity. [2] (b) Describe how chemical signals from the gut and adipose tissue affect appetite regulation. [2]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_10","topic":"Physical activity and health","text":"(a) List two health risks of diabetes. [2] (b) Compare and contrast type 1 and type 2 diabetes. [4]","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_11","topic":"Nutrition for sport, exercise and health","text":"A study examined the effect of a carbohydrate periodization strategy on 21 athletes over three weeks. Participants were randomly assigned to one of two groups according to their consumption of carbohydrate: Early consumption group (all c...","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_12","topic":"Nutrition for sport, exercise and health","text":"(a) List two enzymes that are responsible for the digestion of proteins from the mouth to the small intestine. [1] (b) Describe the function of enzymes in macronutrient digestion. [3]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_13","topic":"Nutrition for sport, exercise and health","text":"(a) Define basal metabolic rate. [1] (b) Discuss dietary practices sometimes employed by athletes to manipulate body composition. [3]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_14","topic":"Nutrition for sport, exercise and health","text":"(a) Describe two methods of monitoring the hydration status of athletes. [2] (b) Explain how antidiuretic hormone (ADH) helps conserve water when sweating during vigorous exercise. [4]","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_15","topic":"Optimizing physiological performance","text":"1. Swimmers may wait for up to 30 minutes (transition time) between warming up in the pool and competing in a race. A study compared four conditions for swimmers during the transition time: • Condition 1: control (sitting and wearing a t...","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_16","topic":"Optimizing physiological performance","text":"2. (a) Outline how the body maintains a stable core temperature when the external environment cools. [2] (b) Explain why swimming in cold water is a challenge to the thermoregulation process. [2]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_17","topic":"Optimizing physiological performance","text":"3. (a) State two classes of non-nutritional ergogenic aids currently banned by the International Olympic Committee (IOC). [2] (b) Evaluate the use of beta blockers by an archer to positively influence their performance. [4]","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_18","topic":"Optimizing physiological performance","text":"4. (a) Outline overreaching and overtraining. [2] (b) Suggest ways an athlete can avoid overtraining. [2]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_19","topic":"Psychology of sports","text":"5. A study assessed the effect of task and ego motivations on behaviour of 90 participants during soccer games. They were divided into three groups and were told: • Group 1 (Task): prizes would be awarded based on improvement • Group 2 (...","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_20","topic":"Psychology of sports","text":"6. (a) Define the term motivation. [1] (b) Distinguish between intrinsic and extrinsic motivation in exercise. [1] (c) Evaluate the effect of using extrinsic rewards to influence motivation. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_21","topic":"Psychology of sports","text":"7. (a) Describe the relationship between arousal and sporting performance for a weightlifter according to the inverted-U hypothesis. [2] (b) Discuss the effect of specific positive and negative emotions on a cyclist's performance during ...","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_22","topic":"Psychology of sports","text":"8. (a) Outline ethical issues associated with the measurement of personality. [2] (b) Explain the interactionist approach to personality using a sporting example. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_23","topic":"Physical activity and health","text":"9. A study looked at the relationship between the level of physical activity, inactive behaviour, and the risk of cardiovascular disease in adults. The mean results are shown in the table. (a) Identify the group that had the highest risk...","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_24","topic":"Physical activity and health","text":"10. (a) Discuss how an inactive lifestyle increases the risk of cardiovascular disease. [3] (b) Identify the arteries labelled X and Y on the diagram. [2]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_25","topic":"Physical activity and health","text":"11. (a) Outline habitual physical activity and exercise. [2] (b) Define hypokinetic disease. [1] (c) Using examples, discuss the relationship between major societal changes and hypokinetic disease. [4]","marks":7,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_26","topic":"Physical activity and health","text":"12. (a) Outline how social support from others can enhance adherence to exercise. [2] (b) Explain features of an exercise programme that can help to reduce the effects of depression and anxiety. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_27","topic":"Nutrition for sports, exercise and health","text":"13. A study was conducted during a practice soccer game in which participants completed a dribbling test every 15 minutes. The participants were randomly allocated to two groups and consumed a gel product after 85 minutes: • Group 1: pla...","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_28","topic":"Nutrition for sports, exercise and health","text":"14. (a) Define glycemic index. [1] (b) Discuss how an athlete can adjust carbohydrate intake and training load in the week prior to an event in order to maximise endurance performance. [4]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_29","topic":"Nutrition for sports, exercise and health","text":"15. (a) Outline the two forms of digestion that take place inside the mouth. [2] (b) State the enzymes responsible for the digestion of fats and proteins. [2]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_30","topic":"Nutrition for sports, exercise and health","text":"16. (a) List two components of daily energy expenditure. [2] (b) Using a sporting example, discuss body composition and how it affects performance. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_31","topic":"Exercise physiology","text":"A study investigated the effect of a 4‑week period of inspiratory muscle training (IMT) on VO2 max performance. Participants completed a cycling programme and were randomly allocated to either a control group or the IMT group. Each week,...","marks":12,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_32","topic":"Skill in sport","text":"Usain Bolt set a world record time of 9.58 seconds for the men's 100 m sprint. (a) It is important for a sprinter to have a good start. Define response time. (b) Identify physiological factors that affect a sprinter's response time. (c) ...","marks":6,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_33","topic":"Energy systems","text":"(a) In basketball, teams have to shoot within 24 seconds of gaining possession of the ball. Describe the two systems used to produce ATP during a short, intense period of possession. (b) Identify the reaction that takes place when two gl...","marks":4,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_34","topic":"Anatomy and biomechanics","text":"(a) Characteristics of muscle tissue include being controlled by nerve stimuli and fed by capillaries. Outline two other general characteristics common to muscle tissue. (b) The diagram shows someone performing a star jump. Position A [d...","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_35","topic":"Skill acquisition and analysis","text":"(a) Define learning. (b) Using an example from sport, explain whole–part–whole skill presentation.","marks":4,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_36","topic":"Comprehensive exercise science","text":"(a) Describe the structural characteristics of a muscle fibre that benefits a marathon runner. (b) Evaluate the use of a 40 m sprint, drop test and standing broad jump test to assess and monitor a basketball player's performance. (c) Out...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_37","topic":"Comprehensive exercise science","text":"(a) An individual medley race requires a swimmer to swim the four main competitive strokes (butterfly, backstroke, breaststroke, freestyle). Using examples, outline five types of movements of synovial joints during an individual medley r...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_38","topic":"Comprehensive exercise science","text":"(a) The diagram shows a skeletal muscle fibre. Annotate the three structures A to C, giving their name, structure and function. (Write your answer in the answer pages following, not on the diagram.) (b) Discuss the recommended macronutri...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_39","topic":"Anatomy and physiology","text":"Question 1a(i): State the mean value for VO₂max (ml kg⁻¹ min⁻¹) for the IMT group under normal oxygen conditions post-cycling.","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_40","topic":"Anatomy and physiology","text":"Question 1a(ii): Calculate the difference in VO₂max (ml kg⁻¹ min⁻¹) between pre-cycling and post-cycling for the CG group under normal oxygen conditions.","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_41","topic":"Research methods","text":"Question 1b: Identify what the error bars represent in the graph.","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_42","topic":"Anatomy and physiology","text":"Question 1c: Compare the effects of inspiratory muscle training (IMT) and the control group (CG) on VO₂max under both normal and low oxygen conditions.","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_43","topic":"Anatomy and physiology","text":"Question 1d: Outline how fatty acids produce more ATP than glucose.","marks":2,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_44","topic":"Anatomy and physiology","text":"Question 1e: Explain why maximal oxygen consumption (VO₂max) varies between cycling and arm ergometry.","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_45","topic":"Skill in sport","text":"Question 2a: Define response time.","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_46","topic":"Skill in sport","text":"Question 2b: Outline two factors that can affect response time in a 100m sprinter.","marks":2,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_47","topic":"Skill in sport","text":"Question 2c: Explain how selective attention can affect the response time of a sprinter at the start of a 100m race.","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_48","topic":"Anatomy and physiology","text":"Question 3a: Outline how ATP is produced during a 200m race using the ATP-CP system and anaerobic glycolysis.","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_49","topic":"Anatomy and physiology","text":"Question 3b: Identify the process by which glucose molecules combine to form glycogen.","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_50","topic":"Anatomy and physiology","text":"Question 4a: Define two of the following terms related to muscle properties: contractility, extensibility, elasticity, atrophy, hypertrophy.","marks":2,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_51","topic":"Anatomy and physiology","text":"Question 4b: Complete the table by identifying the joint action at the knees and the type of muscle contraction during a squat exercise.","marks":2,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_52","topic":"Skill in sport","text":"Question 5a: Define learning in the context of motor skills.","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_53","topic":"Skill in sport","text":"Question 5b: Describe how a coach would use the whole-part-whole practice method to teach the long jump.","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_54","topic":"Anatomy and physiology","text":"Question 6a: Outline the physiological characteristics of a marathon runner's muscle fibres that contribute to their performance.","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_55","topic":"Exercise physiology","text":"Question 6b: Evaluate the use of three fitness tests (40m sprint test, drop test, standing broad jump test) for assessing the fitness of a basketball player.","marks":6,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_56","topic":"Anatomy and physiology","text":"Question 6c: Describe the pathway of deoxygenated blood from the body to the lungs.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_57","topic":"Exercise physiology","text":"Question 6d(i): Calculate the average speed of runner A during the first 20 seconds of the race, given they covered 150m.","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_58","topic":"Exercise physiology","text":"Question 6d(ii): Compare and contrast the speed-time graphs of runner A and runner B during a race.","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_59","topic":"Anatomy and physiology","text":"Question 7a: Define and provide an example for five types of joint movements used in swimming: circumduction, plantar flexion, dorsi flexion, supination, pronation, flexion, extension, abduction, adduction, rotation.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_60","topic":"Anatomy and physiology","text":"Question 7b: Explain why a swimmer's breathing rate remains elevated during recovery after an individual medley race.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_61","topic":"Skill in sport","text":"Question 7c: Classify the individual medley swim using five skill classification continuums (e.g., gross/fine, open/closed, continuous/serial/discrete, externally paced/internally paced, individual/coactive/interactive).","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_62","topic":"Anatomy and physiology","text":"Question 7d: Explain how blood is redistributed during an individual medley swim.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_63","topic":"Anatomy and physiology","text":"Question 8a: Identify and annotate the structures labeled A, B, and C in a diagram of muscle structure (sarcomere, myosin, actin).","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_64","topic":"Nutrition","text":"Question 8b: Explain how the macronutrient requirements of an endurance runner differ from those of a non-athlete.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_65","topic":"Skill in sport","text":"Question 8c: Explain how faking a shot in soccer can increase an opponent's reaction time using the psychological refractory period (PRP).","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_66","topic":"Anatomy and physiology","text":"Question 8d: Explain how marathon training leads to adaptations in the cardiovascular system that improve performance.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_67","topic":"Fitness testing and data analysis","text":"A study examined physical fitness levels of 10-year-old children who regularly participate in sports. The 900 participants were divided evenly between three groups according to their training level: Low: training less than 1 hour per wee...","marks":12,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_68","topic":"Anatomy and exercise physiology","text":"(a) State the general characteristic common to muscle tissue that allows the muscle to stretch and return to its original resting length. (b) Describe the functions of ligaments and tendons in a joint such as the knee joint. (c) Distingu...","marks":11,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_69","topic":"Muscle physiology and metabolism","text":"(a) Explain how acetylcholine (ACh) initiates skeletal muscle contraction. (b) Analyse how capillary and mitochondrial densities affect slow twitch (type I) muscle fibres. (c) Explain the role of insulin and muscle contraction on glucose...","marks":7,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_70","topic":"Muscle types, motor control, cardiovascular responses, information processing, energy systems","text":"(a) Distinguish between the three different types of muscle. (b)(i) Define motor programme. (ii) Apply the concept of motor programme to improving performance of a gymnastics routine. (c) Explain how running versus static exercise (such ...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_71","topic":"Respiratory control, oxygen deficit, memory, biomechanics, muscle contraction","text":"(a) Outline the chemical control of ventilation during exercise. (b) Describe the phenomenon of oxygen deficit. (c) Outline two named methods of memory improvement. (d) Using a sporting example, predict how a change in radius affects spe...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_72","topic":"Joint types, cardiovascular drift, energy systems, biomechanics, sports psychology","text":"(a) Distinguish between the movement permitted in different types of joints. (b) Describe how cardiovascular drift takes place. (c) Outline the re-synthesis of ATP by the ATP–CP system. (d) Using an example, analyse conditions for accele...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_73","topic":"Anatomy and Physiology / Biomechanics / Research Methods","text":"1. A study investigated the magnitude of the impact force, in Newtons (N), at the shoulder during tackling in 35 experienced rugby union players. The researchers looked at the effect of the following variables on the impact force at the ...","marks":12,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_74","topic":"Anatomy and Physiology","text":"2. The diagram shows the heart. (a) State the blood vessels A, B and C in the diagram. [3] (b) Distinguish between the pulmonary and systemic circulatory systems. [2] (c) Explain the changes in blood distribution that occur during an end...","marks":8,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_75","topic":"Nutrition","text":"3. (a) Outline the functions of protein. [2] (b)(i) Describe essential amino acids. [1] (ii) Identify a source of essential amino acids. [1]","marks":4,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_76","topic":"Skill Acquisition","text":"4. (a) Using a sporting example, outline a closed skill. [2] (b) Discuss a sporting example of an externally-paced skill. [2]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_77","topic":"Exercise Physiology / Training / Research Methods","text":"5. (a) A company has developed a drink to improve the performance of athletes during endurance events, such as the Tour de France cycling race. Describe four study design features which could be used in an experiment to test if the sport...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_78","topic":"Exercise Physiology / Anatomy","text":"6. (a) Explain the phenomena of oxygen deficit and oxygen debt for an individual hiking 20 km in mountains. [6] (b) During the 20 km hike, the hiker stops briefly to have a sandwich for lunch. Discuss the effects of insulin and exercise ...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_79","topic":"Biomechanics / Skill Acquisition","text":"7. (a) The soccer player David Beckham could bend the path of a ball through the air in order to deceive a goalkeeper and score a goal. Discuss the Bernoulli principle with respect to the ball's flight during a free kick. [4] (b) Using e...","marks":20,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_80","topic":"Anatomy","text":"What is the position of the scapula relative to the rib cage?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_81","topic":"Anatomy","text":"What structure is labelled X in the diagram below? [diagram showing synovial joint structure]","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_82","topic":"Anatomy","text":"What muscle is labelled X in the diagram below? [diagram showing leg muscle]","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_83","topic":"Anatomy and Physiology","text":"Which is a principal structure of the ventilatory system?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_84","topic":"Anatomy and Physiology","text":"What is residual volume?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_85","topic":"Anatomy and Physiology","text":"What is the action of the diaphragm and the external intercostal muscles during exhalation?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_86","topic":"Anatomy and Physiology","text":"What is the equation for cardiac output?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_87","topic":"Exercise Physiology","text":"Which demonstrates how blood is redistributed to the working muscles during exercise?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_88","topic":"Exercise Physiology","text":"Which defines maximal oxygen consumption?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_89","topic":"Nutrition","text":"Which is a function of protein?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_90","topic":"Nutrition","text":"Which describes non-essential amino acids?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_91","topic":"Exercise Physiology","text":"Which is the breakdown of glycogen into glucose?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_92","topic":"Exercise Physiology","text":"What is the function of glucagon during fasting?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_93","topic":"Exercise Physiology","text":"What is the net amount of ATP molecules produced from one glucose molecule in the lactic acid system?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_94","topic":"Anatomy","text":"What is the structure labelled X in the diagram below? [diagram showing neuron structure]","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_95","topic":"Anatomy","text":"Which movement is performed at the ankle joint in the diagram below? [diagram showing ankle movement]","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_96","topic":"Exercise Physiology","text":"Which muscle contraction occurs when the muscle lengthens under tension?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_97","topic":"Biomechanics","text":"What describes acceleration and the direction of travel during X on the graph below? [velocity-time graph showing negative velocity increasing in magnitude]","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_98","topic":"Biomechanics","text":"What is the relationship between angular momentum, angular velocity and moment of inertia?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_99","topic":"Biomechanics","text":"What happens to the centre of mass when the basketball player prepares to shoot, moving from position A to position B? [diagram showing basketball player in two positions]","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_100","topic":"Skill Acquisition","text":"What type of skill is used to decide and perform a pass in soccer?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_101","topic":"Skill Acquisition","text":"Which classifies the release of an arrow in archery? [diagram showing archery]","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_102","topic":"Skill Acquisition","text":"What is a characteristic of short-term sensory store?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_103","topic":"Skill Acquisition","text":"Which defines response time?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_104","topic":"Skill Acquisition","text":"Which describes the associative stage of learning?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_105","topic":"Skill Acquisition","text":"What type of transfer occurs from a 3 versus 3 training game to a 5 versus 5 competitive basketball game?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_106","topic":"Research Methods","text":"What can be represented by error bars on a graph?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_107","topic":"Exercise Physiology","text":"Which is a component of performance-related (skill-related) fitness?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_108","topic":"Exercise Physiology","text":"Which test measures muscular strength?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_109","topic":"Exercise Physiology","text":"Which outlines progression as a principle of training programme design?","marks":1,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_110","topic":"Optimizing physiological performance","text":"A study tested the effects of a caffeine drink on physical performance in soccer. Eighteen female players took part in two soccer games. They consumed a caffeine drink 60 minutes before Game 1 and a placebo 60 minutes before Game 2. Each...","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_111","topic":"Optimizing physiological performance","text":"(a) Distinguish between overtraining and overreaching.\n\n(b) Describe fartlek training.\n\n(c) Analyse a mesocycle unit of training.","marks":5,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_112","topic":"Optimizing physiological performance","text":"The Marathon des Sables is a 6-day, 250 km run across the Sahara Desert in temperatures reaching 50 °C.\n\n(a) Describe how an athlete acclimatizes when preparing for the race.\n\n(b) Explain the physiological adaptations that occur during h...","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_113","topic":"Psychology of sports","text":"Question 4 removed for copyright reasons","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_114","topic":"Psychology of sports","text":"(a) Distinguish between state and trait anxiety.\n\n(b) List two examples of somatic anxiety in sport.\n\n(c) Evaluate the Competitive State Anxiety Inventory-2.","marks":5,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_115","topic":"Psychology of sports","text":"(a) Outline the concept of learned helplessness.\n\n(b) Analyse the impact of external rewards on intrinsic motivation.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_116","topic":"Physical activity and health","text":"A nine-month trial investigated the effectiveness of exercise on Quality of Life for individuals with type II diabetes. 173 participants were randomly assigned to one of four training groups:\n• aerobic training only\n• resistance training...","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_117","topic":"Physical activity and health","text":"(a) Define mood.\n\n(b) Identify symptoms associated with exercise addiction.\n\n(c) Suggest the nature of exercises that are more likely to reduce depressive symptoms.","marks":5,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_118","topic":"Physical activity and health","text":"(a) Outline the effect of age on peak bone density.\n\n(b) Discuss the impact of exercise on bone density.","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_119","topic":"Nutrition for sports, exercise and health","text":"A study considered the hydration status of 345 athletes. To assess validity, the best urine measure of hydration (urine osmolarity) was compared with four other measures (urine specific gravity; urine colour; thirst perception scale; and...","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_120","topic":"Nutrition for sports, exercise and health","text":"(a) State the function of the gall bladder.\n\n(b) Outline the function of trypsin in macronutrient digestion.","marks":3,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_121","topic":"Nutrition for sports, exercise and health","text":"(a) Outline the possible long-term consequences of consuming excessive protein in the diet.\n\n(b) Discuss recommendations for the consumption of high and low GI foods before and after a soccer match.\n\n(c) Evaluate the use of caffeine-free...","marks":7,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_122","topic":"Optimizing physiological performance","text":"1. Cold-water immersion (CWI) is commonly used for post-exercise recovery. A study looked at the effects of CWI on athletes' muscle damage indicators following completion of a triathlon (3.86 km swim, 180.25 km cycle and 40.2 km run). Th...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_123","topic":"Optimizing physiological performance","text":"2. (a) State the normal physiological core body temperature. (b) The Kona iron man event takes place in a hot climate. Athletes typically undergo heat acclimatization as part of their training to aid their performance. Discuss the physio...","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_124","topic":"Optimizing physiological performance","text":"3. (a) Outline how a triathlete could use fartlek training to improve their endurance capability. (b) Suggest how a triathlete should approach the pre-season phase of their training to maximize performance.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_125","topic":"Optimizing physiological performance","text":"4. (a) Using a sporting example, describe how a substance could have a placebo effect on an athlete's performance. (b) Erythropoietin (EPO) is a substance banned by the International Olympic Committee (IOC). State one other class of non-...","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_126","topic":"Psychology of sports","text":"5. A study investigated the role of trait emotional intelligence (trait EI) on mood states and serum cortisol responses during an 80.5 km treadmill ultramarathon. Participants with low trait EI were compared to those with high trait EI. ...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_127","topic":"Psychology of sports","text":"6. (a) Define the term personality. (b) State one method for measuring personality. (c) Discuss the interactionist approach to personality.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_128","topic":"Psychology of sports","text":"7. (a) Describe the inverted-U hypothesis as it relates to sports performance. (b) Using an example, discuss the positive emotions that characterize an athlete's experience.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_129","topic":"Psychology of sports","text":"8. Describe how an athlete could use different types of goals to maximize their performance.","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_130","topic":"Psychology of sports","text":"9. Using an example, discuss the issues that can arise for an athlete using extrinsic motivators.","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_131","topic":"Physical activity and health","text":"10. A study investigated how mode of exercise can influence the bone density of adolescents. Three groups were identified and had their bone density measured for comparison: Swim WB (swimmers who also take part in weight-bearing sports),...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_132","topic":"Physical activity and health","text":"11. (a) Outline osteoporosis. (b) Discuss the risk factors for osteoporosis. (c) Identify two health consequences of obesity.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_133","topic":"Physical activity and health","text":"12. (a) In some countries, a doctor may write a 'green prescription' to encourage the patient to be physically active as part of their health management. Outline the importance of exercise for individuals with a hypokinetic disease. (b) ...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_134","topic":"Physical activity and health","text":"13. Outline how an appropriate amount of exercise can enhance an individual's psychological well-being.","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_135","topic":"Nutrition for sports, exercise and health","text":"14. A study investigated the effect of sodium bicarbonate (NaHCO3) ingestion on the performance of elite BMX cyclists during simulated competition. Participants ingested either NaHCO3 or a placebo 90 minutes before exercise. They complet...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_136","topic":"Nutrition for sports, exercise and health","text":"15. (a) State the typical pH values found in an athlete's stomach. (b) Athletes consume various nutritional ergogenic aids, such as sodium bicarbonate, in the belief that they will enhance their performance. Evaluate one other nutritiona...","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_137","topic":"Nutrition for sports, exercise and health","text":"16. (a) Identify two reasons why water is critical for normal human functioning. (b) Explain why a marathon runner would require a greater water intake than a shot putter during competition.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_138","topic":"Nutrition for sports, exercise and health","text":"17. (a) List two sources of protein for a vegetarian athlete. (b) Outline the possible harmful effects of excessive protein in a person's diet.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_139","topic":"Optimizing physiological performance","text":"(a) Distinguish between overtraining and overreaching. (b) Describe fartlek training. (c) Analyse a mesocycle unit of training.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_140","topic":"Psychology of sports","text":"(a) Distinguish between state and trait anxiety. (b) List two examples of somatic anxiety in sport. (c) Evaluate the Competitive State Anxiety Inventory-2.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_141","topic":"Psychology of sports","text":"(a) Outline the concept of learned helplessness.","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_142","topic":"Optimizing physiological performance","text":"Cold-water immersion (CWI) is commonly used for post-exercise recovery. A study looked at the effects of CWI on athletes' muscle damage indicators following completion of a triathlon (3.86 km swim, 180.25 km cycle and 40.2 km run). The m...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_143","topic":"Optimizing physiological performance","text":"(a) State the normal physiological core body temperature. [1] (b) The Kona iron man event takes place in a hot climate. Athletes typically undergo heat acclimatization as part of their training to aid their performance. Discuss the physi...","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_144","topic":"Optimizing physiological performance","text":"(a) Outline how a triathlete could use fartlek training to improve their endurance capability. [2] (b) Suggest how a triathlete should approach the pre-season phase of their training to maximize performance. [3]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_145","topic":"Optimizing physiological performance","text":"(a) Using a sporting example, describe how a substance could have a placebo effect on an athlete's performance. [2] (b) Erythropoietin (EPO) is a substance banned by the International Olympic Committee (IOC). State one other class of non...","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_146","topic":"Psychology of sports","text":"A study investigated the role of trait emotional intelligence (trait EI) on mood states and serum cortisol responses during an 80.5 km treadmill ultramarathon. Participants with low trait EI were compared to those with high trait EI. All...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_147","topic":"Optimizing physiological performance - Heat acclimatization and performance","text":"A study compared the performance of nine cyclists in hot and cool conditions. Cyclists performed a 43.4 km time trial in cool conditions (TTC) at the beginning and end of a 15-day training period. During the training period, the cyclists...","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_148","topic":"Optimizing physiological performance - Thermoregulation and heat stress","text":"An international multi-sport event takes place in a city where daytime temperatures commonly exceed 30°C and humidity can be between 60% and 80%. (a) A road cyclist arrives in the city two weeks before their event. Describe two ways that...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_149","topic":"Optimizing physiological performance - Training load management","text":"Coaches strive to maximize athletic performance but must also manage athlete workload. (a) Distinguish between overtraining and overreaching. (b) A swimmer has a sudden and unexpected decrease in performance. Outline three ways a coach c...","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_150","topic":"Optimizing physiological performance - Ergogenic aids","text":"(a) Define the term ergogenic aid. (b) Evaluate the effects of long-term caffeine use on a decathlete.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_151","topic":"Psychology of sports - Psychological skills","text":"A study investigated elite table tennis players' use of four psychological skills (relaxation, imagery, goal-setting and self-talk) during low- and high-stress situations in competition. Individuals completed a self-report questionnaire....","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_152","topic":"Optimizing physiological performance - Overtraining","text":"(a) Define overreaching. (b) Define overtraining. (c) Discuss indicators of overtraining in an athlete.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_153","topic":"Optimizing physiological performance - Thermoregulation","text":"(a) Describe the formation of sweat. (b) Explain the impact of high humidity on performance during a 10-kilometre race.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_154","topic":"Optimizing physiological performance - Ergogenic aids","text":"(a) Define ergogenic aid. (b) Evaluate the use of beta blockers by athletes.","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_155","topic":"Psychology of sport - Motivation","text":"(a) Define motivation. (b) Discuss possible impacts of extrinsic rewards on intrinsic motivation in sport.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_156","topic":"Optimizing physiological performance - humidity and performance","text":"A study examined the effect of humidity on performance in a maximal test. Participants engaged in 60 minutes of steady-state submaximal exercise at varying levels of humidity. After the submaximal exercise in heat, time to exhaustion was...","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_157","topic":"Optimizing physiological performance - training","text":"(a) Define cross-training. [1] (b) Muscle soreness and fatigue are two indicators of overtraining. Discuss how a coach could monitor two other possible indicators to prevent overtraining. [2]","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_158","topic":"Optimizing physiological performance - thermoregulation","text":"(a) State the standard range for a healthy core body temperature. [1] (b) Identify an example of heat conduction in a sport. [1]","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_159","topic":"Optimizing physiological performance - ergogenic aids","text":"(a) Stimulants are one class of non-nutritional ergogenic aids currently banned by the International Olympic Committee (IOC). List two other classes of non-nutritional ergogenic aids that are banned. [2] (b) Explain the use of erythropoi...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_160","topic":"Psychology of sports - motivation","text":"A study examined the relationship between motivation and engagement in regular physical activity. A survey determined motivational profiles based on participants' personal experiences with physical activity: Group 1: Intrinsically motiva...","marks":7,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_161","topic":"Exercise Physiology - Aerobic Capacity and Physical Activity","text":"A study investigated whether there was a relationship between weekly participation in physical activity (PA) and a person's VO2 max. The participants were boys and girls aged 14 and 19. Participants' physical activity involvement was cat...","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_162","topic":"Anatomy and Biomechanics - Joints and Skill Acquisition","text":"The diagram shows a football (soccer) player. (a) Identify the type of synovial joint that enables flexion of the football (soccer) player's knee. [1] (b) Identify the inferior bone that articulates at the hip joint. [1] (c) Using an exa...","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_163","topic":"Biomechanics - Newton's Laws and Impulse","text":"(a) Define the term impulse. [1] (b) Two different balls of the same diameter are shown. Ball A 560 g Ball B 200 g. Explain how Newton's second and third laws of motion would influence each of the balls. [3]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_164","topic":"Anatomy - Ventilatory System","text":"The diagram shows part of the ventilatory system. Identify the structures labelled A and B. [2]","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_165","topic":"Exercise Physiology - Energy Systems","text":"(a) Outline the oxygen deficit experienced by an athlete when completing the multistage fitness test. [2] (b) Explain the role of adenosine triphosphate (ATP) in providing energy for a sprinter's muscles at the beginning of a 100 m race....","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_166","topic":"Research methods, exercise physiology, energy systems","text":"A study examined reliability and validity of the My Jump iPhone application in measuring jump height. Each participant performed 5 vertical jumps on a force platform while simultaneously being assessed using the My Jump app. A force plat...","marks":14,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_167","topic":"Nutrition","text":"(a) List the chemical elements in a protein molecule. (b) A recreational dancer (with a healthy BMI) starts training for a competitive marathon. Identify how their recommended macronutrient intake changes.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_168","topic":"Exercise physiology, muscle contraction","text":"(a) Explain the reasons why adenosine gains and loses a phosphate molecule. (b) Describe the role of calcium ions during the filament sliding of skeletal muscle contraction.","marks":7,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_169","topic":"Respiratory and cardiovascular systems","text":"(a) Discuss the mechanism of oxygen exchange between the alveoli and the capillaries. (b) Distinguish how cardiac output and resting heart rate would differ between trained and untrained individuals. (c) Identify two cardiovascular adapt...","marks":8,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_170","topic":"Respiratory system, sport psychology, anatomy, statistics","text":"(a) Outline the mechanics of ventilation in the human lungs during inspiration. (b) Using an example from a team sport, evaluate the application of psychological refractory period (PRP). (c) Annotate the structure of skeletal muscle. (d)...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_171","topic":"Cardiovascular system, sport psychology, training principles","text":"(a) Discuss systolic and diastolic blood pressure at rest and during exercise for a trained athlete. (b) Discuss the relationship between selective attention and memory. (c) Using examples, outline how a coach uses periodization, progres...","marks":14,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_172","topic":"Exercise physiology, VO2 max, energy systems","text":"A study investigated the effect of a 4-week period of inspiratory muscle training (IMT) on VO2 max performance. Participants completed a cycling programme and were randomly allocated to either a control group or the IMT group. Each week,...","marks":12,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_173","topic":"Skill acquisition, learning theory","text":"(a) Define learning. [1] (b) Using an example from sport, explain whole–part–whole skill presentation. [3]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_174","topic":"Physical characteristics and testing - rock climbing","text":"A study compared the physical characteristics of 55 experienced female rock climbers. They were divided into lower, advanced, and elite ability groups based on self-reported climbing experience. They completed a 10-minute warm-up prior t...","marks":12,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_175","topic":"Training adaptations and sports psychology - handball","text":"A study of 26 untrained 20–30 year old men investigated the potential health benefits of regular participation in team handball training. The participants were allocated randomly to either the handball group, which completed two training...","marks":12,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_176","topic":"Energy systems - kayaking","text":"The diagram shows a person kayaking. The flatwater 200 m (one-person kayak) world records are: Male 33.380 seconds, Female 37.898 seconds.\n(a) Describe the production of ATP by the predominant energy system used by an elite kayaker paddl...","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_177","topic":"Research methods, plyometric exercise, sprint performance","text":"A study investigated the effect of plyometric exercise on sprint speed. (Plyometric exercise involves rapid and repeated stretching and contracting of the muscles.) The mean speed of each participant was measured during a 20 m sprint as ...","marks":7,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_178","topic":"Cardiovascular system, blood components, cardiac output","text":"(a) State one component transported by blood. [1]\n(b) Explain how cardiac output is maintained during prolonged exercise. [3]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_179","topic":"Muscle structure, ATP, reciprocal inhibition, lever systems, anatomical terminology","text":"The diagram shows a skeletal muscle.\n(a) Identify the structures A, B and C in the diagram. [3]\n(b) Define the term origin of a muscle. [1]\n(c) Explain the role of ATP in providing energy for a sprinter's muscles to contract. [3]\n(d) Exp...","marks":16,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_180","topic":"Cardiovascular system, blood pressure","text":"(a) Define systolic blood pressure. [1]\n(b) Predict the effect of a 100 m sprint on a runner's systolic and diastolic blood pressure. [2]","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_181","topic":"Skill Acquisition and Analysis","text":"A study investigated the effect of practice on the improvement of four field hockey skills. Participants engaged in pre-test and post-test competitions before and after a six-week training programme. During the training programme, partic...","marks":18,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_182","topic":"Exercise Physiology and Fitness Testing","text":"An athlete performs a vertical jump on a force plate. The graph shows the recorded ground reaction force of the athlete. (a) State what happens to the athlete between C and D. (b) Outline power, a performance-related component of fitness...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_183","topic":"Anatomy and Biomechanics","text":"(a) Distinguish the movement permitted between a fibrous and a cartilaginous joint. (b) The articular capsule, meniscus and ligaments provide stability at the knee. Outline two other features of a synovial joint.","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_184","topic":"Physiology - Muscle stiffness","text":"Identify the massaged muscle with the greatest stiffness post-run.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_185","topic":"Physiology - Muscle stiffness","text":"Calculate the difference in stiffness, in N m–1, between massaged muscle and placebo post-massage for the muscle identified in 2(a).","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_186","topic":"Physiology - Muscle stiffness and recovery","text":"Deduce the effect of post-exercise massage on muscle stiffness at 72 hours post-massage.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_187","topic":"Fitness testing","text":"State the fitness test shown in the diagram.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_188","topic":"Anatomy and biomechanics - Joint movements","text":"Identify the movement at the hip on moving from position A to position B.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_189","topic":"Respiratory system","text":"Explain the mechanics of inspiration for an athlete completing an aerobic fitness test.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_190","topic":"Cardiovascular system - Blood components","text":"State the function of platelets in response to a skin cut.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_191","topic":"Cardiovascular system - Cardiac conduction","text":"Describe the pathway of the electrical impulse during excitation of the heart muscle.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_192","topic":"Skill acquisition - Motor skill classifications","text":"Compare and contrast the motor skill classifications of a boxer and a road cyclist.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_193","topic":"Anatomy, physiology, and training adaptations","text":"Analyse the movement at the knee and hip as the rower moves from position A to position B in the diagram. Outline one type of muscle tissue. Describe how the characteristics of slow-twitch muscle fibres are suited to a rower. Describe th...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_194","topic":"Biomechanics, physiology, and skill acquisition","text":"Define Newton's first law of motion. Explain how Newton's laws of motion apply in a team sport. Describe the function of adrenaline during exercise. Discuss the distribution of blood at rest and redistribution of blood during strenuous e...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_195","topic":"Fitness, skill acquisition, anatomy, and physiology","text":"Distinguish between health-related and performance-related components of fitness. Apply four components of fitness to the movement of a basketball player. Using an example from a team sport, evaluate the concept of the psychological refr...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_196","topic":"Sports biomechanics, injury prevention, research methodology","text":"A study investigated the magnitude of the impact force, in Newtons (N), at the shoulder during tackling in 35 experienced rugby union players. The researchers looked at the effect of the following variables on the impact force at the sho...","marks":14,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_197","topic":"Cardiovascular system, circulatory systems, blood distribution during exercise","text":"The diagram shows the heart. (a) State the blood vessels A, B and C in the diagram. (b) Distinguish between the pulmonary and systemic circulatory systems. (c) Explain the changes in blood distribution that occur during an endurance trai...","marks":8,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_198","topic":"Nutrition, protein, amino acids","text":"(a) Outline the functions of protein. (b)(i) Describe essential amino acids. (ii) Identify a source of essential amino acids.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_199","topic":"Skill classification, motor skills","text":"(a) Using a sporting example, outline a closed skill. (b) Discuss a sporting example of an externally-paced skill.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_200","topic":"Nutrition and training","text":"A study investigated the impact of heavy and moderate load-resistance training on nutritional intake. Nineteen resistance-trained athletes were randomly assigned to one of two groups: Heavy training load group: Trained in a loading range...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_201","topic":"Anatomy and physiology","text":"(a) Identify the bone type of the scapula. (b) The diagram shows a gymnast holding a position called an iron cross. Discuss the response of systolic and diastolic blood pressure to this static position.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_202","topic":"Biomechanics and anatomy","text":"(a) Define the term centre of mass. (b) The diagram shows a gymnast performing a piked somersault. Explain the manipulation of the moment of inertia during the flight and landing phases. (c) The diagram shows skeletal muscle. Identify th...","marks":10,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_203","topic":"Anatomy and physiology","text":"What type of bone is the fibula?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_204","topic":"Anatomy and physiology","text":"What best describes the tendon labelled X?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_205","topic":"Anatomy and physiology","text":"What is the muscle labelled X?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_206","topic":"Anatomy and physiology","text":"Which are functions of the conducting airways? I. Warming and moistening the air II. Low resistance pathway for airflow III. Increase air pressure","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_207","topic":"Anatomy and physiology","text":"What is defined as the maximum volume of air that can be exhaled after a maximum inhalation?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_208","topic":"Anatomy and physiology","text":"What percentage of oxygen in the blood is transported by hemoglobin as oxyhemoglobin?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_209","topic":"Anatomy and physiology","text":"What causes oxygen to move from the alveoli into the pulmonary capillaries?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_210","topic":"Anatomy and physiology","text":"What effect does the sympathetic nervous system have on cardiovascular function?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_211","topic":"Exercise physiology","text":"Why does running have a greater maximal oxygen consumption compared to cycling?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_212","topic":"Nutrition","text":"Which food is most likely to promote growth and repair of muscles?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_213","topic":"Nutrition","text":"What type of fatty acid is represented in the diagram shown?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_214","topic":"Nutrition","text":"What are the general recommendations for a healthy balanced diet?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_215","topic":"Anatomy and physiology","text":"What is the role of the Golgi apparatus in the cell?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_216","topic":"Exercise physiology","text":"What is the main fuel source for an elite athlete in a 400 m running race?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_217","topic":"Anatomy and physiology","text":"The diagram shows a motor unit. What structure is labelled X?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_218","topic":"Exercise physiology","text":"What are the predominant muscle fibre characteristics of an elite 100 m sprinter's gastrocnemius?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_219","topic":"Anatomy and physiology","text":"What is the movement demonstrated in the image shown?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_220","topic":"Anatomy and physiology","text":"What is the role of the rectus femoris in the movement of the knee during the movement sequence shown?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_221","topic":"Exercise physiology","text":"Which minimizes the effects of delayed onset muscle soreness (DOMS)? I. Increasing the eccentric component of muscle contraction II. Increasing the intensity of resistance training gradually III. Reducing the concentric component of musc...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_222","topic":"Biomechanics","text":"What does the area labelled X on the velocity–time graph shown represent?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_223","topic":"Biomechanics","text":"Which is a third-class lever?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_224","topic":"Skill in sport","text":"Which is a Fleishman perceptual motor ability?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_225","topic":"Skill in sport","text":"What is the function of an exteroceptor?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_226","topic":"Skill in sport","text":"What factors impact the detection–comparison–recognition (DCR) process? I. Background noise II. Intensity of stimulus III. Capacity of short-term sensory store","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_227","topic":"Skill in sport","text":"What adds a psychological refractory period (PRP)?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_228","topic":"Skill in sport","text":"A basketball coach removed a player from a team based on a post-game video analysis that identified a critical flaw in their shooting technique. Which types of feedback were received by the player?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_229","topic":"Skill in sport","text":"The graph shows the reaction times for a population completing an online test. What is the approximate percentage of values falling in the segment labelled X?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_230","topic":"Measurement and evaluation of human performance","text":"What p value is considered statistically significant?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_231","topic":"Measurement and evaluation of human performance","text":"A researcher administered a glucose-free drink as a control in a study on sports drinks. Which experimental technique is being used?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_232","topic":"Measurement and evaluation of human performance","text":"Which test evaluates a health-related component of fitness?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_233","topic":"Psychology of sports","text":"Question 4 - Psychology of sports (removed for copyright reasons)","marks":0,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_234","topic":"Optimizing physiological performance - thermoregulation","text":"(a) State the normal physiological core body temperature. (b) The Kona iron man event takes place in a hot climate. Athletes typically undergo heat acclimatization as part of their training to aid their performance. Discuss the physiolog...","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_235","topic":"Optimizing physiological performance - thermoregulation and warm-up","text":"Swimmers may wait for up to 30 minutes (transition time) between warming up in the pool and competing in a race. A study compared four conditions for swimmers during the transition time: Condition 1: control (sitting and wearing a tracks...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_236","topic":"Optimizing physiological performance - thermoregulation","text":"(a) Outline how the body maintains a stable core temperature when the external environment cools. (b) Explain why swimming in cold water is a challenge to the thermoregulation process.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_237","topic":"Optimizing physiological performance - ergogenic aids","text":"(a) State two classes of non-nutritional ergogenic aids currently banned by the International Olympic Committee (IOC). (b) Evaluate the use of beta blockers by an archer to positively influence their performance.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_238","topic":"Optimizing physiological performance - training","text":"(a) Outline overreaching and overtraining. (b) Suggest ways an athlete can avoid overtraining.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_239","topic":"Psychology of sports - motivation and behaviour","text":"A study assessed the effect of task and ego motivations on behaviour of 90 participants during soccer games. They were divided into three groups and were told: Group 1 (Task): prizes would be awarded based on improvement, Group 2 (Ego): ...","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_240","topic":"Optimizing physiological performance - training principles","text":"(a) Define cross-training. (b) Muscle soreness and fatigue are two indicators of overtraining. Discuss how a coach could monitor two other possible indicators to prevent overtraining.","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_241","topic":"Nutrition, macronutrients","text":"(a) List the chemical elements in a protein molecule. [1] (b) A recreational dancer (with a healthy BMI) starts training for a competitive marathon. Identify how their recommended macronutrient intake changes. [3]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_242","topic":"Cardiovascular system, exercise physiology","text":"(a) State one component transported by blood. [1] (b) Explain how cardiac output is maintained during prolonged exercise. [3]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_243","topic":"Anatomy, muscular system, energy systems, biomechanics","text":"The diagram shows a skeletal muscle. (a) Identify the structures A, B and C in the diagram. [3] (b) Define the term origin of a muscle. [1] (c) Explain the role of ATP in providing energy for a sprinter's muscles to contract. [3] (d) Exp...","marks":16,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_244","topic":"Cardiovascular system, blood pressure","text":"(a) Define systolic blood pressure. [1] (b) Predict the effect of a 100 m sprint on a runner's systolic and diastolic blood pressure. [2]","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_245","topic":"unknown - content removed","text":"Question 1 - removed for copyright reasons","marks":0,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_246","topic":"Muscle physiology, exercise recovery","text":"A separate study focused on the physiology of muscle fibres. It investigated the effect of post-exercise massage on muscle stiffness over a five-day period after downhill running. Stiffness of four leg muscles (rectus femoris, biceps fem...","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_247","topic":"Fitness testing, biomechanics, respiratory mechanics","text":"The diagram shows a fitness test. (a) State the fitness test shown in the diagram. [1] (b) Identify the movement at the hip on moving from position A to position B. [1] (c) Explain the mechanics of inspiration for an athlete completing a...","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_248","topic":"Cardiovascular system, blood components","text":"(a) State the function of platelets in response to a skin cut. [1] (b) Describe the pathway of the electrical impulse during excitation of the heart muscle. [4]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_249","topic":"Motor skills, skill classification","text":"The diagram shows two people boxing. Compare and contrast the motor skill classifications of a boxer and a road cyclist. [4]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_250","topic":"Biomechanics, muscle physiology, energy systems, aerobic training adaptations","text":"The diagram shows a rower using a rowing machine. (a) Analyse the movement at the knee and hip as the rower moves from position A to position B in the diagram. [6] (b) Outline one type of muscle tissue. [2] (c) Describe how the character...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_251","topic":"Biomechanics, exercise physiology, cardiovascular responses, skill acquisition","text":"(a) Define Newton's first law of motion. [1] (b) Explain how Newton's laws of motion apply in a team sport. [4] (c) Describe the function of adrenaline during exercise. [4] (d) Discuss the distribution of blood at rest and redistribution...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_252","topic":"Fitness components, skill execution, sports psychology, anatomy, respiratory system","text":"The diagram shows a basketball player shooting. (a) Distinguish between health-related and performance-related components of fitness. [1] (b) Apply four components of fitness to the movement of a basketball player. [4] (c) Using an examp...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_253","topic":"Anatomy - Bones","text":"What type of bone is a metacarpal?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_254","topic":"Anatomy - Joints","text":"Which are features of the elbow joint?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_255","topic":"Muscle Tissue Characteristics","text":"The diagram shows a hamstring stretch being performed. Which muscle tissue characteristic is demonstrated by the hamstrings when an athlete performs a static stretch as part of their cool down routine?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_256","topic":"Respiratory System","text":"The diagram shows a trace of pulmonary ventilation. Which number shows tidal volume for a person who is jogging?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_257","topic":"Respiratory System","text":"Which of the following occurs during inhalation? I. Diaphragm contracts II. Chest cavity volume increases III. Chest cavity pressure increases","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_258","topic":"Blood Cells","text":"Which are functions of erythrocytes and leucocytes?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_259","topic":"Cardiovascular System","text":"What is the cardiovascular response during the first 5 minutes after completing a cycle race?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_260","topic":"Cardiovascular System - Blood Pressure","text":"Which describes the blood pressure in the vascular system?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_261","topic":"Nutrition","text":"Which of the following is considered a micronutrient?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_262","topic":"Nutrition - Fats","text":"Which types of fat are classified correctly?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_263","topic":"Metabolism","text":"Which best defines metabolism?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_264","topic":"Energy Systems","text":"Which component of the aerobic energy system also occurs in the anaerobic system?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_265","topic":"Neuromuscular System","text":"The diagram shows a neuromuscular junction. What does X represent?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_266","topic":"Muscle Movement Analysis","text":"The diagram shows someone performing a bench press. Which muscle is the primary agonist, and what movement occurs at the shoulder during the upward phase of a bench press?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_267","topic":"Biomechanics - Levers","text":"How does a first class lever differ from a third class lever in the body?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_268","topic":"Biomechanics - Projectile Motion","text":"How is the flight of a golf ball affected when it is hit with backspin?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_269","topic":"Skill Classification","text":"Which correctly identifies an open and a closed skill?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_270","topic":"Sensory Systems","text":"Which is an example of an exteroceptor being used by the body?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_271","topic":"Memory and Learning","text":"A coach trains their team to use a number and letter sequence for a penalty move. Which type of memory improvement technique is being used?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_272","topic":"Skill Transfer","text":"What type of skill transfer occurs when a soccer player performs kicking drills as part of their warm-up before a big match?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_273","topic":"Training Methods","text":"A coach plans training sessions with periods of work and short rest breaks in between. Which type of practice is this?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_274","topic":"Data Interpretation - Training","text":"The graph shows athletes' mean 10 km trial times following four different warm-up methods. Which method resulted in the smallest variation in trial times?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_275","topic":"Research Methodology","text":"Which defines randomization?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_276","topic":"Fitness Testing","text":"Which is considered a limitation of a maximal fitness test?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_277","topic":"Fitness Components","text":"What component of fitness is described as 'the ability to use your muscular strength quickly'?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_278","topic":"Anatomy - Skin","text":"Which is correct with regard to skin?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_279","topic":"Neuroanatomy","text":"Which lobe of the brain is primarily responsible for visual processing and interpretation?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_280","topic":"Endocrine System","text":"Which endocrine organ is found in the neck?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_281","topic":"Endocrine System - Pancreas","text":"Which hormones are released by the pancreas?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_282","topic":"Exercise Physiology - Fatigue","text":"Which of the following would be considered an indication of peripheral fatigue?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_283","topic":"Exercise Intensity","text":"Which of the activities are correctly classified in terms of their exercise intensity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_284","topic":"Biomechanics - Friction","text":"Which correctly describes the static and dynamic friction experienced by the bobsled as the team pushes off at the start but before the bobsled begins to move?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_285","topic":"Biomechanics - Forces","text":"Which force(s) act to slow down a runner as they accelerate out of the blocks at the start of a 100 m sprint? I. Air resistance II. Ground reaction force III. Push force","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_286","topic":"Coaching Pedagogy","text":"Which is a feature of non-linear pedagogy in sports coaching?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_287","topic":"Performance Analysis","text":"A coach records shooting position on the court in a basketball game. What type of notation system is being used?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_288","topic":"Performance Analysis Technology","text":"What does a football coach use performance analysis software (e.g. Prozone) for?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_289","topic":"Genetics","text":"Which statements about genotype and phenotype are correct?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_290","topic":"Environmental Influences on Performance","text":"Which are considered to be an environmental influence on an athlete's characteristics? I. An athlete's lung capacity II. An athlete's training programme III. An athlete's nutritional intake","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_291","topic":"Immune System","text":"Which is a chemical mechanism that the body uses to inhibit an infectious agent?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_292","topic":"Anatomy - Muscular System","text":"Where are the external oblique muscles located in the body?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_293","topic":"Cardiovascular System - Blood","text":"Why does an increase in red blood cells improve athletic performance?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_294","topic":"Cardiovascular System","text":"Which structures of the cardiovascular system are described correctly?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_295","topic":"Training Adaptations","text":"Which adaptation is expected as training for a half marathon progresses?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_296","topic":"Nutrition - Carbohydrates","text":"Which is a polysaccharide?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_297","topic":"Nutrition - Fat Storage","text":"Which is a major storage site for body fat?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_298","topic":"Cell Biology","text":"Which cellular organelles are labelled correctly?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_299","topic":"Muscle Fiber Types","text":"Which muscle fibre type is predominant in the gastrocnemius muscle of an elite 200 m sprinter?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_300","topic":"Movement Analysis","text":"What action occurs at the ankle of a swimmer as they push off the wall?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_301","topic":"Biomechanics - Lever Systems","text":"Which correctly identifies the fulcrum and the effort of the lever system shown in the diagram?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_302","topic":"Skill Acquisition - Abilities","text":"Which is an ability?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_303","topic":"Skill Acquisition - Learning Curves","text":"The chart shows the learning curve of a golfer. What type of learning occurs between weeks 5 and 7?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_304","topic":"Skill Acquisition - Transfer of Learning","text":"The diagram shows a javelin thrower. What type of skill transfer occurs when an athlete uses their knowledge about angle of release to help them to throw a javelin successfully?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_305","topic":"Research Methods - Study Design","text":"Which defines the study design concept of blinding?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_306","topic":"Testing and Measurement","text":"Which of the following is a test for coordination?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_307","topic":"Anatomy and physiology","text":"Which states the correct anatomical relationship among the bones of the hands and arms? A. Phalanges are medial to the humerus. B. Carpals are proximal to the ulna. C. Humerus is distal to the metacarpals. D. Ulna is medial to the radius.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_308","topic":"Anatomy and physiology","text":"What is the attachment of a muscle tendon to a stationary bone? A. Insertion B. Ligament C. Origin D. Synapse","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_309","topic":"Anatomy and physiology","text":"The diagram shows a posterior view of the legs. Which skeletal muscle is labelled X? A. Biceps femoris B. Gastrocnemius C. Gluteus maximus D. Soleus","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_310","topic":"Anatomy and physiology","text":"Which volume defines total lung capacity? A. Air in the lungs after a maximum inhalation B. Air breathed in and out in any one breath C. Air in excess of tidal volume that can be exhaled forcibly D. Air still contained in the lungs after...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_311","topic":"Anatomy and physiology","text":"Which correctly characterizes the relationship between blood acidity levels and ventilation during a sub-maximal training session? A. Blood acidity levels: Rise (low pH), Ventilation: Increases B. Blood acidity levels: Low (normal pH), V...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_312","topic":"Anatomy and physiology","text":"Which option correctly identifies the function of each component of blood? A. Erythrocytes: Repair injuries, Leucocytes: Transport waste, Platelets: Bind oxygen B. Erythrocytes: Bind oxygen, Leucocytes: Fight infection, Platelets: Repair...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_313","topic":"Anatomy and physiology","text":"The diagram shows a cross-section of the heart. What are structures X, Y and Z? A. Structure X: Right atrium, Structure Y: Pulmonary valve, Structure Z: Vena cava B. Structure X: Left atrium, Structure Y: Pulmonary valve, Structure Z: Ao...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_314","topic":"Anatomy and physiology","text":"Which is the correct sequence for excitation of the heart muscle? A. atrioventricular node → ventricles → sinoatrial node → atria B. sinoatrial node → atria → atrioventricular node → ventricles C. sinoatrial node → atria → ventricles → a...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_315","topic":"Exercise physiology","text":"Maximal oxygen consumption represents the functional capacity of the oxygen transport system. Which person would likely have the highest VO2 max? A. Elite marathon runner B. Chess player C. Novice hiker D. Young weightlifter","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_316","topic":"Nutrition","text":"Lipids are a macronutrient. Which are functions of lipids? I. To build hormones II. To build muscle tissue III. To store energy A. I and II only B. I and III only C. II and III only D. I, II and III","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_317","topic":"Nutrition","text":"Which characteristic distinguishes unsaturated fatty acids from saturated fatty acids? A. Ability to bond to glycerol B. Composition of carbon, hydrogen and oxygen C. Plant origin D. Presence of double bonds between carbon atoms","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_318","topic":"Nutrition","text":"Which option states the approximate energy content of 100 g of protein? A. 100 kJ B. 1720 kJ C. 1760 kJ D. 4000 kJ","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_319","topic":"Exercise physiology","text":"Insulin and muscle contraction influence glucose during exercise. Which combination correctly states how they influence glucose uptake? A. Insulin: Stimulates, Muscle contraction: Stimulates B. Insulin: Stimulates, Muscle contraction: In...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_320","topic":"Exercise physiology","text":"Which processes require the presence of oxygen to produce adenosine triphosphate (ATP)? I. Glycolysis by the lactic acid system II. Glycolysis followed by the Krebs cycle and electron transport chain III. Beta oxidation of fatty acids fo...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_321","topic":"Anatomy and physiology","text":"The diagram shows a motor unit. Which is X? A. Dendrite B. Motor end plate C. Axon D. Cell body","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_322","topic":"Anatomy and physiology","text":"Which correctly identifies functions of slow twitch (type I) muscle fibres? A. Force generation: Small, Durability: Maintain contractions for a long time B. Force generation: Moderate, Durability: Fatigue quickly C. Force generation: Lar...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_323","topic":"Biomechanics","text":"During a penalty kick in football (soccer), which type of movement and muscle contraction occurs at the knee and quadriceps? A. Type of movement: Flexion, Muscle contraction: Concentric B. Type of movement: Extension, Muscle contraction:...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_324","topic":"Exercise physiology","text":"Which option is correct about delayed onset muscle soreness (DOMS)? A. DOMS is caused by: Eccentric muscle contractions, DOMS is minimized by: Increasing the eccentric muscle contractions during early training B. DOMS is caused by: Conce...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_325","topic":"Biomechanics","text":"Which sporting action illustrates the performer's centre of mass temporarily outside the body? A. Sprint B. Volleyball serve C. Pirouette D. High jump","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_326","topic":"Biomechanics","text":"A baseball pitcher applies the Bernoulli principle when throwing a curveball. Which option correctly identifies the cause and effect relationship the pitcher uses? A. Cause: Region of high air pressure left of the ball, Effect: Ball curv...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_327","topic":"Skill acquisition","text":"When an ice skater performs a short routine, which option classifies their skills? A. Distinctiveness of movements: Serial skills, Stability of environment: Open skills, Size of muscles involved: Fine motor skills B. Distinctiveness of m...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_328","topic":"Skill acquisition","text":"Which equation correctly relates ability, skill and technique? A. Ability = skill + selection of an appropriate technique B. Skill = ability + selection of an appropriate technique C. Technique = ability + skill D. Technique = ability - ...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_329","topic":"Skill acquisition","text":"A gymnast performs a routine on the balance beam. Which type of sensor informs the gymnast about their joint movement and body position? A. Chemoreceptors B. Exteroceptors C. Interoceptors D. Proprioceptors","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_330","topic":"Skill acquisition","text":"Swimmers perform a 200 m backstroke race. What types of feedback do they receive when they look at the clock at the end of the race? A. Intrinsic and concurrent B. Extrinsic and concurrent C. Intrinsic and terminal D. Extrinsic and terminal","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_331","topic":"Skill acquisition","text":"An athlete acquires a new skill quickly and then their learning slows down. Which type of learning curve represents this? A. Linear B. Negative acceleration C. Positive acceleration D. Plateau","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_332","topic":"Skill acquisition","text":"The diagram shows how a layup is performed. A basketball coach prepares to present learners with a layup practice. Which option justifies the coach's choice of presentation? A. Part – all of the components of a layup are performed at the...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_333","topic":"Measurement and evaluation","text":"A long jumper performs five jumps that are measured in metres of 5.0, 4.3, X, 5.7, 5.5. The mean is 5.0 m. What is X? A. 4.3 m B. 4.5 m C. 5.0 m D. 5.3 m","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_334","topic":"Measurement and evaluation","text":"Which option is correct for a laboratory test of maximal oxygen consumption? A. Strength: Broadly accessible, Limitation: Not reliable B. Strength: Accurate, Limitation: Not broadly accessible C. Strength: Valid, Limitation: Not accurate...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_335","topic":"Measurement and evaluation","text":"A trainer plans to test the effect of a weight training programme on a group of athletes. Which fitness test should the trainer use to assess power? A. Multistage fitness test B. Maximum push-ups C. Hand grip dynamometer D. Vertical jump","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_336","topic":"Training and performance","text":"Which option states essential elements of a general training programme? A. A balanced diet and endurance training B. Endurance training and regular medical check-ups C. Regular medical check-ups and stretching activities D. Endurance tra...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_337","topic":"Skill Acquisition","text":"Which classifies the release of an arrow in archery? [image of archer shown]","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_338","topic":"Anatomy - Skeletal System","text":"Which are the four types of bones?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_339","topic":"Anatomy - Muscular System","text":"An athlete's broken leg is immobilized in a cast. Which muscle characteristic causes difficulty in walking after the prolonged inactivity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_340","topic":"Anatomy - Muscular System","text":"What is the muscle labelled X in the diagram?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_341","topic":"Anatomy - Respiratory System","text":"What is vital capacity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_342","topic":"Anatomy - Cardiovascular System","text":"Which component of blood is greatest by volume?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_343","topic":"Anatomy - Cardiovascular System","text":"How does an increased erythrocyte level benefit an athlete?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_344","topic":"Anatomy - Cardiovascular System","text":"What type of blood is pumped by each of the blood vessels listed? (Vena cava, Pulmonary artery, Pulmonary vein, Aorta)","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_345","topic":"Exercise Physiology - Cardiovascular Response","text":"How does the heart meet the demand for oxygenated blood during physical activity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_346","topic":"Anatomy - Cardiovascular System","text":"What does diastolic blood pressure measure?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_347","topic":"Nutrition - Macromolecules","text":"Which molecule is represented by the diagram below?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_348","topic":"Nutrition - Macromolecules","text":"What is the chemical composition of a protein molecule?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_349","topic":"Nutrition - Energy Content","text":"What is the correct order (greatest to least) for the amount of energy contained in 100 g of each body fuel?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_350","topic":"Energy Systems - Metabolism","text":"What type of process is lipolysis?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_351","topic":"Energy Systems","text":"Which energy system is the most rapid to resynthesize ATP?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_352","topic":"Biomechanics - Movement Analysis","text":"A skier, when snowplowing, turns the soles of their feet outwards. What action are the feet performing?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_353","topic":"Biomechanics - Muscle Contraction","text":"Which type of contraction occurs in the rectus femoris while performing a squat (moving from position A to B)?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_354","topic":"Biomechanics - Levers","text":"Which is an example of a second-class lever?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_355","topic":"Biomechanics - Newton's Laws","text":"Which of Newton's laws predicts the increase in acceleration of the swing when a child uses a lighter baseball bat?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_356","topic":"Biomechanics - Angular Motion","text":"Why does a diver use the tuck position?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_357","topic":"Skill Acquisition - Neurological Pathways","text":"What is the sequence of a motor unit signal travelling from the brain to the muscle?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_358","topic":"Skill Acquisition - Motor Skills","text":"Which motor skill classifications apply when an athlete runs a 100 m race?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_359","topic":"Skill Acquisition - Testing","text":"What is measured by the drop test?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_360","topic":"Skill Acquisition - Feedback","text":"As a golfer hits the ball they feel a sharp pain in the right bicep; this is an example of which types of feedback?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_361","topic":"Skill Acquisition - Transfer of Learning","text":"A teacher introduced fencing to a group of judo athletes. Actions in judo are initiated by the foot whereas fencing actions are initiated by the hand. The judo athletes were slow to master the fencing skills. What learning transfer took ...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_362","topic":"Skill Acquisition - Teaching Styles","text":"A coach is teaching a large group of students in a potentially dangerous situation, for example shot put training. What is the safest teaching style to use?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_363","topic":"Statistics and Data Analysis","text":"What can be represented by error bars on graphs?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_364","topic":"Statistics and Data Analysis","text":"What is coefficient of variation?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_365","topic":"Fitness Testing - Validity and Reliability","text":"Which terms apply to the use of the multistage fitness test to evaluate the muscular power of a 100 m swimmer?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_366","topic":"Fitness Components","text":"Which fitness component is most important when a soccer player dribbles a ball around opponents while maintaining their balance?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_367","topic":"Training - Heart Rate Zones","text":"Why would an athlete work at different heart rate training zones rather than a maximum heart rate zone?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_368","topic":"Anatomy","text":"The diagram below shows a long bone. What is the structure labelled X? A. Compact bone B. Spongy bone C. Diaphysis D. Cartilage","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_369","topic":"Anatomy","text":"Using anatomical terminology, what is the position of the sacral bones relative to the lumbar bones? A. Inferior B. Lateral superior C. Medial D. Superior","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_370","topic":"Anatomy - Muscle Types","text":"Which types of muscles are only under involuntary control? I. Smooth muscle II. Cardiac muscle III. Skeletal muscle A. I and II only B. I and III only C. II and III only D. I, II and III","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_371","topic":"Respiratory System","text":"Which term is defined as the volume of air breathed in and out in one breath? A. Pulmonary ventilation B. Tidal volume C. Vital capacity D. Residual volume","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_372","topic":"Cardiovascular System","text":"The diagram shows an anterior view of the heart. Which blood vessel is labelled X? A. Aorta B. Pulmonary artery C. Pulmonary vein D. Vena cava","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_373","topic":"Cardiovascular System","text":"What describes the sequence of excitation of the heart muscle? A. Sinoatrial node → atrioventricular node → ventricles B. Atrioventricular node → ventricles → sinoatrial node C. Ventricles → atrioventricular node → sinoatrial node D. Sin...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_374","topic":"Cardiovascular System - Exercise Physiology","text":"What describes the effect of exercise on cardiac output? Stroke volume / Heart rate A. Increases / Increases B. Increases / Decreases C. Decreases / Increases D. Decreases / Decreases","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_375","topic":"Cardiovascular System","text":"Where does blood exert the force measured as systolic blood pressure? A. On the arterial walls during ventricular relaxation B. On the venous walls during ventricular contraction C. On the arterial walls during ventricular contraction D....","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_376","topic":"Cardiovascular System - Exercise Physiology","text":"How does blood pressure respond during a warm-up? Systolic blood pressure / Diastolic blood pressure A. Increases / Increases B. Remains constant / Remains constant C. Remains constant / Increases D. Increases / Remains constant","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_377","topic":"Nutrition","text":"Which element distinguishes an amino acid from a fatty acid? A. Carbon B. Hydrogen C. Oxygen D. Nitrogen","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_378","topic":"Nutrition","text":"The diagram shows the nutritional information from an energy gel packet. Which nutrient provides the most energy per serving? Nutrition Facts: Serving size 1 packet (30g), Servings per container 1, Amount per serving: Total fat 10g, Tota...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_379","topic":"Nutrition - Energy Systems","text":"Which is a major storage site for glycogen? A. Pancreas B. Brain C. Liver D. Kidney","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_380","topic":"Nutrition - Energy Systems","text":"Which outlines lipolysis? A. Two glucose molecules combine to form a disaccharide B. One glycerol and three fatty acids combine to form a triglyceride C. One disaccharide breaks down to form two glucose molecules D. One triglyceride brea...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_381","topic":"Energy Systems","text":"What are the products of anaerobic glycolysis? A. 2 ATP per glucose molecule and lactic acid B. 2 ATP per glucose molecule and no lactic acid C. 34–36 ATP per glucose molecule and no lactic acid D. 34–36 ATP per glucose molecule and lact...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_382","topic":"Muscle Contraction","text":"What describes the role of acetylcholine in skeletal muscle contraction? A. To open an axon's synaptic vesicle B. To close an axon's synaptic vesicle C. To open a motor-end plate channel D. To block a motor-end plate channel","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_383","topic":"Anatomy - Movement","text":"The diagram shows a right foot. Which type of movement happens from Position A to Position B? A. Dorsi flexion B. Plantar extension C. Eversion D. Inversion","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_384","topic":"Biomechanics","text":"The velocity–time graph below shows the performance of two sprinters. Which statement describes the sprinters at 1 second? Graph shows velocity (m s⁻¹) vs Time (s) for Sprinter A and Sprinter B from 0-14 seconds. A. Sprinter A is moving ...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_385","topic":"Biomechanics - Levers","text":"Which levers have the effort and the load on the same side of the fulcrum? I. First class lever II. Second class lever III. Third class lever A. I and II only B. I and III only C. II and III only D. I, II and III","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_386","topic":"Biomechanics - Newton's Laws","text":"Which illustrates Newton's second law of motion during a baseball game? A. The ball changes direction when hit by the bat due to an unbalanced outside force. B. The ball exerts a force on the bat when hit in the opposite direction. C. Th...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_387","topic":"Biomechanics - Levers","text":"The diagram shows elbow extension. Which type of lever is used? Diagram shows Fulcrum, Effort force, and Resistance force positions. A. First B. Second C. Third D. No lever is used during elbow extension","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_388","topic":"Skill Acquisition","text":"Which skill profile outlines the motor skills involved in a tennis rally? A. Discrete and open B. Serial and open C. Continuous and closed D. Serial and closed","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_389","topic":"Skill Acquisition","text":"Which term is defined as a capacity of the individual that is related to the performance potential of a variety of tasks? A. Skill B. Ability C. Technique D. Learning","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_390","topic":"Skill Acquisition - Information Processing","text":"Which statement characterizes Hick's Law? A. As the number of stimuli increases, the reaction time increases. B. The response time increases as stimuli are presented in close succession. C. Reaction time decreases as the number of stimul...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_391","topic":"Skill Acquisition - Information Processing","text":"What is the role of selective attention? A. To filter relevant information from noise B. To hold all information for seconds C. To store relevant information for years D. To pass all information to the long-term memory","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_392","topic":"Skill Acquisition - Learning","text":"Which graph shows a negatively accelerated learning curve? A. [graph showing successful performance vs time] B. [graph showing successful performance vs time] C. [graph showing successful performance vs time] D. [graph showing successful...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_393","topic":"Skill Acquisition - Practice Methods","text":"Which type of presentation involves the repetitive practice of a single part of a skill? A. Whole B. Whole–part–whole C. Progressive part D. Part","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_394","topic":"Statistics","text":"What describes the difference between the two sets of group data in the table? Group 1 data: Mean 385, SD 34.33; Group 2 data: Mean 402, SD 25.70; p 0.32. Percent probability that the difference is due to chance / Difference is statistic...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_395","topic":"Fitness Testing","text":"What makes a fitness test reliable? A. It is repeatable. B. It is relevant to a given sport. C. It is inconsistent. D. It measures the factors that it is designed to measure.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_396","topic":"Fitness Testing","text":"Which fitness test provides an assessment of muscle endurance? A. Hand grip dynamometer B. Maximum push-ups C. Harvard step test D. Standing broad jump","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_397","topic":"Training Principles","text":"An athlete is engaged in consistent regular training. Which key principle is being met? A. Overload B. Specificity C. Reversibility D. Variety","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_398","topic":"Anatomy - Skeletal System","text":"Which are parts of the pectoral girdle?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_399","topic":"Anatomy - Skeletal System","text":"Which are functions of the axial skeleton? I. To protect internal organs II. To provide sites for attachment of muscle III. To stabilize parts of appendicular skeleton","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_400","topic":"Anatomy - Joint Structure","text":"Which feature of the synovial joint covers the ends of the bones?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_401","topic":"Anatomy - Respiratory System","text":"Which are principal structures of the ventilatory system? I. Lungs II. Heart III. Alveoli","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_402","topic":"Physiology - Respiratory Volumes","text":"The diagram shows various lung volumes. Which label represents tidal volume?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_403","topic":"Physiology - Gas Exchange","text":"What promotes passive diffusion during inspiration?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_404","topic":"Anatomy - Cardiovascular System","text":"The diagram shows the human heart. Which valve is labelled X?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_405","topic":"Physiology - Cardiovascular Response","text":"What causes an increase in cardiac output during exercise?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_406","topic":"Exercise Physiology - Aerobic Capacity","text":"Which competitive activity requires the highest maximal oxygen consumption for a well-trained athlete?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_407","topic":"Biochemistry - Metabolism","text":"Which is a condensation reaction?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_408","topic":"Nutrition - Sports Nutrition","text":"An untrained individual with healthy BMI starts to train for a marathon. What change should they make to their diet?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_409","topic":"Biochemistry - Metabolism","text":"What is an anabolic reaction?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_410","topic":"Cell Biology - Cell Structure","text":"The diagram shows the ultrastructure of a generalized animal cell. What is the main function of the organelle labelled X?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_411","topic":"Biochemistry - Lipid Storage","text":"What are major sites for triglyceride storage in the body? I. Liver II. Skeletal muscle III. Adipose tissue","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_412","topic":"Anatomy - Movement Analysis","text":"What type of movement takes place from Position A to Position B in the diagram?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_413","topic":"Exercise Physiology - Muscle Contraction","text":"The diagram shows joints in motion. Which shows a muscle undergoing eccentric contraction?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_414","topic":"Biomechanics - Angular Motion","text":"What causes an increase in angular velocity during a spin where no additional forces are applied after the initial push?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_415","topic":"Biomechanics - Kinematics","text":"The diagram shows velocity–time graphs. Which graph shows the greatest change in velocity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_416","topic":"Biomechanics - Centre of Mass","text":"The diagram shows a high jumper performing a Fosbury Flop. During which phase is the centre of mass outside the athlete?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_417","topic":"Biomechanics - Fluid Mechanics","text":"What causes a golf ball to lift after being hit?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_418","topic":"Skill Acquisition - Skill Classification","text":"What is an example of an open skill?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_419","topic":"Skill Acquisition - Abilities and Skills","text":"What is an ability?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_420","topic":"Skill Acquisition - Motor Abilities","text":"What is an example of a perceptual motor ability?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_421","topic":"Skill Acquisition - Sensory Information","text":"Which is an example of information received through proprioceptors?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_422","topic":"Skill Acquisition - Memory","text":"What is rehearsal in memory improvement?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_423","topic":"Skill Acquisition - Reaction Time","text":"What is movement time?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_424","topic":"Research Methods - Statistics","text":"What does standard deviation represent?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_425","topic":"Research Methods - Experimental Design","text":"Which procedure would assess the reliability of an experiment?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_426","topic":"Exercise Testing - Health Screening","text":"Which is correct about the Physical Activity Readiness Questionnaire (PAR-Q)?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_427","topic":"Exercise Testing - Fitness Assessment","text":"What is a benefit of a maximal test?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_428","topic":"Anatomy - Skeletal System","text":"What are the functions of the axial skeleton?\nA. muscle attachment protection of organs fine motor movement\nB. support of the body protection of organs fine motor movement\nC. support of the body protection of organs muscle attachment\nD. ...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_429","topic":"Anatomy - Muscular System","text":"Which statement is correct about the insertion of a skeletal muscle?\nA. The attachment of a muscle tendon to a moveable bone\nB. The attachment of a muscle tendon to a stationary bone\nC. The attachment of a muscle tendon at the proximal e...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_430","topic":"Anatomy - Muscular System","text":"The diagram shows the skeletal muscles in the anterior upper leg. Which muscle is labelled X?\nA. Rectus femoris\nB. Vastus medialis\nC. Sartorius\nD. Vastus lateralis","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_431","topic":"Anatomy and Physiology - Respiratory System","text":"The graph below represents lung volume. What is labelled X?\nA. Tidal volume\nB. Vital capacity\nC. Expiratory reserve volume\nD. Inspiratory reserve volume","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_432","topic":"Anatomy and Physiology - Respiratory System","text":"Which statement(s) about the functions of the conducting airways is/are correct?\nI. Provide a low resistance pathway for airflow\nII. Provide a site for gaseous exchange\nIII. Warm and moisten the air\nA. I and II only\nB. I and III only\nC. ...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_433","topic":"Physiology - Respiratory System","text":"What causes an increase in ventilation?\nA. A decrease in carbon dioxide content in the blood\nB. A decrease in hydrogen ions in the blood\nC. A decrease in blood pH\nD. A decrease in blood acidity","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_434","topic":"Anatomy and Physiology - Cardiovascular System","text":"What is the primary role of platelets?\nA. Supporting immune function\nB. Carrying dissolved substances\nC. Transporting oxygen\nD. Blood clotting and preventing bleeding","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_435","topic":"Physiology - Cardiovascular System","text":"How is cardiac output calculated?\nA. Heart rate × stroke volume\nB. Heart rate + stroke volume\nC. Heart rate + tidal volume\nD. Tidal volume × stroke volume","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_436","topic":"Physiology - Cardiovascular System","text":"What does systolic blood pressure measure?\nA. The force exerted on venous walls during atrial contraction\nB. The force exerted on arterial walls during atrial contraction\nC. The force exerted on venous walls during ventricular contractio...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_437","topic":"Nutrition","text":"Which are macronutrients?\nI. Fats\nII. Carbohydrates\nIII. Water\nA. I and II only\nB. I and III only\nC. II and III only\nD. I, II and III","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_438","topic":"Nutrition - Lipids","text":"What is the composition of triacylglycerol?\nA. Three glycerol and one fatty acid molecules\nB. One glucose and three fatty acid molecules\nC. One glycerol and three fatty acid molecules\nD. Three glucose and one fatty acid molecules","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_439","topic":"Physiology - Endocrine System","text":"What is a function of adrenaline?\nA. Increases stimulation of the parasympathetic nervous system\nB. Increases heart rate\nC. Decreases glycogenolysis\nD. Decreases heart rate","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_440","topic":"Exercise Physiology - Energy Systems","text":"What is the definition of cell respiration?\nA. The controlled release of energy in the form of adenosine triphosphate (ATP) from organic compounds in cells\nB. The controlled release of energy in the form of adenosine diphosphate (ADP) fr...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_441","topic":"Exercise Physiology - Energy Systems","text":"Which energy system is the predominant contributor of ATP for a runner participating in a marathon?\nA. ATP–PC system\nB. Anaerobic system\nC. Lactic acid system\nD. Aerobic system","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_442","topic":"Exercise Physiology - Muscle Contraction","text":"What shortens during muscular contraction according to the sliding filament theory?\nA. Z line\nB. A band\nC. H zone\nD. Actin","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_443","topic":"Exercise Physiology - Muscle Contraction","text":"What is an example of an isotonic eccentric contraction for the triceps?\nA. Lowering phase (elbow flexion) in a push-up\nB. Lifting phase (elbow extension) in a push-up\nC. Execution phase (elbow extension) when throwing a ball\nD. Preparat...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_444","topic":"Biomechanics - Motion Analysis","text":"Which term describes a scalar quantity?\nA. Acceleration\nB. Distance\nC. Displacement\nD. Velocity","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_445","topic":"Biomechanics - Levers","text":"What is an example of a first-class lever?\nA. Triceps contracting, moving the elbow\nB. Biceps contracting, moving the elbow\nC. Quadriceps contracting, moving the knee\nD. Hamstrings contracting, moving the knee","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_446","topic":"Biomechanics - Angular Motion","text":"How is angular momentum calculated?\nA. Moment of inertia ÷ angular velocity\nB. Moment of inertia - angular velocity\nC. Moment of inertia × angular velocity\nD. Moment of inertia + angular velocity","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_447","topic":"Biomechanics - Projectile Motion","text":"For successful completion, which event requires the greatest angle of release?\nA. High jump\nB. Long jump\nC. Shot put\nD. Discus","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_448","topic":"Skill Acquisition and Analysis","text":"Which is an example of perceptual skill?\nA. Knowledge of team tactics\nB. Shooting in basketball\nC. Assessing the putting green in golf\nD. Receiving a serve in tennis","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_449","topic":"Skill Acquisition and Analysis","text":"What does ability refer to?\nA. The production of goal-orientated movements\nB. The way in which a sports skill is performed\nC. A learned skill that is specific to the task\nD. The general trait or capacity of the individual","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_450","topic":"Skill Acquisition and Analysis - Information Processing","text":"Why are yellow balls used in tennis?\nA. To increase signal intensity\nB. To limit background noise\nC. To improve the efficiency of sense organs\nD. To improve memory retrieval","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_451","topic":"Skill Acquisition and Analysis - Memory","text":"What is the average capacity of short-term memory?\nA. 1 bit of information\nB. 2 ± 7 bits of information\nC. 7 ± 2 bits of information\nD. Unlimited","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_452","topic":"Skill Acquisition and Analysis - Information Processing","text":"What is Hick's Law?\nA. There is an increase in reaction time with increased number of choices.\nB. There is a decrease in reaction time with increased number of choices.\nC. There is an increase in movement time with increased number of ch...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_453","topic":"Skill Acquisition and Analysis - Learning and Performance","text":"Which describes practice to performance transfer in tennis?\nA. Hitting against a ball machine\nB. Understanding the biomechanics of hitting\nC. Training for strength to improve hitting\nD. Hitting right-handed and left-handed","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_454","topic":"Measurement and Evaluation - Statistics","text":"An athlete completed five timed trials of a 20 m sprint test. What is the mean time?\nTrial 1: 3.95s\nTrial 2: 4.05s\nTrial 3: 3.80s\nTrial 4: 4.00s\nTrial 5: 4.20s\nA. 3.90 s\nB. 3.95 s\nC. 4.00 s\nD. 4.05 s","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_455","topic":"Measurement and Evaluation - Statistics","text":"What does a large standard deviation indicate?\nA. The data is clustered closely to the mean.\nB. The data is spread widely around the mean.\nC. The data is normally distributed.\nD. The data is not normally distributed.","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_456","topic":"Measurement and Evaluation - Fitness Testing","text":"Which fitness component does the stork stand test?\nA. Reaction time\nB. Balance\nC. Strength\nD. Muscle endurance","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_457","topic":"Training and Conditioning","text":"Which are elements of a general training programme?\nI. Warm up\nII. Endurance training\nIII. Recreational activities and sports\nA. I and II only\nB. I and III only\nC. II and III only\nD. I, II and III","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_458","topic":"Anatomy and Physiology","text":"What is the primary function of the skull and vertebral column?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_459","topic":"Anatomy and Physiology","text":"Which type of joint provides the greatest degree of movement?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_460","topic":"Anatomy and Physiology","text":"Which defines the origin of a muscle?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_461","topic":"Anatomy and Physiology","text":"Which four are principal structures of the ventilatory system?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_462","topic":"Anatomy and Physiology","text":"What is total lung capacity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_463","topic":"Anatomy and Physiology","text":"Which does blood transport? I. Proteins II. Hormones III. Platelets","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_464","topic":"Anatomy and Physiology","text":"Which circulation is responsible for the exchange of oxygen between the blood and the lungs?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_465","topic":"Anatomy and Physiology","text":"What changes occur to a boxer's stroke volume and heart rate while punching during a bout?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_466","topic":"Anatomy and Physiology","text":"What action of the heart is responsible for the force of systolic pressure as measured on the walls of the aorta?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_467","topic":"Nutrition","text":"Which is considered a micronutrient?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_468","topic":"Nutrition","text":"While celebrating with their team, a basketball player wants to eat a pizza that contains unsaturated fatty acids. Which will contain the most unsaturated fatty acids?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_469","topic":"Energy Systems","text":"Which reaction represents aerobic catabolism?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_470","topic":"Energy Systems","text":"Where is glycogen primarily stored in the body?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_471","topic":"Energy Systems","text":"Which donates a phosphate group to adenosine diphosphate (ADP) during the initial stages of intense exercise to regenerate adenosine triphosphate (ATP)?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_472","topic":"Biomechanics","text":"The diagram shows a swimmer performing backstroke. What type of movement correctly describes the motion at the shoulder joint?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_473","topic":"Biomechanics","text":"Which term is correctly matched to the type of quantity that it measures?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_474","topic":"Biomechanics","text":"The diagram shows a gymnast. Which represents the correct location for the centre of mass?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_475","topic":"Biomechanics","text":"A golfer wants to increase the force applied to their golf ball to make it travel further. Assuming the ball will be hit with the same acceleration each time, which golf club should they use?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_476","topic":"Biomechanics","text":"When a golfer hits a golf ball with backspin, what is the effect of the spin on the ball?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_477","topic":"Skill Acquisition","text":"The diagram shows a field hockey player. What is the correct classification of motor skills for dribbling in hockey?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_478","topic":"Skill Acquisition","text":"Which phrase describes technique?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_479","topic":"Skill Acquisition","text":"What is the relationship between ability, skill and technique?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_480","topic":"Skill Acquisition","text":"What is response time?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_481","topic":"Skill Acquisition","text":"The graphs represent how reaction time changes when additional possible outcomes are introduced into a situation. Which graph represents Hick's Law?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_482","topic":"Skill Acquisition","text":"Which type of transfer is best demonstrated when a baseball player learns to hit a ball both left handed and right handed?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_483","topic":"Skill Acquisition","text":"A group of baseball players hit both left handed and right handed. The mean distance travelled by the ball is shown in the chart. What might be concluded about the statistical significance of the data?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_484","topic":"Measurement and Evaluation","text":"A student measures flexibility using five trials of the sit and reach test. They record the same result for each trial for the first participant. Which does this provide evidence for?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_485","topic":"Measurement and Evaluation","text":"Alex signs up at the local gym and is required to complete a Physical Activity Readiness Questionnaire (PAR-Q). What is the purpose of this questionnaire?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_486","topic":"Training and Performance","text":"A track athlete runs 800 m at 5-minute intervals over 30 minutes. Which element of their general training programme is this?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_487","topic":"Anatomy - Skeletal System","text":"Which bones form part of the appendicular skeleton?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_488","topic":"Anatomy - Anatomical Position","text":"The diagram shows a gymnast performing a handstand. What is the position of the tarsals in relation to the femur?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_489","topic":"Anatomy - Connective Tissue","text":"What is the function of a ligament?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_490","topic":"Respiratory System","text":"The diagram shows average respiratory volumes. What happens to the expiratory reserve volume (ERV) when an athlete begins to run?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_491","topic":"Respiratory System","text":"Which occurs during the inhalation phase of ventilation during exercise?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_492","topic":"Cardiovascular System","text":"What blood vessel does the cardiovascular system use to send deoxygenated blood to the lungs?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_493","topic":"Cardiovascular System","text":"The diagram represents blood flow in the heart, muscle, brain and skin of an athlete (i) at rest and (ii) at maximal exercise. Which represents the blood flow for muscle when changing from rest to exercise?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_494","topic":"Cardiovascular System","text":"Which describes the cardiac output of an athlete recovering from strenuous exercise?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_495","topic":"Exercise Physiology","text":"The maximal oxygen uptake of an athlete when tested on a treadmill is measured to be 53 ml kg–1 min–1. What happens to this measurement when using an arm ergometer?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_496","topic":"Nutrition","text":"In percentage terms, which provides the greatest source of carbohydrate for an athlete?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_497","topic":"Energy Systems - Metabolism","text":"Which is formed from a catabolic reaction?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_498","topic":"Energy Systems - Metabolism","text":"Which process occurs when blood glucose levels are decreased?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_499","topic":"Energy Systems","text":"Which represents the production of adenosine triphosphate (ATP) via the aerobic glycolysis system?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_500","topic":"Cell Biology","text":"The diagram shows an animal cell. What is the function of X?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_501","topic":"Neuromuscular System","text":"The diagram shows a motor unit. In which area does the neurotransmitter acetylcholine act?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_502","topic":"Muscular System","text":"The diagram shows an athlete extending their left elbow while throwing a javelin. According to the sliding filament theory, which occurs in the muscle fibres of the athlete's left triceps?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_503","topic":"Muscular System","text":"The diagram shows a downhill speed skier. What type of muscle contraction occurs in the skier's quadriceps during this action?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_504","topic":"Exercise Physiology","text":"In preparation for a downhill running event, what can an athlete do during initial training to prevent delayed onset muscle soreness (DOMS)?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_505","topic":"Biomechanics","text":"Levers are working throughout the body when a basketball player performs a jump shot. Where is the effort applied in the lower right leg?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_506","topic":"Biomechanics","text":"A ball hit during a game of tennis is subject to Newton's laws of motion. What will increase the acceleration of the ball? I. Increasing the angular velocity of the racket head II. Increasing the force applied to the ball III. Increasing...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_507","topic":"Skill Acquisition","text":"The image shows a 100 m freestyle swimming race. What is the classification of motor skills for a competitor in this race?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_508","topic":"Skill Acquisition - Information Processing","text":"Which feature of Welford's model of information processing is directly linked to short-term memory?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_509","topic":"Skill Acquisition - Sensory Systems","text":"The diagram shows a baseball player. What type of sensor is used by a hitter to gain information regarding the flight of a baseball?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_510","topic":"Skill Acquisition","text":"Which is an example of reaction time at the start of a 100 m swimming race?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_511","topic":"Skill Acquisition - Transfer of Learning","text":"The diagram shows a gymnast performing a tuck somersault. What type of transfer occurs when a gymnast learns that forming a tuck in a somersault will reduce the moment of inertia and allow them to spin faster?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_512","topic":"Skill Acquisition - Practice Methods","text":"Which best describes variable practice in ice hockey training?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_513","topic":"Research Methods","text":"A researcher is designing a study to assess free-throw ability in basketball. How could they improve the reliability of the data? I. Increase the number of participants II. Allow participants to record their own scores III. Increase the ...","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_514","topic":"Research Methods - Statistics","text":"A series of fitness tests were conducted before and after a training programme to evaluate the effectiveness of the programme. The table shows the mean results and probability (p) values. Which fitness component shows no significant change?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_515","topic":"Research Methods","text":"A study investigated the effects of a carbohydrate-rich mouthwash on soccer players. The investigators used a double-blind protocol. What characterizes a double-blind study?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_516","topic":"Exercise Physiology - Training","text":"What is required to calculate exercise intensity using the Karvonen method?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_517","topic":"Anatomy","text":"Which bone is correctly categorized?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_518","topic":"Anatomy","text":"Which anatomical term describes the location of the radius in relation to the humerus?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_519","topic":"Anatomy","text":"Which structure attaches muscle to bone to facilitate movement?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_520","topic":"Respiratory System","text":"The diagram represents lung volumes and capacities. Which represents vital capacity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_521","topic":"Respiratory System","text":"What regulates the rate and depth of ventilation when an athlete starts to exercise?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_522","topic":"Cardiovascular System","text":"A healthy athlete is at sea level, at a comfortable temperature in a low-humidity environment. Which condition results in the lowest saturation of hemoglobin?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_523","topic":"Cardiovascular System","text":"Which component of the blood has a nucleus?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_524","topic":"Cardiovascular System","text":"Which option represents the highest pressure exerted on the aorta?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_525","topic":"Cardiovascular System","text":"Which exercise will result in an elevation of both systolic and diastolic blood pressures?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_526","topic":"Nutrition","text":"Which combination categorizes macro- and micronutrients correctly?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_527","topic":"Nutrition","text":"Which food is most likely to contain unsaturated fats?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_528","topic":"Nutrition","text":"Which is one characteristic of non-essential amino acids?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_529","topic":"Energy Systems","text":"Which process is represented by the breakdown of sugar in the absence of oxygen?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_530","topic":"Cell Biology","text":"Which represents the rough endoplasmic reticulum?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_531","topic":"Muscle Physiology","text":"What is the function of calcium ions during muscle contraction?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_532","topic":"Muscle Physiology","text":"Which contraction occurs in the triceps during the lowering phase of a tricep extension?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_533","topic":"Biomechanics","text":"Which is a scalar quantity?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_534","topic":"Biomechanics","text":"Which is an example of Newton's second law of motion?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_535","topic":"Biomechanics","text":"The diagrams show a gymnast somersaulting. In which position does the gymnast experience the greatest moment of inertia?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_536","topic":"Biomechanics","text":"At the start of a race, a swimmer dives off a raised starting block rather than from the side of the pool. For exactly the same dive, what effect does this have?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_537","topic":"Skill Acquisition","text":"What is the consistent production of goal-oriented movements, which are learned and specific to the task?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_538","topic":"Skill Acquisition","text":"Which type of skill is used when a tennis player plans how to hit their serve?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_539","topic":"Skill Acquisition","text":"Which describes a simple model of information processing?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_540","topic":"Skill Acquisition","text":"Which is monitored by an interoceptor?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_541","topic":"Skill Acquisition","text":"A golfer is following a new training programme to improve the distance of their drive. Data collected from seven weeks of training is shown in the table. Which type of learning curve is represented by the data collected during weeks 4–7?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_542","topic":"Skill Acquisition","text":"Which transfer occurs when a left-handed tennis player learns to hit with their right hand?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_543","topic":"Research Methods","text":"A scientific study performed a correlation on two variables, velocity (V) and agility (A) and determined that r = 0.91. Which correctly describes the variables?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_544","topic":"Research Methods","text":"Two coaches have been collecting data on their swimming squads. Which statement demonstrates the reliability of data collection?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_545","topic":"Fitness and Training","text":"A healthy young person is training to compete in judo at the Youth Olympics. Which is a health-related component of fitness?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_546","topic":"Fitness and Training","text":"What aspect of a training programme is measured using the Karvonen method?","marks":1,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_Sports Science_547","topic":"Option A — Optimizing physiological performance","text":"1. A study compared the effects of two recovery techniques on quadriceps muscle mass over a 12-week strength training programme. Twenty-one participants were randomly assigned to one of two groups: • Active recovery (ACT) • Cold water im...","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_548","topic":"Option A — Optimizing physiological performance","text":"2. (a) Define overreaching. [1] (b) Define overtraining. [1] (c) Discuss indicators of overtraining in an athlete. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_549","topic":"Option A — Optimizing physiological performance","text":"3. (a) Describe the formation of sweat. [2] (b) Explain the impact of high humidity on performance during a 10-kilometre race. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_550","topic":"Option A — Optimizing physiological performance","text":"4. (a) Define ergogenic aid. [1] (b) Evaluate the use of beta blockers by athletes. [4]","marks":5,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_551","topic":"Option B — Psychology of sport","text":"5. A study assessed the effectiveness of imagery during a six-week training programme. The muscle strength of the participants was measured while doing a single one-arm curl in a one-repetition maximum test (1RM) at the start of the stud...","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_552","topic":"Option B — Psychology of sport","text":"6. (a) Define motivation. [1] (b) Discuss possible impacts of extrinsic rewards on intrinsic motivation in sport. [3]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_553","topic":"Option B — Psychology of sport","text":"7. (a) Apply social learning theory to a novice who wants to learn from an experienced performer. [2] (b) Describe issues associated with the measurement of personality through questionnaires. [3]","marks":5,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_554","topic":"Option B — Psychology of sport","text":"8. (a) Define anxiety. [1] (b) Evaluate possible emotions experienced by a soccer player preparing to take an important penalty kick. [4]","marks":5,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_555","topic":"Option C — Physical activity and health","text":"9. A study collected data on the number of people who did not participate in any physical exercise from 122 countries. The proportion of inactive people in each of four age groups was calculated according to their geographic region. [Gra...","marks":10,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_556","topic":"Option C — Physical activity and health","text":"10. (a) Outline two methods for determining obesity. [2] (b) Describe how chemical signals from the gut and adipose tissue affect appetite regulation. [2]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_557","topic":"Option C — Physical activity and health","text":"11. (a) List two health risks of diabetes. [2] (b) Compare and contrast type 1 and type 2 diabetes. [4]","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_558","topic":"Option D — Nutrition for sport, exercise and health","text":"12. A study examined the effect of a carbohydrate periodization strategy on 21 athletes over three weeks. Participants were randomly assigned to one of two groups according to their consumption of carbohydrate: • Early consumption group ...","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_559","topic":"Option D — Nutrition for sport, exercise and health","text":"13. (a) List two enzymes that are responsible for the digestion of proteins from the mouth to the small intestine. [1] (b) Describe the function of enzymes in macronutrient digestion. [3]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_560","topic":"Option D — Nutrition for sport, exercise and health","text":"14. (a) Define basal metabolic rate. [1] (b) Discuss dietary practices sometimes employed by athletes to manipulate body composition. [3]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_561","topic":"Option D — Nutrition for sport, exercise and health","text":"15. (a) Describe two methods of monitoring the hydration status of athletes. [2] (b) Explain how antidiuretic hormone (ADH) helps conserve water when sweating during vigorous exercise. [4]","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_562","topic":"Fitness testing","text":"1. A study examined physical fitness levels of 10-year-old children who regularly participate in sports. The 900 participants were divided evenly between three groups according to their training level: Low: training less than 1 hour per ...","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_563","topic":"Fitness testing","text":"1. (a)(ii) Calculate the difference of mean standing broad jump fitness test score between moderate and high training levels for the group stated in 1(a)(i). [2]","marks":2,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_564","topic":"Fitness testing","text":"1. (a)(iii) Using the data, deduce the effect of high level of participation in sport on performance in the standing broad jump test. [2]","marks":2,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_565","topic":"Research methods","text":"1. (a)(iv) A two-tailed, unpaired t-test was conducted on the data. The calculations yielded the following results: comparing low and moderate training level yielded p > 0.05; comparing moderate and high training level yielded p < 0.05; ...","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_566","topic":"Fitness testing","text":"1. (b)(i) State an alternative test (other than standing broad jump) for measuring leg power. [1]","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_567","topic":"Fitness testing","text":"1. (b)(ii) Outline the procedure for measuring leg power in the test stated in 1(b)(i). [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_568","topic":"Anatomy","text":"2. (a) State the general characteristic common to muscle tissue that allows the muscle to stretch and return to its original resting length. [1]","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_569","topic":"Anatomy","text":"2. (b) Describe the functions of ligaments and tendons in a joint such as the knee joint. [2]","marks":2,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_570","topic":"Exercise physiology","text":"2. (c) Distinguish between maximal oxygen consumption during cycling and arm ergometry. [1]","marks":1,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_571","topic":"Respiratory system","text":"2. (d) Describe the process of oxygen exchange between the lungs and pulmonary capillaries at rest. [4]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_572","topic":"Cardiovascular system","text":"2. (e) Distinguish how cardiac output, stroke volume and resting heart rate would differ between trained and untrained women during exercise. [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_573","topic":"Neuromuscular system","text":"3. (a) Explain how acetylcholine (ACh) initiates skeletal muscle contraction. [2]","marks":2,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_574","topic":"Muscle physiology","text":"3. (b) Analyse how capillary and mitochondrial densities affect slow twitch (type I) muscle fibres. [2]","marks":2,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_575","topic":"Energy systems","text":"3. (c) Explain the role of insulin and muscle contraction on glucose uptake during exercise. [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_576","topic":"Anatomy","text":"4. (a) Distinguish between the three different types of muscle. [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_577","topic":"Skill acquisition","text":"4. (b)(i) Define motor programme. [1]","marks":1,"pt":"P2","diff":"1","src":"past"},
+    {"id":"OLD_Sports Science_578","topic":"Skill acquisition","text":"4. (b)(ii) Apply the concept of motor programme to improving performance of a gymnastics routine. [2]","marks":2,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_579","topic":"Cardiovascular system","text":"4. (c) Explain how running versus static exercise (such as holding a plank position) affect systolic and diastolic blood pressure levels. [4]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_580","topic":"Skill acquisition","text":"4. (d) Using Welford's model of information processing, describe how information enters the short-term memory (STM). [4]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_581","topic":"Energy systems","text":"4. (e) Discuss how the three energy systems contribute to ATP production during an 800-metre run. [6]","marks":6,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_582","topic":"Respiratory system","text":"5. (a) Outline the chemical control of ventilation during exercise. [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_583","topic":"Energy systems","text":"5. (b) Describe the phenomenon of oxygen deficit. [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_584","topic":"Skill acquisition","text":"5. (c) Outline two named methods of memory improvement. [4]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_585","topic":"Biomechanics","text":"5. (d) Using a sporting example, predict how a change in radius affects speed of rotation. [4]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_586","topic":"Muscle physiology","text":"5. (e) Explain sliding filament theory after acetylcholine (ACh) increases muscle membrane permeability. [6]","marks":6,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_587","topic":"Anatomy","text":"6. (a) Distinguish between the movement permitted in different types of joints. [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_588","topic":"Cardiovascular system","text":"6. (b) Describe how cardiovascular drift takes place. [3]","marks":3,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_589","topic":"Energy systems","text":"6. (c) Outline the re-synthesis of ATP by the ATP–CP system. [4]","marks":4,"pt":"P2","diff":"2","src":"past"},
+    {"id":"OLD_Sports Science_590","topic":"Biomechanics","text":"6. (d) Using an example, analyse conditions for acceleration. [4]","marks":4,"pt":"P2","diff":"3","src":"past"},
+    {"id":"OLD_Sports Science_591","topic":"Skill acquisition","text":"6. (e) Using examples from team sports, evaluate the concept of the psychological refractory period (PRP). [6]","marks":6,"pt":"P2","diff":"3","src":"past"},
+  ],
+  "English Language & Literature SL": [
+    {"id":"ENG_0001","topic":"Rhetorical Devices - Paper 1","text":"Identify and analyze three rhetorical devices in the extract and explain their effect on audience (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0002","topic":"Rhetorical Devices - Paper 1","text":"How does the author use metaphor to convey the central message or argument? (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0003","topic":"Rhetorical Devices - Paper 1","text":"Examine the use of anaphora in the text and discuss its cumulative persuasive effect (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0004","topic":"Rhetorical Devices - Paper 1","text":"Identify examples of antithesis and explain how they create persuasive impact (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0005","topic":"Rhetorical Devices - Paper 1","text":"Analyze the use of hyperbole and its role in strengthening the argument or message (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0006","topic":"Tone and Register - Paper 1","text":"Describe the tone of the text and identify language features that create this tone (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0007","topic":"Tone and Register - Paper 1","text":"How does the shift in register throughout the passage reflect changes in the author's purpose? (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0008","topic":"Tone and Register - Paper 1","text":"Identify the formal register in the scientific text and explain how it achieves objectivity (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0009","topic":"Tone and Register - Paper 1","text":"Analyze how informal language choices affect the reader's engagement and response (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0010","topic":"Tone and Register - Paper 1","text":"Discuss the relationship between register and intended audience in the source (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0011","topic":"Syntax and Diction - Paper 1","text":"Analyze the effect of sentence length variation in creating pace and emotional impact (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0012","topic":"Syntax and Diction - Paper 1","text":"Explain how the author's word choice (diction) reinforces the theme of the text (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0013","topic":"Syntax and Diction - Paper 1","text":"Discuss the use of parallel structures and their effect on clarity and persuasiveness (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0014","topic":"Syntax and Diction - Paper 1","text":"Analyze how complex syntax affects the reader's understanding and response (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0015","topic":"Syntax and Diction - Paper 1","text":"Examine the use of technical vocabulary and its impact on credibility (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0016","topic":"Imagery and Symbolism - Paper 1","text":"Analyze the use of color imagery in the passage and its symbolic significance (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0017","topic":"Imagery and Symbolism - Paper 1","text":"What does the recurring symbol represent and how does it develop throughout the text? (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0018","topic":"Imagery and Symbolism - Paper 1","text":"Discuss the use of sensory imagery and its contribution to meaning and atmosphere (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0019","topic":"Imagery and Symbolism - Paper 1","text":"Analyze how imagery creates mood and influences the reader's emotional response (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0020","topic":"Imagery and Symbolism - Paper 1","text":"Examine the symbolic value of a key image and its connection to the overall message (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0021","topic":"Audience and Purpose - Paper 1","text":"Who is the intended audience for this text and how does the author appeal to them? (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0022","topic":"Audience and Purpose - Paper 1","text":"Examine how the purpose of persuasion is achieved through linguistic techniques (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0023","topic":"Audience and Purpose - Paper 1","text":"Analyze how the author adapts their message and style for a specific audience (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0024","topic":"Audience and Purpose - Paper 1","text":"Discuss the relationship between audience and the choice of rhetorical strategies (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0025","topic":"Audience and Purpose - Paper 1","text":"Explain how understanding the audience helps interpret the author's choices (Variation 1)","marks":6,"pt":"P1","diff":"eas","src":"bank"},
+    {"id":"ENG_0026","topic":"Character Development - Paper 2","text":"Trace the character development of the protagonist from beginning to end of the text (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0027","topic":"Character Development - Paper 2","text":"How does the author reveal the internal conflict of the main character through dialogue and action? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0028","topic":"Character Development - Paper 2","text":"What does the relationship between two main characters reveal about their individual growth? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0029","topic":"Character Development - Paper 2","text":"Analyze how the minor character serves to highlight the protagonist's transformation (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0030","topic":"Character Development - Paper 2","text":"Discuss the psychological motivations that drive the antagonist's actions throughout (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0031","topic":"Themes and Motifs - Paper 2","text":"What is the central theme of the work and how is it developed through repeated motifs? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0032","topic":"Themes and Motifs - Paper 2","text":"How does the motif of the journey reflect the theme of self-discovery in the text? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0033","topic":"Themes and Motifs - Paper 2","text":"Analyze how the recurring image of light and darkness relates to the exploration of good and evil (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0034","topic":"Themes and Motifs - Paper 2","text":"What universal theme does the work explore and how is it still relevant to modern audiences? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0035","topic":"Themes and Motifs - Paper 2","text":"Discuss how the motif of betrayal operates throughout the narrative and affects relationships (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0036","topic":"Narrative Techniques - Paper 2","text":"Analyze the effect of the unreliable narrator on the reader's understanding of events (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0037","topic":"Narrative Techniques - Paper 2","text":"How does the author use foreshadowing to build suspense in the narrative? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0038","topic":"Narrative Techniques - Paper 2","text":"Discuss the significance of non-linear narrative structure in revealing truth (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0039","topic":"Narrative Techniques - Paper 2","text":"Analyze how the author's use of multiple perspectives enriches interpretation (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0040","topic":"Narrative Techniques - Paper 2","text":"How does the shifting point of view affect the emotional impact of key scenes? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0041","topic":"Poetic Devices - Paper 2","text":"Analyze the use of extended metaphor in the poem and its contribution to meaning (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0042","topic":"Poetic Devices - Paper 2","text":"Explain how the poet uses alliteration and assonance to create musical effects (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0043","topic":"Poetic Devices - Paper 2","text":"Discuss the significance of regular rhyme scheme and meter in conveying the poem's message (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0044","topic":"Poetic Devices - Paper 2","text":"How does the poet's use of enjambment affect the pace and meaning? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0045","topic":"Poetic Devices - Paper 2","text":"Analyze the use of personification and its effect on the reader's emotional response (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0046","topic":"Literary Movements - Paper 2","text":"How does this work reflect the characteristics of the Modernist movement? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0047","topic":"Literary Movements - Paper 2","text":"Discuss how the author's work responds to the social and political context of its time (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0048","topic":"Literary Movements - Paper 2","text":"To what extent is this work a product of the Romantic era? (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0049","topic":"Literary Movements - Paper 2","text":"Analyze how the author uses Gothic conventions to explore psychological themes (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0050","topic":"Literary Movements - Paper 2","text":"Discuss the influence of Realism on the author's portrayal of character and society (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0051","topic":"Comparative Analysis","text":"Compare how two texts treat the theme of love and loss - similarities and differences (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0052","topic":"Comparative Analysis","text":"Analyze the different perspectives on identity presented in the two texts (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0053","topic":"Comparative Analysis","text":"Discuss how both authors use narrative technique to engage the reader (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0054","topic":"Comparative Analysis","text":"Compare the settings in both texts and how they function symbolically (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0055","topic":"Comparative Analysis","text":"Analyze how each author's writing style reflects their attitude toward subject matter (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0056","topic":"Essay Writing - Paper 2","text":"Write an analytical essay on how the author uses conflict to develop characterization (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0057","topic":"Essay Writing - Paper 2","text":"Write an essay discussing the role of setting in the development of theme (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0058","topic":"Essay Writing - Paper 2","text":"Write a comparative essay analyzing how texts explore the concept of belonging (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0059","topic":"Essay Writing - Paper 2","text":"Write an essay examining the effectiveness of the author's use of imagery to convey emotion (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0060","topic":"Essay Writing - Paper 2","text":"Write an analytical essay on how narrative choices shape reader interpretation (Variation 1)","marks":6,"pt":"P2","diff":"eas","src":"bank"},
+    {"id":"ENG_0061","topic":"Essay Writing - Paper 2","text":"Write an essay analyzing how characterization develops through conflict (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0062","topic":"Essay Writing - Paper 2","text":"Write an essay analyzing how characterization develops through conflict (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0063","topic":"Essay Writing - Paper 2","text":"Write an essay on how setting functions as a symbol in the narrative (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0064","topic":"Essay Writing - Paper 2","text":"Write an essay on how setting functions as a symbol in the narrative (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0065","topic":"Comparative Analysis","text":"Compare the use of narrative perspective in two texts (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0066","topic":"Comparative Analysis","text":"Compare the use of narrative perspective in two texts (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"ENG_0067","topic":"Comparative Analysis","text":"Analyze how both texts explore the theme of alienation (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0068","topic":"Comparative Analysis","text":"Analyze how both texts explore the theme of alienation (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"ENG_0069","topic":"Literary Movements - Paper 2","text":"To what extent is this work a product of postmodernism? (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0070","topic":"Literary Movements - Paper 2","text":"To what extent is this work a product of postmodernism? (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0071","topic":"Literary Movements - Paper 2","text":"Discuss how the author responds to feminist ideas of the era (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0072","topic":"Literary Movements - Paper 2","text":"Discuss how the author responds to feminist ideas of the era (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0073","topic":"Poetic Devices - Paper 2","text":"Analyze the use of paradox in the poem and its significance (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0074","topic":"Poetic Devices - Paper 2","text":"Analyze the use of paradox in the poem and its significance (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0075","topic":"Poetic Devices - Paper 2","text":"How does repetition function in the structure and meaning of the poem? (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0076","topic":"Poetic Devices - Paper 2","text":"How does repetition function in the structure and meaning of the poem? (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0077","topic":"Narrative Techniques - Paper 2","text":"Analyze the effect of second-person narration on reader engagement (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0078","topic":"Narrative Techniques - Paper 2","text":"Analyze the effect of second-person narration on reader engagement (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0079","topic":"Narrative Techniques - Paper 2","text":"How does the stream-of-consciousness technique reveal character psychology? (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0080","topic":"Narrative Techniques - Paper 2","text":"How does the stream-of-consciousness technique reveal character psychology? (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0081","topic":"Themes and Motifs - Paper 2","text":"Analyze how the motif of water symbolizes transformation in the text (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0082","topic":"Themes and Motifs - Paper 2","text":"Analyze how the motif of water symbolizes transformation in the text (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0083","topic":"Themes and Motifs - Paper 2","text":"Discuss how the theme of redemption is developed throughout the work (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0084","topic":"Themes and Motifs - Paper 2","text":"Discuss how the theme of redemption is developed throughout the work (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0085","topic":"Character Development - Paper 2","text":"How do secondary characters contribute to the protagonist's journey? (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0086","topic":"Character Development - Paper 2","text":"How do secondary characters contribute to the protagonist's journey? (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0087","topic":"Character Development - Paper 2","text":"Analyze the complex relationship between two characters and what it reveals (Variation 1)","marks":8,"pt":"P2","diff":"med","src":"bank"},
+    {"id":"ENG_0088","topic":"Character Development - Paper 2","text":"Analyze the complex relationship between two characters and what it reveals (Variation 2)","marks":9,"pt":"P2","diff":"har","src":"bank"},
+    {"id":"ENG_0089","topic":"Audience and Purpose - Paper 1","text":"How does the author anticipate and address potential counterarguments? (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0090","topic":"Audience and Purpose - Paper 1","text":"How does the author anticipate and address potential counterarguments? (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"ENG_0091","topic":"Audience and Purpose - Paper 1","text":"Explain how the text's structure guides the reader's understanding and response (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0092","topic":"Audience and Purpose - Paper 1","text":"Explain how the text's structure guides the reader's understanding and response (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"ENG_0093","topic":"Imagery and Symbolism - Paper 1","text":"Analyze the significance of nature imagery throughout the passage (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0094","topic":"Imagery and Symbolism - Paper 1","text":"Analyze the significance of nature imagery throughout the passage (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"ENG_0095","topic":"Imagery and Symbolism - Paper 1","text":"How does architectural imagery contribute to the overall meaning? (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0096","topic":"Imagery and Symbolism - Paper 1","text":"How does architectural imagery contribute to the overall meaning? (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"ENG_0097","topic":"Syntax and Diction - Paper 1","text":"Examine the use of repetition and its rhetorical effect (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0098","topic":"Syntax and Diction - Paper 1","text":"Examine the use of repetition and its rhetorical effect (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"ENG_0099","topic":"Syntax and Diction - Paper 1","text":"How does the use of negative constructions affect the argument's force? (Variation 1)","marks":8,"pt":"P1","diff":"med","src":"bank"},
+    {"id":"ENG_0100","topic":"Syntax and Diction - Paper 1","text":"How does the use of negative constructions affect the argument's force? (Variation 2)","marks":9,"pt":"P1","diff":"har","src":"bank"},
+    {"id":"OLD_English Lang & Lit_0","topic":"Language and Literature Analysis","text":"How does the writer use language and structure to inform and reassure the audience?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_1","topic":"Language and Literature Analysis","text":"How does the comic use visual and verbal features to inform and reassure the public?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_2","topic":"Language and Literature Analysis","text":"How does the comic use visual and written features to explain complex scientific ideas in an accessible way?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_3","topic":"Language and Literature Analysis","text":"How do the visual and textual features shape the reader's understanding and perception of Malta's residency programme?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_4","topic":"Language and Literature Analysis","text":"Analyze the text and explore its primary and secondary purpose. (a) Identify and describe the key visual features of this parody. (b) Explore how the visual imagery conveys a critique of industrial pollution. (c) Explain how the use of s...","marks":40,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_5","topic":"Language and Literature Analysis","text":"A letter written in 1920 from a grandfather to his newborn grandson Liverpool, Christmas, 1920. Examine how tone and structure contribute to the writer's message about values and intergenerational legacy.","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_6","topic":"Language and Literature Analysis","text":"How does this advertisement use language and visual elements to appeal to authority, prestige, and success?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_7","topic":"Language and Literature Analysis","text":"How does the writer use tone and structure to communicate its ideas?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_8","topic":"Language and Literature Analysis","text":"How do visual and textual features combine to shape the brochure's appeal to potential tourists?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_9","topic":"Language and Literature Analysis","text":"How does this advertisement use layout, technical language, and visual design to appeal to its target audience?","marks":20,"pt":"P1","diff":"1","src":"past"},
+    {"id":"OLD_English Lang & Lit_10","topic":"Textual Analysis - Non-literary Text (Podcast Transcript)","text":"Write a guided analysis of text 1. The following transcript is from the podcast, The Happiness Lab, hosted by Dr Laurie Santos, professor of psychology at Yale University. [Full transcript provided in exam]. Use the guiding question or p...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_11","topic":"Textual Analysis - Non-literary Text (Infographic)","text":"Write a guided analysis of text 2. The following infographic is taken from the Foresters Friendly Society website, which promises 'Straightforward financial solutions with a human touch'. [Full infographic provided showing membership opt...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_12","topic":"Guided textual analysis - non-literary text (infographic)","text":"Write a guided analysis of the following text. The following text is an infographic taken from the Institute for Transportation and Development Policy (ITDP). How has the interplay of text and images been used to convey the overarching m...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_13","topic":"Guided textual analysis - non-literary text (article)","text":"Write a guided analysis of the following text. [Article text removed for copyright reasons] How does this article persuade the reader to rethink their approach to food and eating?","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_14","topic":"Guided textual analysis - non-literary text (podcast transcript)","text":"Write a guided analysis of one of the following texts.\n\n1. The following transcript is from the podcast, The Happiness Lab, hosted by Dr Laurie Santos, professor of psychology at Yale University.\n\n[Full transcript text about empathy from...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_15","topic":"Guided textual analysis - non-literary text (infographic)","text":"Write a guided analysis of one of the following texts.\n\n2. The following infographic is taken from the Foresters Friendly Society* website, which promises \"Straightforward financial solutions with a human touch\".\n\n[Infographic about beco...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_16","topic":"Non-literary text analysis - Article","text":"Write a guided analysis of one of the following texts.\n\n2. [Article about food and eating - content removed for copyright reasons]\n\nHow does this article persuade the reader to rethink their approach to food and eating?","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_17","topic":"Narrative structure and non-linear chronology","text":"Referring to two works you have studied, how is an unconventional order of events used to achieve a specific effect?","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_18","topic":"Social representation and context","text":"How, and to what effect, do the writers in two works you have studied portray the societies they are writing about?","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_19","topic":"Narrative perspective and reader response","text":"Referring to two works you have studied, how, and to what effect, do the different points of view expressed influence the reader?","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_20","topic":"Literary devices and contrast","text":"Discuss how and to what effect contrast has been used in two works you have studied.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_21","topic":"Journey and its significance in literature","text":"Referring to two works you have studied, discuss how the writers portray the significance of a journey.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_22","topic":"Passage of time in literature","text":"With reference to two works you have studied, discuss the means by which the passage of time is communicated and the effect this achieves.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_23","topic":"Characters overcoming limitation","text":"Referring to two works you have studied, compare and contrast the ways in which they show the main characters overcoming limitation.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_24","topic":"Representation of poverty","text":"With regard to two works you have studied, explore the representation of poverty.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_25","topic":"Journey and its significance","text":"In two works you have studied, discuss how the authors have portrayed the significance of a journey.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_26","topic":"Passage of time and its effects","text":"In two works you have studied, discuss how the passage of time was communicated and what effect did this achieve.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_27","topic":"Main characters overcoming limitations","text":"In two works you have studied, compare and contrast how the main characters overcame limitation.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_28","topic":"Representation of poverty","text":"In two works you have studied, explore the representation of poverty.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_29","topic":"Textual Analysis - Non-literary Text","text":"Write a guided analysis of text 1. The following blog post is taken from oliveremberton.com whose author, Oliver Emberton, is a self-proclaimed \"busy bee\". [Full text of blog post included] How do authorial choices help to create a persu...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_30","topic":"Textual Analysis - Non-literary Text","text":"Write a guided analysis of text 2. The following comic is taken from edgrace.co.uk; Ed Grace's work celebrates the 10-year anniversary of Columbus, the European science lab housed at the International Space Station. [Full comic strip inc...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_31","topic":"Guided textual analysis - structure and argument","text":"Write a guided analysis of text 1. The following opinion article was published in UX Collective, an online newsletter and blog that helps designers think more critically about their work, particularly in the area of user experience (UX)....","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_32","topic":"Settings, events and characters","text":"Writers often use more conventional settings to highlight the contrasting strangeness of events or characters. Referring to two works you have studied explore how this has been achieved and to what effect.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_33","topic":"Myths and legends","text":"Referring to two works you have studied, explore how and to what effect writers make use of myths and legends.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_34","topic":"Preconceived ideas and reader response","text":"Discuss how two works you have studied make the reader question preconceived ideas and how this is achieved by the writer.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_35","topic":"Humanity and nature","text":"How do two works you have studied portray the relationship between humanity and nature?","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_36","topic":"Comparative analysis of literary works - concept of death","text":"Discuss how two works you have studied portray the concept of death.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_37","topic":"Comparative analysis of literary works - relationships","text":"Relationships are often central to literary works. How is this true of two works you have studied?","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_38","topic":"Comparative analysis of literary works - historical setting","text":"The depiction of historical setting is an important aspect of many works. Referring to two works you have studied, discuss how and to what effect this depiction is achieved.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_39","topic":"Comparative analysis of literary works - female heroism","text":"Referring to two works you have studied, discuss how female heroism is represented by the writers.","marks":30,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_40","topic":"Representation of philosophical or aesthetic ideas","text":"Discuss the ways in which philosophical or aesthetic ideas are represented in the two works you have studied. Your answer should address the ways in which language and context contribute to your reading of each work.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_41","topic":"Love and suffering","text":"There is no love without suffering. Discuss the extent to which the two works you have studied support this view. Your answer should address the ways in which language and context contribute to your reading of each work.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_42","topic":"Power and authority","text":"In the two works you have studied, discuss the means as well as the effectiveness with which power or authority is exercised. Your answer should address the ways in which language and context contribute to your reading of each work.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_43","topic":"Pleasure - deferral, delay, denial","text":"Pleasure is often deferred, delayed or denied. Discuss why this is so by analysing examples in the two works you have studied. Your answer should address the ways in which language and context contribute to your reading of each work.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_44","topic":"Contradictory or paradoxical elements","text":"In what ways are the contradictory or the paradoxical significant aspects of the two works you have studied? Your answer should address the ways in which language and context contribute to your reading of each work.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_45","topic":"Non-conforming characters","text":"Consider why writers create characters who do not conform to norms in the two works you have studied. Your answer should address the ways in which language and context contribute to your reading of each work.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_46","topic":"Textual Analysis","text":"Write an analysis on one of the following texts. Include comments on the significance of context, audience, purpose and formal and stylistic features.","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_47","topic":"Visual and Textual Analysis","text":"Text 1 - Comic strip by Gabby Schulz: Analyse the words and images that characterize the protagonist and his world. Comment on the significance of the final frame in relation to the cartoon as a whole.","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_48","topic":"Magazine Article Analysis","text":"Text 2 - Personal story from magazine: Explore the psychological aspects of this personal story and their possible appeal for the readers of this type of magazine. How do the contrasts of the text make the reader think about materialism ...","marks":20,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_49","topic":"Title and opening lines significance","text":"In the two works you have studied, explore how the title and/or opening lines take on increasing significance throughout the work.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_50","topic":"Structure and reader engagement","text":"With reference to the two works you have studied, examine how writers structure their works to engage the reader and to explore their ideas.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_51","topic":"Controversial form and content","text":"Many works of literature have caused controversy. Examine how the form and/or content of the two works you have studied have caused controversies.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_52","topic":"Characters and their pasts","text":"In the two works you have studied, discuss the significance of characters' relationships with their pasts.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_53","topic":"Villains and villainous forces","text":"Discuss the role of the villain or villainous forces in the two works you have studied.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_54","topic":"Distortion of reality","text":"In what ways could you say that the two writers you have studied distort reality in order to create a particular effect or to present a particular idea?","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_55","topic":"Literature - Character and Setting","text":"In what ways do cultural, physical or geographical surroundings influence the characters in the two works you have studied?","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_56","topic":"Literature - Literary Techniques","text":"To what effect have humorous elements been used in the two works you have studied?","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_57","topic":"Literature - Context and Relevance","text":"Works of literature may be set in times past or times yet to come, but their central concerns are always relevant to the time in which they were written. Discuss with reference to the two works you have studied.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_58","topic":"Literature - Themes","text":"Discuss in what ways and to what effect the \"freedom to act, to speak, to think\" has been explored in the two works you have studied.","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_59","topic":"Literature - Plot and Atmosphere","text":"How have aspects of mystery or suspense been used to develop plot and/or atmosphere in the two works you have studied?","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_60","topic":"Literature - Context and Themes","text":"In what ways would you argue that war is an important factor, either contextually or within the body of the work, in the two works you have studied?","marks":25,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_English Lang & Lit_61","topic":"Guided textual analysis","text":"Write a guided analysis of one of the following texts.\n\n1. [Text 1 - removed for copyright reasons]","marks":20,"pt":null,"diff":"med","src":"past"},
+  ],
+  "History SL": [
+    {"id":"HIST_0001","topic":"Source Comprehension - Paper 1","text":"What does Source A tell us about the causes of the conflict? Use evidence from the source (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0002","topic":"Source Comprehension - Paper 1","text":"What does Source A tell us about the causes of the conflict? Use evidence from the source (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0003","topic":"Source Comprehension - Paper 1","text":"According to Source B, what were the main priorities of the government at this time? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0004","topic":"Source Comprehension - Paper 1","text":"According to Source B, what were the main priorities of the government at this time? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0005","topic":"Source Comprehension - Paper 1","text":"What evidence is provided in Source C about the living conditions of ordinary people? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0006","topic":"Source Comprehension - Paper 1","text":"What evidence is provided in Source C about the living conditions of ordinary people? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0007","topic":"Source Comprehension - Paper 1","text":"Using Source D, explain the economic situation described in this period (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0008","topic":"Source Comprehension - Paper 1","text":"Using Source D, explain the economic situation described in this period (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0009","topic":"Source Comprehension - Paper 1","text":"What does Source E reveal about attitudes toward social reform? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0010","topic":"Source Comprehension - Paper 1","text":"What does Source E reveal about attitudes toward social reform? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0011","topic":"Source Inference - Paper 1","text":"What can we infer from Source A about the writer's views on the government? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0012","topic":"Source Inference - Paper 1","text":"What can we infer from Source A about the writer's views on the government? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0013","topic":"Source Inference - Paper 1","text":"What does Source B suggest about the state of public opinion at this time? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0014","topic":"Source Inference - Paper 1","text":"What does Source B suggest about the state of public opinion at this time? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0015","topic":"Source Inference - Paper 1","text":"From Source C, what can we infer about the social divisions in this society? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0016","topic":"Source Inference - Paper 1","text":"From Source C, what can we infer about the social divisions in this society? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0017","topic":"Source Inference - Paper 1","text":"What does Source D tell us indirectly about the effectiveness of government policies? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0018","topic":"Source Inference - Paper 1","text":"What does Source D tell us indirectly about the effectiveness of government policies? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0019","topic":"Source Inference - Paper 1","text":"What underlying anxieties can we infer from Source E about the future? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0020","topic":"Source Inference - Paper 1","text":"What underlying anxieties can we infer from Source E about the future? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0021","topic":"Source Comparison - Paper 1","text":"Compare Sources A and B. How do their views on the conflict differ? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0022","topic":"Source Comparison - Paper 1","text":"Compare Sources A and B. How do their views on the conflict differ? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0023","topic":"Source Comparison - Paper 1","text":"What similarities and differences are there between Sources C and D regarding economic conditions? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0024","topic":"Source Comparison - Paper 1","text":"What similarities and differences are there between Sources C and D regarding economic conditions? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0025","topic":"Source Comparison - Paper 1","text":"Compare the portrayals of government authority in Sources B and E (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0026","topic":"Source Comparison - Paper 1","text":"Compare the portrayals of government authority in Sources B and E (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0027","topic":"Source Comparison - Paper 1","text":"How do Sources A and C present contrasting perspectives on social change? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0028","topic":"Source Comparison - Paper 1","text":"How do Sources A and C present contrasting perspectives on social change? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0029","topic":"Source Comparison - Paper 1","text":"Compare the tone and purpose of Sources D and E. What do they reveal about viewpoints? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0030","topic":"Source Comparison - Paper 1","text":"Compare the tone and purpose of Sources D and E. What do they reveal about viewpoints? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0031","topic":"Source Utility - Paper 1","text":"How useful is Source A for understanding the causes of the conflict? Consider origin, purpose, content (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0032","topic":"Source Utility - Paper 1","text":"How useful is Source A for understanding the causes of the conflict? Consider origin, purpose, content (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0033","topic":"Source Utility - Paper 1","text":"Evaluate the usefulness of Source B as evidence for the government's policies. Consider limitations (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0034","topic":"Source Utility - Paper 1","text":"Evaluate the usefulness of Source B as evidence for the government's policies. Consider limitations (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0035","topic":"Source Utility - Paper 1","text":"How useful is Source C for understanding the social impact of these events? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0036","topic":"Source Utility - Paper 1","text":"How useful is Source C for understanding the social impact of these events? (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0037","topic":"Source Utility - Paper 1","text":"To what extent is Source D useful for understanding economic conditions? Discuss reliability (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0038","topic":"Source Utility - Paper 1","text":"To what extent is Source D useful for understanding economic conditions? Discuss reliability (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0039","topic":"Source Utility - Paper 1","text":"Evaluate how useful Source E is for historians studying attitudes to reform. Consider bias (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0040","topic":"Source Utility - Paper 1","text":"Evaluate how useful Source E is for historians studying attitudes to reform. Consider bias (Variation 2)","marks":9,"pt":"P1 Sources","diff":"med","src":"bank"},
+    {"id":"HIST_0041","topic":"Causation - Paper 2","text":"To what extent was economic crisis the main cause of the revolution? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0042","topic":"Causation - Paper 2","text":"To what extent was economic crisis the main cause of the revolution? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0043","topic":"Causation - Paper 2","text":"How far do you agree that political incompetence was the primary cause of the government's fall? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0044","topic":"Causation - Paper 2","text":"How far do you agree that political incompetence was the primary cause of the government's fall? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0045","topic":"Causation - Paper 2","text":"Discuss the relative importance of social discontent and foreign intervention as causes of conflict (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0046","topic":"Causation - Paper 2","text":"Discuss the relative importance of social discontent and foreign intervention as causes of conflict (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0047","topic":"Causation - Paper 2","text":"To what extent was the influence of key individuals responsible for the changes that occurred? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0048","topic":"Causation - Paper 2","text":"To what extent was the influence of key individuals responsible for the changes that occurred? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0049","topic":"Causation - Paper 2","text":"How important was the spread of new ideas in causing the social reforms of this period? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0050","topic":"Causation - Paper 2","text":"How important was the spread of new ideas in causing the social reforms of this period? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0051","topic":"Change Over Time - Paper 2","text":"Analyze the extent of change in political systems during this period. What remained the same? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0052","topic":"Change Over Time - Paper 2","text":"Analyze the extent of change in political systems during this period. What remained the same? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0053","topic":"Change Over Time - Paper 2","text":"To what extent did the status of women change during the twentieth century? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0054","topic":"Change Over Time - Paper 2","text":"To what extent did the status of women change during the twentieth century? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0055","topic":"Change Over Time - Paper 2","text":"How significant was the transformation of the economy from agrarian to industrial? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0056","topic":"Change Over Time - Paper 2","text":"How significant was the transformation of the economy from agrarian to industrial? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0057","topic":"Change Over Time - Paper 2","text":"Discuss the changes and continuities in attitudes toward social welfare over the period (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0058","topic":"Change Over Time - Paper 2","text":"Discuss the changes and continuities in attitudes toward social welfare over the period (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0059","topic":"Change Over Time - Paper 2","text":"To what extent did technological developments transform society in this era? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0060","topic":"Change Over Time - Paper 2","text":"To what extent did technological developments transform society in this era? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0061","topic":"Significance - Paper 2","text":"How significant were the reforms introduced during this period for long-term social progress? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0062","topic":"Significance - Paper 2","text":"How significant were the reforms introduced during this period for long-term social progress? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0063","topic":"Significance - Paper 2","text":"Assess the historical significance of the military campaign for the future of the region (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0064","topic":"Significance - Paper 2","text":"Assess the historical significance of the military campaign for the future of the region (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0065","topic":"Significance - Paper 2","text":"How far was the historical figure a decisive influence on events of this period? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0066","topic":"Significance - Paper 2","text":"How far was the historical figure a decisive influence on events of this period? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0067","topic":"Significance - Paper 2","text":"Discuss the historical importance of the cultural movement for society (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0068","topic":"Significance - Paper 2","text":"Discuss the historical importance of the cultural movement for society (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0069","topic":"Significance - Paper 2","text":"To what extent did the scientific discoveries of this period represent a turning point in history? (Variation 1)","marks":6,"pt":"P2 Essay","diff":"eas","src":"bank"},
+    {"id":"HIST_0070","topic":"Significance - Paper 2","text":"To what extent did the scientific discoveries of this period represent a turning point in history? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0071","topic":"Historical Context","text":"Explain the political context that led to the conflicts of this period (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0072","topic":"Historical Context","text":"Explain the political context that led to the conflicts of this period (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0073","topic":"Historical Context","text":"What social and economic conditions characterized this era? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0074","topic":"Historical Context","text":"What social and economic conditions characterized this era? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0075","topic":"Historical Context","text":"Describe the international relations context during this period (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0076","topic":"Historical Context","text":"Describe the international relations context during this period (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0077","topic":"Historical Context","text":"What was the cultural and intellectual climate of this age? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0078","topic":"Historical Context","text":"What was the cultural and intellectual climate of this age? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0079","topic":"Historical Context","text":"Explain how technology and science influenced society during this period (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0080","topic":"Historical Context","text":"Explain how technology and science influenced society during this period (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0081","topic":"Evidence and Interpretation","text":"How do historians differ in their interpretation of the causes of this event? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0082","topic":"Evidence and Interpretation","text":"How do historians differ in their interpretation of the causes of this event? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0083","topic":"Evidence and Interpretation","text":"What evidence supports the view that this was a progressive period? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0084","topic":"Evidence and Interpretation","text":"What evidence supports the view that this was a progressive period? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0085","topic":"Evidence and Interpretation","text":"Compare different historical interpretations of the significance of this movement (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0086","topic":"Evidence and Interpretation","text":"Compare different historical interpretations of the significance of this movement (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0087","topic":"Evidence and Interpretation","text":"How has historical interpretation of this figure changed over time? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0088","topic":"Evidence and Interpretation","text":"How has historical interpretation of this figure changed over time? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0089","topic":"Evidence and Interpretation","text":"What documentary evidence exists for the government's policies during this period? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0090","topic":"Evidence and Interpretation","text":"What documentary evidence exists for the government's policies during this period? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0091","topic":"Reliability and Bias","text":"How might the author's background have influenced the reliability of this account? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0092","topic":"Reliability and Bias","text":"How might the author's background have influenced the reliability of this account? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0093","topic":"Reliability and Bias","text":"What limitations does this source have as historical evidence? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0094","topic":"Reliability and Bias","text":"What limitations does this source have as historical evidence? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0095","topic":"Reliability and Bias","text":"Discuss how propaganda may have distorted accounts of this event (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0096","topic":"Reliability and Bias","text":"Discuss how propaganda may have distorted accounts of this event (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0097","topic":"Reliability and Bias","text":"How can historians verify the accuracy of sources from this period? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0098","topic":"Reliability and Bias","text":"How can historians verify the accuracy of sources from this period? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"HIST_0099","topic":"Reliability and Bias","text":"What perspective is the document written from and how does this affect its usefulness? (Variation 1)","marks":6,"pt":"P1 Sources","diff":"eas","src":"bank"},
+    {"id":"HIST_0100","topic":"Reliability and Bias","text":"What perspective is the document written from and how does this affect its usefulness? (Variation 2)","marks":9,"pt":"P2 Essay","diff":"med","src":"bank"},
+    {"id":"OLD_History_0","topic":"Military leaders - Genghis Khan - Mongol invasion of Khwarezmia (1219–1221)","text":"1. (a) What, according to Source A, were the consequences of the Mongol invasion of Khwarezmia? (b) What does Source D suggest about the Mongol invasion of the region?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_1","topic":"Military leaders - Genghis Khan - Mongol invasion of Khwarezmia (1219–1221)","text":"2. With reference to its origin, purpose and content, analyse the value and limitations of Source C for an historian studying the Mongol invasion of Khwarezmia.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_2","topic":"Military leaders - Genghis Khan - Mongol invasion of Khwarezmia (1219–1221)","text":"3. Compare and contrast what Sources A and B reveal about the Mongol invasion of Khwarezmia (1219–1221).","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_3","topic":"Military leaders - Genghis Khan - Mongol invasion of Khwarezmia (1219–1221)","text":"4. Using the sources and your own knowledge, discuss the factors that led to the Mongol invasion of Khwarezmia.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_4","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"5. (a) What, according to Source E, were the problems that Moctezuma II faced with the arrival of the Spanish? (b) What does Source F suggest about the arrival of the Spanish in the region?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_5","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"6. With reference to its origin, purpose and content, analyse the value and limitations of Source H for an historian studying the conflict between Moctezuma II and the Spanish.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_6","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"7. Compare and contrast what Sources G and H reveal about the events in Cholula.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_7","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"8. Using the sources and your own knowledge, discuss the reasons why Moctezuma II was defeated by the Spanish.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_8","topic":"The move to global war - German and Italian expansion (1933–1940) - Appeasement","text":"9. (a) What, according to Source I, were Churchill's criticisms of the British government policy of appeasement? (b) What does Source J reveal about British defence spending in the 1930s?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_9","topic":"The move to global war - German and Italian expansion (1933–1940) - Appeasement","text":"10. With reference to its origin, purpose and content, analyse the value and limitations of Source I for an historian studying appeasement.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_10","topic":"The move to global war - German and Italian expansion (1933–1940) - Appeasement","text":"11. Compare and contrast what Sources K and L reveal about the policy of appeasement.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_11","topic":"The move to global war - German and Italian expansion (1933–1940) - Appeasement","text":"12. Using the sources and your own knowledge, evaluate the effectiveness of the British government's policy of appeasement.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_12","topic":"Rights and protest - Civil rights movement in the United States (1954–1965) - Little Rock (1957)","text":"13. (a) What, according to Source M, were the signs of hope seen by Martin Luther King after the events at Little Rock? (b) What does Source N reveal about the problems facing the Little Rock School Board?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_13","topic":"Rights and protest - Civil rights movement in the United States (1954–1965) - Little Rock (1957)","text":"14. With reference to its origin, purpose and content, analyse the value and limitations of Source O for an historian studying the events at Little Rock in 1957.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_14","topic":"Rights and protest - Civil rights movement in the United States (1954–1965) - Little Rock (1957)","text":"15. Compare and contrast what Sources O and P reveal about the role played by President Eisenhower at Little Rock.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_15","topic":"Rights and protest - Civil rights movement in the United States (1954–1965) - Little Rock (1957)","text":"16. Using the sources and your own knowledge, discuss the reasons why the crisis in Little Rock in 1957 was resolved.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_16","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"17. (a) Why, according to Source Q, did the US join NATO's bombing campaign against Serbian forces? (b) What does Source R suggest about the effects of NATO's bombing campaign?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_17","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"18. With reference to its origin, purpose and content, analyse the value and limitations of Source T for an historian studying NATO's bombing campaign against Serbian forces.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_18","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"19. Compare and contrast what Sources S and T reveal about NATO's bombing campaign against Serbian forces.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_19","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"20. Using the sources and your own knowledge, to what extent do you agree with the view that NATO's bombing campaign in Kosovo was successful?","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_20","topic":"Society and economy (750–1400)","text":"Evaluate the importance of factors affecting the transmission of ideas and cultures in two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_21","topic":"Society and economy (750–1400)","text":"Evaluate the significance of religious leaders in the government of two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_22","topic":"Causes and effects of wars (750–1500)","text":"\"Territorial disputes were the most important cause of war in the period 750–1500.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_23","topic":"Causes and effects of wars (750–1500)","text":"Evaluate the significance of human and economic resources to the outcome of two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_24","topic":"Dynasties and rulers (750–1500)","text":"Discuss the nature of the power of two rulers, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_25","topic":"Dynasties and rulers (750–1500)","text":"To what extent were two rulers successful in dealing with challenges to their power?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_26","topic":"Societies in transition (1400–1700)","text":"Examine the impact of population expansion and movements on the economy of two societies, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_27","topic":"Societies in transition (1400–1700)","text":"\"The use of printed text was the most important influence on religious expansion and conversion.\" Discuss with reference to two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_28","topic":"Early Modern states (1450–1789)","text":"Compare and contrast the reasons for colonial/imperial expansion of two Early Modern states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_29","topic":"Early Modern states (1450–1789)","text":"To what extent were rebellions a serious challenge to the colonial rule of two Early Modern states?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_30","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"The most important causes of wars were political.\" Discuss, with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_31","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"Evaluate the significance of the organization of warfare to the outcome of two wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_32","topic":"Origins, development and impact of industrialization (1750–2005)","text":"Examine the impact of two key individuals, each chosen from a different region, upon the origins of industrialization.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_33","topic":"Origins, development and impact of industrialization (1750–2005)","text":"\"The organization of labour was the most effective way to improve labour conditions.\" Discuss with reference to two countries, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_34","topic":"Independence movements (1800–2000)","text":"\"Violent methods were more significant than non-violent methods in achieving independence.\" Discuss, with reference to two states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_35","topic":"Independence movements (1800–2000)","text":"\"Economic difficulties were the most important challenge faced in the first ten years of independence.\" Discuss, with reference to two states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_36","topic":"Emergence and development of democratic states (1848–2000)","text":"\"The development of electoral systems was the most significant factor in the emergence of democracy.\" Discuss, with reference to two democratic states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_37","topic":"Emergence and development of democratic states (1848–2000)","text":"Evaluate the impact of responses to domestic crises in two democratic states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_38","topic":"Authoritarian states (20th century)","text":"To what extent was ideology the most important factor in the emergence of two authoritarian states?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_39","topic":"Authoritarian states (20th century)","text":"\"A successful foreign policy was the most important factor in the maintenance of power.\" Discuss with reference to two authoritarian states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_40","topic":"Causes and effects of 20th century wars","text":"Evaluate the impact of technological developments on the outcome of two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_41","topic":"Causes and effects of 20th century wars","text":"\"The most significant effects of war were economic.\" Discuss, with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_42","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"With reference to two leaders, each from a different region, evaluate their impact on the development of the Cold War.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_43","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"\"Cold War crises were mainly caused by superpower aggression.\" Discuss, with reference to two crises, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_44","topic":"Society and economy (750–1400)","text":"1. Evaluate the importance of factors affecting the transmission of ideas and cultures in two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_45","topic":"Society and economy (750–1400)","text":"2. Evaluate the significance of religious leaders in the government of two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_46","topic":"Causes and effects of wars (750–1500)","text":"3. \"Territorial disputes were the most important cause of war in the period 750–1500.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_47","topic":"Causes and effects of wars (750–1500)","text":"4. Evaluate the significance of human and economic resources to the outcome of two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_48","topic":"Dynasties and rulers (750–1500)","text":"5. Discuss the nature of the power of two rulers, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_49","topic":"Dynasties and rulers (750–1500)","text":"6. To what extent were two rulers successful in dealing with challenges to their power?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_50","topic":"Societies in transition (1400–1700)","text":"7. Examine the impact of population expansion and movements on the economy of two societies, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_51","topic":"Societies in transition (1400–1700)","text":"8. \"The use of printed text was the most important influence on religious expansion and conversion.\" Discuss with reference to two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_52","topic":"Early Modern states (1450–1789)","text":"9. Compare and contrast the reasons for colonial/imperial expansion of two Early Modern states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_53","topic":"Early Modern states (1450–1789)","text":"10. To what extent were rebellions a serious challenge to the colonial rule of two Early Modern states?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_54","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"11. \"The most important causes of wars were political.\" Discuss, with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_55","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"12. Evaluate the significance of the organization of warfare to the outcome of two wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_56","topic":"Origins, development and impact of industrialization (1750–2005)","text":"13. Examine the impact of two key individuals, each chosen from a different region, upon the origins of industrialization.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_57","topic":"Origins, development and impact of industrialization (1750–2005)","text":"14. \"The organization of labour was the most effective way to improve labour conditions.\" Discuss with reference to two countries, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_58","topic":"Independence movements (1800–2000)","text":"15. \"Violent methods were more significant than non-violent methods in achieving independence.\" Discuss, with reference to two states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_59","topic":"Independence movements (1800–2000)","text":"16. \"Economic difficulties were the most important challenge faced in the first ten years of independence.\" Discuss, with reference to two states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_60","topic":"Emergence and development of democratic states (1848–2000)","text":"17. \"The development of electoral systems was the most significant factor in the emergence of democracy.\" Discuss, with reference to two democratic states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_61","topic":"Emergence and development of democratic states (1848–2000)","text":"18. Evaluate the impact of responses to domestic crises in two democratic states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_62","topic":"Authoritarian states (20th century)","text":"19. To what extent was ideology the most important factor in the emergence of two authoritarian states?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_63","topic":"Authoritarian states (20th century)","text":"20. \"A successful foreign policy was the most important factor in the maintenance of power.\" Discuss with reference to two authoritarian states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_64","topic":"Causes and effects of 20th century wars","text":"21. Evaluate the impact of technological developments on the outcome of two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_65","topic":"Causes and effects of 20th century wars","text":"22. \"The most significant effects of war were economic.\" Discuss, with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_66","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"23. With reference to two leaders, each from a different region, evaluate their impact on the development of the Cold War.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_67","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"24. \"Cold War crises were mainly caused by superpower aggression.\" Discuss, with reference to two crises, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_68","topic":"Military leaders - Genghis Khan","text":"1. (a) What, according to Source A, was one reason for the success of Genghis Khan's invasion of Khwarezmia? [2] (b) What is the message conveyed by Source D? [2]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_69","topic":"Military leaders - Genghis Khan","text":"3. Compare and contrast what Sources A and C reveal about the causes of Genghis Khan's invasion of Khwarezmia.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_70","topic":"Military leaders - Genghis Khan","text":"4. Using the sources and your own knowledge, examine the contribution of Genghis Khan to the success of the Mongol invasion of Khwarezmia (1219–1221).","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_71","topic":"Conquest and its impact - Mexico and Peru","text":"5. (a) What does Source F suggest about the indigenous response to the Spanish conquest? [2] (b) What is the message conveyed by Source G? [2]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_72","topic":"Conquest and its impact - Mexico and Peru","text":"7. Compare and contrast what Sources E and H reveal about Moctezuma II's response to the Spanish conquest.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_73","topic":"Conquest and its impact - Mexico and Peru","text":"8. Using the sources and your own knowledge, examine the role of key actors in the Spanish conquest of Mexico and Peru.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_74","topic":"The move to global war - German and Italian expansion","text":"9. (a) What, according to Source I, was one reason for the failure of British policy towards Germany? [2] (b) What does Source J reveal about British defence expenditure between 1933 and 1939? [2]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_75","topic":"The move to global war - German and Italian expansion","text":"11. Compare and contrast what Sources I and L reveal about British attitudes towards appeasement.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_76","topic":"The move to global war - German and Italian expansion","text":"12. Using the sources and your own knowledge, examine the reasons for the policy of appeasement adopted by Britain towards Germany between 1933 and 1938.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_77","topic":"Rights and protest - Civil rights movement in the United States","text":"13. (a) What, according to Source M, was one challenge facing the civil rights movement? [2] (b) What is the message conveyed by Source N? [2]","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_78","topic":"Rights and protest - Civil rights movement in the United States","text":"15. Compare and contrast what Sources M and P reveal about President Eisenhower's response to the events at Little Rock.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_79","topic":"Rights and protest - Civil rights movement in the United States","text":"16. Using the sources and your own knowledge, discuss the nature and characteristics of discrimination in education in the United States, with reference to Little Rock (1957).","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_80","topic":"Dynasties and rulers (750–1500)","text":"5. Examine the nature of the power of two rulers, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_81","topic":"Origins, development and impact of industrialization (1750–2005)","text":"13. Discuss the view that developments in communication were the most important factor in the industrialization of two countries.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_82","topic":"Origins, development and impact of industrialization (1750–2005)","text":"14. Evaluate the impact of industrialization on the labour conditions in two countries.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_83","topic":"Independence movements (1800–2000)","text":"15. Evaluate the importance of nationalism to the development of two independence movements.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_84","topic":"Independence movements (1800–2000)","text":"16. \"Social issues were the most important challenge faced in the first ten years of independence.\" Discuss, with reference to two states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_85","topic":"Emergence and development of democratic states (1848–2000)","text":"17. \"The development of political parties was the most important factor in the emergence of democracy.\" Discuss, with reference to two democratic states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_86","topic":"Emergence and development of democratic states (1848–2000)","text":"18. Evaluate the impact of cultural policies in two democratic states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_87","topic":"Authoritarian states (20th century)","text":"19. \"Economic conditions were the most important factor in the emergence of authoritarian states.\" Discuss with reference to two states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_88","topic":"Authoritarian states (20th century)","text":"20. Evaluate the importance of charismatic leadership to the maintenance of power in two authoritarian states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_89","topic":"Causes and effects of 20th century wars","text":"21. \"Economic factors were the most significant cause of war.\" Discuss with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_90","topic":"Causes and effects of 20th century wars","text":"22. \"Peacemaking largely failed.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_91","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"23. \"Reconciliation was more important than confrontation in superpower relations.\" Discuss with reference to the period between 1980 and 1991.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_92","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"24. \"Mistrust between the superpowers was the most important cause of Cold War crises.\" Discuss, with reference to two crises, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_93","topic":"Military leaders - Richard I of England (1173–1199)","text":"1. (a) How, according to Source A, was Richard I perceived by his contemporaries? [3] (b) What does Source D suggest about Richard I? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_94","topic":"Military leaders - Richard I of England (1173–1199)","text":"3. Compare and contrast what Sources B and C reveal about Richard I's leadership.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_95","topic":"Military leaders - Richard I of England (1173–1199)","text":"4. Using the sources and your own knowledge, evaluate the contribution of military prowess to Richard I's reputation.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_96","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"5. (a) What, according to Source E, were the reasons behind exploration? [3] (b) What does Source F suggest about the nature of the Spanish conquest? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_97","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"7. Compare and contrast what Sources G and H reveal about motives for exploration and conquest.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_98","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"8. Using the sources and your own knowledge, discuss the importance of economic motives for Spanish exploration and conquest in Latin America.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_99","topic":"The move to global war - German and Italian expansion (1933–1940)","text":"9. (a) What, according to Source I, should the United States do to support Britain? [3] (b) What does Source J suggest about Britain's situation in June 1940? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_100","topic":"The move to global war - German and Italian expansion (1933–1940)","text":"11. Compare and contrast what Sources K and L reveal about international responses to German and Italian aggression.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_101","topic":"Rights and protest - Apartheid South Africa (1948–1964)","text":"13. (a) What, according to Source M, were the intended outcomes of apartheid for the people of South Africa? [3] (b) What does Source N suggest about the division of races in South Africa? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_102","topic":"Rights and protest - Apartheid South Africa (1948–1964)","text":"15. Compare and contrast what Sources O and P reveal about racial divisions in South African society.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_103","topic":"Rights and protest - Apartheid South Africa (1948–1964)","text":"16. \"The aim of apartheid was to protect and maintain all racial groups in South Africa.\" Using the sources and your own knowledge, to what extent do you agree with this statement?","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_104","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"17. (a) Why, according to Source Q, was the surrender of Milosevic and his transfer to The Hague important? [3] (b) What does Source R suggest about attempts to bring Milosevic to justice? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_105","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"19. Compare and contrast what Sources S and T reveal about the arrest and trial of Milosevic.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_106","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"20. Using the sources and your own knowledge, evaluate the contribution of the ICTY to international justice up to 2002.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_107","topic":"Military leaders - Richard I of England","text":"1. What, according to Source A, did medieval chroniclers see as the central event in Richard I's life?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_108","topic":"Military leaders - Richard I of England","text":"2. What is the message conveyed by Source D?","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_109","topic":"Military leaders - Richard I of England","text":"3. With reference to its origin, purpose and content, assess the value and limitations of Source B for an historian studying the military reputation of Richard I.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_110","topic":"Military leaders - Richard I of England","text":"4. Compare and contrast the views expressed in Sources A and C about the reputation of Richard I.","marks":8,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_111","topic":"Conquest and its impact - The conquest of Mexico and Peru","text":"5. What does Source E suggest were the motivating factors for European expansion?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_112","topic":"Conquest and its impact - The conquest of Mexico and Peru","text":"6. What is the message conveyed by Source F?","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_113","topic":"Conquest and its impact - The conquest of Mexico and Peru","text":"7. With reference to its origin, purpose and content, assess the value and limitations of Source G for an historian studying the motives for the conquest of Mexico and Peru.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_114","topic":"Conquest and its impact - The conquest of Mexico and Peru","text":"8. Compare and contrast the views expressed in Sources G and H about the motives for the conquest of Mexico and Peru.","marks":8,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_115","topic":"The move to global war - German and Italian expansion","text":"9. What, according to Source I, did Churchill believe was essential to the security of trade routes?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_116","topic":"The move to global war - German and Italian expansion","text":"10. What is the message conveyed by Source J?","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_117","topic":"The move to global war - German and Italian expansion","text":"11. With reference to its origin, purpose and content, assess the value and limitations of Source K for an historian studying international responses to German and Italian aggression in 1940.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_118","topic":"The move to global war - German and Italian expansion","text":"12. Compare and contrast the views expressed in Sources I and L about international responses to German and Italian aggression in 1940.","marks":8,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_119","topic":"Rights and protest - Apartheid South Africa","text":"13. What does Source M suggest about the classification of people in South Africa?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_120","topic":"Rights and protest - Apartheid South Africa","text":"14. What is the message conveyed by Source N?","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_121","topic":"Rights and protest - Apartheid South Africa","text":"15. With reference to its origin, purpose and content, assess the value and limitations of Source O for an historian studying the nature and characteristics of discrimination in South Africa.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_122","topic":"Rights and protest - Apartheid South Africa","text":"16. Compare and contrast the views expressed in Sources M and P about the classification of people in South Africa.","marks":8,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_123","topic":"Society and economy (750–1400)","text":"\"There was only limited change in social structures and systems.\" Discuss with reference to two societies, each chosen from a different region, in the period 750–1400.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_124","topic":"Society and economy (750–1400)","text":"Examine the impact of artistic and cultural developments in two societies in the period 750–1400.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_125","topic":"Causes and effects of wars (750–1500)","text":"\"Economic causes played only a limited role in the origin of wars.\" Discuss with reference to two wars in the period 750–1500.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_126","topic":"Causes and effects of wars (750–1500)","text":"Evaluate the significance of logistics and tactics on the outcome of two wars in the period 750–1500.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_127","topic":"Dynasties and rulers (750–1500)","text":"With reference to two dynasties/kingdoms, evaluate the effectiveness of methods used to expand power in the period 750–1500.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_128","topic":"Dynasties and rulers (750–1500)","text":"\"Their successes were greater than their failures.\" With reference to two medieval rulers in the period 750–1500, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_129","topic":"Societies in transition (1400–1700)","text":"\"The role of women changed significantly in the period 1400–1700.\" With reference to two societies, each chosen from a different region, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_130","topic":"Societies in transition (1400–1700)","text":"\"Religion was more of a challenge than a support to the state in the period 1400–1700.\" With reference to two states, each chosen from a different region, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_131","topic":"Early Modern states (1450–1789)","text":"Compare and contrast the methods of government of two Early Modern states in the period 1450–1789, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_132","topic":"Early Modern states (1450–1789)","text":"To what extent were internal challenges to power overcome in two Early Modern states in the period 1450–1789?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_133","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"Competition for resources was the main cause of war.\" With reference to two Early Modern wars in the period 1500–1750, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_134","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"Discuss the impact of foreign influence on the outcome of two Early Modern wars in the period 1500–1750, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_135","topic":"Origins, development and impact of industrialization (1750–2005)","text":"\"Technological developments were the most important reason for industrialization.\" Discuss, with reference to two countries in the period 1750–2005.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_136","topic":"Origins, development and impact of industrialization (1750–2005)","text":"Discuss the reasons for opposition to industrialization in two countries in the period 1750–2005.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_137","topic":"Independence movements (1800–2000)","text":"\"External factors were more significant than internal ones in the rise of independence movements.\" Discuss with reference to two independence movements in the period 1800–2000.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_138","topic":"Independence movements (1800–2000)","text":"With reference to two independence movements in the period 1800–2000, each chosen from a different region, to what extent did their success depend on effective leadership?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_139","topic":"Emergence and development of democratic states (1848–2000)","text":"Evaluate the significance of external influences on the emergence of two democratic states in the period 1848–2000, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_140","topic":"Emergence and development of democratic states (1848–2000)","text":"Evaluate the significance of civil protests in the development of two democratic states in the period 1848–2000.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_141","topic":"Authoritarian states (20th century)","text":"Compare and contrast the nature of opposition in two 20th century authoritarian states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_142","topic":"Authoritarian states (20th century)","text":"To what extent did the social policies of two 20th century authoritarian states lead to significant change?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_143","topic":"Causes and effects of 20th century wars","text":"\"The mobilization of human and economic resources had the greatest impact on the outcome of wars.\" Discuss with reference to two 20th century wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_144","topic":"Causes and effects of 20th century wars","text":"\"The political impact of war was limited.\" Discuss with reference to two 20th century wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_145","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"To what extent did ideology lead to the breakdown of the Grand Alliance in the period 1943–1949?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_146","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"Examine the social and cultural impact of the Cold War on two countries, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_147","topic":"Society and economy (750–1400)","text":"Evaluate the impact of the development of trading routes on two societies in the period 750–1400, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_148","topic":"Society and economy (750–1400)","text":"Evaluate the contribution of two key individuals to cultural and intellectual developments in the period 750–1400.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_149","topic":"Causes and effects of wars (750–1500)","text":"To what extent were boundary changes the most significant consequence of two wars in the period 750–1500?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_150","topic":"Dynasties and rulers (750–1500)","text":"\"The use of force was the most effective method used to deal with rebellion and political opposition.\" Discuss with reference to two medieval rulers in the period 750–1500.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_151","topic":"Early Modern states (1450–1789)","text":"Evaluate the importance of the causes of rivalries and tensions in two Early Modern states in the period 1450–1789.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_152","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"Compare and contrast the long-term causes of two Early Modern wars in the period 1500–1750, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_153","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"Evaluate the impact of two Early Modern wars on religion and society in the period 1500–1750.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_154","topic":"Origins, development and impact of industrialization (1750–2005)","text":"Evaluate the social impact of the introduction of new products in two countries in the period 1750–2005.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_155","topic":"Independence movements (1800–2000)","text":"Evaluate the importance of wars to the rise of two independence movements in the period 1800–2000.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_156","topic":"Independence movements (1800–2000)","text":"\"Ethnic and racial challenges were the most important issues facing states in their first 10 years of independence.\" Discuss with reference to two new states in the period 1800–2000, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_157","topic":"Emergence and development of democratic states (1848–2000)","text":"Evaluate the significance of leaders in the emergence of two democratic states in the period 1848–2000, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_158","topic":"Emergence and development of democratic states (1848–2000)","text":"Discuss the impact of social and economic policies on the population of one democratic state in the period 1848–2000.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_159","topic":"Authoritarian states (20th century)","text":"To what extent was propaganda the most important factor in maintaining power in two 20th century authoritarian states?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_160","topic":"Causes and effects of 20th century wars","text":"Evaluate the impact of foreign influence on the outcome of two 20th century civil wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_161","topic":"Causes and effects of 20th century wars","text":"\"Further conflict was rarely prevented.\" Discuss with reference to peacemaking after two 20th century wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_162","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"Discuss the impact of two leaders, each chosen from a different region, on the course of the Cold War.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_163","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"To what extent were economic factors the main reason for the end of the Cold War in the period 1980–1991?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_164","topic":"Military leaders - Richard I of England - Third Crusade","text":"What, according to Source D, were the consequences of Richard I's refusal to take Jerusalem?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_165","topic":"Military leaders - Richard I of England - Third Crusade","text":"What does Source B suggest about Richard I's march towards Jerusalem?","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_166","topic":"Military leaders - Richard I of England - Third Crusade","text":"With reference to its origin, purpose and content, analyse the value and limitations of Source A for an historian studying Richard I's involvement in the Third Crusade.","marks":4,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_167","topic":"Military leaders - Richard I of England - Third Crusade","text":"Compare and contrast what Sources C and D reveal about Richard I's participation in the Third Crusade.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_168","topic":"Military leaders - Richard I of England - Third Crusade","text":"Using the sources and your own knowledge, evaluate Richard I's contribution to the Third Crusade.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_169","topic":"Conquest and its impact - Mexico and Peru","text":"What, according to Source G, was the impact of the Spanish conquest on the indigenous populations?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_170","topic":"Conquest and its impact - Mexico and Peru","text":"What does Source H suggest about the impact of the conquest on the indigenous populations in Mexico?","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_171","topic":"Conquest and its impact - Mexico and Peru - encomienda system","text":"Compare and contrast what Sources E and F reveal about the impact of the encomiendas.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_172","topic":"Conquest and its impact - Mexico and Peru","text":"Using the sources and your own knowledge, discuss the social and economic impact of the Spanish conquest on the indigenous populations between 1519 and 1551.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_173","topic":"The move to global war - Italian expansion - Abyssinia","text":"What, according to Source I, were Mussolini's reasons for invading Abyssinia in October 1935?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_174","topic":"The move to global war - Italian expansion - Abyssinia","text":"What does Source J suggest about the Italian invasion of Abyssinia?","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_175","topic":"The move to global war - Italian expansion - Abyssinia","text":"Compare and contrast what Sources K and L reveal about Mussolini's policies towards Abyssinia.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_176","topic":"The move to global war - Italian expansion - Abyssinia","text":"Using the sources and your own knowledge, discuss the factors which influenced Mussolini's decision to invade Abyssinia on 3 October 1935.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_177","topic":"Rights and protest - Apartheid South Africa - Bantustan system","text":"What, according to Source M, were the reasons for the establishment of the Bantustan system?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_178","topic":"Rights and protest - Apartheid South Africa - Bantustan system","text":"What does Source N suggest about the distribution of the Bantustans?","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_179","topic":"Rights and protest - Apartheid South Africa - Bantustan system","text":"Compare and contrast what Sources O and P reveal about the Bantustan system.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_180","topic":"Rights and protest - Apartheid South Africa - Bantustan system","text":"Using the sources and your own knowledge, evaluate the success of the Bantustan system in achieving the aims of the South African government.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_181","topic":"Conflict and intervention - Kosovo","text":"What, according to Source Q, were the aims of the Kosovo Liberation Army?","marks":3,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_182","topic":"Conflict and intervention - Kosovo","text":"What does Source T suggest about Slobodan Milosevic's actions in Kosovo?","marks":2,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_183","topic":"Conflict and intervention - Kosovo","text":"Compare and contrast what Sources R and S reveal about the conflict in Kosovo.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_184","topic":"Conflict and intervention - Kosovo","text":"Using the sources and your own knowledge, to what extent do you agree that the actions of the Kosovo Liberation Army escalated the conflict in Kosovo?","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_185","topic":"Military leaders - Richard I of England (1173–1199)","text":"1. (a) What, according to Source A, were Richard I's concerns about besieging Jerusalem? [3]\n(b) What is the message conveyed by Source B? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_186","topic":"Military leaders - Richard I of England (1173–1199)","text":"3. Compare and contrast the views expressed in Sources C and D about Richard I's leadership during the Third Crusade. [6]","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_187","topic":"Military leaders - Richard I of England (1173–1199)","text":"4. Using the sources and your own knowledge, examine the reasons why Richard I was unable to recapture Jerusalem during the Third Crusade. [9]","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_188","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"5. (a) What, according to Source E, were the objectives of the \"New Laws\" of 1542? [3]\n(b) What is the message conveyed by Source F? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_189","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"7. Compare and contrast the views expressed in Sources E and F about the encomienda system. [6]","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_190","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"8. Using the sources and your own knowledge, discuss the extent to which Spanish colonial policy protected indigenous populations in Mexico and Peru. [9]","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_191","topic":"The move to global war - German and Italian expansion (1933–1940)","text":"9. (a) What, according to Source I, did the League of Nations decide to do in response to the Italian invasion of Abyssinia? [3]\n(b) What is the message conveyed by Source J? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_192","topic":"The move to global war - German and Italian expansion (1933–1940)","text":"11. Compare and contrast the views expressed in Sources K and L about Mussolini's reasons for invading Abyssinia. [6]","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_193","topic":"The move to global war - German and Italian expansion (1933–1940)","text":"12. Using the sources and your own knowledge, examine the international response to the Italian invasion of Abyssinia. [9]","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_194","topic":"Society and economy (750–1400)","text":"Evaluate the impact of developments in science and technology on one society.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_195","topic":"Society and economy (750–1400)","text":"Examine the reasons for disputes between rulers and religious leaders in two societies, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_196","topic":"Causes and effects of wars (750–1500)","text":"\"The mobilization of human and economic resources was the most important factor in determining the outcome of wars.\" Discuss with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_197","topic":"Causes and effects of wars (750–1500)","text":"Examine the short-term and long-term political consequences of one war.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_198","topic":"Dynasties and rulers (750–1500)","text":"Examine the effects of religious and secular law on the governing institutions of one state.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_199","topic":"Dynasties and rulers (750–1500)","text":"Evaluate the effectiveness of two rulers, each chosen from a different region, in resolving issues of succession.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_200","topic":"Societies in transition (1400–1700)","text":"Discuss the impact of social and economic change on either minority or indigenous peoples in one society.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_201","topic":"Societies in transition (1400–1700)","text":"Evaluate the impact of cross-cultural exchange on two societies in transition.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_202","topic":"Early Modern states (1450–1789)","text":"Discuss the economic reasons for expansion by two Early Modern states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_203","topic":"Early Modern states (1450–1789)","text":"\"Resistance and rebellion had a significant impact on colonial rule.\" With reference to two states, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_204","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"Evaluate the significance of religion as a cause of two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_205","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"Land strategies were more important than sea strategies in determining the outcome of wars.\" Discuss with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_206","topic":"Origins, development and impact of industrialization (1750–2005)","text":"Evaluate the significance of individuals to the origins of industrialization in two countries.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_207","topic":"Origins, development and impact of industrialization (1750–2005)","text":"Examine the impact of developments in transportation on the industrialization of two countries.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_208","topic":"Independence movements (1800–2000)","text":"Discuss the importance of social and economic factors in the rise of one independence movement, up to the point of independence.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_209","topic":"Independence movements (1800–2000)","text":"Discuss the effectiveness of responses to political problems during the first ten years of independence in two states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_210","topic":"Emergence and development of democratic states (1848–2000)","text":"Evaluate the success of suffrage movements in extending democracy in two states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_211","topic":"Emergence and development of democratic states (1848–2000)","text":"To what extent were education and social welfare policies successful in achieving their aims in one democratic state?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_212","topic":"Authoritarian states (20th century)","text":"Compare and contrast the use of force in the maintenance of power in two authoritarian states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_213","topic":"Authoritarian states (20th century)","text":"\"Authoritarian states had total control over the population.\" With reference to two states, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_214","topic":"Causes and effects of 20th century wars","text":"\"Territorial disputes were the main cause of wars.\" Discuss with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_215","topic":"Causes and effects of 20th century wars","text":"Discuss the impact of the mobilization of human and economic resources on the outcome of two wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_216","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"To what extent was the arms race the most important reason for the end of the Cold War (1980–1991)?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_217","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"Examine the economic impact of the Cold War on two countries, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_218","topic":"Military leaders - Richard I of England (1173–1199) - Impact: social, cultural and religious impact: anti-Jewish violence","text":"1. (a) What, according to Source C, encouraged violence against the Jews? (b) What does Source D reveal about anti-Jewish violence in York in 1190?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_219","topic":"Military leaders - Richard I of England (1173–1199) - Impact: social, cultural and religious impact: anti-Jewish violence","text":"3. Compare and contrast what Sources B and C reveal about the massacre of the Jews in York in 1190.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_220","topic":"Military leaders - Richard I of England (1173–1199) - Impact: social, cultural and religious impact: anti-Jewish violence","text":"4. Using the sources and your own knowledge, examine the view that there was limited protection for the Jews in England during the reign of Richard I.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_221","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551) - Context and motives: political and economic motives for exploration and conquest","text":"5. (a) What, according to Source E, were the causes of the Spanish expansion? (b) What does Source F suggest about the actions of the Spanish conquerors towards the indigenous population?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_222","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551) - Context and motives: political and economic motives for exploration and conquest","text":"7. Compare and contrast what Sources E and G reveal about the causes for the Spanish exploration and conquest of the Americas.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_223","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551) - Context and motives: political and economic motives for exploration and conquest","text":"8. \"Spanish expansion beyond Iberia was primarily economic in motivation\" (Source E). Using the sources and your own knowledge, to what extent do you agree with this statement?","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_224","topic":"The move to global war - German and Italian expansion (1933–1940) - Causes of expansion: impact of Fascism and Nazism on the foreign policies of Italy and Germany","text":"9. (a) What, according to Source I, did Fascism and Nazism have in common? (b) What does Source J suggest about the foreign policies of Italy and Germany?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_225","topic":"The move to global war - German and Italian expansion (1933–1940) - Causes of expansion: impact of Fascism and Nazism on the foreign policies of Italy and Germany","text":"11. Compare and contrast what Sources K and L reveal about German and Italian foreign policies.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_226","topic":"The move to global war - German and Italian expansion (1933–1940) - Causes of expansion: impact of Fascism and Nazism on the foreign policies of Italy and Germany","text":"12. Using the sources and your own knowledge, evaluate the influence of ideology on the foreign policies of Italy and Germany.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_227","topic":"Rights and protest - Civil rights movement in the United States (1954–1965) - The role and significance of key actors/groups: NAACP, SCLC, SNCC, Nation of Islam","text":"13. (a) What, according to Source P, were the criticisms of civil rights leaders made by Malcolm X and the Nation of Islam (NOI)? (b) What does Source N reveal about the struggle for civil rights?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_228","topic":"Rights and protest - Civil rights movement in the United States (1954–1965) - The role and significance of key actors/groups: NAACP, SCLC, SNCC, Nation of Islam","text":"16. Using the sources and your own knowledge, evaluate the effectiveness of non-violence in the African American struggle for civil rights.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_229","topic":"Conflict and intervention - Rwanda (1990–1998) - Impact: social impact; refugee crisis","text":"17. (a) How, according to Source T, did the Hutu power structure impose its authority in refugee camps? (b) What does Source R suggest about the living conditions of Rwandan refugees in camps?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_230","topic":"Conflict and intervention - Rwanda (1990–1998) - Impact: social impact; refugee crisis","text":"19. Compare and contrast what Sources Q and S reveal about the problems faced by the UNHCR during the refugee crisis.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_231","topic":"Society and economy (750–1400)","text":"Evaluate the impact of population change on two societies, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_232","topic":"Society and economy (750–1400)","text":"Compare and contrast the impact of developments in science and technology on two societies, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_233","topic":"Causes and effects of wars (750–1500)","text":"\"The most important causes of wars in the period 750–1500 were political.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_234","topic":"Causes and effects of wars (750–1500)","text":"\"Wars in the period 750–1500 resulted in significant boundary and dynastic changes.\" Discuss with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_235","topic":"Dynasties and rulers (750–1500)","text":"Evaluate the methods of government and administration of two rulers, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_236","topic":"Dynasties and rulers (750–1500)","text":"With reference to two rulers, compare and contrast the methods used to address external challenges to their power.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_237","topic":"Societies in transition (1400–1700)","text":"Evaluate the importance of population expansion and movements as causes of change in two societies, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_238","topic":"Societies in transition (1400–1700)","text":"Discuss the social impact of scientific and technological developments on two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_239","topic":"Early Modern states (1450–1789)","text":"\"The most important reasons for the territorial expansion of Early Modern states were religious.\" With reference to two states, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_240","topic":"Early Modern states (1450–1789)","text":"With reference to one Early Modern state, discuss the challenges to its power and how successfully they were overcome.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_241","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"The most important causes of Early Modern wars were political.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_242","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"The most important effects of Early Modern wars were economic.\" Discuss with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_243","topic":"Origins, development and impact of industrialization (1750–2005)","text":"Evaluate the significance of developments in energy and power to industrialization in two countries.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_244","topic":"Origins, development and impact of industrialization (1750–2005)","text":"\"Opposition to industrialization was limited.\" Discuss with reference to two countries, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_245","topic":"Independence movements (1800–2000)","text":"Evaluate the role of war as a cause for the rise of two independence movements, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_246","topic":"Independence movements (1800–2000)","text":"Evaluate the factors, excluding leadership, that led to the success of one independence movement.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_247","topic":"Emergence and development of democratic states (1848–2000)","text":"\"Ideology was the most important influence on the evolution of democratic states.\" Discuss with reference to two states, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_248","topic":"Emergence and development of democratic states (1848–2000)","text":"Evaluate the impact of changing social policies in two states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_249","topic":"Authoritarian states (20th century)","text":"\"The treatment of opposition was the most important factor in the maintenance of power.\" Discuss with reference to two authoritarian states, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_250","topic":"Authoritarian states (20th century)","text":"\"Full authoritarian control could not be achieved.\" With reference to two states, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_251","topic":"Causes and effects of 20th century wars","text":"\"The most important causes of war were economic.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_252","topic":"Causes and effects of 20th century wars","text":"\"Changes to the role and status of women as a result of war were limited.\" Discuss with reference to two wars, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_253","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"Evaluate the factors which led to detente between the US and USSR between 1971 and 1979.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_254","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"Discuss the impact of two Cold War crises on superpower rivalry.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_255","topic":"Society and economy (750–1400)","text":"Discuss the social and economic influence of religious institutions on two societies, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_256","topic":"Causes and effects of wars (750–1500)","text":"\"Religion was the most important cause of wars in the period 750–1500.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_257","topic":"Dynasties and rulers (750–1500)","text":"Evaluate the administration and interpretation of law by two rulers, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_258","topic":"Societies in transition (1400–1700)","text":"Compare and contrast the treatment of minority or indigenous peoples in two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_259","topic":"Societies in transition (1400–1700)","text":"Evaluate the significance of two key intellectual/scientific figures, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_260","topic":"Early Modern states (1450–1789)","text":"Examine the impact of territorial expansion on the political organization of two Early Modern states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_261","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"The most important causes of war were religious.\" With reference to two Early Modern wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_262","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"The most important effects of Early Modern wars were social.\" Discuss with reference to two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_263","topic":"Origins, development and impact of industrialization (1750–2005)","text":"\"The exploitation of natural resources was the most significant contributor to industrialization.\" Discuss with reference to two countries.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_264","topic":"Independence movements (1800–2000)","text":"Evaluate the importance of external factors in the growth of two independence movements, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_265","topic":"Authoritarian states (20th century)","text":"Evaluate the impact of foreign policy on the maintenance of power in two authoritarian states, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_266","topic":"Causes and effects of 20th century wars","text":"\"The most important causes of wars were political.\" With reference to two wars, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_267","topic":"Military leaders - Genghis Khan (c1200–1227)","text":"1. (a) Why, according to Source A, was Genghis Khan a successful leader? (b) What does Source D suggest about the military campaigns under the leadership of Genghis Khan?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_268","topic":"Military leaders - Genghis Khan (c1200–1227)","text":"4. \"Chinggis [Genghis] Khan built his power base and his tribal empire through battle\" (Source B). Using the sources and your own knowledge, to what extent do you agree with this statement?","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_269","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"5. (a) What, according to Source G, were the consequences of Atahualpa's encounter with Francisco Pizarro? (b) What does Source F suggest about the payment of Atahualpa's ransom?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_270","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"7. Compare and contrast what Sources G and H reveal about Atahualpa and the conquest of Peru.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_271","topic":"Conquest and its impact - The conquest of Mexico and Peru (1519–1551)","text":"8. Using the sources and your own knowledge, evaluate the significance of Atahualpa's fall to the conquest of Peru.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_272","topic":"The move to global war - German and Italian expansion (1933–1940)","text":"9. (a) What, according to Source I, were the reasons for the signing of the Nazi–Soviet Pact? (b) What does Source J suggest about the relationship between Hitler and Stalin?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_273","topic":"The move to global war - German and Italian expansion (1933–1940)","text":"12. Using the sources and your own knowledge, discuss why Germany attacked Poland in September 1939.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_274","topic":"Rights and protest - Civil rights movement in the United States (1954–1965)","text":"13. (a) What, according to Source M, were President Johnson's reasons for introducing the Voting Rights Act? (b) What does Source N suggest about the struggle to achieve civil rights?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_275","topic":"Rights and protest - Civil rights movement in the United States (1954–1965)","text":"16. Using the sources and your own knowledge, discuss the contribution of the Civil Rights Act (1964) and the Voting Rights Act (1965) in ensuring that African Americans could exercise their right to vote.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_276","topic":"Conflict and intervention - Rwanda (1990–1998)","text":"17. (a) What, according to Source Q, were the causes of violence and conflict in Rwanda in 1994? (b) What does Source R suggest about the impact of the conflict in Rwanda by July 1994?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_277","topic":"Military leaders - Genghis Khan","text":"1. (a) What, according to Source A, changed about the way rewards were divided under Genghis Khan's leadership? [3]\n(b) What is the message conveyed by Source D? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_278","topic":"Military leaders - Genghis Khan","text":"4. Using the sources and your own knowledge, examine the importance of Genghis Khan's leadership to Mongol success. [9]","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_279","topic":"Conquest and its impact - Mexico and Peru","text":"5. (a) What, according to Source E, did Chalcuchima do when Atahualpa was imprisoned? [3]\n(b) What is the message conveyed by Source F? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_280","topic":"The move to global war - German and Italian expansion","text":"9. (a) What, according to Source I, did Hitler claim about the relationship between Germany and Poland? [3]\n(b) What is the message conveyed by Source J? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_281","topic":"The move to global war - German and Italian expansion","text":"11. Compare and contrast what Sources I and K reveal about the Nazi–Soviet Pact. [6]","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_282","topic":"The move to global war - German and Italian expansion","text":"12. Using the sources and your own knowledge, examine the factors that led to the outbreak of the Second World War in 1939. [9]","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_283","topic":"Society and economy (750–1400)","text":"Evaluate the impact of different types of taxation on two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_284","topic":"Society and economy (750–1400)","text":"Examine the economic impact of religious persecution on two societies.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_285","topic":"Causes and effects of wars (750–1500)","text":"Discuss the importance of religion in causing the outbreak of two wars, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_286","topic":"Causes and effects of wars (750–1500)","text":"\"Boundary changes were the most significant effect of wars in the period 750–1500.\" Discuss with reference to two wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_287","topic":"Dynasties and rulers (750–1500)","text":"Examine the importance of invasion and settlement for the expansion of two dynasties/kingdoms.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_288","topic":"Dynasties and rulers (750–1500)","text":"Compare and contrast the methods used by two rulers to deal with challenges to their reign, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_289","topic":"Societies in transition (1400–1700)","text":"\"Population expansion was a significant cause of social and economic change.\" With reference to two societies, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_290","topic":"Societies in transition (1400–1700)","text":"Evaluate the impact of religious expansion and conversion on two societies in transition.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_291","topic":"Early Modern states (1450–1789)","text":"Compare and contrast the treatment of subjects in two Early Modern states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_292","topic":"Early Modern states (1450–1789)","text":"\"The race to establish colonial rule was driven mostly by economic competition.\" Discuss with reference to two states.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_293","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"The main cause of Early Modern wars was the competition for resources.\" Discuss with reference to two wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_294","topic":"Causes and effects of Early Modern wars (1500–1750)","text":"\"Leaders were the most significant factor in determining the outcome of Early Modern wars.\" Discuss with reference to two wars, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_295","topic":"Origins, development and impact of industrialization (1750–2005)","text":"Discuss the importance of developments in energy and power for industrialization in two countries, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_296","topic":"Origins, development and impact of industrialization (1750–2005)","text":"\"Changes to leisure were the most significant social impact of industrialization.\" With reference to two countries, to what extent do you agree with this statement?","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_297","topic":"Independence movements (1800–2000)","text":"\"Other factors were more important than leadership in the success of independence movements.\" Discuss with reference to two independence movements.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_298","topic":"Independence movements (1800–2000)","text":"Evaluate the effectiveness of responses to economic challenges in the first ten years of independence in two states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_299","topic":"Emergence and development of democratic states (1848–2000)","text":"Compare and contrast the role of leadership in the emergence of two democratic states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_300","topic":"Emergence and development of democratic states (1848–2000)","text":"Evaluate the impact of changing social and economic policies on the population of one democratic state.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_301","topic":"Authoritarian states (20th century)","text":"\"Propaganda was the key factor in the emergence of authoritarian states.\" Discuss with reference to two states, each from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_302","topic":"Authoritarian states (20th century)","text":"Evaluate the effectiveness of methods used to control opposition in two authoritarian states, each chosen from a different region.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_303","topic":"Causes and effects of 20th century wars","text":"Evaluate the importance of foreign influence to the outcome of two civil wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_304","topic":"Causes and effects of 20th century wars","text":"\"Political change was the most significant short-term effect of war.\" Discuss with reference to two wars.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_305","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"\"The arms race made the greatest contribution to the ending of the Cold War.\" Discuss with reference to the period between 1980 and 1991.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_306","topic":"The Cold War: Superpower tensions and rivalries (20th century)","text":"Examine the influence of two leaders, each chosen from a different region, on the development of the Cold War.","marks":15,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_307","topic":"Military leaders - Richard I of England (1173–1199)","text":"3. Compare and contrast what Sources C and D reveal about the political situation in England during Richard I's absence.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_308","topic":"Military leaders - Richard I of England (1173–1199)","text":"4. Using the sources and your own knowledge, evaluate the political impact of Richard I's absence in England.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_309","topic":"Conquest and its impact - The final stages of Muslim rule in Spain","text":"5. (a) What, according to Source E, was the political situation in the Iberian Peninsula in the late 15th century? (b) What does Source F suggest about the Iberian Peninsula up to 1492?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_310","topic":"Conquest and its impact - The final stages of Muslim rule in Spain","text":"8. Using the sources and your own knowledge, to what extent do you agree that the unification of the Iberian Peninsula was politically motivated?","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_311","topic":"The move to global war - Japanese expansion in East Asia (1931–1941)","text":"9. (a) What, according to Source I, were the proposals made to Japan by the United States? (b) What does Source J suggest about the attack on Pearl Harbor?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_312","topic":"The move to global war - Japanese expansion in East Asia (1931–1941)","text":"11. Compare and contrast what Sources K and L reveal about why the Japanese attacked Pearl Harbor in December 1941.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_313","topic":"The move to global war - Japanese expansion in East Asia (1931–1941)","text":"12. Using the sources and your own knowledge, discuss the reasons for the Japanese attack on Pearl Harbor in 1941.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_314","topic":"Rights and protest - Apartheid South Africa (1948–1964)","text":"13. (a) What, according to Source M, was the role of Nelson Mandela in the formation of the MK? (b) What does Source N suggest about support for Nelson Mandela?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_315","topic":"Rights and protest - Apartheid South Africa (1948–1964)","text":"15. Compare and contrast what Sources M and P reveal about Mandela's role in the struggle against apartheid.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_316","topic":"Rights and protest - Apartheid South Africa (1948–1964)","text":"16. Using the sources and your own knowledge, evaluate the significance of Nelson Mandela to the struggle against apartheid up to 1964.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_317","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"17. (a) What, according to Source Q, were the aims of Ibrahim Rugova's Democratic League of Kosovo (LDK)? (b) What does Source R suggest about Ibrahim Rugova's relationship with western powers?","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_318","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"19. Compare and contrast what Sources S and T reveal about Ibrahim Rugova's methods to achieve Kosovar independence.","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_319","topic":"Conflict and intervention - Kosovo (1989–2002)","text":"20. Using the sources and your own knowledge, discuss the view that Ibrahim Rugova's methods contributed to the origin of war in Kosovo.","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_320","topic":"Military leaders - Richard I of England","text":"1. (a) What, according to Source A, was Philip's motive for delaying Richard's release? [3]\n(b) What is the message conveyed by Source B? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_321","topic":"Conquest and its impact - Muslim rule in Spain","text":"5. (a) What, according to Source E, were two reasons for the political instability in the Iberian Peninsula in the 15th century? [3]\n(b) What is the message conveyed by Source F? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_322","topic":"Conquest and its impact - Muslim rule in Spain","text":"7. Compare and contrast what Sources E and H reveal about the internal conflicts in the Iberian Peninsula in the late 15th century. [6]","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_323","topic":"Conquest and its impact - Muslim rule in Spain","text":"8. Using the sources and your own knowledge, discuss the view that political instability in the Iberian Peninsula was caused by internal conflicts and alliances. [9]","marks":9,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_324","topic":"The move to global war - Japanese expansion","text":"9. (a) What, according to Source I, did the United States Government expect Japan to do? [3]\n(b) What is the message conveyed by Source J? [2]","marks":5,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_325","topic":"Rights and protest - Apartheid South Africa","text":"15. Compare and contrast what Sources M and P reveal about Nelson Mandela's role and significance in the fight against apartheid. [6]","marks":6,"pt":null,"diff":"med","src":"past"},
+    {"id":"OLD_History_326","topic":"Rights and protest - Apartheid South Africa","text":"16. Using the sources and your own knowledge, examine the role and significance of Nelson Mandela in the fight against apartheid in South Africa. [9]","marks":9,"pt":null,"diff":"med","src":"past"},
+  ],
+};
+// QUESTION_VAULT: 2430 questions
+
 /* ═══════════════ SUBJECT FRAMEWORKS v37 ═══════════════ */
 // All grading logic, generation prompts, field manuals, and visual standards
 // distilled from 20 IB framework documents (5 per subject × 4 subjects)
@@ -1309,11 +3801,39 @@ Year | Principal | Interest | Balance
 
   'Sports, Exercise & Health Science SL': {
     gradingModel: 'markByMark',
+    // 2026 SEHS syllabus — Paper 3 removed. P1 is now a single integrated paper with two sections.
+    // P1A = MCQ (auto-graded), P1B = Data-Based & Experimental (mark-by-mark), P2 = Structured (mark-by-mark)
     papers: {
-      'P1 MCQ': { label: 'Paper 1 MCQ', marks: '30 questions', time: '45min', description: '30 multiple-choice questions, auto-graded, 1 mark each', autoGrade: true },
-      'P1 Written': { label: 'Paper 1 Written', marks: '~100', time: '2hr', description: '12-15 short/medium questions (4-8 marks each), knowledge + basic application' },
-      'P2': { label: 'Paper 2', marks: '~100', time: '2hr', description: '8-10 medium/long questions (8-15 marks each), application to real scenarios' },
-      'P3': { label: 'Paper 3 Case Study', marks: '~80-100', time: '1hr', description: '1 extended case study, 5-8 parts, 10-20 marks per part' },
+      'P1A MCQ': {
+        label: 'Paper 1A — Multiple Choice',
+        marks: '30 questions × 1 mark',
+        time: 'SL: 90min total for P1 (1A+1B)',
+        description: '30 MCQ covering entire core syllabus. Tests terminology, facts, basic concepts. Auto-graded.',
+        autoGrade: true,
+        weighting: 'Part of 36% combined P1 weighting (SL)',
+        commandTerms: ['Define', 'Identify', 'State', 'Outline'],
+        note: 'Integrated into Paper 1 alongside 1B. SL: 1.5hr total. HL: 1.75hr total.'
+      },
+      'P1B Data': {
+        label: 'Paper 1B — Data-Based & Experimental',
+        marks: '~30-40',
+        time: 'SL: part of 90min P1 block',
+        description: 'Data analysis and experimental design questions. Interpret graphs, tables, experimental results. Calculate means, identify trends, evaluate methodology.',
+        autoGrade: false,
+        weighting: 'Part of 36% combined P1 weighting (SL)',
+        commandTerms: ['Calculate', 'Identify', 'Describe', 'Explain', 'Evaluate', 'Suggest'],
+        note: 'Requires: reading data from graphs/tables, statistical reasoning, experimental critique.'
+      },
+      'P2': {
+        label: 'Paper 2 — Structured',
+        marks: '~95 (SL) / ~130 (HL)',
+        time: 'SL: 1.5hr | HL: 2.5hr',
+        description: 'Short-answer and extended-response questions. Apply knowledge to specific sport/health contexts, analyse scenarios, evaluate scientific claims.',
+        autoGrade: false,
+        weighting: '40% (SL/HL)',
+        commandTerms: ['Describe', 'Explain', 'Analyse', 'Evaluate', 'Discuss', 'Compare', 'Suggest'],
+        note: 'Higher-order thinking required. Must link physiology/psychology/biomechanics to specific sport contexts.'
+      },
     },
     mcqTopics: [
       { topic: 'Aerobic/Anaerobic Energy Systems', subtopics: ['ATP-PC system', 'Glycolytic system', 'Oxidative system', 'Energy continuum', 'Oxygen debt/EPOC'] },
@@ -1353,39 +3873,50 @@ Year | Principal | Interest | Balance
       'MISSING CONTEXTUAL APPLICATION: Explains principle but does not link to scenario → 70-80% of marks',
       'ZERO MARK CRITERIA: Completely wrong concept, no attempt, or completely off-topic'
     ],
-    generationPrompt: `You are an IB Sports, Exercise & Health Science SL examiner generating exam questions.
+    generationPrompt: `You are an IB Sports, Exercise & Health Science SL examiner generating exam questions for the 2026 syllabus.
 
-PAPER TYPE RULES:
-- P1 MCQ: 30 questions, 1 mark each, 4 options (A/B/C/D), correct answer stored as index (0-3). Distribute evenly across 10 MCQ topic categories.
-- P1 Written: Short/medium questions (4-8 marks). Focus: definitions, descriptions, basic application.
-- P2: Medium/long questions (8-15 marks). Focus: application to real scenarios with specific athletes/sports.
-- P3: Extended case study with 5-8 parts (10-20 marks each). One scenario, multiple aspects explored.
+2026 ASSESSMENT MODEL (Paper 3 is ABOLISHED):
+- Paper 1A (MCQ): 30 MCQ × 1 mark. Tests facts, definitions, terminology. Auto-graded. Command terms: State, Identify, Define, Outline.
+- Paper 1B (Data-Based): Data analysis + experimental questions. Interpret graphs/tables, calculate, evaluate methodology. Command terms: Calculate, Identify, Describe, Explain, Suggest, Evaluate.
+- Paper 2 (Structured): Short-answer + extended-response. Apply physiology/psychology/biomechanics to specific sport contexts. Command terms: Describe, Explain, Analyse, Evaluate, Discuss, Compare, Suggest.
+
+PAPER TYPE ROUTING RULES:
+- P1A MCQ → auto-graded, 30 questions, 1 mark each, 4 options (A/B/C/D), correctIndex 0-3. Distractors must be plausible misconceptions.
+- P1B Data → mark-by-mark, 4-8 mark questions, MUST include data (table/graph described in text), command terms from P1B list only.
+- P2 → mark-by-mark, 8-15 mark questions, MUST name a specific sport/athlete context, higher-order command terms only.
+
+COMMAND TERM → PAPER MAPPING:
+- State/Identify/Define/Outline → P1A MCQ or P1B Data (low mark)
+- Calculate/Describe (data) → P1B Data
+- Explain/Suggest → P1B Data or P2
+- Analyse/Evaluate/Discuss/Compare → P2 ONLY
 
 QUESTION GENERATION RULES:
-1. Use EXACT IB command terms from this list with correct mark values: Define (2), Describe (4-6), Explain (6-8), Evaluate (10-15), Discuss (8-12), Analyze (8-12), Compare (6-10), Suggest (4-8)
-2. For Evaluate questions: MUST require advantages AND disadvantages for full marks
-3. For case study: create realistic athlete scenario with specific sport context
-4. Application questions: include specific sport, athlete type, training context
-5. Mark scheme must have one criterion per mark
+1. NEVER generate a P3 question — Paper 3 does not exist in 2026
+2. P1B MUST include a data stimulus (describe a graph, table, or experimental result in text)
+3. P2 MUST anchor to a named sport/athlete context (e.g. "a 400m sprinter", "a competitive cyclist")
+4. For Evaluate (P2): MUST require advantages AND disadvantages for full marks
+5. Mark scheme: one criterion per mark, specific not vague
 
-MCQ FORMAT (P1 MCQ only):
-- Question tests ONE specific concept
-- Four plausible options where distractors are common misconceptions
-- Only ONE correct answer
+MCQ FORMAT (P1A only):
+- Tests ONE concept from core syllabus
+- Four plausible options — distractors are common student misconceptions
+- Only ONE correct answer, stored as correctIndex (0=A, 1=B, 2=C, 3=D)
 
 QUALITY CHECKS:
-- Command term matches mark value?
-- For Evaluate: mark scheme rewards both advantages AND disadvantages?
-- Context is realistic?
-- Terminology is accurate IB Sports Science?
+- Command term matches paper type AND mark value?
+- P3 mentioned anywhere? → REJECT and regenerate
+- P1B has data stimulus?
+- P2 has specific sport context?
+- Terminology is accurate 2026 IB SEHS?
 
 OUTPUT FORMAT (JSON):
 {
   "question": "Full question text",
-  "paperType": "P1 MCQ|P1 Written|P2|P3",
+  "paperType": "P1A MCQ|P1B Data|P2",
   "marks": <number>,
-  "options": ["A: ...", "B: ...", "C: ...", "D: ..."] (only for MCQ),
-  "correctIndex": 0-3 (only for MCQ),
+  "options": ["A: ...", "B: ...", "C: ...", "D: ..."] (P1A MCQ only),
+  "correctIndex": 0-3 (P1A MCQ only),
   "markScheme": [{"mark": 1, "criterion": "text"}],
   "partialCreditRules": ["rule"],
   "modelAnswer": "Complete model answer"
@@ -2099,7 +4630,18 @@ ANALYSIS VERBS (Upgrade your language):
 function routeGrading(subject, paperType) {
   const fw = SUBJECT_FRAMEWORKS[subject];
   if (!fw) return 'markByMark';
+  // 2026 SEHS: P1A MCQ is auto-graded, P1B Data and P2 are mark-by-mark
+  if (subject.includes('Sports') || subject.includes('SEHS')) {
+    if (paperType === 'P1A MCQ') return 'autoGrade';
+    if (paperType === 'P1B Data') return 'markByMark';
+    if (paperType === 'P2') return 'markByMark';
+    // Legacy paper name fallbacks
+    if (paperType === 'P1 MCQ') return 'autoGrade';
+    if (paperType === 'P1 Written') return 'markByMark';
+    if (paperType === 'P3') return 'markByMark'; // shouldn't exist but guard
+  }
   const paper = fw.papers?.[paperType];
+  if (paper?.autoGrade) return 'autoGrade';
   if (paper?.model) return paper.model;
   return fw.gradingModel || 'markByMark';
 }
@@ -5449,6 +7991,17 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [kbSection, setKbSection] = useState('browse'); // browse | quality | compliance
   const [styleComplianceRunning, setStyleComplianceRunning] = useState(false);
   const [styleComplianceResults, setStyleComplianceResults] = useState(null); // { subject, total, passed, failed, results[] }
+  // ── v50 new state ──
+  const [qDetailOpen, setQDetailOpen] = useState(null); // Question Detail popup: question object
+  const [studyTargetTopics, setStudyTargetTopics] = useState([]); // targeted drill topics from weak areas
+  const [viewingSession, setViewingSession] = useState(null); // session shown in overlay from Battle Log
+  const [expandedSession, setExpandedSession] = useState(null); // expanded row in Battle Log (session id)
+  const [highlightSession, setHighlightSession] = useState(null); // session to highlight in Battle Log
+  const [battleLogFilter, setBattleLogFilter] = useState({ subject: 'all', paper: 'all', range: 'month' });
+  const [battleLogSort, setBattleLogSort] = useState('newest');
+  const [sitrepCollapsed, setSitrepCollapsed] = useState(false); // collapse/expand sitrep card
+  const [kbRecs, setKbRecs] = useState({}); // { subjectName: recommendation text }
+  const [kbRecsLoading, setKbRecsLoading] = useState({}); // { subjectName: boolean }
   const [qcResults, setQcResults] = useState(null); // { valid, flagged, total }
   const [qcRunning, setQcRunning] = useState(false);
   const [autoFixRunning, setAutoFixRunning] = useState(false);
@@ -5536,7 +8089,26 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
         }
       });
     });
-    return [...pbqQs, ...qdbExtras];
+    // v50: merge QUESTION_VAULT (2430 IB questions from new bank + past papers)
+    const vaultQs = [];
+    Object.entries(QUESTION_VAULT).forEach(([subj, qs]) => {
+      qs.forEach(q => {
+        vaultQs.push({
+          id: q.id || ('vault_' + subj.slice(0,4) + '_' + Math.random().toString(36).slice(2,7)),
+          subject: subj,
+          topic: q.topic || '',
+          text: q.text || '',
+          marks: q.marks || 0,
+          paperType: q.pt || '',
+          difficulty: q.diff === 'eas' ? 'easy' : q.diff === 'har' ? 'hard' : 'medium',
+          source: q.src === 'bank' ? 'vault-bank' : q.src === 'past' ? 'past-paper-import' : 'vault',
+          qdbStatus: 'vault',
+          qdbChecks: null,
+          type: q.pt === 'P1A MCQ' ? 'mcq' : 'structured',
+        });
+      });
+    });
+    return [...pbqQs, ...qdbExtras, ...vaultQs];
   }, [qdbExtras, qdbOverrides]);
   const [qdbFilter, setQdbFilter] = useState('all'); // subject filter
   const [qdbSearch, setQdbSearch] = useState(''); // text search
@@ -7184,6 +9756,34 @@ Write a single paragraph situation report. Do NOT use bullet points or headers.`
       setSitrepLoading(false);
     }
   }, [sitrepLoading, gamify, profile, planner, questionHistory]);
+
+  const generateKbRecs = async (subjectName) => {
+    setKbRecsLoading(p => ({ ...p, [subjectName]: true }));
+    const subDocs = docs.filter(d => d.subject === subjectName).slice(0, 6);
+    const recentWeak = repo
+      .filter(s => s.subject === subjectName)
+      .slice(-5)
+      .flatMap(s => (s.questions || []).filter(q => q.status === 'zero' || q.status === 'partial').map(q => q.topic))
+      .filter(Boolean);
+    const docText = subDocs.map(d => `${d.name}:\n${(d.text || d.summary || d.preview || '').slice(0, 400)}`).join('\n\n');
+    const sys = `You are ${profile?.name || 'the student'}'s personal ${subjectName} tutor. Write targeted study recommendations based on their uploaded materials. Be specific to IB ${subjectName} — name exact techniques, vocabulary, and command term approaches.`;
+    const prompt = `Analyse these uploaded study materials and recent performance for ${subjectName}.
+
+DOCUMENTS:
+${docText || 'No documents uploaded yet.'}
+
+RECENT WEAK TOPICS: ${[...new Set(recentWeak)].join(', ') || 'No session data yet'}
+
+Write recommendations in exactly 3 sections:
+1. KEY TECHNIQUE GAPS — specific IB skills or vocabulary missing
+2. QUICK WINS — 3 things to do RIGHT NOW for immediate mark improvement
+3. PRIORITY TOPICS — 2-3 topics needing attention before May 2026 exams
+
+Address ${profile?.name || 'the student'} by name. Be concrete and subject-specific.`;
+    const result = await callClaude(sys, prompt, 1000);
+    setKbRecs(p => ({ ...p, [subjectName]: result }));
+    setKbRecsLoading(p => ({ ...p, [subjectName]: false }));
+  };
 
   const refreshPlanIfNeeded = useCallback(async () => {
     if (!planner) return;
@@ -9578,8 +12178,34 @@ For EACH question, you MUST provide:
         await saveGamify(g2);
       }
 
-      // Save to repo and progress
-      await addToRepo({ id: Date.now().toString(), type: 'study', msn: currentMSN || null, subject: currentSubject.name, subjectName: `${currentSubject.name} ${currentSubject.level.toUpperCase()}`, topic: studyTopic, preset: studyPreset, presetLabel: preset.label, questions: finalQs.map(q => ({ text: q.text, answer: q.answer, skipped: q.skipped, timeSpent: q.timeSpent })), grading: text, grade, totalTime, date: new Date().toISOString() });
+      // Save to repo and progress — v50 enriched session
+      const paperTypeSaved = studyPaperType || studyPaperMode?.replace('paper', 'P') || null;
+      const totalPossibleMarks = finalQs.reduce((s, q) => s + (q.marks || 0), 0);
+      const totalMarksAwarded = finalQs.reduce((s, q) => s + (parseMarksFromGrading(text, q.num || finalQs.indexOf(q) + 1) || 0), 0);
+      const enrichedQuestions = finalQs.map((q, i) => {
+        const qNum = q.num || i + 1;
+        const ma = parseMarksFromGrading(text, qNum);
+        return {
+          num: qNum, text: q.text, marks: q.marks || 0,
+          marksAwarded: ma, answer: q.answer || '', skipped: q.skipped || false,
+          timeSpent: q.timeSpent || 0, scanBase64: q.scanBase64 || null,
+          status: q.skipped ? 'skipped' : deriveStatus(ma, q.marks || 0),
+          feedback: parseQuestionFeedback(text, qNum), topic: q.topic || studyTopic || '',
+          isMCQ: q.isMCQ || false, subject: currentSubject.name,
+        };
+      });
+      const summaryParsed = parseSummary(text);
+      await addToRepo({
+        id: Date.now().toString(), type: 'study', msn: currentMSN || null,
+        subject: currentSubject.name, subjectName: `${currentSubject.name} ${currentSubject.level.toUpperCase()}`,
+        topic: studyTopic, preset: studyPreset, presetLabel: preset.label,
+        paperType: paperTypeSaved,
+        examName: `${currentSubject.name} — ${paperTypeSaved || preset.label} — ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'})}`,
+        source: finalQs.some(q => q.scanBase64) ? 'scan' : finalQs.some(q => q.isMCQ) ? 'mcq' : 'typed',
+        totalMarks: totalPossibleMarks || null, marksAwarded: totalMarksAwarded || null,
+        questions: enrichedQuestions, summary: summaryParsed,
+        grading: text, grade, totalTime, date: new Date().toISOString(),
+      });
       if (grade) await recordPractice(currentSubject.name, studyTopic, finalQs.length, grade);
       // Gamification
       await onStudyComplete(finalQs.filter(q => !q.skipped).length, grade || 0, Math.round(totalTime / 60), currentSubject.name);
@@ -10172,6 +12798,81 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             {/* Gothic tracery */}
             <path d="M150 200 Q200 150 250 200" /><path d="M350 200 Q400 150 450 200" /><path d="M550 200 Q600 150 650 200" />
           </svg>
+        </div>
+      )}
+      {/* ── v50 Question Detail Popup ── */}
+      {qDetailOpen && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center" style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}
+          onClick={() => setQDetailOpen(null)}>
+          <div className="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200">
+              <div>
+                <span className="font-bold text-slate-800">Q{qDetailOpen.num}</span>
+                <span className="text-slate-400 text-sm ml-2">{qDetailOpen.marks} marks{qDetailOpen.topic ? ` · ${qDetailOpen.topic}` : ''}</span>
+              </div>
+              <button onClick={() => setQDetailOpen(null)} className="text-slate-400 hover:text-slate-700 text-xl">✕</button>
+            </div>
+            <div className="px-5 py-4 bg-slate-50 border-b border-slate-200">
+              <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Question</div>
+              <p className="text-sm text-slate-700 leading-relaxed">{qDetailOpen.text}</p>
+            </div>
+            <div className="grid grid-cols-2 border-b border-slate-200">
+              <div className="px-5 py-4 border-r border-slate-200">
+                <div className="text-[10px] text-slate-400 uppercase font-bold mb-2">Your Answer</div>
+                {qDetailOpen.scanBase64
+                  ? <img src={`data:image/jpeg;base64,${qDetailOpen.scanBase64}`} className="w-full rounded-lg" alt="scan" />
+                  : <p className="text-xs text-slate-700 whitespace-pre-wrap">{qDetailOpen.answer || '(no answer given)'}</p>}
+              </div>
+              <div className="px-5 py-4">
+                <div className="text-[10px] text-slate-400 uppercase font-bold mb-2">Marks: {qDetailOpen.marksAwarded ?? '—'}/{qDetailOpen.marks ?? '—'}</div>
+                <div className="flex gap-1 mb-3 flex-wrap">
+                  {Array.from({ length: Math.min(qDetailOpen.marks || 5, 10) }).map((_, i2) => (
+                    <div key={i2} className="w-3.5 h-3.5 rounded-full flex-shrink-0"
+                      style={{ background: i2 < (qDetailOpen.marksAwarded || 0) ? (qDetailOpen.status === 'full' ? '#10b981' : '#f59e0b') : '#e2e8f0' }} />
+                  ))}
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">{qDetailOpen.feedback || 'See full session feedback.'}</p>
+              </div>
+            </div>
+            <div className="px-5 py-4 bg-blue-50 border-b border-slate-200">
+              <div className="text-[10px] font-bold text-blue-700 mb-1">💡 How to Fix This</div>
+              <p className="text-xs text-blue-900 leading-relaxed">
+                {qDetailOpen.status === 'full' ? `Great work — ${qDetailOpen.marks}/${qDetailOpen.marks}. Keep this approach.`
+                  : qDetailOpen.status === 'zero' ? `This scored zero. Review the topic, then attempt it again in a targeted drill.`
+                  : `You got ${qDetailOpen.marksAwarded} of ${qDetailOpen.marks}. Look carefully at each criterion the mark scheme expects — every mark needs its own explicit step.`}
+              </p>
+            </div>
+            <div className="px-5 py-4 flex gap-3">
+              <button onClick={() => { setQDetailOpen(null); safeSetTab('tutor'); }}
+                className="flex-1 py-2.5 rounded-xl text-xs font-bold"
+                style={{ background: '#a78bfa15', color: '#7c3aed', border: '1px solid #a78bfa30' }}>
+                🧠 Ask Logic-Engine
+              </button>
+              <button onClick={() => { setStudyTargetTopics([qDetailOpen.topic||''].filter(Boolean)); setExamCenterSubject(qDetailOpen.subject||''); setWarRoomSubTab('combat'); setQDetailOpen(null); safeSetTab('study'); }}
+                className="flex-1 py-2.5 rounded-xl text-xs font-bold"
+                style={{ background: '#ef444415', color: '#dc2626', border: '1px solid #ef444430' }}>
+                ⚔️ Practise Similar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* ── v50 Viewing Session Overlay ── */}
+      {viewingSession && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-auto" style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', padding: '2rem 1rem' }}
+          onClick={() => setViewingSession(null)}>
+          <div className="bg-slate-50 w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-white">
+              <div>
+                <div className="font-bold text-slate-800">{viewingSession.subject}</div>
+                <div className="text-xs text-slate-400">{viewingSession.paperType} · {viewingSession.date ? new Date(viewingSession.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : ''}</div>
+              </div>
+              <button onClick={() => setViewingSession(null)} className="text-slate-400 hover:text-slate-700 text-xl">✕</button>
+            </div>
+            <div className="p-5">
+              <ExamDebrief session={viewingSession} readOnly={true} />
+            </div>
+          </div>
         </div>
       )}
       <ToastContainer toasts={toasts} />
@@ -13183,6 +15884,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             { id: 'activity',      label: '⚡ Chronos-Scan',      desc: 'Study activity log' },
             { id: 'readiness',     label: '🚦 Combat Readiness',  desc: 'Exam preparedness' },
             { id: 'fieldreports',  label: '📋 Field Reports',     desc: 'Exam history & patterns' },
+            { id: 'battlelog',     label: '⚔️ Battle Log',       desc: 'All exam sessions' },
           ];
 
           // ─── COMBAT READINESS helpers ───────────────────────────────
@@ -13329,6 +16031,9 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                       style={{ background: '#22d3ee18', color: '#22d3ee', border: '1px solid #22d3ee30' }}>
                       {sitrepLoading ? <><Loader2 className="w-3 h-3 animate-spin" /> Scanning...</> : '🔄 Re-brief'}
                     </button>
+                    <button onClick={() => setSitrepCollapsed(p => !p)} className="text-[10px] text-slate-400 hover:text-slate-600 ml-1">
+                      {sitrepCollapsed ? '▼ Show' : '▲ Hide'}
+                    </button>
                   </div>
                   {/* Three data boxes */}
                   <div className="grid grid-cols-3 gap-px bg-slate-700/20 border-b border-slate-700/30">
@@ -13357,7 +16062,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                         <Loader2 className="w-3 h-3 animate-spin" />
                         <span className="font-mono italic">Cogitator arrays processing battlefield data...</span>
                       </div>
-                    ) : sitrep ? (
+                    ) : sitrep && !sitrepCollapsed ? (
                       <p className="text-xs text-slate-300 leading-relaxed italic font-light">{sitrep}</p>
                     ) : (
                       <p className="text-xs text-slate-500 italic">Awaiting vox-signal from the Strategium...</p>
@@ -13988,6 +16693,102 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 <StatBox label="Best Streak Goal" value={streakGoal || 7} accent="#f97316" sub="day target" icon={Award} />
               </div>
             </>}
+
+            {intelSubTab === 'battlelog' && (() => {
+              const now2 = Date.now();
+              const rangeDays2 = battleLogFilter.range === 'week' ? 7 : battleLogFilter.range === 'month' ? 30 : 3650;
+              let blSessions = repo
+                .filter(s => s.type === 'study' && s.date && (now2 - new Date(s.date).getTime()) < rangeDays2 * 86400000)
+                .filter(s => battleLogFilter.subject === 'all' || s.subject === battleLogFilter.subject)
+                .filter(s => battleLogFilter.paper === 'all' || s.paperType === battleLogFilter.paper);
+              if (battleLogSort === 'newest') blSessions = blSessions.sort((a,b) => new Date(b.date) - new Date(a.date));
+              else if (battleLogSort === 'grade-low') blSessions = blSessions.sort((a,b) => (a.grade||0) - (b.grade||0));
+              else if (battleLogSort === 'grade-high') blSessions = blSessions.sort((a,b) => (b.grade||0) - (a.grade||0));
+              return (
+                <div className="space-y-3">
+                  {/* Filter bar */}
+                  <div className="flex gap-2 flex-wrap items-center">
+                    <select value={battleLogFilter.subject} onChange={e => setBattleLogFilter(p => ({...p, subject: e.target.value}))}
+                      className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white text-slate-700">
+                      <option value="all">All subjects</option>
+                      {userSubjects.map(s => <option key={s.name} value={s.name}>{s.name}</option>)}
+                    </select>
+                    <select value={battleLogFilter.paper} onChange={e => setBattleLogFilter(p => ({...p, paper: e.target.value}))}
+                      className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white text-slate-700">
+                      <option value="all">All papers</option>
+                      {['P1','P2','P3','P1A MCQ','P1B Data','P1 MCQ','P1 Written'].map(p => <option key={p} value={p}>{p}</option>)}
+                    </select>
+                    {['week','month','all'].map(r => (
+                      <button key={r} onClick={() => setBattleLogFilter(p => ({...p, range: r}))}
+                        className="text-xs px-2.5 py-1.5 rounded-lg font-medium border"
+                        style={{ background: battleLogFilter.range === r ? '#3b82f6' : 'transparent', color: battleLogFilter.range === r ? '#fff' : '#64748b', borderColor: battleLogFilter.range === r ? '#3b82f6' : '#e2e8f0' }}>
+                        {r === 'week' ? 'Week' : r === 'month' ? 'Month' : 'All'}
+                      </button>
+                    ))}
+                    <select value={battleLogSort} onChange={e => setBattleLogSort(e.target.value)}
+                      className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white text-slate-700 ml-auto">
+                      <option value="newest">Newest first</option>
+                      <option value="grade-low">Grade ↑</option>
+                      <option value="grade-high">Grade ↓</option>
+                    </select>
+                  </div>
+                  {/* Session list */}
+                  {blSessions.length === 0
+                    ? <div className="text-center py-10 text-slate-400 text-sm">No sessions found. Complete your first exam to see it here.</div>
+                    : blSessions.map(s => {
+                      const isExpBL = expandedSession === s.id;
+                      const blPct = s.totalMarks ? Math.round(((s.marksAwarded||0)/s.totalMarks)*100) : null;
+                      const blHighlight = highlightSession === s.id;
+                      return (
+                        <div key={s.id} className="bg-white rounded-2xl border overflow-hidden" style={{ borderColor: blHighlight ? '#3b82f6' : '#e2e8f0', boxShadow: blHighlight ? '0 0 0 2px #3b82f640' : 'none' }}>
+                          <button onClick={() => setExpandedSession(isExpBL ? null : s.id)}
+                            className="w-full flex items-center gap-2 px-3 py-3 text-left hover:bg-slate-50">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-full font-bold text-white flex-shrink-0"
+                              style={{ background: subjectColor(s.subject) }}>{(s.subject||'').slice(0,4)}</span>
+                            <span className="text-[11px] text-slate-500 flex-shrink-0">{s.paperType||'Study'}</span>
+                            <span className="text-[11px] text-slate-700 font-medium flex-1 truncate">{s.examName||s.subject}</span>
+                            <span className="text-[11px] text-slate-400 flex-shrink-0">{s.date ? new Date(s.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : ''}</span>
+                            <span className="text-sm font-black flex-shrink-0" style={{ color: gradeColor(s.grade) }}>G{s.grade||'—'}</span>
+                            <button onClick={e => { e.stopPropagation(); setViewingSession(s); }}
+                              className="text-slate-300 hover:text-slate-600 text-sm">👁</button>
+                            <span className="text-slate-300 text-[10px]">{isExpBL ? '▲' : '▼'}</span>
+                          </button>
+                          {isExpBL && (
+                            <div className="px-3 pb-3 border-t border-slate-100">
+                              {s.questions?.length > 0 ? (
+                                <div className="mt-2">
+                                  <div className="text-[10px] text-slate-400 mb-1.5 uppercase font-bold">Tap for details</div>
+                                  <div className="flex gap-1.5 flex-wrap">
+                                    {s.questions.map((q, qi) => {
+                                      const dc = q.status === 'full' ? '#10b981' : q.status === 'partial' ? '#f59e0b' : q.status === 'zero' ? '#ef4444' : '#94a3b8';
+                                      return (
+                                        <button key={qi} onClick={() => setQDetailOpen({...q, subject: s.subject})}
+                                          className="flex flex-col items-center gap-0.5 hover:opacity-80">
+                                          <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
+                                            style={{ background: dc }}>Q{q.num||qi+1}</div>
+                                          <div className="text-[8px] text-slate-400">{q.marksAwarded??'?'}/{q.marks??'?'}</div>
+                                        </button>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="mt-2 text-[11px] text-slate-400 italic">Complete a session to see question breakdown here.</div>
+                              )}
+                              {s.summary?.strengths && (
+                                <div className="mt-2 text-[11px] text-slate-600">
+                                  <span className="font-bold text-green-600">🟢 </span>{(s.summary.strengths||'').slice(0,100)}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+              );
+            })()}
 
             {/* ══ v37 TAB: FIELD REPORTS ══ */}
             {intelSubTab === 'fieldreports' && (() => {
@@ -17104,105 +19905,143 @@ function RepoRow({ entry, onDelete }) {
   );
 }
 
-/* ═══════════ v37 ExamDebrief Component ═══════════ */
-function ExamDebrief({ session, onAction }) {
-  // session: { subject, paperType, questions, answers, grades, teacherSummary, date }
-  // grades: { [qIdx]: { awarded, total, criteria:[{criterion,awarded}] } }
-  // teacherSummary: { strengths, improvements, criticalGaps, recommendedAction }
-  const [selectedQ, setSelectedQ] = React.useState(null);
+/* ═══════════ v50 ExamDebrief Component (4-section) ═══════════ */
+function ExamDebrief({ session, accent = '#3b82f6', isSM = false, onNewSession, onDrill, onGuide, readOnly = false }) {
+  const [qDetailOpen2, setQDetailOpen2] = React.useState(null);
   if (!session) return null;
-  const { subject, paperType, questions = [], answers = {}, grades = {}, teacherSummary = {}, date } = session;
-  const totalAwarded = Object.values(grades).reduce((s, g) => s + (g?.awarded || 0), 0);
-  const totalMarks = Object.values(grades).reduce((s, g) => s + (g?.total || 0), 0);
-  const pct = totalMarks > 0 ? Math.round((totalAwarded / totalMarks) * 100) : 0;
-  const pctColor = pct >= 70 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#ef4444';
+
+  const markPct = session.totalMarks
+    ? Math.round(((session.marksAwarded || 0) / session.totalMarks) * 100)
+    : session.grade ? Math.round(((session.grade - 1) / 6) * 100) : 0;
+  const sylPct = session.summary?.syllabusAlignment ?? markPct;
+
+  const pctColor2 = (n) => n >= 70 ? '#10b981' : n >= 50 ? '#f59e0b' : '#ef4444';
+  const gradeColor2 = (g) => !g ? '#94a3b8' : g >= 6 ? '#10b981' : g >= 4 ? '#f59e0b' : '#ef4444';
+
+  const questions = session.questions || [];
+
   return (
     <div className="space-y-3">
-      {/* Score header */}
-      <div className="p-4 rounded-xl text-center" style={{ background: `${pctColor}10`, border: `1.5px solid ${pctColor}30` }}>
-        <div className="text-3xl font-extrabold" style={{ color: pctColor }}>{pct}%</div>
-        <div className="text-xs text-slate-500 mt-1">{totalAwarded}/{totalMarks} marks · {subject} {paperType}</div>
-        {date && <div className="text-xs text-slate-400 mt-0.5">{new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>}
+      {/* Section A — Grade Summary 3-col */}
+      <div className="grid grid-cols-3 gap-2">
+        <div className="rounded-2xl p-3 text-center bg-white border border-slate-200">
+          <div className="text-[10px] text-slate-400 font-mono uppercase mb-1">IB Grade</div>
+          <div className="text-4xl font-black mb-1" style={{ color: gradeColor2(session.grade) }}>{session.grade || '—'}</div>
+          <div className="text-[10px] text-slate-400">{session.subject}</div>
+        </div>
+        <div className="rounded-2xl p-3 bg-white border border-slate-200">
+          <div className="text-[10px] text-slate-400 font-mono uppercase mb-1">vs Mark Scheme</div>
+          <div className="text-xl font-black mb-1" style={{ color: pctColor2(markPct) }}>
+            {session.marksAwarded ?? '—'}/{session.totalMarks ?? '—'}
+          </div>
+          <div className="h-1.5 bg-slate-100 rounded-full mb-1 overflow-hidden">
+            <div className="h-full rounded-full" style={{ width: `${markPct}%`, background: pctColor2(markPct) }} />
+          </div>
+          <div className="text-[10px] text-slate-500">{markPct >= 70 ? 'Strong' : markPct >= 50 ? 'Marks left' : 'Needs work'}</div>
+        </div>
+        <div className="rounded-2xl p-3 bg-white border border-slate-200">
+          <div className="text-[10px] text-slate-400 font-mono uppercase mb-1">Score %</div>
+          <div className="text-xl font-black mb-1" style={{ color: pctColor2(sylPct) }}>{sylPct}%</div>
+          <div className="h-1.5 bg-slate-100 rounded-full mb-1 overflow-hidden">
+            <div className="h-full rounded-full" style={{ width: `${sylPct}%`, background: pctColor2(sylPct) }} />
+          </div>
+          <div className="text-[10px] text-slate-500">{session.paperType || 'Practice'}</div>
+        </div>
       </div>
-      {/* Teacher Summary */}
-      {(teacherSummary.strengths || teacherSummary.improvements || teacherSummary.criticalGaps) && (
-        <div className="space-y-2">
-          {teacherSummary.strengths && (
-            <div className="p-3 rounded-xl" style={{ background: '#10b98110', border: '1.5px solid #10b98130' }}>
-              <div className="text-xs font-bold text-green-700 mb-1">🟢 Strengths</div>
-              <p className="text-sm text-slate-700">{teacherSummary.strengths}</p>
+
+      {/* Section B — Teacher Feedback 3-col */}
+      {(session.summary || session.teacherSummary) && (() => {
+        const s = session.summary || {};
+        const ts = session.teacherSummary || {};
+        const strengths = s.strengths || ts.strengths;
+        const improvements = s.improvements || ts.improvements;
+        const actions = s.actions || ts.criticalGaps;
+        if (!strengths && !improvements && !actions) return null;
+        return (
+          <div className="grid grid-cols-3 gap-2">
+            <div className="rounded-2xl p-3 bg-green-50 border border-green-100">
+              <div className="text-[10px] font-bold text-green-700 mb-1">🟢 Strengths</div>
+              <div className="text-[11px] text-green-900 leading-relaxed whitespace-pre-wrap">{strengths || '—'}</div>
             </div>
-          )}
-          {teacherSummary.improvements && (
-            <div className="p-3 rounded-xl" style={{ background: '#f59e0b10', border: '1.5px solid #f59e0b30' }}>
-              <div className="text-xs font-bold text-amber-700 mb-1">🟡 Areas for Improvement</div>
-              <p className="text-sm text-slate-700">{teacherSummary.improvements}</p>
+            <div className="rounded-2xl p-3 bg-amber-50 border border-amber-100">
+              <div className="text-[10px] font-bold text-amber-700 mb-1">🟡 Needs Work</div>
+              <div className="text-[11px] text-amber-900 leading-relaxed whitespace-pre-wrap">{improvements || '—'}</div>
             </div>
-          )}
-          {teacherSummary.criticalGaps && (
-            <div className="p-3 rounded-xl" style={{ background: '#ef444410', border: '1.5px solid #ef444430' }}>
-              <div className="text-xs font-bold text-red-700 mb-1">🔴 Critical Gaps</div>
-              <p className="text-sm text-slate-700">{teacherSummary.criticalGaps}</p>
+            <div className="rounded-2xl p-3 bg-blue-50 border border-blue-100">
+              <div className="text-[10px] font-bold text-blue-700 mb-1">🎯 Actions</div>
+              <div className="text-[11px] text-blue-900 leading-relaxed whitespace-pre-wrap">{actions || '—'}</div>
             </div>
-          )}
-          {teacherSummary.recommendedAction && (
-            <button onClick={() => onAction && onAction(teacherSummary.recommendedAction)}
-              className="w-full py-2.5 rounded-xl text-sm font-bold text-white transition-all"
-              style={{ background: '#2563eb' }}>
-              ⚡ {teacherSummary.recommendedAction}
-            </button>
-          )}
-        </div>
-      )}
-      {/* Question dot navigator */}
+          </div>
+        );
+      })()}
+
+      {/* Section C — Question breakdown */}
       {questions.length > 0 && (
-        <div>
-          <div className="text-xs font-semibold text-slate-500 mb-2">Question Results</div>
-          <div className="flex flex-wrap gap-2">
-            {questions.map((q, i) => {
-              const g = grades[i];
-              let dotBg = '#e2e8f0', dotColor = '#64748b';
-              if (g) {
-                dotBg = g.awarded === g.total ? '#10b981' : g.awarded > 0 ? '#f59e0b' : '#ef4444';
-                dotColor = '#fff';
-              }
-              return (
-                <button key={i} onClick={() => setSelectedQ(selectedQ === i ? null : i)}
-                  className="w-8 h-8 rounded-full text-xs font-bold transition-all flex items-center justify-center"
-                  style={{ background: dotBg, color: dotColor, border: `2px solid ${selectedQ === i ? '#2563eb' : 'transparent'}`, transform: selectedQ === i ? 'scale(1.15)' : 'scale(1)' }}>
-                  {i + 1}
-                </button>
-              );
-            })}
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div className="px-4 py-2.5 border-b border-slate-100">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Question Breakdown</span>
+          </div>
+          {questions.map((q, i) => {
+            const statusColor = q.status === 'full' ? '#10b981' : q.status === 'partial' ? '#f59e0b' : q.status === 'zero' ? '#ef4444' : '#94a3b8';
+            const totalDots = Math.min(q.marks || 5, 8);
+            const filledDots = q.marksAwarded || 0;
+            const gradeIdx = q.grades || {};
+            return (
+              <div key={i} className="flex items-center gap-2 px-3 py-2.5 border-b border-slate-50 hover:bg-slate-50">
+                <span className="text-[11px] font-bold text-slate-400 w-5">Q{q.num || (i+1)}</span>
+                {q.isMCQ ? (
+                  <span className="text-[11px] font-bold" style={{ color: q.status === 'full' ? '#10b981' : '#ef4444' }}>
+                    {q.status === 'full' ? 'MCQ ✓' : 'MCQ ✗'}
+                  </span>
+                ) : (
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: totalDots }).map((_, di) => (
+                      <div key={di} className="w-2.5 h-2.5 rounded-full"
+                        style={{ background: di < filledDots ? statusColor : '#e2e8f0' }} />
+                    ))}
+                  </div>
+                )}
+                <span className="text-[11px] text-slate-400 flex-1">{q.marksAwarded ?? (gradeIdx.awarded ?? '—')}/{q.marks ?? (gradeIdx.total ?? '—')} marks</span>
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: statusColor }} />
+                <button onClick={() => setQDetailOpen2(q)} className="text-slate-300 hover:text-slate-600 text-sm">👁</button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Q Detail mini popup */}
+      {qDetailOpen2 && (
+        <div className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center" style={{ background: 'rgba(0,0,0,0.5)' }}
+          onClick={() => setQDetailOpen2(null)}>
+          <div className="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl overflow-hidden shadow-2xl p-5" onClick={e => e.stopPropagation()}>
+            <div className="flex justify-between mb-3">
+              <span className="font-bold">Q{qDetailOpen2.num} · {qDetailOpen2.marks} marks</span>
+              <button onClick={() => setQDetailOpen2(null)} className="text-slate-400">✕</button>
+            </div>
+            <p className="text-sm text-slate-700 mb-3">{qDetailOpen2.text}</p>
+            {qDetailOpen2.answer && <p className="text-xs text-slate-500 mb-2 bg-slate-50 p-2 rounded-lg">{qDetailOpen2.answer}</p>}
+            <p className="text-xs text-blue-700 bg-blue-50 p-2 rounded-lg">{qDetailOpen2.feedback || 'See full session grading for detailed feedback.'}</p>
           </div>
         </div>
       )}
-      {/* Question detail panel */}
-      {selectedQ !== null && questions[selectedQ] && (
-        <div className="p-4 rounded-xl border" style={{ background: '#f8fafc', border: '1.5px solid #e2e8f0' }}>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-600">Question {selectedQ + 1}</span>
-            <button onClick={() => setSelectedQ(null)} className="text-xs text-slate-400 hover:text-slate-600">✕ Close</button>
-          </div>
-          <div className="text-sm text-slate-700 mb-3 leading-relaxed">{questions[selectedQ].text || questions[selectedQ]}</div>
-          {answers[selectedQ] && (
-            <div className="mb-3 p-3 rounded-lg" style={{ background: '#f0f9ff', border: '1px solid #bae6fd' }}>
-              <div className="text-xs font-semibold text-blue-600 mb-1">Your Answer</div>
-              <p className="text-sm text-slate-700 whitespace-pre-wrap">{answers[selectedQ]}</p>
-            </div>
-          )}
-          {grades[selectedQ] && (
-            <div className="space-y-1">
-              <div className="text-xs font-semibold text-slate-500 mb-1">Mark Scheme — {grades[selectedQ].awarded}/{grades[selectedQ].total} marks</div>
-              {(grades[selectedQ].criteria || []).map((c, ci) => (
-                <div key={ci} className="flex items-start gap-2 text-sm">
-                  <span className={`flex-shrink-0 text-base ${c.awarded ? 'text-green-500' : 'text-red-400'}`}>{c.awarded ? '✅' : '❌'}</span>
-                  <span className="text-slate-600">{c.criterion}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+
+      {/* Section D — Targeted Drill */}
+      {!readOnly && questions.some(q => q.status === 'partial' || q.status === 'zero') && (
+        <button onClick={() => onDrill?.()}
+          className="w-full py-3 rounded-2xl text-sm font-bold text-white"
+          style={{ background: '#ef4444' }}>
+          ⚔️ Launch Targeted Drill — Fix My Weak Areas
+        </button>
+      )}
+
+      {/* Old-format fallback: teacherSummary without questions array */}
+      {questions.length === 0 && session.teacherSummary?.recommendedAction && (
+        <button onClick={() => onAction?.(session.teacherSummary.recommendedAction)}
+          className="w-full py-2.5 rounded-xl text-sm font-bold text-white"
+          style={{ background: '#2563eb' }}>
+          ⚡ {session.teacherSummary.recommendedAction}
+        </button>
       )}
     </div>
   );
