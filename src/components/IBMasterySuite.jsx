@@ -17958,6 +17958,48 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   </Card>
                 )}
 
+                {/* ── KB FIELD RECOMMENDATIONS (v50) ── */}
+                {kbSection === 'browse' && userSubjects.length > 0 && (
+                  <Card smMode={isSM} accent={accent} className="p-5 mt-3">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">📋 Field Recommendations</div>
+                      <div className="text-[10px] text-slate-400">AI analysis of your uploaded docs + weak areas</div>
+                    </div>
+                    <div className="space-y-3">
+                      {userSubjects.map(s => {
+                        const rec = kbRecs[s.name];
+                        const loading = kbRecsLoading[s.name];
+                        const subDocs = docs.filter(d => d.subject === s.name).length;
+                        return (
+                          <div key={s.name} className="rounded-xl p-3" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-sm">{IB_CATALOGUE[s.name]?.icon || '📚'}</span>
+                              <span className="text-xs font-semibold text-slate-700 flex-1">{s.name}</span>
+                              <span className="text-[10px] text-slate-400">{subDocs} doc{subDocs !== 1 ? 's' : ''} uploaded</span>
+                              <button
+                                onClick={() => generateKbRecs(s.name)}
+                                disabled={loading}
+                                className="text-[10px] px-2 py-1 rounded-lg font-medium flex items-center gap-1"
+                                style={{ background: loading ? '#f1f5f9' : accent + '15', color: loading ? '#94a3b8' : accent, border: `1px solid ${accent}30` }}>
+                                {loading ? <><Loader2 className="w-2.5 h-2.5 animate-spin" /> Analysing…</> : rec ? '🔄 Refresh' : '⚡ Generate'}
+                              </button>
+                            </div>
+                            {loading && (
+                              <div className="text-[11px] text-slate-400 italic">Analysing your uploaded materials and session history…</div>
+                            )}
+                            {!loading && rec && (
+                              <div className="text-[11px] text-slate-700 leading-relaxed whitespace-pre-wrap bg-white rounded-lg p-2.5 border border-slate-100">{rec}</div>
+                            )}
+                            {!loading && !rec && (
+                              <div className="text-[11px] text-slate-400 italic">Click Generate for AI-powered study recommendations based on your uploaded documents and weak areas.</div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </Card>
+                )}
+
                 {/* Quality Check results */}
                 {/* ── STYLE COMPLIANCE RESULTS ── */}
                 {kbSection === 'compliance' && (
