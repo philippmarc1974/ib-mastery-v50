@@ -4020,8 +4020,9 @@ Fast-twitch vs Slow-twitch
   Slow-twitch (Type I): Smaller, endurance, fatigue-resistant, aerobic, red colour, more mitochondria`
       },
       caseStudyApproach: {
-        title: 'Case Study Approach (Paper 3)',
-        content: `HOW TO ANSWER CASE STUDY QUESTIONS
+        title: 'Extended Response — Paper 2 Case Study Approach',
+        content: `HOW TO ANSWER EXTENDED RESPONSE / CASE STUDY QUESTIONS (Paper 2)
+NOTE: Paper 3 was abolished in 2026. These case-style questions now appear in Paper 2 as extended-response items.
 
 STEP 1 — Read the scenario carefully
 Identify: Athlete type, sport, current issue, training history, any physiological data given.
@@ -4055,7 +4056,7 @@ STEP 6 — Acknowledge limitations or monitoring
     papers: {
       'P1 Section A': { label: 'P1 Section A', marks: '35', time: '45min', description: 'Guided questions on ONE unseen text (mark-by-mark)', model: 'markByMark' },
       'P1 Section B': { label: 'P1 Section B', marks: '55', time: '75min', description: 'Comparative essay on TWO unseen texts (holistic bands)', model: 'holistic' },
-      'P2': { label: 'Paper 2', marks: '90 (45+45)', time: '2hr', description: 'Two literature essays from studied texts (holistic bands)', model: 'holistic' },
+      'P2': { label: 'Paper 2 (2026)', marks: '25', time: '1hr45min', description: 'ONE comparative essay on two studied literary works. Marked by 5 criteria × 5 marks each. NOT holistic bands.', model: 'criteria2026' },
     },
     sectionAQuestions: {
       'Q1 Identify & Explain (10 marks)': 'Identify ONE specific device/technique and explain its effect on the reader',
@@ -4086,22 +4087,76 @@ STEP 6 — Acknowledge limitations or monitoring
       },
       rule: 'TECHNIQUE + QUOTATION + EFFECT + DEEPER MEANING. Never state a technique without quoting. Never quote without analyzing effect. Never analyze effect without connecting to deeper meaning, theme, or author\'s purpose.'
     },
+    p2Criteria2026: {
+      'Criterion A — Knowledge, Understanding, Interpretation': {
+        marks: 5,
+        descriptors: {
+          5: 'Perceptive, convincing interpretation of both works. Thorough knowledge demonstrated. Sophisticated understanding of how meaning is constructed.',
+          4: 'Sound interpretation. Good knowledge of both works. Clear understanding of how language creates meaning.',
+          3: 'Adequate interpretation. Adequate knowledge. Some understanding of how language creates meaning.',
+          2: 'Limited interpretation. Basic knowledge. Little understanding of how language creates meaning.',
+          1: 'Minimal or no relevant interpretation. Very limited knowledge.',
+        }
+      },
+      'Criterion B1 — Analysis of Textual Features': {
+        marks: 5,
+        descriptors: {
+          5: 'Perceptive, convincing analysis of how specific textual features (style, structure, technique) contribute to meaning in both works.',
+          4: 'Clear analysis of textual features in both works. Good selection of relevant features.',
+          3: 'Some analysis of textual features. May be uneven across works.',
+          2: 'Limited analysis. Description of features rather than analysis of effect.',
+          1: 'Minimal or no analysis of textual features.',
+        }
+      },
+      'Criterion B2 — Authorial Choices': {
+        marks: 5,
+        descriptors: {
+          5: 'Perceptive discussion of how authorial choices shape meaning and effect. Convincing links between choices and themes/purpose in both works.',
+          4: 'Clear discussion of authorial choices and their effects. Good connections to meaning.',
+          3: 'Some awareness of authorial choices. May be mechanical or partial.',
+          2: 'Limited awareness of authorial choices. Mostly paraphrase.',
+          1: 'Minimal or no discussion of authorial choices.',
+        }
+      },
+      'Criterion C — Organisation': {
+        marks: 5,
+        descriptors: {
+          5: 'Focused, coherent, well-developed response. Purposeful structure. Comparison woven throughout — not text-by-text. Effective introduction and conclusion.',
+          4: 'Clear structure. Comparison present throughout most of response. Competent introduction and conclusion.',
+          3: 'Adequate structure. Some organisation. Comparison may be implicit or occasional.',
+          2: 'Limited organisation. May be text-by-text or lose focus.',
+          1: 'Little or no organisation. Incoherent.',
+        }
+      },
+      'Criterion D — Language': {
+        marks: 5,
+        descriptors: {
+          5: 'Precise, varied, sophisticated language. Appropriate academic register. Accurate grammar and syntax. Terminology used correctly and purposefully.',
+          4: 'Clear, competent language. Mostly accurate. Appropriate register. Good use of literary terminology.',
+          3: 'Adequate language. Some errors but meaning clear. Some literary terminology.',
+          2: 'Limited clarity. Errors sometimes impede meaning. Little use of literary terminology.',
+          1: 'Language impedes communication. Serious and frequent errors.',
+        }
+      },
+    },
     peeqMethod: {
       title: 'PEEQ Method for Analysis Paragraphs',
       steps: ['POINT: State what you are analyzing and why', 'EVIDENCE: Quote the SHORTEST possible text (1-5 words ideal)', 'EXPLANATION: Explain the specific effect on the reader (not just what it is)', 'QUESTION: Ask "so what?" — what does this reveal about theme/author\'s purpose?']
     },
     assessmentCriteria: {
-      'Knowledge & Understanding': '25% — Accurate identification of devices; understanding of how language creates meaning; recognition of context and different interpretations',
-      'Analysis & Interpretation': '35% — Breaking down HOW techniques create effects; developing multiple interpretations; evaluating effectiveness; making sophisticated connections',
-      'Organisation & Expression': '20% — Clear paragraph structure; precise academic terminology; logical progression; fluent varied sentences; appropriate register',
-      'Evidence & Support': '20% — Abundant textual references; quotations integrated smoothly; evidence directly supporting points; variety of evidence types'
+      'Criterion A — Knowledge, Understanding, Interpretation': '5 marks — Accurate knowledge of both works; convincing interpretation; understanding of how meaning is constructed',
+      'Criterion B1 — Analysis of Textual Features': '5 marks — How style, structure, technique contribute to meaning in both works; relevant feature selection; effect explained',
+      'Criterion B2 — Authorial Choices': '5 marks — How authorial choices shape meaning and purpose; purposeful links between choices and themes',
+      'Criterion C — Organisation': '5 marks — Focused coherent structure; genuine comparison throughout (NOT text-by-text); effective intro + conclusion',
+      'Criterion D — Language': '5 marks — Precise academic register; accurate grammar; literary terminology used correctly',
+      'TOTAL': '25 marks (NOT 45 or 90 — this changed in 2026)',
     },
     generationPrompt: `You are an IB English Language & Literature SL examiner generating exam practice materials.
 
 PAPER TYPE RULES:
 - P1 Section A: Generate ONE unseen text (300-500 words, literary or non-literary prose/poem) + THREE guided questions (Q1 identify+explain 10 marks, Q2 analyze language+structure 12 marks, Q3 evaluate effectiveness 13 marks)
 - P1 Section B: Generate TWO unseen texts (200-300 words each, preferably different genres) + TWO comparative guiding questions (55 marks each), student chooses one
-- P2: Generate 6-8 essay questions about studied literary works (45 marks each, mix of 5 types: thematic, character, stylistic, comparative, open interpretation)
+- P2: Generate 6-8 essay questions about studied literary works (25 marks each — 2026 model: 5 criteria × 5 marks). Questions must demand comparison of TWO works. Mix of 5 types: thematic, character, stylistic, comparative, open interpretation. IMPORTANT: P2 is now 25 marks NOT 45 — do not generate mark schemes over 25
 
 QUESTION GENERATION RULES FOR SECTION A:
 1. Q1: Ask about ONE specific technique (metaphor, tone, structure, etc.) — 10 marks
@@ -4138,7 +4193,8 @@ OUTPUT FORMAT (JSON):
   "paperType": "P1 Section A|P1 Section B|P2",
   "marks": <number>,
   "markScheme": [{"mark": 1, "criterion": "specific, not generic"}],
-  "bandDescriptors": {"L4": "...", "L3": "...", "L2": "...", "L1": "..."} (for holistic only),
+  "bandDescriptors": {"L4": "...", "L3": "...", "L2": "...", "L1": "..."} (P1 Section B holistic only — NOT for P2),
+  "criteriaScores": {"A": "0-5", "B1": "0-5", "B2": "0-5", "C": "0-5", "D": "0-5"} (P2 only — 2026 model),
   "modelAnswer": "Model answer or essay plan"
 }`,
     gradingPrompt: `You are an IB English Language & Literature SL examiner grading a student response.
@@ -4149,12 +4205,58 @@ Grade each criterion independently:
 - Specific feedback on each criterion
 - Highlight: Does student ANALYZE or merely DESCRIBE? (This is the key discriminator)
 
-FOR SECTION B AND P2 (holistic bands):
-Use these band descriptors to determine mark:
-- L4 (P1B: 50-55, P2: 40-45): Sophisticated analysis, original interpretation, seamless evidence, nuanced comparison/argument
-- L3 (P1B: 40-49, P2: 30-39): Clear analysis, sound interpretation, well-selected evidence, competent
-- L2 (P1B: 30-39, P2: 20-29): Basic analysis, surface-level reading, thin evidence
-- L1 (below): Description not analysis, plot summary, minimal evidence
+FOR SECTION B (P1 Section B — holistic bands, 55 marks):
+Use these band descriptors:
+- L4 (50-55): Sophisticated analysis, original interpretation, seamless evidence, nuanced comparison
+- L3 (40-49): Clear analysis, sound interpretation, well-selected evidence, competent
+- L2 (30-39): Basic analysis, surface-level reading, thin evidence
+- L1 (below 30): Description not analysis, plot summary, minimal evidence
+
+FOR P2 (2026 MODEL — 25 marks, 5 criteria × 5 marks — NOT holistic bands):
+Score each criterion INDEPENDENTLY on a 0-5 scale:
+
+CRITERION A — Knowledge, Understanding, Interpretation (0-5):
+5: Perceptive, convincing interpretation of BOTH works; thorough knowledge
+4: Sound interpretation; good knowledge of both works
+3: Adequate interpretation; some understanding
+2: Limited interpretation; basic knowledge only
+1: Minimal knowledge or interpretation
+0: Nothing relevant
+
+CRITERION B1 — Analysis of Textual Features (0-5):
+5: Perceptive analysis of HOW specific features (style, structure, technique) create meaning in both works
+4: Clear analysis of features; good selection
+3: Some analysis; may be uneven across works
+2: Description of features rather than analysis of effect
+1: Minimal feature analysis
+0: Nothing relevant
+
+CRITERION B2 — Authorial Choices (0-5):
+5: Convincing discussion of how authorial decisions shape meaning/purpose in both works
+4: Clear connection between choices and meaning
+3: Some awareness of authorial choices; may be mechanical
+2: Limited awareness; mostly paraphrase
+1: Minimal discussion
+0: Nothing relevant
+
+CRITERION C — Organisation (0-5):
+5: Coherent, purposeful structure; comparison woven throughout (NOT text-by-text); strong intro + conclusion
+4: Clear structure; comparison present throughout most of response
+3: Adequate structure; some organisation; comparison may be occasional
+2: Limited organisation; may be text-by-text or lose focus
+1: Little organisation; incoherent
+0: No discernible organisation
+
+CRITERION D — Language (0-5):
+5: Precise, varied, sophisticated; accurate grammar; literary terminology used correctly and purposefully
+4: Clear, competent; mostly accurate; appropriate register
+3: Adequate; some errors but meaning clear; some literary terminology
+2: Limited clarity; errors sometimes impede meaning
+1: Serious and frequent errors
+0: Incomprehensible
+
+TOTAL P2 = A + B1 + B2 + C + D (max 25 marks)
+CRITICAL: Never give P2 a mark above 25. Never use L1/L2/L3/L4 bands for P2.
 
 KEY DISCRIMINATORS:
 - Analysis vs Description (most important — separates every band)
@@ -4172,12 +4274,13 @@ OUTPUT FORMAT (JSON):
 {
   "totalAwarded": <number>,
   "totalPossible": <number>,
-  "band": "L1|L2|L3|L4",
-  "breakdown": [{"criterion": "text", "awarded": true/false, "reason": "why"}],
+  "band": "L1|L2|L3|L4 (P1 Section B only — omit for P2)",
+  "criteriaScores": {"A": 0, "B1": 0, "B2": 0, "C": 0, "D": 0} (P2 only — integers 0-5 each, must sum to totalAwarded),
+  "breakdown": [{"criterion": "A|B1|B2|C|D or P1 criterion text", "awarded": 0, "outOf": 5, "reason": "specific evidence from student response"}],
   "teacherSummary": {
-    "strengths": "specific — what they did well",
-    "improvements": "specific — what to do differently",
-    "criticalGaps": "most urgent issue"
+    "strengths": "specific — cite what the student did well against which criterion",
+    "improvements": "specific — which criterion lost most marks and exactly what was missing",
+    "criticalGaps": "lowest-scoring criterion and how to fix it"
   }
 }`,
     fieldManual: {
@@ -4303,6 +4406,47 @@ central concern as not grief but its more insidious aftermath — the loss of th
 capacity to change."
 Strength: Identifies paradox within metaphor, traces symbolic convention, develops
 original interpretation, connects to authorial purpose.`
+      },
+      p2CriteriaGuide2026: {
+        title: 'Paper 2 — 2026 Marking Criteria (25 marks)',
+        content: `IB ENGLISH LANG & LIT SL — PAPER 2 (2026)
+IMPORTANT CHANGE: P2 is now 25 marks across 5 criteria (NOT holistic bands).
+Each criterion is worth 5 marks. Your examiner scores them INDEPENDENTLY.
+
+CRITERION A — Knowledge, Understanding & Interpretation (5 marks)
+What earns marks: Convincing interpretation of BOTH works; show you understand
+how meaning is constructed, not just what happens.
+Top tip: Every paragraph should show you've read both works closely.
+
+CRITERION B1 — Analysis of Textual Features (5 marks)
+What earns marks: How specific features (imagery, structure, voice, syntax)
+WORK to create meaning — not just naming them.
+Top tip: "The author uses metaphor" = 0. "The extended metaphor of X creates Y
+effect because Z" = marks.
+
+CRITERION B2 — Authorial Choices (5 marks)
+What earns marks: WHY the author made specific decisions — what purpose do they
+serve? Link choices to themes, context, intended reader response.
+Top tip: Ask "why did the author choose THIS word/structure/form?" after
+every technique you identify.
+
+CRITERION C — Organisation (5 marks)
+What earns marks: Comparison woven throughout every paragraph. Purposeful
+structure. NOT text-by-text (Text A then Text B = max 3/5).
+Top tip: Every paragraph must contain material from BOTH works in genuine
+comparison — not separate treatment.
+
+CRITERION D — Language (5 marks)
+What earns marks: Precise literary terminology used correctly. Academic register.
+Accurate grammar. Varied sentence structures.
+Top tip: Learn 15-20 terms precisely. Using one term wrong costs more than
+not using it at all.
+
+STRATEGY FOR 25/25:
+Para 1 (intro): Thesis + preview comparison → earns C marks
+Paras 2-4 (body): BOTH works per paragraph, technique → effect → authorial choice → earns A, B1, B2
+Para 5 (conclusion): Synthesise — don't summarise → earns C marks
+Throughout: Embed quotations, vary sentences → earns D marks`
       },
       comparativeLanguage: {
         title: 'Comparative Language for Section B',
