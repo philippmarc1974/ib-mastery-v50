@@ -14748,35 +14748,6 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   </div>
                 </Card>
 
-                {/* v52 FOG OF WAR TOGGLE */}
-                {combatStep === 1 && (
-                  <div className="rounded-2xl p-4 mb-3 flex items-start gap-3"
-                    style={{ background: fogOfWarActive ? '#7f1d1d20' : '#1e293b08', border: `1px solid ${fogOfWarActive ? '#ef444440' : '#94a3b820'}` }}>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="text-sm font-bold" style={{ color: fogOfWarActive ? '#ef4444' : '#64748b' }}>
-                          💀 Fog of War
-                        </span>
-                        {fogOfWarActive && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider text-white" style={{ background: '#ef4444' }}>ACTIVE</span>}
-                      </div>
-                      <p className="text-[11px] text-slate-500 leading-relaxed">No hints · No mark schemes · Locked timer · Score ×2.0 weight</p>
-                      {fogOfWarActive && (
-                        <p className="text-[10px] text-red-400 mt-1 font-bold">⚔️ All glory to the warrior who fights blind</p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => {
-                        const next = !fogOfWarActive;
-                        setFogOfWarActive(next);
-                        window.storage.set(STORE.fogOfWarPref, String(next)).catch(() => {});
-                      }}
-                      className="relative w-11 h-6 rounded-full transition-all flex-shrink-0 mt-1"
-                      style={{ background: fogOfWarActive ? '#ef4444' : '#cbd5e1' }}>
-                      <span className="absolute top-0.5 transition-all w-5 h-5 rounded-full bg-white shadow"
-                        style={{ left: fogOfWarActive ? '1.375rem' : '0.125rem' }} />
-                    </button>
-                  </div>
-                )}
 
                 {/* STEP 1 — Subject */}
                 {combatStep === 1 && (
