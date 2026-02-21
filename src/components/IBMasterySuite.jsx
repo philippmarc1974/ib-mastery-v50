@@ -8475,6 +8475,9 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [studyThisQuestion, setStudyThisQuestion] = useState(null);
   const [studyThisLoading, setStudyThisLoading] = useState(false);
   const [studyThisResult, setStudyThisResult] = useState(null);
+  // v72 Daily Orders
+  const [dailyOrdersOpen, setDailyOrdersOpen] = useState(false);
+  const [dailyOrdersShownToday, setDailyOrdersShownToday] = useState(false);
   const [battleLogFilter, setBattleLogFilter] = useState({ subject: 'all', paper: 'all', range: 'month' });
   const [battleLogSort, setBattleLogSort] = useState('newest');
   const [sitrepCollapsed, setSitrepCollapsed] = useState(false); // collapse/expand sitrep card
@@ -8995,6 +8998,17 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
     if (!userSubjects.length) return;
     setExamEveActive(checkExamEveData(userSubjects));
   }, [userSubjects]);
+
+  // v72 Daily Orders auto-open: show once per day when profile + sitrep ready
+  useEffect(() => {
+    if (!profile || !sitrep || dailyOrdersShownToday) return;
+    const today = new Date().toDateString();
+    const lastShown = localStorage.getItem('ib-daily-orders-shown');
+    if (lastShown === today) return;
+    setDailyOrdersOpen(true);
+    setDailyOrdersShownToday(true);
+    localStorage.setItem('ib-daily-orders-shown', today);
+  }, [profile, sitrep, dailyOrdersShownToday]);
 
   const saveProfile = useCallback(async (p) => { try { await window.storage.set(STORE.profile, JSON.stringify(p)); setProfile(p); } catch(e) { console.error(e); } }, []);
 
@@ -14100,16 +14114,35 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 <div className="text-xs text-slate-400 mt-1">Analysing grades, weak areas, and exam timeline</div>
               </div>}
 
-              {!battlePlan && !battlePlanGenerating && <div className="text-center py-8">
-                <div className="text-5xl mb-3">🗓️</div>
-                <div className="text-sm font-medium text-slate-600 mb-1">No battle plan yet</div>
-                <div className="text-xs text-slate-400 mb-4 max-w-sm mx-auto">AI generates a full day-by-day schedule from today through your IB exams, prioritising weak subjects and building in spaced repetition.</div>
-                {!userSubjects.some(s => s.examDates && Object.values(s.examDates).some(Boolean)) && <div className="mb-4 p-3 rounded-lg text-xs text-left" style={{ background: '#f59e0b10', border: '1px solid #f59e0b30' }}>
+              {!battlePlan && !battlePlanGenerating && <div className="space-y-4 py-2">
+                {/* Mini dossier preview using mission slates / planner tasks */}
+                <div className="rounded-xl p-4" style={{ background: `${accent}08`, border: `1px solid ${accent}20` }}>
+                  <div className="text-xs font-bold text-slate-600 mb-3 flex items-center gap-2">
+                    <span>📋</span> Today's Recommended Sessions
+                  </div>
+                  {(missionSlates ? [missionSlates.alpha, missionSlates.beta, missionSlates.gamma].filter(Boolean) : userSubjects.slice(0, 3)).map((item, i) => {
+                    const subName = item?.subject || item?.name || 'Study session';
+                    const topicName = item?.topic || 'General review';
+                    const subAccentColor = getSubjectColor(subName);
+                    return (
+                      <div key={i} className="flex items-center gap-3 py-2 border-b last:border-0" style={{ borderColor: `${subAccentColor}20` }}>
+                        <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: subAccentColor }} />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs font-semibold text-slate-700 truncate">{subName.split(' ').slice(0, 3).join(' ')}</div>
+                          <div className="text-[10px] text-slate-400">{topicName}</div>
+                        </div>
+                        <span className="text-[9px] font-bold px-2 py-0.5 rounded" style={{ background: subAccentColor + '20', color: subAccentColor }}>~45min</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                {!userSubjects.some(s => s.examDates && Object.values(s.examDates).some(Boolean)) && <div className="p-3 rounded-lg text-xs text-left" style={{ background: '#f59e0b10', border: '1px solid #f59e0b30' }}>
                   <span className="text-amber-500 font-medium">💡 Tip:</span> <span className="text-slate-400"> Set exam dates in Settings → Me for a smarter plan.</span>
                 </div>}
-                <button onClick={generateBattlePlan} className="px-6 py-3 rounded-xl text-sm font-bold" style={{ background: accent, color: '#fff' }}>
-                  🚀 Generate My Battle Plan
+                <button onClick={generateBattlePlan} className="w-full px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2" style={{ background: accent, color: '#fff' }}>
+                  <span>🚀</span> Generate Full Battle Plan
                 </button>
+                <div className="text-center text-[10px] text-slate-400">AI builds a day-by-day schedule through your IB exams, prioritising weak subjects.</div>
               </div>}
             </Card>
 
@@ -17118,8 +17151,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     const trend = overallPts.length > 1 ? latestAvg - overallPts[0].avg : 0;
 
                     // SVG dimensions
-                    const PAD_L = 28; const PAD_R = 10; const PAD_T = 8; const PAD_B = 18;
-                    const chartW = 300; const chartH = 110;
+                    const PAD_L = 22; const PAD_R = 8; const PAD_T = 6; const PAD_B = 14;
+                    const chartW = 220; const chartH = 80;
                     const plotW = chartW - PAD_L - PAD_R;
                     const plotH = chartH - PAD_T - PAD_B;
                     const gradeToY = g => PAD_T + plotH - ((g - 1) / 6) * plotH;
@@ -17127,6 +17160,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     const ptPath = (pts) => pts.length > 1
                       ? pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${weekToX(p.week).toFixed(1)},${gradeToY(p.avg).toFixed(1)}`).join(' ')
                       : null;
+                    const tooFewData = overallPts.length < 2;
 
                     const isExpanded = expandedSubject === sub.name || (expandedSubject === null && si === 0);
 
@@ -17165,6 +17199,15 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                         {/* ── Expanded chart ── */}
                         {isExpanded && (
                           <div className="px-3 pb-3">
+                            {tooFewData ? (
+                              <div className="rounded-xl flex items-center justify-center py-4 text-center" style={{ background: '#f1f5f9', border: '1px solid #e2e8f0', minHeight: 60 }}>
+                                <div>
+                                  <div className="text-2xl mb-1">📊</div>
+                                  <div className="text-xs text-slate-500 font-medium">Complete 2+ graded sessions</div>
+                                  <div className="text-[10px] text-slate-400">to see your trajectory</div>
+                                </div>
+                              </div>
+                            ) : (<>
                             {/* Paper legend */}
                             {paperLines.length > 0 && (
                               <div className="flex gap-3 flex-wrap mb-2 px-1">
@@ -17276,6 +17319,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                                 })}
                               </div>
                             )}
+                            </>)}
                           </div>
                         )}
                       </div>
@@ -20082,6 +20126,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   </div>
                   <div className="text-[10px] font-extrabold tracking-wide uppercase text-center leading-tight" style={{ color: greetingRank?.color || '#4b5563' }}>{greetingRank?.name || 'Unranked'}</div>
                   <div className="text-[8px] text-slate-400 uppercase tracking-widest">Operative Rank</div>
+                  <div className="text-[8px] rounded px-1.5 py-0.5 font-bold" style={{ background: (greetingRank?.color || '#4b5563') + '20', color: greetingRank?.color || '#4b5563' }}>G{Math.round(getSubjectEffectiveGrade(userSubjects[0]?.name, progress, userSubjects) || profile?.subjects?.[0]?.currentGrade || 4)}</div>
                 </div>
 
                 <div className="w-px self-stretch bg-slate-200 mx-1" />
@@ -20138,49 +20183,48 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   <span className="text-base">🏅</span>
                   <span>Cabinet</span>
                 </button>
+                {/* v72 Daily Orders button */}
+                <button onClick={() => setDailyOrdersOpen(true)} className="flex-shrink-0 text-[10px] font-black px-2.5 py-2 rounded-xl transition-all hover:opacity-80 flex flex-col items-center gap-0.5" style={{ background: '#78350f', color: '#fbbf24', border: '1px solid #f59e0b50' }}>
+                  <span className="text-base">📜</span>
+                  <span>Orders</span>
+                </button>
               </div>
             </div>
 
-            {/* ── VOX-CAST GREETING + DIRECTIVES OF THE DAY — side by side ── */}
+            {/* ── COMMANDER'S BRIEFING + DIRECTIVES OF THE DAY — side by side ── */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-              {/* Left: Vox-Cast Greeting */}
-              <Card smMode={isSM} accent={accent} className="p-5">
-                <div className="flex items-center justify-between mb-1">
-                  <div>
-                    <div className="text-base font-bold text-slate-800">{isSM ? smGreeting : greeting}, {profile?.name || 'Student'}!</div>
-                    <div className="text-xs text-slate-500 mt-0.5">
-                      {now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
-                      {nextExam && <span className={`ml-2 font-semibold ${nextExam.days <= 14 ? 'text-red-500' : nextExam.days <= 30 ? 'text-amber-500' : 'text-slate-400'}`}>
-                        · {nextExam.subject.split(' ')[0]} exam in {nextExam.days}d
-                      </span>}
-                    </div>
-                  </div>
-                  {streak > 0 && <div className="text-xs font-bold text-orange-500 flex-shrink-0">🔥 {streak}d</div>}
+              {/* Left: Sitrep — Commander's Briefing */}
+              <div className="rounded-2xl overflow-hidden border border-slate-800/30" style={{ background: 'linear-gradient(135deg, #0f172a, #1e293b, #0f172a)' }}>
+                <div className="px-4 py-2.5 flex items-center gap-2 border-b border-slate-700/40">
+                  <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">📡 Commander's Briefing</span>
+                  <span className="text-[9px] text-slate-500 ml-1">{now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+                  {nextExam && <span className={`text-[9px] font-bold ml-auto ${nextExam.days <= 14 ? 'text-red-400' : nextExam.days <= 30 ? 'text-amber-400' : 'text-slate-500'}`}>{nextExam.subject.split(' ')[0]} in {nextExam.days}d</span>}
+                  <button onClick={generateSitrep} disabled={sitrepLoading}
+                    className="ml-2 flex-shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded transition-all disabled:opacity-40"
+                    style={{ background: '#22d3ee18', color: '#22d3ee', border: '1px solid #22d3ee30' }}>
+                    {sitrepLoading ? '...' : '🔄'}
+                  </button>
                 </div>
-
-                {/* Stats strip: streak + weekly points */}
-                {(streak > 0 || (gamify.points || 0) > 0) && <div className="flex gap-2 mt-3">
-                  {streak > 0 && <div className="flex-1 flex items-center gap-1.5 px-3 py-2 rounded-xl" style={{ background: '#f9731310', border: '1px solid #f9731325' }}>
-                    <span className="text-base">🔥</span>
-                    <div>
-                      <div className="text-xs font-black text-orange-500">{streak}-day streak</div>
-                      <div className="text-[10px] text-slate-400">Keep going today</div>
+                <div className="px-4 py-3">
+                  {sitrepLoading ? (
+                    <div className="flex items-center gap-2 text-xs text-cyan-400/60">
+                      <Loader2 className="w-3 h-3 animate-spin" />
+                      <span className="font-mono italic">Cogitator arrays processing...</span>
                     </div>
-                  </div>}
-                  {(gamify.points || 0) > 0 && <div className="flex-1 flex items-center gap-1.5 px-3 py-2 rounded-xl" style={{ background: accent + '10', border: `1px solid ${accent}25` }}>
-                    <span className="text-base">⚡</span>
-                    <div>
-                      <div className="text-xs font-black" style={{ color: accent }}>{(gamify.weeklyPoints || 0)} pts this week</div>
-                      <div className="text-[10px] text-slate-400">{(gamify.points || 0)} total effort pts</div>
+                  ) : sitrep ? (
+                    <p className="text-xs text-slate-300 leading-relaxed italic">{sitrep.slice(0, 280)}{sitrep.length > 280 ? '...' : ''}</p>
+                  ) : (
+                    <div className="space-y-2">
+                      <p className="text-xs text-slate-500 italic">Awaiting vox-signal...</p>
+                      <button onClick={generateSitrep} className="text-[10px] px-3 py-1.5 rounded-lg font-bold w-full" style={{ background: '#22d3ee18', color: '#22d3ee', border: '1px solid #22d3ee30' }}>
+                        📡 Generate Briefing
+                      </button>
                     </div>
-                  </div>}
-                </div>}
-                {/* Motivational quote — variable reward */}
-                <div className="mt-3 p-3 rounded-xl text-xs text-slate-600 italic leading-relaxed" style={{ background: `${accent}08`, border: `1px solid ${accent}15` }}>
-                  "{isSM ? smMotivation : todayMotivation}"
+                  )}
+                  {streak > 0 && <div className="mt-2 text-[10px] font-bold text-orange-400">🔥 {streak}-day streak</div>}
                 </div>
-              </Card>
+              </div>
 
               {/* Right: Directives of the Day */}
               <Card smMode={isSM} accent={accent} className="p-5">
@@ -20336,8 +20380,8 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
             {/* ── BRIDGE SUB-TABS ── */}
             <div className="flex gap-1 p-1 rounded-xl" style={{ background: isSM ? 'rgba(0,80,80,0.08)' : '#f1f5f9', border: isSM ? '1px solid rgba(0,200,200,0.15)' : '1px solid #e2e8f0' }}>
               {[
-                { id: 'tempo',     label: '📊 Chronos-Scan',     desc: 'Study activity' },
-                { id: 'readiness', label: '🚦 Combat Readiness',  desc: 'Exam preparedness' }
+                { id: 'tempo',     label: '📅 This Week',         desc: 'Study activity' },
+                { id: 'readiness', label: '🎯 Subject Status',    desc: 'Exam preparedness' }
               ].map(bt => (
                 <button key={bt.id} onClick={() => setBridgeSubTab(bt.id)}
                   className="flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all"
@@ -20368,7 +20412,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                 <div className="space-y-3">
                   <Card smMode={isSM} accent={accent} className="p-5">
                     <div className="flex items-center justify-between mb-3">
-                      <div className="text-sm font-semibold text-slate-700">Chronos-Scan — This Week</div>
+                      <div className="text-sm font-semibold text-slate-700">This Week — Study Activity</div>
                       <button onClick={() => { setIntelSubTab('activity'); safeSetTab('intel'); }} className="text-[10px] font-medium" style={{ color: accent }}>Full Intel →</button>
                     </div>
                     <div className="flex items-end gap-2 h-16">
@@ -20387,7 +20431,12 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                         );
                       })}
                     </div>
-                    <div className="flex gap-3 mt-4">
+                    {(() => {
+                      const weekSessionCount = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].reduce((acc, _, di) => acc + (bDayTotals[bWeekDays[di]]?.count || 0), 0);
+                      const weekTotalMins = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].reduce((acc, _, di) => acc + (bDayTotals[bWeekDays[di]]?.minutes || 0), 0);
+                      return <div className="text-[11px] text-slate-500 text-center mt-2 mb-1">{weekSessionCount} session{weekSessionCount !== 1 ? 's' : ''} · {Math.round(weekTotalMins / 60 * 10) / 10}h this week</div>;
+                    })()}
+                    <div className="flex gap-3 mt-2">
                       {[
                         { label: 'This week pts', val: gamify.weeklyPoints || 0, col: '#10b981' },
                         { label: 'Sessions (30d)', val: bLast30.length, col: accent },
@@ -20404,7 +20453,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
               );
             })()}
 
-            {/* ── v37 SUBJECT INTEL STRIP ── */}
+            {/* ── SUBJECT STATUS ── */}
             {bridgeSubTab === 'readiness' && (() => {
               const allGradedSessions = repo.filter(r => r.type === 'study' && r.aiGrade);
               const daysSinceDate = (dateStr) => {
@@ -20444,18 +20493,18 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                             )}
                             <div className="flex gap-1.5 mt-3">
                               <button onClick={() => { setWarRoomSubTab('drills'); safeSetTab('study'); }}
-                                className="flex-1 text-[10px] py-1.5 rounded-lg font-bold"
-                                style={{ background: '#fef2f2', color: '#ef4444', border: '1px solid #fecaca' }}>
+                                className="flex-1 text-[11px] py-2 rounded-lg font-black"
+                                style={{ background: '#ef4444', color: '#fff' }}>
                                 ⚔️ Drill
                               </button>
                               <button onClick={() => { setWarRoomSubTab('combat'); safeSetTab('study'); }}
-                                className="flex-1 text-[10px] py-1.5 rounded-lg font-bold"
-                                style={{ background: '#eff6ff', color: '#2563eb', border: '1px solid #bfdbfe' }}>
+                                className="flex-1 text-[11px] py-2 rounded-lg font-black"
+                                style={{ background: '#2563eb', color: '#fff' }}>
                                 📝 Exam
                               </button>
                               <button onClick={() => { setFieldManualSubject(subject); setTutorMode('fieldmanual'); safeSetTab('tutor'); }}
-                                className="flex-1 text-[10px] py-1.5 rounded-lg font-bold"
-                                style={{ background: '#f0fdf4', color: '#16a34a', border: '1px solid #bbf7d0' }}>
+                                className="flex-1 text-[11px] py-2 rounded-lg font-black"
+                                style={{ background: '#16a34a', color: '#fff' }}>
                                 📖 Guide
                               </button>
                             </div>
@@ -20474,6 +20523,41 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
               );
             })()}
 
+
+            {/* ── RECENT SESSIONS STRIP ── */}
+            {(() => {
+              const recentSessions = repo.filter(r => r.type === 'study' && (r.aiGrade || r.grade)).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+              if (recentSessions.length === 0) return null;
+              return (
+                <div>
+                  <div className="flex items-center gap-2 mb-2 px-1">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">📚 Recent Sessions</span>
+                    <div className="h-px flex-1 bg-slate-200" />
+                    <button onClick={() => { setIntelSubTab('fieldreports'); safeSetTab('intel'); }} className="text-[10px] font-medium" style={{ color: accent }}>All →</button>
+                  </div>
+                  <div className="space-y-1.5">
+                    {recentSessions.map((session, i) => {
+                      const g = session.aiGrade || session.grade;
+                      const gradeColor = g >= 6 ? '#10b981' : g >= 4 ? '#f59e0b' : '#ef4444';
+                      const subColor = getSubjectColor(session.subject || session.subjectName);
+                      return (
+                        <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-xl" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                          <div className="w-2 h-8 rounded-full flex-shrink-0" style={{ background: subColor }} />
+                          <div className="flex-1 min-w-0">
+                            <div className="text-xs font-semibold text-slate-700 truncate">{(session.subject || session.subjectName || 'Study session').split(' ').slice(0, 3).join(' ')}</div>
+                            <div className="text-[10px] text-slate-400 truncate">{session.topic || 'General review'}</div>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white" style={{ background: gradeColor }}>{g}</div>
+                            <div className="text-[9px] text-slate-400">{session.date ? new Date(session.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : ''}</div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* ── INVESTMENT LOOP (Eyal: reward history + streak) ── */}
             {(streak > 0 || gamify.totalQuestions > 0) && (
@@ -20801,6 +20885,150 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
         })()}
 
         </>)}
+        {/* ══ v72 DAILY ORDERS OVERLAY ══ */}
+        {dailyOrdersOpen && (
+          <div className="fixed inset-0 z-[9998] flex items-start justify-center p-4 overflow-y-auto"
+            style={{ background: 'rgba(0,0,0,0.88)', backdropFilter: 'blur(6px)' }}>
+            <div className="w-full max-w-lg mt-4 mb-8 rounded-3xl overflow-hidden shadow-2xl"
+              style={{ background: '#1a1209', border: '2px solid #d4a01780' }}>
+              {/* Parchment header */}
+              <div className="px-5 py-4 flex items-center justify-between" style={{ background: '#2d1f0a', borderBottom: '2px solid #d4a01740' }}>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">📜</span>
+                  <div>
+                    <div className="text-sm font-black text-amber-300 uppercase tracking-widest">Daily Orders</div>
+                    <div className="text-[9px] text-amber-600">{new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
+                  </div>
+                </div>
+                <button onClick={() => setDailyOrdersOpen(false)}
+                  className="text-[10px] font-bold px-3 py-1.5 rounded-lg transition-all"
+                  style={{ background: '#d4a01720', color: '#d4a017', border: '1px solid #d4a01740' }}>
+                  Understood ✕
+                </button>
+              </div>
+
+              <div className="p-5 space-y-5">
+
+                {/* SECTION I — Today's Missions */}
+                <div>
+                  <div className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-500 mb-2 flex items-center gap-2">
+                    <span>⚔️</span> Section I — Today's Missions
+                    <div className="h-px flex-1 bg-amber-800/40" />
+                  </div>
+                  {missionSlates ? (
+                    <div className="space-y-2">
+                      {[missionSlates.alpha, missionSlates.beta, missionSlates.gamma].filter(Boolean).map((slate, idx) => {
+                        const slColors = { ALPHA: '#f59e0b', BETA: '#ef4444', GAMMA: '#06b6d4' };
+                        const sc = slColors[slate.label] || '#f59e0b';
+                        return (
+                          <div key={idx} className="flex items-center gap-3 px-3 py-2.5 rounded-xl"
+                            style={{ background: `${sc}12`, border: `1px solid ${sc}30` }}>
+                            <span className="text-[10px] font-black px-1.5 py-0.5 rounded uppercase" style={{ background: sc, color: '#000' }}>{slate.label}</span>
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs font-bold text-amber-200">{slate.subject}</div>
+                              <div className="text-[10px] text-slate-400">{slate.topic} · {slate.paper}</div>
+                            </div>
+                            <span className="text-[9px] text-slate-500">~45min</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      {userSubjects.slice(0, 3).map((s, i) => {
+                        const subColor = getSubjectColor(s.name);
+                        return (
+                          <div key={i} className="flex items-center gap-3 px-3 py-2.5 rounded-xl" style={{ background: `${subColor}12`, border: `1px solid ${subColor}30` }}>
+                            <div className="w-2 h-2 rounded-full" style={{ background: subColor }} />
+                            <div className="flex-1"><div className="text-xs font-bold text-amber-200">{s.name}</div><div className="text-[10px] text-slate-400">General review</div></div>
+                            <span className="text-[9px] text-slate-500">~45min</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* SECTION II — This Week's Focus */}
+                <div>
+                  <div className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-500 mb-2 flex items-center gap-2">
+                    <span>🎯</span> Section II — This Week's Focus
+                    <div className="h-px flex-1 bg-amber-800/40" />
+                  </div>
+                  <div className="space-y-2">
+                    {userSubjects.slice(0, 2).map((s, i) => {
+                      const subColor = getSubjectColor(s.name);
+                      const sessions = repo.filter(r => r.type === 'study' && (r.subject === s.name || r.subjectName === s.name));
+                      const grades = sessions.map(r => r.aiGrade || r.grade).filter(Boolean);
+                      const avg = grades.length > 0 ? Math.round(grades.reduce((a,b) => a+b, 0) / grades.length * 10) / 10 : null;
+                      const readinessPct = avg ? Math.round((avg / 7) * 100) : 0;
+                      const statusLabel = readinessPct >= 70 ? 'Combat Ready' : readinessPct >= 50 ? 'Developing' : 'Critical Gap';
+                      const statusColor = readinessPct >= 70 ? '#10b981' : readinessPct >= 50 ? '#f59e0b' : '#ef4444';
+                      return (
+                        <div key={i} className="px-3 py-2.5 rounded-xl" style={{ background: `${subColor}10`, border: `1px solid ${subColor}25` }}>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <div className="text-xs font-bold text-amber-200">{s.name.split(' ').slice(0, 3).join(' ')}</div>
+                            <span className="text-[9px] font-bold px-2 py-0.5 rounded" style={{ background: statusColor + '20', color: statusColor }}>{statusLabel}</span>
+                          </div>
+                          <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                            <div className="h-full rounded-full" style={{ width: `${readinessPct}%`, background: statusColor }} />
+                          </div>
+                          <div className="text-[9px] text-slate-500 mt-1">{avg ? `Avg G${avg} · ` : ''}{sessions.length} session{sessions.length !== 1 ? 's' : ''}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* SECTION III — Commander's Briefing */}
+                <div>
+                  <div className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-500 mb-2 flex items-center gap-2">
+                    <span>📡</span> Section III — Commander's Briefing
+                    <div className="h-px flex-1 bg-amber-800/40" />
+                  </div>
+                  <div className="px-3 py-3 rounded-xl" style={{ background: '#0f172a', border: '1px solid #1e3a4a' }}>
+                    {sitrepLoading ? (
+                      <div className="flex items-center gap-2 text-xs text-cyan-400/60">
+                        <Loader2 className="w-3 h-3 animate-spin" /><span className="italic">Cogitator arrays processing...</span>
+                      </div>
+                    ) : sitrep ? (
+                      <p className="text-xs text-slate-300 leading-relaxed italic">{sitrep}</p>
+                    ) : (
+                      <p className="text-xs text-slate-500 italic">No briefing yet — close and tap 🔄 on the Today tab.</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* SECTION IV — One Thing */}
+                <div>
+                  <div className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-500 mb-2 flex items-center gap-2">
+                    <span>🔴</span> Section IV — Priority Order
+                    <div className="h-px flex-1 bg-amber-800/40" />
+                  </div>
+                  <div className="px-4 py-3 rounded-xl text-center" style={{ background: '#78350f', border: '1px solid #f59e0b40' }}>
+                    {(() => {
+                      const prioritySlate = missionSlates?.alpha || (userSubjects[0] ? { subject: userSubjects[0].name, topic: 'your weakest area', paper: 'P1' } : null);
+                      return prioritySlate ? (
+                        <>
+                          <div className="text-[9px] text-amber-600 uppercase tracking-widest mb-1">Your most important task right now:</div>
+                          <div className="text-sm font-black text-amber-300">{prioritySlate.subject}</div>
+                          <div className="text-xs text-amber-500 mt-0.5">{prioritySlate.topic} — Begin immediately.</div>
+                          <button onClick={() => { setDailyOrdersOpen(false); const si = userSubjects.findIndex(s => s.name === prioritySlate.subject); if (si >= 0) setActiveSubjectIdx(si); setStudyTopic(prioritySlate.topic || ''); safeSetTab('study'); }}
+                            className="mt-3 px-6 py-2 rounded-xl text-xs font-black uppercase tracking-wider"
+                            style={{ background: '#f59e0b', color: '#000' }}>
+                            ⚔️ Deploy Now
+                          </button>
+                        </>
+                      ) : <div className="text-xs text-amber-600">Set up your subjects in Profile to receive orders.</div>;
+                    })()}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ══ v52 STUDY THIS OVERLAY ══ */}
         {studyThisQuestion && (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
