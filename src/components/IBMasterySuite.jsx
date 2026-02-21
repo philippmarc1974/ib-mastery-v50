@@ -455,11 +455,15 @@ function generateBattlePlanData(profile, existingMaster) {
   const subjectVelocities = subjects.map(s => ({
     name: s.name,
     velocity: computeVelocity(s.currentGrade || 4, s.targetGrade || 7, daysUntilExam),
-    topics: Object.keys(SUBJECT_FRAMEWORKS).find(k =>
-      k.toLowerCase().includes((s.name || '').toLowerCase().split(' ')[0])
-    ) ? Object.keys(SUBJECT_FRAMEWORKS[Object.keys(SUBJECT_FRAMEWORKS).find(k =>
-      k.toLowerCase().includes((s.name || '').toLowerCase().split(' ')[0])
-    )]?.papers || {}) : ['General Review']
+    topics: (() => {
+      const sName = (s.name || '').toLowerCase();
+      const fwKey = Object.keys(SUBJECT_FRAMEWORKS).find(k => {
+        const kl = k.toLowerCase();
+        // Exact match first, then first-word match, then any-word match
+        return kl === sName || kl.startsWith(sName.split(' ')[0]) || sName.split(' ').some(w => w.length > 3 && kl.includes(w));
+      });
+      return fwKey ? Object.keys(SUBJECT_FRAMEWORKS[fwKey]?.papers || {}) : ['General Review'];
+    })()
   }));
   const totalVelocity = subjectVelocities.reduce((s, v) => s + v.velocity, 0) || 1;
   for (let day = 0; day < 90; day++) {
@@ -508,7 +512,7 @@ function runWeeklyInterceptData(crusadeActive, repo) {
   const newActive = JSON.parse(JSON.stringify(crusadeActive));
   const heresy = [...new Set([...(newActive.heresy || []), ...heresyClusters.map(c => c.subject)])];
   // Replace next 3 scheduled days with remediation
-  const upcoming = (newActive.scheduledDays || []).filter(d => d.day >= Math.floor((now - Date.now()) / 86400000)).slice(0, 3);
+  const upcoming = (newActive.scheduledDays || []).slice(0, 3); // next 3 scheduled days
   for (let i = 0; i < Math.min(3, heresyClusters.length); i++) {
     const slot = upcoming[i];
     if (slot) slot.subject = heresyClusters[i].subject;
@@ -621,9 +625,11 @@ function calculateWarFitnessData(subject, repo) {
 function checkExamEveData(userSubjects) {
   const now = Date.now();
   for (const s of (userSubjects || [])) {
-    const examDate = s.examDate ? new Date(s.examDate) : new Date('2026-05-16');
+    // Only trigger if the student has explicitly set an exam date
+    if (!s.examDate) continue;
+    const examDate = new Date(s.examDate);
     const days = Math.floor((examDate - now) / 86400000);
-    if (days < 2) return true;
+    if (days >= 0 && days < 2) return true;
   }
   return false;
 }
@@ -12760,7 +12766,7 @@ For EACH question, you MUST provide:
         source: finalQs.some(q => q.scanBase64) ? 'scan' : finalQs.some(q => q.isMCQ) ? 'mcq' : 'typed',
         totalMarks: totalPossibleMarks || null, marksAwarded: totalMarksAwarded || null,
         questions: enrichedQuestions, summary: summaryParsed,
-        grading: text, grade, totalTime, date: new Date().toISOString(),
+        grading: text, grade, aiGrade: grade, totalTime, date: new Date().toISOString(),
         fogOfWar: fogOfWarActive || false,
         weightMultiplier: fogOfWarActive ? 2.0 : 1.0,
       });
