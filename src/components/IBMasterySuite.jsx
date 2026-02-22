@@ -367,7 +367,71 @@ const SKIN_CSS = {
 const getSkinCSS = (themeId) => SKIN_CSS[themeId] || SKIN_CSS.default;
 
 /* ═══════════════ CONSTANTS ═══════════════ */
-const STORE = { progress: 'ib-progress-v2', repo: 'ib-repo-v2', docs: 'ib-docs-v2', profile: 'ib-profile-v2', gamify: 'ib-gamify-v1', planner: 'ib-planner-v1', battlePlan: 'ib-battleplan-v1', rewards: 'ib-rewards-v1', rewardHistory: 'ib-reward-hist-v1', knowledgeBank: 'ib-knowledge-v2', gDrive: 'ib-gdrive-v1', remarkableSettings: 'ib-remarkable-v1', parentMode: 'ib-parent-mode-v1', questionDB: 'ib-qdb-v1', questionHistory: 'ib-qhist-v1', msnSessions: 'ib-msn-sessions-v1', crusadeMaster: 'ib-crusade-master-v1', crusadeActive: 'ib-crusade-active-v1', crusadeGhost: 'ib-crusade-ghost-v1', cognitiveLoad: 'ib-cognitive-load-v1', fogOfWarPref: 'ib-fog-of-war-v1' };
+const STORE = { progress: 'ib-progress-v2', repo: 'ib-repo-v2', docs: 'ib-docs-v2', profile: 'ib-profile-v2', gamify: 'ib-gamify-v1', planner: 'ib-planner-v1', battlePlan: 'ib-battleplan-v1', rewards: 'ib-rewards-v1', rewardHistory: 'ib-reward-hist-v1', knowledgeBank: 'ib-knowledge-v2', gDrive: 'ib-gdrive-v1', remarkableSettings: 'ib-remarkable-v1', parentMode: 'ib-parent-mode-v1', questionDB: 'ib-qdb-v1', questionHistory: 'ib-qhist-v1', msnSessions: 'ib-msn-sessions-v1', crusadeMaster: 'ib-crusade-master-v1', crusadeActive: 'ib-crusade-active-v1', crusadeGhost: 'ib-crusade-ghost-v1', cognitiveLoad: 'ib-cognitive-load-v1', fogOfWarPref: 'ib-fog-of-war-v1', confidence: 'ib-confidence-v1' };
+
+/* ═══════════════ TRAFFIC LIGHT QUESTION STATUS ═══════════════ */
+const getQuestionTrafficLight = (q) => {
+  // Green: approved, quality-checked clean, or has linked mark scheme
+  if (q.qdbStatus === 'approved' || (q.qdbStatus === 'quality-checked' && !q._qcFlagged)) return 'green';
+  if (q.linkedMarkScheme || q.aiAnswer?.source === 'past-paper-official') return 'green';
+  // Red: AI-generated unchecked, or flagged by quality/style check
+  if (q.qdbStatus === 'ai-generated') return 'red';
+  if (q._qcFlagged || q._scFailed) return 'red';
+  // Orange: everything else (pre-built, vault, imported — pending review)
+  return 'orange';
+};
+const TRAFFIC_COLORS = { green: '#10b981', orange: '#f59e0b', red: '#ef4444' };
+const TRAFFIC_LABELS = { green: 'Live', orange: 'Pending', red: 'Review' };
+
+/* ═══════════════ SANDBOX DEMO DATA ═══════════════ */
+const buildDemoData = () => {
+  const now = new Date();
+  const d = (daysAgo) => new Date(now.getTime() - daysAgo * 86400000).toISOString();
+  const subjects = [
+    { name: 'Mathematics AI', level: 'hl', currentGrade: 4, targetGrade: 7, examDate: '2026-05-08' },
+    { name: 'Physics', level: 'hl', currentGrade: 5, targetGrade: 6, examDate: '2026-05-12' },
+    { name: 'English Lang & Lit', level: 'sl', currentGrade: 5, targetGrade: 6, examDate: '2026-05-06' },
+    { name: 'History', level: 'hl', currentGrade: 3, targetGrade: 6, examDate: '2026-05-15' }
+  ];
+  const mkSession = (subj, paper, grade, marks, total, daysAgo, topic) => ({
+    id: `demo-${Date.now()}-${Math.random().toString(36).slice(2,6)}`,
+    type: 'study', msn: `MSN-DEMO-${subj.replace(/[^A-Z]/gi,'').slice(0,4).toUpperCase()}-${daysAgo}`,
+    subject: subj, subjectName: subj, topic, preset: 'full', presetLabel: 'Full Paper',
+    paperType: paper, examName: `${subj} ${paper}`, source: 'typed',
+    totalMarks: total, marksAwarded: marks,
+    questions: Array.from({length: 6}, (_, i) => ({
+      id: `dq-${i}`, num: i+1, text: `Demo question ${i+1} on ${topic}`,
+      marks: Math.ceil(total/6), answer: 'Demo answer', skipped: false, time: 180000, scanBase64: null, isMCQ: false, subject: subj
+    })),
+    summary: { strengths: `Good understanding of core ${topic} concepts`, improvements: `Need more practice with complex ${topic} problems`, criticalGaps: grade < 5 ? `Weak on multi-step ${topic} calculations` : '', actions: `Review ${topic} worked examples`, syllabusAlignment: 75 },
+    grading: `Grade: ${grade}/7. ${marks}/${total} marks.`, grade, aiGrade: grade,
+    totalTime: 3600000 + Math.random() * 1800000, date: d(daysAgo), fogOfWar: false, weightMultiplier: 1
+  });
+  const repo = [
+    mkSession('Mathematics AI', 'Paper 1', 4, 32, 80, 20, 'Number & Algebra'),
+    mkSession('Mathematics AI', 'Paper 2', 5, 45, 80, 12, 'Functions'),
+    mkSession('Physics', 'Paper 1', 5, 24, 40, 18, 'Mechanics'),
+    mkSession('Physics', 'Paper 2', 5, 38, 65, 8, 'Waves & Electromagnetism'),
+    mkSession('English Lang & Lit', 'Paper 1', 5, 18, 30, 16, 'Textual Analysis'),
+    mkSession('English Lang & Lit', 'Paper 2', 6, 22, 30, 6, 'Comparative Essay'),
+    mkSession('History', 'Paper 1', 3, 10, 30, 14, 'Source Analysis'),
+    mkSession('History', 'Paper 2', 4, 18, 45, 4, 'Essay Writing — Cold War')
+  ];
+  const progress = {};
+  repo.forEach(s => {
+    if (!progress[s.subject]) progress[s.subject] = { questionsAnswered: 0, correctAnswers: 0, weakTopics: [], strongTopics: [], grades: [] };
+    progress[s.subject].questionsAnswered += s.questions.length;
+    progress[s.subject].correctAnswers += Math.round(s.questions.length * (s.grade / 7));
+    progress[s.subject].grades.push(s.grade);
+    if (s.grade < 5) progress[s.subject].weakTopics.push(s.topic);
+    else progress[s.subject].strongTopics.push(s.topic);
+  });
+  progress['History'].weakTopics.push('Source Analysis');
+  const gamify = { xp: 480, points: 156, streak: 5, lastStudyDate: d(0).slice(0,10), totalQuestions: 64, totalMinutes: 420, bestGrade: 6, maxImprove: 2, perfectSessions: 1, plansCompleted: 2, weeksCompleted: 2, unlocked: ['first_session','week_warrior'], subjectsToday: [], unlockedMedals: ['recruit','initiate','scholar'], personalBests: 3 };
+  const cognitiveLoad = { 'Physics': { sessions: [{ intensity: 'high', date: now.getTime() - 3600000 }, { intensity: 'high', date: now.getTime() - 7200000 }, { intensity: 'medium', date: now.getTime() - 14400000 }], fatigued: true, fatiguedUntil: now.getTime() + 14400000, lastUpdated: now.getTime() } };
+  const confidence = { 'Mathematics AI': 3, 'Physics': 6, 'English Lang & Lit': 5, 'History': 4 };
+  return { profile: { name: 'Alex', subjects, theme: 'spacemarine', accent: '#00d4ff' }, repo, progress, gamify, cognitiveLoad, confidence };
+};
 
 // Generate Mission Serial Number: MSN-[SUBJ]-[YYYYMMDD]-[HHMM]-[4charHash]
 const generateMSN = (subjectName) => {
@@ -8451,6 +8515,13 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [settingsSubTab, setSettingsSubTab] = useState('upload');
   const [uploadCategoryOverride, setUploadCategoryOverride] = useState('auto');
   const [kbSection, setKbSection] = useState('browse'); // browse | quality | compliance
+  const [subjectConfidence, setSubjectConfidence] = useState({});
+  const [lastStyleCheckDate, setLastStyleCheckDate] = useState(null);
+  const [lastStyleCheckResult, setLastStyleCheckResult] = useState(null);
+  const [lastQcDate, setLastQcDate] = useState(null);
+  const [lastQcResult, setLastQcResult] = useState(null);
+  const [kbExpandedSubject, setKbExpandedSubject] = useState(null);
+  const [kbExpandedTopic, setKbExpandedTopic] = useState(null);
   const [styleComplianceRunning, setStyleComplianceRunning] = useState(false);
   const [styleComplianceResults, setStyleComplianceResults] = useState(null); // { subject, total, passed, failed, results[] }
   // ── v50 new state ──
@@ -8939,6 +9010,7 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
       try { const r = await window.storage.get(STORE.crusadeGhost); if (r?.value) setCrusadeGhostData(JSON.parse(r.value)); } catch {}
       try { const r = await window.storage.get(STORE.cognitiveLoad); if (r?.value) setCognitiveLoadData(JSON.parse(r.value)); } catch {}
       try { const r = await window.storage.get(STORE.fogOfWarPref); if (r?.value) setFogOfWarActive(r.value === 'true'); } catch {}
+      try { const r = await window.storage.get(STORE.confidence); if (r?.value) setSubjectConfidence(JSON.parse(r.value)); } catch {}
       clearTimeout(safetyTimer);
       setProfileLoaded(true); setLoading(false);
     })();
@@ -9714,6 +9786,9 @@ Return: {"pass":true/false,"issues":[],"missingCriteria":[],"extraCriteriaNeeded
     const failed = allResults.filter(r => !r.pass);
     setStyleComplianceResults({ subject: subjectName, total: allResults.length, passed, failed: failed.length, results: allResults, guideUsed: guide.name });
     setStyleComplianceRunning(false);
+    setLastStyleCheckDate(new Date().toLocaleDateString());
+    setLastStyleCheckResult(`${passed}/${allResults.length} passed`);
+    setKbSection('compliance'); // auto-navigate to results
     addToast(`Style check complete: ${passed}/${allResults.length} passed`, passed === allResults.length ? 'success' : 'warning');
   }, [docs, questionDB, addToast]);
 
@@ -13488,7 +13563,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
 
 
       {/* ═══ LEFT SIDEBAR ═══ */}
-      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col backdrop-blur-md transition-all duration-300 ${sidebarOpen ? 'w-52' : 'w-14'} overflow-hidden ${isSM ? 'sm-sidebar' : 'border-r border-slate-700/50 bg-slate-950/95'}`}>
+      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col backdrop-blur-md transition-all duration-300 ${sidebarOpen ? 'w-60' : 'w-20'} overflow-hidden ${isSM ? 'sm-sidebar' : 'border-r border-slate-700/50 bg-slate-950/95'}`}>
         {/* Logo area */}
         <div className={`flex items-center justify-between px-4 h-14 flex-shrink-0 ${isSM ? 'border-b border-cyan-500/10' : 'border-b border-slate-300/40'}`}>
           {sidebarOpen && <div>
@@ -13496,8 +13571,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             <h1 className={`text-sm font-bold tracking-tight ${isSM ? 'text-teal-700 font-mono uppercase' : 'text-white'}`}>{v('IB Study Companion')}</h1>
             <p className={`text-xs leading-none ${isSM ? 'text-cyan-700/50' : 'text-slate-500'}`}>{profile?.name} · {isSM ? 'Battle-Brother' : 'May 2026'}</p>
           </div>}
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-1.5 rounded-lg hover:bg-slate-200/70 text-slate-500 hover:text-white transition-colors flex-shrink-0">
-            {sidebarOpen ? <ChevronLeft className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg hover:bg-slate-200/70 text-slate-500 hover:text-white transition-colors flex-shrink-0">
+            {sidebarOpen ? <ChevronLeft className="w-5 h-5" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
@@ -13518,12 +13593,12 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   setSidebarOpen(false);
                 };
                 return <button key={item.id} onClick={handleClick}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all mb-0.5 ${isActive ? '' : 'text-slate-400 hover:text-slate-200 hover:bg-white/8'}`}
+                  className={`w-full flex items-center ${sidebarOpen ? 'gap-3 px-3' : 'justify-center px-1'} py-3 rounded-xl text-sm font-medium transition-all mb-1 ${isActive ? '' : 'text-slate-400 hover:text-slate-200 hover:bg-white/8'}`}
                   style={isActive
-                    ? { background: `${itemColor}1a`, color: itemColor, borderLeft: `3px solid ${itemColor}`, paddingLeft: '10px' }
-                    : { borderLeft: '3px solid transparent', paddingLeft: '10px' }}
+                    ? { background: `${itemColor}1a`, color: itemColor, borderLeft: `3px solid ${itemColor}`, paddingLeft: sidebarOpen ? '10px' : '4px' }
+                    : { borderLeft: '3px solid transparent', paddingLeft: sidebarOpen ? '10px' : '4px' }}
                   title={!sidebarOpen ? item.label : undefined}>
-                  <NavIcon id={item.id} color={isActive ? itemColor : '#94a3b8'} size={22} />
+                  <NavIcon id={item.id} color={isActive ? itemColor : '#94a3b8'} size={sidebarOpen ? 28 : 44} />
                   {sidebarOpen && <span className="truncate">{item.label}</span>}
                 </button>;
               })}
@@ -13564,7 +13639,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
       {/* ═══ MAIN CONTENT ═══ */}
       {/* Overlay to close sidebar when open */}
       {sidebarOpen && <div className="fixed inset-0 z-40" onClick={() => setSidebarOpen(false)} />}
-      <div className={`skin-content flex-1 min-h-screen transition-all duration-300 ${sidebarOpen ? 'ml-52' : 'ml-14'} ${fontSize === 'large' ? 'text-base' : fontSize === 'small' ? 'text-xs' : 'text-sm'}`}
+      <div className={`skin-content flex-1 min-h-screen transition-all duration-300 ${sidebarOpen ? 'ml-60' : 'ml-20'} ${fontSize === 'large' ? 'text-base' : fontSize === 'small' ? 'text-xs' : 'text-sm'}`}
         style={{ background: isSM ? '#e8f0f2' : '#f8fafc' }}
         onClick={() => { if (sidebarOpen) setSidebarOpen(false); if (showNotifications) setShowNotifications(false); }}>
         {/* Top bar */}
@@ -18234,6 +18309,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
               setQcResults(res);
               setQcRunning(false);
               setKbSection('quality');
+              setLastQcDate(new Date().toLocaleDateString());
+              setLastQcResult(`${res.valid.length} OK, ${res.flagged.length} flagged`);
               addToast(`Quality check: ${res.valid.length} OK, ${res.flagged.length} need fixing`, res.flagged.length > 0 ? 'info' : 'success');
             }, 400);
           };
@@ -18386,6 +18463,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                       { id: 'auto', label: '✨ Auto-detect' },
                       { id: 'json', label: '📊 JSON Question Bank' },
                       { id: 'past_paper', label: '📝 Past Paper' },
+                      { id: 'mock_exam', label: '🎯 Mock Exam' },
                       { id: 'marking_scheme', label: '✅ Mark Scheme' },
                       { id: 'notes', label: '📓 Study Notes' },
                       { id: 'style_guide', label: '📐 Style Guide' }
@@ -18410,7 +18488,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                       e.preventDefault(); e.currentTarget.classList.remove('ring-2');
                       const files = Array.from(e.dataTransfer.files);
                       if (!files.length) return;
-                      const cat = uploadCategoryOverride === 'json' ? 'auto' : uploadCategoryOverride;
+                      const cat = uploadCategoryOverride === 'json' ? 'auto' : uploadCategoryOverride === 'mock_exam' ? 'past_paper' : uploadCategoryOverride;
                       if (uploadCategoryOverride === 'json') {
                         for (const f of files) if (f.name.endsWith('.json')) { await runImportCheck(f); }
                       } else {
@@ -18424,7 +18502,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                         if (uploadCategoryOverride === 'json') {
                           for (const f of files) if (f.name.endsWith('.json')) { await runImportCheck(f); }
                         } else {
-                          await handleFileUpload(files, uploadCategoryOverride === 'json' ? 'auto' : uploadCategoryOverride);
+                          await handleFileUpload(files, uploadCategoryOverride === 'json' ? 'auto' : uploadCategoryOverride === 'mock_exam' ? 'past_paper' : uploadCategoryOverride);
                         }
                         e.target.value = '';
                       }} />
@@ -18444,6 +18522,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                           <div className="mt-2 px-4 py-1.5 rounded-lg text-xs font-medium" style={{ background: accent + '15', color: accent }}>
                             {uploadCategoryOverride === 'auto' ? 'Will auto-detect type from filename' :
                              uploadCategoryOverride === 'json' ? 'JSON files → imported to Knowledge Base' :
+                             uploadCategoryOverride === 'mock_exam' ? 'Mock exams → filed as Past Papers for practice & grading' :
                              `Will be filed as: ${uploadCategoryOverride.replace(/_/g,' ')}`}
                           </div>
                         </div>
@@ -18635,59 +18714,209 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   )}
                 </Card>
 
-                {/* Browse section — per-subject breakdown */}
-                {kbSection === 'browse' && (
-                  <Card smMode={isSM} accent={accent} className="p-5">
-                    <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Questions by subject</div>
-                    {questionDB.length === 0 ? (
-                      <div className="text-center py-6">
-                        <div className="text-3xl mb-2">🧠</div>
-                        <div className="text-sm text-slate-500 mb-1">No questions imported yet</div>
-                        <div className="text-xs text-slate-400">Import a Past Paper JSON or upload documents to auto-extract questions</div>
+                {/* ══ v73 KB BROWSE — Pipeline Summary + Workshop/Library + Drill-Down ══ */}
+                {kbSection === 'browse' && (() => {
+                  // Classify all questions with traffic lights
+                  const allGreen = questionDB.filter(q => getQuestionTrafficLight(q) === 'green');
+                  const allOrange = questionDB.filter(q => getQuestionTrafficLight(q) === 'orange');
+                  const allRed = questionDB.filter(q => getQuestionTrafficLight(q) === 'red');
+                  const pctReady = questionDB.length ? Math.round((allGreen.length / questionDB.length) * 100) : 0;
+                  // Group helper
+                  const groupBySubject = (qs) => {
+                    const m = {};
+                    qs.forEach(q => { const s = q.subject || 'Unknown'; if (!m[s]) m[s] = []; m[s].push(q); });
+                    return Object.entries(m);
+                  };
+                  // Render a subject row with expandable accordion
+                  const renderSubjectRow = (subj, qs, pool) => {
+                    const cat = IB_CATALOGUE[subj];
+                    const green = qs.filter(q => getQuestionTrafficLight(q) === 'green').length;
+                    const orange = qs.filter(q => getQuestionTrafficLight(q) === 'orange').length;
+                    const red = qs.filter(q => getQuestionTrafficLight(q) === 'red').length;
+                    const isExpanded = kbExpandedSubject === `${pool}-${subj}`;
+                    // Group by topic for drill-down
+                    const byTopic = {};
+                    qs.forEach(q => { const t = q.topic || q.subtopic || 'General'; if (!byTopic[t]) byTopic[t] = []; byTopic[t].push(q); });
+                    return (
+                      <div key={`${pool}-${subj}`} className="rounded-xl overflow-hidden" style={{ border: '1px solid #e2e8f0' }}>
+                        <button onClick={() => setKbExpandedSubject(isExpanded ? null : `${pool}-${subj}`)}
+                          className="w-full p-3 text-left hover:bg-slate-50/50 transition-colors" style={{ background: '#f8fafc' }}>
+                          <div className="flex items-center gap-2">
+                            {isExpanded ? <ChevronDown className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />}
+                            <span className="text-base">{cat?.icon || '📚'}</span>
+                            <div className="font-semibold text-xs text-slate-700 flex-1">{subj}</div>
+                            <div className="flex items-center gap-2 text-[10px]">
+                              {green > 0 && <span className="flex items-center gap-0.5"><span className="w-2 h-2 rounded-full inline-block" style={{ background: TRAFFIC_COLORS.green }} />{green}</span>}
+                              {orange > 0 && <span className="flex items-center gap-0.5"><span className="w-2 h-2 rounded-full inline-block" style={{ background: TRAFFIC_COLORS.orange }} />{orange}</span>}
+                              {red > 0 && <span className="flex items-center gap-0.5"><span className="w-2 h-2 rounded-full inline-block" style={{ background: TRAFFIC_COLORS.red }} />{red}</span>}
+                              <span className="font-bold px-1.5 py-0.5 rounded" style={{ background: accent + '15', color: accent }}>{qs.length}</span>
+                            </div>
+                          </div>
+                          {/* Mini progress bar */}
+                          <div className="flex gap-0.5 h-1 mt-2 rounded-full overflow-hidden">
+                            {green > 0 && <div style={{ width: `${(green/qs.length)*100}%`, background: TRAFFIC_COLORS.green }} />}
+                            {orange > 0 && <div style={{ width: `${(orange/qs.length)*100}%`, background: TRAFFIC_COLORS.orange }} />}
+                            {red > 0 && <div style={{ width: `${(red/qs.length)*100}%`, background: TRAFFIC_COLORS.red }} />}
+                          </div>
+                        </button>
+                        {/* Level 2: Topic drill-down */}
+                        {isExpanded && (
+                          <div className="border-t border-slate-100 bg-white">
+                            {Object.entries(byTopic).map(([topic, tqs]) => {
+                              const tGreen = tqs.filter(q => getQuestionTrafficLight(q) === 'green').length;
+                              const tOrange = tqs.filter(q => getQuestionTrafficLight(q) === 'orange').length;
+                              const tRed = tqs.filter(q => getQuestionTrafficLight(q) === 'red').length;
+                              const topicKey = `${pool}-${subj}-${topic}`;
+                              const topicExpanded = kbExpandedTopic === topicKey;
+                              return (
+                                <div key={topic}>
+                                  <button onClick={() => setKbExpandedTopic(topicExpanded ? null : topicKey)}
+                                    className="w-full px-5 py-2 text-left hover:bg-slate-50/60 flex items-center gap-2 border-b border-slate-50">
+                                    {topicExpanded ? <ChevronDown className="w-3 h-3 text-slate-300" /> : <ChevronRight className="w-3 h-3 text-slate-300" />}
+                                    <span className="text-[11px] font-medium text-slate-600 flex-1">{topic}</span>
+                                    <div className="flex items-center gap-1.5 text-[9px]">
+                                      {tGreen > 0 && <span style={{ color: TRAFFIC_COLORS.green }}>●{tGreen}</span>}
+                                      {tOrange > 0 && <span style={{ color: TRAFFIC_COLORS.orange }}>●{tOrange}</span>}
+                                      {tRed > 0 && <span style={{ color: TRAFFIC_COLORS.red }}>●{tRed}</span>}
+                                      <span className="text-slate-400">{tqs.length} Qs</span>
+                                    </div>
+                                  </button>
+                                  {/* Level 3: Individual questions */}
+                                  {topicExpanded && (
+                                    <div className="bg-slate-50/30">
+                                      {tqs.slice(0, 20).map((q, qi) => {
+                                        const tl = getQuestionTrafficLight(q);
+                                        return (
+                                          <div key={q.id || qi} className="px-8 py-1.5 border-b border-slate-50 flex items-start gap-2">
+                                            <span className="w-2 h-2 rounded-full mt-1 flex-shrink-0" style={{ background: TRAFFIC_COLORS[tl] }} />
+                                            <div className="flex-1 min-w-0">
+                                              <div className="text-[10px] text-slate-600 truncate">{(q.text || '').replace(/\n/g, ' ').slice(0, 80)}</div>
+                                              <div className="flex gap-2 text-[9px] text-slate-400 mt-0.5">
+                                                <span>{q.marks || '?'} marks</span>
+                                                <span>{q.difficulty || '?'} diff</span>
+                                                <span>{q.source || q.qdbStatus}</span>
+                                              </div>
+                                            </div>
+                                            <span className="text-[9px] font-medium px-1 py-0.5 rounded" style={{ color: TRAFFIC_COLORS[tl], background: `${TRAFFIC_COLORS[tl]}12` }}>{TRAFFIC_LABELS[tl]}</span>
+                                          </div>
+                                        );
+                                      })}
+                                      {tqs.length > 20 && <div className="px-8 py-1.5 text-[10px] text-slate-400">+{tqs.length - 20} more questions</div>}
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
-                    ) : (() => {
-                      // Group by subject
-                      const bySubject = {};
-                      questionDB.forEach(q => {
-                        const s = q.subject || 'Unknown';
-                        if (!bySubject[s]) bySubject[s] = [];
-                        bySubject[s].push(q);
-                      });
-                      return (
-                        <div className="space-y-2">
-                          {Object.entries(bySubject).map(([subj, qs]) => {
-                            const withMS = qs.filter(q => q.linkedMarkScheme || q.aiAnswer?.source === 'past-paper-official').length;
-                            const aiGen = qs.filter(q => q.source === 'ai-generated').length;
-                            const prebuilt = qs.filter(q => q.qdbStatus === 'pre-built').length;
-                            const cat = IB_CATALOGUE[subj];
-                            return (
-                              <div key={subj} className="p-3 rounded-xl" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                                <div className="flex items-center gap-2 mb-1.5">
-                                  <span className="text-base">{cat?.icon || '📚'}</span>
-                                  <div className="font-semibold text-xs text-slate-700 flex-1">{subj}</div>
-                                  <div className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: accent + '15', color: accent }}>{qs.length} Qs</div>
-                                </div>
-                                <div className="flex gap-3 text-[10px] text-slate-500 flex-wrap">
-                                  {withMS > 0 && <span>✅ {withMS} with MS</span>}
-                                  {aiGen > 0 && <span>🤖 {aiGen} AI-gen</span>}
-                                  {prebuilt > 0 && <span>📚 {prebuilt} pre-built</span>}
-                                  <span>📝 {qs.length - withMS - aiGen - prebuilt} imported</span>
-                                </div>
-                              </div>
-                            );
-                          })}
+                    );
+                  };
+
+                  return (<>
+                    {/* Pipeline Status Summary Bar */}
+                    <Card smMode={isSM} accent={accent} className="p-4">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-3">Pipeline Status</div>
+                      <div className="grid grid-cols-4 gap-2 mb-3">
+                        <div className="text-center p-2 rounded-lg" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                          <div className="text-lg font-black text-slate-700">{questionDB.length}</div>
+                          <div className="text-[9px] text-slate-500">Total</div>
                         </div>
-                      );
-                    })()}
-                  </Card>
-                )}
+                        <div className="text-center p-2 rounded-lg" style={{ background: `${TRAFFIC_COLORS.green}08`, border: `1px solid ${TRAFFIC_COLORS.green}20` }}>
+                          <div className="text-lg font-black" style={{ color: TRAFFIC_COLORS.green }}>{allGreen.length}</div>
+                          <div className="text-[9px] text-slate-500">Live</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg" style={{ background: `${TRAFFIC_COLORS.orange}08`, border: `1px solid ${TRAFFIC_COLORS.orange}20` }}>
+                          <div className="text-lg font-black" style={{ color: TRAFFIC_COLORS.orange }}>{allOrange.length}</div>
+                          <div className="text-[9px] text-slate-500">Pending</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg" style={{ background: `${TRAFFIC_COLORS.red}08`, border: `1px solid ${TRAFFIC_COLORS.red}20` }}>
+                          <div className="text-lg font-black" style={{ color: TRAFFIC_COLORS.red }}>{allRed.length}</div>
+                          <div className="text-[9px] text-slate-500">Review</div>
+                        </div>
+                      </div>
+                      {/* Overall readiness bar */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-2 rounded-full overflow-hidden flex" style={{ background: '#e2e8f0' }}>
+                          {allGreen.length > 0 && <div style={{ width: `${(allGreen.length/Math.max(questionDB.length,1))*100}%`, background: TRAFFIC_COLORS.green }} />}
+                          {allOrange.length > 0 && <div style={{ width: `${(allOrange.length/Math.max(questionDB.length,1))*100}%`, background: TRAFFIC_COLORS.orange }} />}
+                          {allRed.length > 0 && <div style={{ width: `${(allRed.length/Math.max(questionDB.length,1))*100}%`, background: TRAFFIC_COLORS.red }} />}
+                        </div>
+                        <span className="text-[10px] font-bold" style={{ color: pctReady >= 70 ? TRAFFIC_COLORS.green : pctReady >= 40 ? TRAFFIC_COLORS.orange : TRAFFIC_COLORS.red }}>{pctReady}% ready</span>
+                      </div>
+                      {/* Last check dates */}
+                      <div className="flex gap-4 mt-2 text-[9px] text-slate-400">
+                        {lastQcDate && <span>Quality: {lastQcDate} — {lastQcResult}</span>}
+                        {lastStyleCheckDate && <span>Style: {lastStyleCheckDate} — {lastStyleCheckResult}</span>}
+                      </div>
+                    </Card>
+
+                    {questionDB.length === 0 ? (
+                      <Card smMode={isSM} accent={accent} className="p-5">
+                        <div className="text-center py-6">
+                          <div className="text-3xl mb-2">🧠</div>
+                          <div className="text-sm text-slate-500 mb-1">No questions imported yet</div>
+                          <div className="text-xs text-slate-400">Import a Past Paper JSON or upload documents to auto-extract questions</div>
+                        </div>
+                      </Card>
+                    ) : (<>
+                      {/* ── FIELD WORKSHOP (red + orange questions needing attention) ── */}
+                      {(allRed.length + allOrange.length) > 0 && (
+                        <Card smMode={isSM} accent="#f59e0b" className="p-5">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-base">🔧</span>
+                            <div className="text-xs font-bold uppercase tracking-wider text-amber-700 flex-1">Field Workshop</div>
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded" style={{ background: '#fef3c7', color: '#92400e' }}>{allRed.length + allOrange.length} need attention</span>
+                          </div>
+                          <p className="text-[10px] text-slate-500 mb-3">Questions awaiting quality check, style check, or manual review. Not yet in the Framework Library.</p>
+                          <div className="space-y-1.5">
+                            {groupBySubject([...allRed, ...allOrange]).map(([subj, qs]) => renderSubjectRow(subj, qs, 'workshop'))}
+                          </div>
+                          <div className="flex gap-2 mt-3">
+                            <button onClick={runQualityCheck} disabled={qcRunning}
+                              className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-[10px] font-bold"
+                              style={{ background: '#f59e0b', color: '#fff' }}>
+                              {qcRunning ? <><Loader2 className="w-3 h-3 animate-spin" /> Checking…</> : 'Quality Check All'}
+                            </button>
+                            <button onClick={() => currentSubject && runStyleCompliance(currentSubject.name)}
+                              disabled={styleComplianceRunning || !docs.some(d => d.category === 'style_guide')}
+                              className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-[10px] font-bold"
+                              style={{ background: '#3b82f6', color: '#fff', opacity: !docs.some(d => d.category === 'style_guide') ? 0.4 : 1 }}>
+                              {styleComplianceRunning ? <><Loader2 className="w-3 h-3 animate-spin" /> Scanning…</> : 'Style Check All'}
+                            </button>
+                          </div>
+                          {!docs.some(d => d.category === 'style_guide') && (
+                            <div className="text-[9px] text-amber-600 mt-1.5 text-center">Upload a Style Guide in Tribute Injection to enable Style Check</div>
+                          )}
+                        </Card>
+                      )}
+
+                      {/* ── FRAMEWORK LIBRARY (green questions — live and ready) ── */}
+                      <Card smMode={isSM} accent="#10b981" className="p-5">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-base">📗</span>
+                          <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex-1">Framework Library</div>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded" style={{ background: '#dcfce7', color: '#166534' }}>{allGreen.length} live</span>
+                        </div>
+                        <p className="text-[10px] text-slate-500 mb-3">Approved questions ready for Combat Simulations and mock exams.</p>
+                        {allGreen.length === 0 ? (
+                          <div className="text-center py-4 text-[11px] text-slate-400">No approved questions yet. Run Quality Check on the Workshop to promote questions here.</div>
+                        ) : (
+                          <div className="space-y-1.5">
+                            {groupBySubject(allGreen).map(([subj, qs]) => renderSubjectRow(subj, qs, 'library'))}
+                          </div>
+                        )}
+                      </Card>
+                    </>)}
+                  </>);
+                })()}
 
                 {/* ── KB FIELD RECOMMENDATIONS (v50) ── */}
                 {kbSection === 'browse' && userSubjects.length > 0 && (
                   <Card smMode={isSM} accent={accent} className="p-5 mt-3">
                     <div className="flex items-center justify-between mb-3">
-                      <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">📋 Field Recommendations</div>
-                      <div className="text-[10px] text-slate-400">AI analysis of your uploaded docs + weak areas</div>
+                      <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">📋 Topic Gaps</div>
+                      <div className="text-[10px] text-slate-400">AI analysis — which topics need more questions</div>
                     </div>
                     <div className="space-y-3">
                       {userSubjects.map(s => {
@@ -19069,6 +19298,44 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                         className="w-full py-2 rounded-xl text-xs font-medium flex items-center justify-center gap-2 text-slate-400 hover:text-red-400 transition-colors"
                         style={{ border: '1px solid #e2e8f0' }}>
                         <Trash2 className="w-3.5 h-3.5" /> Clear Session History
+                      </button>
+                    </div>
+                  </Card>
+
+                  {/* ── SANDBOX / DEMO MODE ── */}
+                  <Card smMode={isSM} accent={accent} className="p-5">
+                    <div className="flex items-center gap-2 mb-1"><User className="w-4 h-4" style={{ color: '#8b5cf6' }} /><h3 className="text-sm font-semibold text-slate-600">Sandbox Mode</h3></div>
+                    <p className="text-xs text-slate-500 mb-4">Load a pre-built demo profile ("Alex, IB Year 2, Day 21") with 3 weeks of study history, 8 exam sessions, gamification data, and active mission slates. Perfect for testing and demos.</p>
+                    <div className="flex flex-col gap-2">
+                      <button onClick={async () => {
+                        if (!confirm('Load demo data? This will REPLACE all current data with the "Alex" test profile.')) return;
+                        const demo = buildDemoData();
+                        setProfile(demo.profile); await window.storage.set(STORE.profile, JSON.stringify(demo.profile));
+                        setRepo(demo.repo); await window.storage.set(STORE.repo, JSON.stringify(demo.repo));
+                        setProgress(demo.progress); await window.storage.set(STORE.progress, JSON.stringify(demo.progress));
+                        setGamify(demo.gamify); await window.storage.set(STORE.gamify, JSON.stringify(demo.gamify));
+                        setCognitiveLoadData(demo.cognitiveLoad); await window.storage.set(STORE.cognitiveLoad, JSON.stringify(demo.cognitiveLoad));
+                        setSubjectConfidence(demo.confidence); await window.storage.set(STORE.confidence, JSON.stringify(demo.confidence));
+                        // Clear crusade so it auto-regenerates from new profile
+                        setCrusadeMasterData(null); setCrusadeActiveData(null);
+                        await window.storage.set(STORE.crusadeMaster, '').catch(()=>{});
+                        await window.storage.set(STORE.crusadeActive, '').catch(()=>{});
+                        addToast('Demo profile "Alex" loaded — 3 weeks of data injected', 'success');
+                      }}
+                        className="w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2"
+                        style={{ background: '#8b5cf6', color: '#fff' }}>
+                        <Zap className="w-4 h-4" /> Load Demo Data — "Alex, Day 21"
+                      </button>
+                      <button onClick={async () => {
+                        if (!confirm('⚠️ RESET TO FRESH? This wipes ALL data — profile, sessions, everything. Cannot be undone.')) return;
+                        for (const key of Object.values(STORE)) {
+                          try { await window.storage.set(key, ''); } catch {}
+                        }
+                        window.location.reload();
+                      }}
+                        className="w-full py-2 rounded-xl text-xs font-medium flex items-center justify-center gap-2 text-slate-400 hover:text-red-500 transition-colors"
+                        style={{ border: '1px solid #e2e8f0' }}>
+                        <RotateCcw className="w-3.5 h-3.5" /> Reset to Fresh — Wipe Everything
                       </button>
                     </div>
                   </Card>
@@ -20308,6 +20575,56 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
               )}
             </Card>
             </div>{/* end side-by-side grid */}
+
+            {/* ══ v73 CONFIDENCE VOX — Self-Assessment vs AI Reality ══ */}
+            {subjectStats.length > 0 && (
+              <Card smMode={isSM} accent={accent} className="p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <Radio className="w-4 h-4" style={{ color: accent }} />
+                  <h3 className={`text-xs font-bold uppercase tracking-wider ${isSM ? 'text-teal-700 font-mono' : 'text-slate-500'}`}>Confidence Vox — Self-Assessment</h3>
+                </div>
+                <p className="text-[10px] text-slate-400 mb-3">Rate your confidence per subject. The AI compares against your actual performance.</p>
+                <div className="space-y-3">
+                  {subjectStats.map(ss => {
+                    const conf = subjectConfidence[ss.name] ?? 5;
+                    const avg = ss.avgGrade ? parseFloat(ss.avgGrade) : null;
+                    const actual = avg ? Math.round((avg / 7) * 10) : null;
+                    const gap = actual !== null ? conf - actual : null;
+                    const gapLabel = gap === null ? '—' : gap > 2 ? '⚠️ Overconfident' : gap < -2 ? '💪 Underconfident' : '✓ Aligned';
+                    const gapColor = gap === null ? '#94a3b8' : gap > 2 ? '#ef4444' : gap < -2 ? '#3b82f6' : '#10b981';
+                    return (
+                      <div key={ss.name} className="p-3 rounded-xl" style={{ background: `${ss.accent}06`, border: `1px solid ${ss.accent}15` }}>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-sm">{ss.cat?.icon || '📚'}</span>
+                          <span className="text-xs font-semibold text-slate-700 flex-1">{ss.name}</span>
+                          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ color: gapColor, background: `${gapColor}12` }}>{gapLabel}</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[10px] text-slate-500">Your confidence</span>
+                              <span className="text-xs font-bold" style={{ color: ss.accent }}>{conf}/10</span>
+                            </div>
+                            <input type="range" min="1" max="10" value={conf}
+                              onChange={e => {
+                                const next = { ...subjectConfidence, [ss.name]: parseInt(e.target.value) };
+                                setSubjectConfidence(next);
+                                window.storage.set(STORE.confidence, JSON.stringify(next)).catch(() => {});
+                              }}
+                              className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
+                              style={{ accentColor: ss.accent, background: `linear-gradient(90deg, ${ss.accent} ${(conf/10)*100}%, #e2e8f0 ${(conf/10)*100}%)` }} />
+                          </div>
+                          <div className="text-center w-16 flex-shrink-0">
+                            <div className="text-[10px] text-slate-400 mb-0.5">AI Reality</div>
+                            <div className="text-lg font-black" style={{ color: actual !== null ? ss.accent : '#cbd5e1' }}>{actual !== null ? `${actual}/10` : '—'}</div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Card>
+            )}
 
             {/* ══ v52 MISSION SLATES ══ */}
             {missionSlates && (
