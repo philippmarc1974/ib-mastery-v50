@@ -9299,6 +9299,7 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   /* ── Subject change: reset tab-specific state ── */
   const subjectSwitchRef = useRef(false);
   const prevSubjectIdxRef = useRef(0);
+  const startStudySessionRef = useRef(null);
   useEffect(() => {
     setChatHistory([]); setChatInput('');
     setMgTopic(''); setMgContent('');
@@ -9532,6 +9533,9 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   useEffect(() => {
     if (sessionAutoStart && currentSubject && tab === 'study') {
       setSessionAutoStart(false);
+      setTimeout(() => {
+        if (startStudySessionRef.current) startStudySessionRef.current();
+      }, 200);
     }
   }, [sessionAutoStart, currentSubject, tab]);
 
@@ -10680,6 +10684,7 @@ Return ONLY a valid JSON array. For each question:
         const lostStreak = g.streak || 0;
         g.streak = 1; // reset
         if (lostStreak >= 3) addToast(`💔 ${lostStreak}-day streak lost! Start rebuilding today.`);
+        if (lostStreak > 3) setShowStreakLoss({ prevStreak: lostStreak });
       }
     }
     g.lastStudyDate = today;
@@ -11871,6 +11876,7 @@ Include questions that specifically address the TYPES of errors this student mak
     } catch (e) { addToast('Operation failed. Please try again.', 'error'); }
     setStudyGenerating(false);
   };
+  startStudySessionRef.current = startStudySession;
 
   const studySaveCurrentAnswer = () => {
     if (!studyQuestions.length) return;
@@ -14451,8 +14457,11 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
           </div>
         </div>}
 
-        {/* ═══ TIER 1: VICTORY ROYALE (Grade 7) ═══ */}
-        {celebration?.type === 'tier1' && <div className="fixed inset-0 z-[200] flex items-center justify-center backdrop-blur-md bg-black/80" onClick={() => setCelebration(null)}>
+        {/* ═══ TIER 1: VICTORY ROYALE (Grade 7) — V83: Ultramarines cathedral bg ═══ */}
+        {celebration?.type === 'tier1' && <div className="fixed inset-0 z-[200] flex items-center justify-center" onClick={() => setCelebration(null)}>
+          {isSM && <div className="absolute inset-0" style={{ backgroundImage: `url(${MARINES.VICTORY})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />}
+          <div className={`absolute inset-0 ${isSM ? 'bg-black/60' : 'backdrop-blur-md bg-black/80'}`} />
+          {isSM && <ConfettiBlast active={true} count={80} />}
           <div className={`text-center max-w-sm mx-4 p-8 rounded-3xl relative overflow-hidden ${isSM ? 'sm-card' : 'bg-white'}`}
             style={{ border: isSM ? '3px solid #d4a01780' : '3px solid #10b98180', boxShadow: '0 0 80px #10b98140', animation: 'celebrationPop 0.5s ease-out' }}>
             {[...Array(16)].map((_,i) => <div key={i} className="absolute w-2 h-2 rounded-full animate-bounce" style={{ top: `${5+Math.random()*35}%`, left: `${3+i*6}%`, background: ['#f59e0b','#10b981','#3b82f6','#ec4899','#8b5cf6','#f97316'][i%6], animationDelay: `${i*0.08}s`, opacity: 0.8 }} />)}
@@ -14558,6 +14567,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
         {showStreakLoss && <StreakLossBanner prevStreak={showStreakLoss.prevStreak} onClose={() => setShowStreakLoss(null)} />}
 
         <main className="px-4 sm:px-6 py-6 pb-20 w-[95%] max-w-6xl mx-auto">
+          {/* V83: Battle damage on all panels in SM mode */}
+          {isSM && <BattleDamage seed={tab} intensity="heavy" className="fixed inset-0 pointer-events-none z-[2]" />}
           {!currentSubject ? (
             <Card smMode={isSM} className="p-8 text-center"><GraduationCap className="w-12 h-12 text-slate-400 mx-auto mb-3" />
               <p className="text-slate-400">No subjects configured.</p>
@@ -14780,6 +14791,18 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 </div>;
               })()}
             </Card>}
+
+            {/* V83: Space Wolves storm panel — The Long Campaign */}
+            {isSM && (
+              <div className="relative rounded-xl overflow-hidden mt-4" style={{ height: '120px' }}>
+                <div className="absolute inset-0" style={{ backgroundImage: `url(${MARINES.CAMPAIGN})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                <div className="absolute inset-0 bg-black/50" />
+                <div className="relative z-10 p-4 h-full flex flex-col justify-end">
+                  <p className="text-white text-xs font-bold uppercase tracking-widest">The Long Campaign</p>
+                  <p className="text-slate-300 text-[10px] mt-1 italic">"A Space Marine does not ask how long the war will last. He asks only where the enemy stands."</p>
+                </div>
+              </div>
+            )}
 
           </div>
         )}
@@ -15480,12 +15503,23 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
         {(tab === 'study' || tab === 'exam') && (
           <div className="space-y-4">
             {/* ── WAR ROOM Sub-Tab Navigation ── */}
+            {/* V83: Black Legion War Room header */}
+            {!studyMode && isSM && (
+              <div className="relative overflow-hidden rounded-xl mb-4">
+                <div className="absolute inset-0" style={{ backgroundImage: `url(${MARINES.WAR_ROOM})`, backgroundSize: 'cover', backgroundPosition: 'center 30%' }} />
+                <div className="absolute inset-0 bg-black/75" />
+                <div className="relative z-10 p-5">
+                  <h1 className="text-2xl font-black text-white tracking-widest uppercase font-mono">Strategium</h1>
+                  <p className="text-slate-300 text-xs mt-1">War Room — Active Operations</p>
+                </div>
+              </div>
+            )}
             {!studyMode && (
               <div className="flex gap-1 p-1 rounded-xl" style={{ background: isSM ? 'rgba(0,80,80,0.08)' : '#f1f5f9', border: isSM ? '1px solid rgba(0,200,200,0.15)' : '1px solid #e2e8f0' }}>
                 {[
-                  { id: 'combat',  label: '⚔️ The Crucible of Will', desc: 'Full exam papers' },
-                  { id: 'drills',  label: '🎯 Combat Simulations',   desc: 'Quick fire questions' },
-                  { id: 'debrief', label: '📥 The Audit of Purity',  desc: 'Upload & grade' }
+                  { id: 'combat',  label: isSM ? '⚔️ The Crucible of Will' : '📝 Full Papers', desc: 'Full exam papers' },
+                  { id: 'drills',  label: isSM ? '🎯 Combat Simulations' : '🎯 Quick Practice',   desc: 'Quick fire questions' },
+                  { id: 'debrief', label: isSM ? '📥 The Audit of Purity' : '📥 Upload & Grade',  desc: 'Upload & grade' }
                 ].map(st => (
                   <button key={st.id} onClick={() => setWarRoomSubTab(st.id)}
                     className="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all"
@@ -15498,6 +15532,14 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     <div className="text-xs font-normal opacity-70 mt-0.5">{st.desc}</div>
                   </button>
                 ))}
+              </div>
+            )}
+
+            {/* V83: Blood Angels background during active session */}
+            {studyMode === 'active' && isSM && (
+              <div className="fixed inset-0 z-[1] pointer-events-none">
+                <div className="absolute inset-0" style={{ backgroundImage: `url(${MARINES.BATTLE})`, backgroundSize: 'cover', backgroundPosition: 'center top' }} />
+                <div className="absolute inset-0 bg-black/75" />
               </div>
             )}
 
@@ -16467,6 +16509,17 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 <Card smMode={isSM} accent={accent} className="p-6 text-center">
                   {studyResultGrade && <div className="text-6xl font-extrabold mb-2" style={{ color: gradeColor(studyResultGrade) }}>{studyResultGrade}</div>}
                   <div className="text-sm text-slate-400 mb-1">Estimated IB Grade</div>
+                  {/* V83 GAME-5: Grade 1-3 encouraging result */}
+                  {isSM && studyResultGrade && studyResultGrade <= 3 && (
+                    <div className="mt-4 text-center">
+                      <div className="text-3xl mb-2">🛡️</div>
+                      <h3 className="text-lg font-black text-white mb-2">The Warrior Endures</h3>
+                      <p className="text-slate-300 text-sm max-w-xs mx-auto">
+                        Even Space Marines fall in training. The difference is they always stand again.
+                        Your weak points are now known — that is intelligence, not failure.
+                      </p>
+                    </div>
+                  )}
                   <div className="text-xs text-slate-500 mb-3">{STUDY_PRESETS[studyPreset]?.label} · {studyTopic}</div>
                   <div className="flex items-center justify-center gap-4 text-xs text-slate-500 mb-4">
                     <span className="flex items-center gap-1"><Timer className="w-3 h-3" /> {studyFmtTimer(studyTimerElapsed)} / {studyFmtTimer(studyTimerTotal)} {studyOverTime && <span className="text-red-400">(over)</span>}</span>
@@ -19011,6 +19064,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
         {/* ═══════════ PROFILE ═══════════ */}
         {/* ═══════════ MY PROFILE (Kid Settings) ═══════════ */}
         {tab === 'settings' && (() => {
+          /* V83: Space Wolves library bg for Archivum */
+          const isArchivum = ['upload','past_papers','knowledge_base'].includes(settingsSubTab);
           const ARCHIVUM_TABS = [
             { id: 'upload',        label: '📤 Tribute Injection',       icon: '📤' },
             { id: 'past_papers',   label: '📋 Ancient Data-Slates',  icon: '📋' },
@@ -19198,9 +19253,16 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
           const totalWithMS = questionDB.filter(q => q.linkedMarkScheme || q.aiAnswer?.source === 'past-paper-official').length;
 
           return (
-          <div className="space-y-4">
+          <div className="space-y-4 relative">
+            {/* V83: Space Wolves library bg for Archivum */}
+            {isSM && isArchivum && (
+              <div className="fixed inset-0 z-[0] pointer-events-none">
+                <div className="absolute inset-0" style={{ backgroundImage: `url(${MARINES.ARCHIVES})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                <div className="absolute inset-0 bg-black/82" />
+              </div>
+            )}
             {/* ── Tab Navigation (no profile card) ── */}
-            <div className="rounded-2xl border" style={{ background: '#fff', borderColor: `${accent}25` }}>
+            <div className="rounded-2xl border relative z-10" style={{ background: '#fff', borderColor: `${accent}25` }}>
               <div className="flex gap-1 p-1 rounded-xl overflow-x-auto" style={{ background: "#f1f5f9", border: "1px solid #e2e8f0", scrollbarWidth: "none" }}>
                 {SUB_TABS.map(st => (
                   <button key={st.id} onClick={() => setSettingsSubTab(st.id)}
