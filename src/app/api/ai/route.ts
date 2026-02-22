@@ -15,6 +15,14 @@
  */
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
+import { initializeApp, cert, getApps } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
+
+if (!getApps().length && process.env.FIREBASE_ADMIN_KEY) {
+  initializeApp({
+    credential: cert(JSON.parse(process.env.FIREBASE_ADMIN_KEY)),
+  });
+}
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -31,6 +39,29 @@ function pickModel(isVision: boolean, maxTokens: number): string {
 }
 
 export async function POST(req: NextRequest) {
+  // ── AUTH CHECK ─────────────────────────────────────────────────
+  if (process.env.FIREBASE_ADMIN_KEY) {
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const idToken = authHeader.split("Bearer ")[1];
+    try {
+      await getAuth().verifyIdToken(idToken);
+    } catch {
+      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    }
+  }
+  // ── END AUTH ───────────────────────────────────────────────────
+
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error("[/api/ai] ANTHROPIC_API_KEY is not set");
+    return NextResponse.json(
+      { error: "Server configuration error" },
+      { status: 500 }
+    );
+  }
+
   try {
     const body = await req.json();
 
@@ -107,9 +138,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ content: [{ type: "text", text }] });
   } catch (error) {
-    console.error("AI API error:", error);
+    console.error("[/api/ai] Upstream error:", error);
     return NextResponse.json(
-      { error: "Failed to get AI response" },
+      { error: "AI service temporarily unavailable. Please try again." },
       { status: 500 }
     );
   }
