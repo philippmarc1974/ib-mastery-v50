@@ -13604,7 +13604,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     ? { background: `${itemColor}1a`, color: itemColor, borderLeft: `3px solid ${itemColor}`, paddingLeft: sidebarOpen ? '10px' : '4px' }
                     : { borderLeft: '3px solid transparent', paddingLeft: sidebarOpen ? '10px' : '4px' }}
                   title={!sidebarOpen ? item.label : undefined}>
-                  <NavIcon id={item.id} color={isActive ? itemColor : '#94a3b8'} size={sidebarOpen ? 28 : 44} />
+                  <NavIcon id={item.id} color={isActive ? itemColor : '#94a3b8'} size={sidebarOpen ? 24 : 38} />
                   {sidebarOpen && <span className="truncate">{item.label}</span>}
                 </button>;
               })}
@@ -13751,7 +13751,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             <div className={`text-2xl font-black mb-1 ${isSM ? 'text-teal-700 font-mono uppercase tracking-wide' : 'text-slate-800'}`}>{celebration.title}</div>
             <div className="text-sm text-slate-500 mb-4">{celebration.subtitle}</div>
             {celebration.isPersonalBest && <div className="text-sm font-bold text-amber-600 mb-2">📈 New personal best!</div>}
-            {celebration.rankUp && <div className="flex items-center justify-center gap-3 my-3 p-3 rounded-xl" style={{ background: celebration.rankUp.next.color + '15', border: `1px solid ${celebration.rankUp.next.color}30` }}>
+            {celebration.rankUp && <div className="flex items-center justify-center gap-3 my-3 p-3 rounded-xl overflow-hidden" style={{ background: celebration.rankUp.next.color + '15', border: `1px solid ${celebration.rankUp.next.color}30` }}>
               <RankEmblem rank={celebration.rankUp.prev} size={36} />
               <span className="text-slate-400">→</span>
               <RankEmblem rank={celebration.rankUp.next} size={48} animated={celebration.rankUp.next.grade === 7} />
@@ -13774,7 +13774,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             <div className={`text-xl font-black mb-1 ${isSM ? 'text-teal-700 font-mono uppercase' : 'text-slate-800'}`}>{celebration.title}</div>
             <div className="text-sm text-slate-500 mb-3">{celebration.subtitle}</div>
             {celebration.isPersonalBest && <div className="text-sm font-bold text-amber-600 mb-2">📈 New personal best!</div>}
-            {celebration.rankUp && <div className="flex items-center justify-center gap-3 my-2 p-2.5 rounded-xl" style={{ background: celebration.rankUp.next.color + '12', border: `1px solid ${celebration.rankUp.next.color}25` }}>
+            {celebration.rankUp && <div className="flex items-center justify-center gap-3 my-2 p-2.5 rounded-xl overflow-hidden" style={{ background: celebration.rankUp.next.color + '12', border: `1px solid ${celebration.rankUp.next.color}25` }}>
               <RankEmblem rank={celebration.rankUp.prev} size={32} />
               <span className="text-slate-400 text-lg">→</span>
               <RankEmblem rank={celebration.rankUp.next} size={40} animated={celebration.rankUp.next.grade === 7} />
@@ -13795,7 +13795,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 <div className={`text-sm font-black ${isSM ? 'text-teal-700 font-mono uppercase' : 'text-slate-800'}`}>{celebration.title}</div>
                 <div className="text-xs text-slate-500 mt-0.5">{celebration.subtitle}</div>
               </div>
-              {celebration.rankUp && <div className="flex items-center gap-1.5">
+              {celebration.rankUp && <div className="flex items-center gap-1.5 overflow-hidden">
                 <RankEmblem rank={celebration.rankUp.prev} size={28} />
                 <span className="text-slate-400 text-xs">→</span>
                 <RankEmblem rank={celebration.rankUp.next} size={34} animated={celebration.rankUp.next.grade === 7} />
@@ -20390,7 +20390,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
 
                 {/* Rank block */}
                 <div className="flex flex-col items-center gap-1.5 min-w-[72px]">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center overflow-hidden"
                     style={{
                       background: '#f1f5f9',
                       boxShadow: `0 0 0 2.5px ${greetingRank?.color || '#4b5563'}, 0 3px 10px rgba(0,0,0,0.18)`
@@ -20500,7 +20500,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                 </div>
               </div>
 
-              {/* Right: Directives of the Day */}
+              {/* Right: Directives — Today + This Week */}
               <Card smMode={isSM} accent={accent} className="p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <Target className="w-4 h-4" style={{ color: accent }} />
@@ -20516,7 +20516,6 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   <div className="text-center py-4 space-y-2">
                     <div className="text-2xl">📋</div>
                     <div className="text-xs text-slate-500">{isSM ? 'Standby — awaiting orders' : 'No tasks planned today'}</div>
-                    {/* Suggestions when no battle plan */}
                     <div className="text-left mt-3 space-y-1.5">
                       <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide mb-1">{isSM ? '⚡ Suggested Operations' : '💡 Suggestions'}</div>
                       {subjectStats.slice(0, 3).map((ss2, si) => (
@@ -20575,6 +20574,50 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   )}
                 </div>
               )}
+
+                {/* ── THIS WEEK overview ── */}
+                {planner?.days && (() => {
+                  const today = new Date();
+                  const dayOfWeek = today.getDay() || 7; // Mon=1, Sun=7
+                  const weekDays = [];
+                  for (let i = 1 - dayOfWeek; i <= 7 - dayOfWeek; i++) {
+                    const d = new Date(today); d.setDate(today.getDate() + i);
+                    const dk = dayKey(d);
+                    const tasks = planner.days[dk] || [];
+                    if (tasks.length > 0 || dk === dayKey()) weekDays.push({ date: d, key: dk, tasks, isToday: dk === dayKey() });
+                  }
+                  const weekPending = weekDays.flatMap(wd => wd.tasks.filter(t => !t.done && !wd.isToday));
+                  const weekDone = weekDays.flatMap(wd => wd.tasks.filter(t => t.done && !wd.isToday));
+                  if (weekPending.length === 0 && weekDone.length === 0) return null;
+                  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+                  return (
+                    <div className="mt-4 pt-3 border-t border-slate-100">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Rest of This Week</span>
+                        <span className="text-[10px] ml-auto" style={{ color: accent }}>{weekPending.length} pending · {weekDone.length} done</span>
+                      </div>
+                      <div className="space-y-1">
+                        {weekDays.filter(wd => !wd.isToday && wd.tasks.length > 0).map(wd => (
+                          <div key={wd.key} className="flex items-start gap-2 px-2 py-1.5 rounded-lg" style={{ background: '#f8fafc' }}>
+                            <span className="text-[10px] font-bold text-slate-500 w-8 flex-shrink-0 pt-0.5">{dayNames[wd.date.getDay()]}</span>
+                            <div className="flex-1 flex flex-wrap gap-1">
+                              {wd.tasks.map((t, ti) => {
+                                const ss = subjectStats.find(s => s.name === t.subject);
+                                return (
+                                  <span key={ti} className="text-[9px] px-1.5 py-0.5 rounded font-medium"
+                                    style={{ background: t.done ? '#10b98115' : `${ss?.accent || accent}15`, color: t.done ? '#10b981' : ss?.accent || accent, textDecoration: t.done ? 'line-through' : 'none' }}>
+                                    {(t.topic || t.subject || '').split(' ').slice(0,2).join(' ')} {t.duration || 30}m
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
             </Card>
             </div>{/* end side-by-side grid */}
 
