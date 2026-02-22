@@ -15507,6 +15507,10 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 <div className="rounded-b-xl border border-t-0 border-slate-200 px-4 py-2.5 flex items-center justify-between backdrop-blur-md"
                   style={{ background: studyOverTime ? 'rgba(127,29,29,0.8)' : 'rgba(15,22,41,0.9)' }}>
                   <div className="flex items-center gap-3">
+                    <button onClick={() => showConfirm('Abort this session and return to setup?', () => resetStudy())}
+                      className="text-xs px-2 py-1 rounded-md text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 transition-all">
+                      <X className="w-3 h-3 inline mr-0.5" />Exit
+                    </button>
                     <Timer className="w-4 h-4" style={{ color: studyOverTime ? '#fca5a5' : '#f59e0b' }} />
                     <span className="font-mono text-lg font-bold" style={{ color: studyOverTime ? '#fca5a5' : '#f59e0b' }}>
                       {studyFmtTimer(studyTimerElapsed)}
@@ -15564,8 +15568,14 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 {/* Wizard header card */}
                 <Card smMode={isSM} accent={accent} className="p-5">
                   <div className="flex items-center gap-3 mb-1">
+                    {combatStep > 1 && (
+                      <button onClick={() => setCombatStep(combatStep - 1)}
+                        className="text-xs px-2.5 py-1.5 rounded-lg transition-all hover:bg-slate-100 text-slate-500 border border-slate-200">
+                        <ChevronLeft className="w-3 h-3 inline" /> Back
+                      </button>
+                    )}
                     {isSM ? <SmSkull className="text-teal-600" size={18} /> : <BookOpen className="w-4 h-4" style={{ color: accent }} />}
-                    <div>
+                    <div className="flex-1">
                       <h2 className={`text-lg font-bold ${isSM ? 'text-teal-700 font-mono uppercase tracking-wider' : 'text-slate-800'}`}>
                         {isSM ? 'The Crucible of Will' : 'The Crucible of Will'}
                       </h2>
