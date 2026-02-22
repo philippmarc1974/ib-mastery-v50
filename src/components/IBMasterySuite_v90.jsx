@@ -15565,121 +15565,99 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
 
               return (
               <div className="space-y-4">
-                {/* Wizard header card */}
-                <Card smMode={isSM} accent={accent} className="p-5">
-                  <div className="flex items-center gap-3 mb-1">
-                    {combatStep > 1 && (
-                      <button onClick={() => setCombatStep(combatStep - 1)}
-                        className="text-xs px-2.5 py-1.5 rounded-lg transition-all hover:bg-slate-100 text-slate-500 border border-slate-200">
-                        <ChevronLeft className="w-3 h-3 inline" /> Back
-                      </button>
-                    )}
-                    {isSM ? <SmSkull className="text-teal-600" size={18} /> : <BookOpen className="w-4 h-4" style={{ color: accent }} />}
-                    <div className="flex-1">
-                      <h2 className={`text-lg font-bold ${isSM ? 'text-teal-700 font-mono uppercase tracking-wider' : 'text-slate-800'}`}>
-                        {isSM ? 'The Crucible of Will' : 'The Crucible of Will'}
-                      </h2>
-                      <p className="text-xs text-slate-500">{isSM ? 'Select engagement parameters and designate your theatre of war.' : 'Choose subject, format, topic, difficulty, and how you want to run the session.'}</p>
-                    </div>
+                {/* ── QUICK BATTLE HERO — one tap, start immediately ── */}
+                {combatStep === 1 && (() => {
+                  const weakest = subjectStats.reduce((a, b) => ((a.avgGrade || 99) < (b.avgGrade || 99) ? a : b), subjectStats[0]);
+                  return (
+                    <button
+                      onClick={() => {
+                        setCombatSubject(weakest.name);
+                        setActiveSubjectIdx(userSubjects.findIndex(s => s.name === weakest.name));
+                        setStudyPreset('15min'); setStudyTopic(''); setStudyPaperMode(null); setStudyTopics([]);
+                        setCombatStep(3);
+                      }}
+                      className="w-full p-5 rounded-2xl text-left transition-all hover:-translate-y-0.5 active:scale-[0.99]"
+                      style={{ background: `linear-gradient(135deg, ${weakest.accent}18, ${weakest.accent}08)`, border: `2px solid ${weakest.accent}40` }}>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: weakest.accent }}>
+                            {isSM ? '⚡ Quick Sortie' : '⚡ Quick Battle'}
+                          </div>
+                          <div className="text-base font-black text-slate-800">{weakest.name}</div>
+                          <div className="text-xs text-slate-500 mt-0.5">4 questions · 15 min · {weakest.avgGrade ? `avg G${weakest.avgGrade}` : 'not yet graded'}</div>
+                        </div>
+                        <div className="text-3xl" style={{ color: weakest.accent }}>→</div>
+                      </div>
+                    </button>
+                  );
+                })()}
+
+                {/* ── Back + Title when past step 1 ── */}
+                {combatStep > 1 && (
+                  <div className="flex items-center gap-3">
+                    <button onClick={() => setCombatStep(combatStep - 1)}
+                      className="text-xs px-2.5 py-1.5 rounded-lg transition-all hover:bg-slate-100 text-slate-500 border border-slate-200">
+                      <ChevronLeft className="w-3 h-3 inline" /> Back
+                    </button>
+                    <div className="text-sm font-bold text-slate-700">{combatSubject}</div>
+                    {studyPreset && <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: `${wizAccent}15`, color: wizAccent }}>{STUDY_PRESETS[studyPreset]?.label}</span>}
                   </div>
-
-                  {/* Step indicator */}
-                  <div className="flex items-center gap-1 mt-4 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
-                    {stepLabels.map((label, idx) => {
-                      const stepNum = idx + 1;
-                      const isDone = combatStep > stepNum;
-                      const isActive = combatStep === stepNum;
-                      return (
-                        <React.Fragment key={stepNum}>
-                          <button
-                            onClick={() => { if (stepNum < combatStep) setCombatStep(stepNum); }}
-                            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
-                            style={{ background: isActive ? accent : isDone ? `${accent}20` : '#f1f5f9', color: isActive ? '#fff' : isDone ? accent : '#4b5563', cursor: stepNum < combatStep ? 'pointer' : 'default' }}>
-                            {isDone ? '✓' : stepNum} {label}
-                          </button>
-                          {idx < stepLabels.length - 1 && <div className="flex-1 h-0.5 rounded-full min-w-[8px]" style={{ background: isDone ? `${accent}40` : '#e2e8f0' }} />}
-                        </React.Fragment>
-                      );
-                    })}
-                  </div>
-                </Card>
-
-
-                {/* STEP 1 — Subject */}
-                {combatStep === 1 && (
-                  <Card smMode={isSM} accent={accent} className="p-5">
-                    <h3 className="text-sm font-semibold text-slate-700 mb-4">⚔️ Step 1: Pick your subject</h3>
-                    <div className="grid grid-cols-1 gap-3">
-                      {subjectStats.map((ss, i) => {
-                        const isActive = combatSubject === ss.name;
-                        const todayTasks = planner?.days?.[dayKey()]?.filter(t => t.subject === ss.name && !t.done) || [];
-                        return (
-                          <button key={i}
-                            onClick={() => {
-                              setCombatSubject(ss.name);
-                              setActiveSubjectIdx(userSubjects.findIndex(s => s.name === ss.name));
-                              setStudyPreset(null); setStudyTopic(''); setStudyPaperMode(null); setStudyTopics([]);
-                              setCombatStep(2);
-                            }}
-                            className="flex items-center gap-3 p-4 rounded-xl text-left transition-all hover:-translate-y-px"
-                            style={{ background: isActive ? `${ss.accent}15` : `${ss.accent}06`, border: `2px solid ${isActive ? ss.accent : ss.accent + '25'}` }}>
-                            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0" style={{ background: `${ss.accent}20` }}>
-                              {ss.cat?.icon || '📚'}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="font-bold text-sm text-slate-800">{ss.name}</div>
-                              <div className="text-xs text-slate-500">{ss.level?.toUpperCase()} · {ss.practiced}/{ss.totalSections} topics practiced</div>
-                            </div>
-                            {ss.avgGrade && <div className="text-right shrink-0">
-                              <div className="text-lg font-extrabold" style={{ color: ss.accent }}>{ss.avgGrade}</div>
-                              <div className="text-xs text-slate-400">avg</div>
-                            </div>}
-                            {todayTasks.length > 0 && <span className="px-1.5 py-0.5 rounded-full text-xs shrink-0" style={{ background: '#f59e0b20', color: '#f59e0b' }}>{todayTasks.length} tasks</span>}
-                            {ss.nextExam && ss.nextExam.days <= 14 && <span className="text-xs font-bold shrink-0 text-red-400">{ss.nextExam.days}d</span>}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </Card>
                 )}
 
-                {/* STEP 2 — Engagement (Preset) */}
-                {combatStep === 2 && (
-                  <Card smMode={isSM} accent={wizAccent} className="p-5">
-                    <h3 className="text-sm font-semibold text-slate-700 mb-1">🎖️ Step 2: Choose your engagement</h3>
-                    <p className="text-xs text-slate-500 mb-4">{combatSubject} · {wizSubjStats?.level?.toUpperCase()}</p>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      {Object.entries(STUDY_PRESETS).map(([key, preset]) => {
-                        const isActive = studyPreset === key;
-                        return (
-                          <button key={key}
-                            onClick={() => {
-                              setStudyPreset(key);
-                              setStudyTopic(''); setStudyPaperMode(null); setStudyTopics([]);
-                              // For pastpaper skip difficulty; for full/other advance to step 3
-                              setCombatStep(3);
-                            }}
-                            className="p-4 rounded-xl border-2 text-center transition-all hover:-translate-y-px"
-                            style={{ background: isActive ? wizAccent : `${wizAccent}08`, border: `2px solid ${isActive ? wizAccent : `${wizAccent}20`}`, color: isActive ? '#fff' : '#334155' }}>
-                            <div className="text-3xl font-extrabold mb-1">{preset.icon}</div>
-                            <div className="text-xs font-bold">{preset.label}</div>
-                            <div className="text-xs mt-0.5 opacity-70">{preset.isPastPaper ? 'Real past paper' : `${preset.questions}q · ${preset.minutes}m`}</div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                    {/* Weakness hint */}
-                    {(weaknessProfile.worstTopics.length > 0) && (
-                      <div className="mt-4 p-3 rounded-xl" style={{ background: '#ef444408', border: '1px solid #ef444415' }}>
-                        <div className="flex items-center gap-1.5 mb-1"><AlertTriangle className="w-3 h-3 text-red-400" /><span className="text-xs font-bold text-red-400">Weak areas to consider:</span></div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {weaknessProfile.worstTopics.slice(0, 4).map((w, i) => (
-                            <span key={i} className="text-xs px-2 py-0.5 rounded-lg" style={{ background: '#ef444412', color: '#ef4444' }}>{w.topic}</span>
-                          ))}
+                {/* ── STEP 1 — Subject list (compact) ── */}
+                {combatStep === 1 && (
+                  <div className="space-y-1.5">
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">Or pick a subject</div>
+                    {subjectStats.map((ss, i) => (
+                      <button key={i}
+                        onClick={() => {
+                          setCombatSubject(ss.name);
+                          setActiveSubjectIdx(userSubjects.findIndex(s => s.name === ss.name));
+                          setStudyPreset(null); setStudyTopic(''); setStudyPaperMode(null); setStudyTopics([]);
+                          setCombatStep(2);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all hover:bg-slate-50"
+                        style={{ border: '1px solid #e2e8f0' }}>
+                        <div className="w-2 h-8 rounded-full flex-shrink-0" style={{ background: ss.accent }} />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-bold text-sm text-slate-800">{ss.name}</div>
+                          <div className="text-xs text-slate-400">{ss.level?.toUpperCase()} · {ss.practiced}/{ss.totalSections} topics</div>
                         </div>
+                        {ss.avgGrade && <div className="text-base font-extrabold" style={{ color: ss.accent }}>{ss.avgGrade}</div>}
+                        {ss.nextExam && ss.nextExam.days <= 14 && <span className="text-[10px] font-bold text-red-400">{ss.nextExam.days}d</span>}
+                        <ChevronRight className="w-4 h-4 text-slate-300 flex-shrink-0" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* STEP 2 — Session type (compact grid) */}
+                {combatStep === 2 && (
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">How long do you want to study?</div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {Object.entries(STUDY_PRESETS).map(([key, preset]) => (
+                        <button key={key}
+                          onClick={() => {
+                            setStudyPreset(key);
+                            setStudyTopic(''); setStudyPaperMode(null); setStudyTopics([]);
+                            setCombatStep(3);
+                          }}
+                          className="p-3.5 rounded-xl text-center transition-all hover:-translate-y-px active:scale-[0.98]"
+                          style={{ background: '#ffffff', border: '1.5px solid #e2e8f0' }}>
+                          <div className="text-2xl mb-1">{preset.icon}</div>
+                          <div className="text-xs font-bold text-slate-800">{preset.label}</div>
+                          <div className="text-[10px] text-slate-400 mt-0.5">{preset.isPastPaper ? 'Real past paper' : `${preset.questions} questions · ${preset.minutes}m`}</div>
+                        </button>
+                      ))}
+                    </div>
+                    {weaknessProfile.worstTopics.length > 0 && (
+                      <div className="flex items-center gap-2 px-1">
+                        <AlertTriangle className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                        <span className="text-xs text-slate-500">Weak: {weaknessProfile.worstTopics.slice(0, 3).map(w => w.topic).join(', ')}</span>
                       </div>
                     )}
-                  </Card>
+                  </div>
                 )}
 
                 {/* STEP 3 — Topic / Paper selection */}
