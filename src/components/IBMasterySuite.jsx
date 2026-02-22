@@ -405,7 +405,7 @@ const buildDemoData = () => {
     })),
     summary: { strengths: `Good understanding of core ${topic} concepts`, improvements: `Need more practice with complex ${topic} problems`, criticalGaps: grade < 5 ? `Weak on multi-step ${topic} calculations` : '', actions: `Review ${topic} worked examples`, syllabusAlignment: 75 },
     grading: `Grade: ${grade}/7. ${marks}/${total} marks.`, grade, aiGrade: grade,
-    totalTime: 3600000 + Math.random() * 1800000, date: d(daysAgo), fogOfWar: false, weightMultiplier: 1
+    totalTime: 2400 + Math.round(Math.random() * 1800), date: d(daysAgo), fogOfWar: false, weightMultiplier: 1
   });
   const repo = [
     mkSession('Mathematics AI', 'Paper 1', 4, 32, 80, 20, 'Number & Algebra'),
@@ -16774,7 +16774,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             if (!dk) return;
             if (!dayTotals[dk]) dayTotals[dk] = { count: 0, minutes: 0 };
             dayTotals[dk].count++;
-            dayTotals[dk].minutes += s.totalTime ? Math.round(s.totalTime/60) : 0;
+            dayTotals[dk].minutes += s.totalTime ? Math.round((s.totalTime > 100000 ? s.totalTime / 1000 : s.totalTime) / 60) : 0;
           });
 
           // Quick grade snapshot for summary
@@ -17437,7 +17437,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     {[
                       { label: 'Sessions', value: studySessions2.length, sub: `${studySessions2.filter(s=>(now2-new Date(s.date))<msWeek).length} this week`, color: '#3b82f6' },
                       { label: 'Questions', value: gamify.totalQuestions || 0, sub: `${Object.values(questionHistory).filter(h=>h.lastAttempt&&(now2-new Date(h.lastAttempt))<msWeek).length} this week`, color: '#a78bfa' },
-                      { label: 'Study Time', value: `${Math.round((gamify.totalMinutes||0)/60)}h`, sub: `${Math.round(studySessions2.filter(s=>(now2-new Date(s.date))<msWeek).reduce((a,s)=>a+(s.totalTime?Math.round(s.totalTime/60):0),0)/60)}h this week`, color: '#10b981' },
+                      { label: 'Study Time', value: `${Math.round((gamify.totalMinutes||0)/60)}h`, sub: `${Math.round(studySessions2.filter(s=>(now2-new Date(s.date))<msWeek).reduce((a,s)=>a+(s.totalTime?Math.round((s.totalTime>100000?s.totalTime/1000:s.totalTime)/60):0),0)/60)}h this week`, color: '#10b981' },
                       { label: 'Plan Done', value: compliancePct !== null ? `${compliancePct}%` : '—', sub: compliancePct !== null ? `${doneCount}/${pastBlocks.length} sessions` : 'No plan yet', color: compColor }
                     ].map(({ label, value, sub, color }) => (
                       <div key={label} className="p-3 rounded-xl text-center" style={{ background: `${color}10`, border: `1.5px solid ${color}25` }}>
@@ -17554,7 +17554,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
               <div className="grid grid-cols-2 gap-3">
                 <StatBox label={isSM ? 'Crusade Duration' : 'Current Streak'} value={streak} accent="#f97316" sub="days" icon={Zap} />
                 <StatBox label="Sessions (30d)" value={last30.length} accent={accent} sub="sessions" icon={BookOpen} />
-                <StatBox label="Avg Session" value={studySessions.length ? `${Math.round(studySessions.reduce((a,s) => a+(s.totalTime?Math.round(s.totalTime/60):0),0)/studySessions.length)}m` : '—'} accent={accent} sub="per session" icon={Timer} />
+                <StatBox label="Avg Session" value={studySessions.length ? `${Math.round(studySessions.reduce((a,s) => a+(s.totalTime?Math.round((s.totalTime>100000?s.totalTime/1000:s.totalTime)/60):0),0)/studySessions.length)}m` : '—'} accent={accent} sub="per session" icon={Timer} />
                 <StatBox label="Best Streak Goal" value={streakGoal || 7} accent="#f97316" sub="day target" icon={Award} />
               </div>
             </>}
@@ -17877,7 +17877,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
           const themeLvls = isSM ? THEMES.spacemarine.levels : null;
           const curLevel = getLevel(gamify.xp || 0, themeLvls);
           const cabWeekAgoMs = Date.now() - 7 * 24 * 60 * 60 * 1000;
-          const cabWeeklyMinutes = repo.filter(s => s.date && new Date(s.date).getTime() >= cabWeekAgoMs).reduce((sum, s) => sum + (s.totalTime || 0), 0);
+          const cabToSec = t => t > 100000 ? Math.round(t / 1000) : (t || 0);
+          const cabWeeklyMinutes = repo.filter(s => s.date && new Date(s.date).getTime() >= cabWeekAgoMs).reduce((sum, s) => sum + Math.round(cabToSec(s.totalTime) / 60), 0);
           const cabWeeklyHours = (cabWeeklyMinutes / 60).toFixed(1);
 
           const CABINET_TABS = [
@@ -20369,7 +20370,8 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
 
           // Weekly hours: sum session minutes from last 7 days
           const weekAgoMs = Date.now() - 7 * 24 * 60 * 60 * 1000;
-          const weeklyMinutes = repo.filter(s => s.date && new Date(s.date).getTime() >= weekAgoMs).reduce((sum, s) => sum + (s.totalTime || 0), 0);
+          const toSec = t => t > 100000 ? Math.round(t / 1000) : (t || 0); // auto-detect ms vs seconds
+          const weeklyMinutes = repo.filter(s => s.date && new Date(s.date).getTime() >= weekAgoMs).reduce((sum, s) => sum + Math.round(toSec(s.totalTime) / 60), 0);
           const weeklyHours = (weeklyMinutes / 60).toFixed(1);
 
           // Latest unlocked medal for banner
@@ -20377,7 +20379,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
           const bridgeLatestMedal = bridgeUnlockedMedals[bridgeUnlockedMedals.length - 1] || null;
 
           return (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {/* v52 Exam Eve Protocol */}
             {examEveBanner}
 
@@ -20468,7 +20470,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
               {/* Left: Sitrep — Commander's Briefing */}
-              <div className="rounded-2xl overflow-hidden bg-white" style={{ border: `1.5px solid ${accent}25`, boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}>
+              <div className="rounded-2xl overflow-hidden bg-white max-h-[340px]" style={{ border: `1.5px solid ${accent}25`, boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}>
                 <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${accent}, ${accent}80, ${accent})` }} />
                 <div className="px-4 py-2.5 flex items-center gap-2 border-b border-slate-100">
                   <span className="text-xs font-bold tracking-widest uppercase" style={{ color: accent }}>📡 Commander's Briefing</span>
@@ -20501,7 +20503,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
               </div>
 
               {/* Right: Directives — Today + This Week */}
-              <Card smMode={isSM} accent={accent} className="p-5">
+              <Card smMode={isSM} accent={accent} className="p-4 max-h-[340px] overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
                 <div className="flex items-center gap-2 mb-3">
                   <Target className="w-4 h-4" style={{ color: accent }} />
                   <h3 className="text-sm font-semibold text-slate-700">{isSM ? "Directives of the Day" : "Today's Mission"}</h3>
@@ -20621,48 +20623,43 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
             </Card>
             </div>{/* end side-by-side grid */}
 
-            {/* ══ v73 CONFIDENCE VOX — Self-Assessment vs AI Reality ══ */}
+            {/* ══ v73 CONFIDENCE VOX — compact horizontal strip ══ */}
             {subjectStats.length > 0 && (
-              <Card smMode={isSM} accent={accent} className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Radio className="w-4 h-4" style={{ color: accent }} />
-                  <h3 className={`text-xs font-bold uppercase tracking-wider ${isSM ? 'text-teal-700 font-mono' : 'text-slate-500'}`}>Confidence Vox — Self-Assessment</h3>
+              <Card smMode={isSM} accent={accent} className="p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <Radio className="w-3.5 h-3.5" style={{ color: accent }} />
+                  <h3 className={`text-[10px] font-bold uppercase tracking-wider ${isSM ? 'text-teal-700 font-mono' : 'text-slate-500'}`}>Confidence Vox</h3>
+                  <span className="text-[9px] text-slate-400 ml-auto">Slide to rate · AI compares</span>
                 </div>
-                <p className="text-[10px] text-slate-400 mb-3">Rate your confidence per subject. The AI compares against your actual performance.</p>
-                <div className="space-y-3">
+                <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
                   {subjectStats.map(ss => {
                     const conf = subjectConfidence[ss.name] ?? 5;
                     const avg = ss.avgGrade ? parseFloat(ss.avgGrade) : null;
                     const actual = avg ? Math.round((avg / 7) * 10) : null;
                     const gap = actual !== null ? conf - actual : null;
-                    const gapLabel = gap === null ? '—' : gap > 2 ? '⚠️ Overconfident' : gap < -2 ? '💪 Underconfident' : '✓ Aligned';
+                    const gapLabel = gap === null ? '—' : gap > 2 ? '⚠️' : gap < -2 ? '💪' : '✓';
                     const gapColor = gap === null ? '#94a3b8' : gap > 2 ? '#ef4444' : gap < -2 ? '#3b82f6' : '#10b981';
                     return (
-                      <div key={ss.name} className="p-3 rounded-xl" style={{ background: `${ss.accent}06`, border: `1px solid ${ss.accent}15` }}>
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-sm">{ss.cat?.icon || '📚'}</span>
-                          <span className="text-xs font-semibold text-slate-700 flex-1">{ss.name}</span>
-                          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ color: gapColor, background: `${gapColor}12` }}>{gapLabel}</span>
+                      <div key={ss.name} className="flex-shrink-0 w-36 p-2 rounded-xl" style={{ background: `${ss.accent}06`, border: `1px solid ${ss.accent}15` }}>
+                        <div className="flex items-center gap-1 mb-1">
+                          <span className="text-xs">{ss.cat?.icon || '📚'}</span>
+                          <span className="text-[10px] font-bold text-slate-700 truncate flex-1">{ss.name.split(' ').slice(0,2).join(' ')}</span>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-[10px] text-slate-500">Your confidence</span>
-                              <span className="text-xs font-bold" style={{ color: ss.accent }}>{conf}/10</span>
-                            </div>
-                            <input type="range" min="1" max="10" value={conf}
-                              onChange={e => {
-                                const next = { ...subjectConfidence, [ss.name]: parseInt(e.target.value) };
-                                setSubjectConfidence(next);
-                                window.storage.set(STORE.confidence, JSON.stringify(next)).catch(() => {});
-                              }}
-                              className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-                              style={{ accentColor: ss.accent, background: `linear-gradient(90deg, ${ss.accent} ${(conf/10)*100}%, #e2e8f0 ${(conf/10)*100}%)` }} />
-                          </div>
-                          <div className="text-center w-16 flex-shrink-0">
-                            <div className="text-[10px] text-slate-400 mb-0.5">AI Reality</div>
-                            <div className="text-lg font-black" style={{ color: actual !== null ? ss.accent : '#cbd5e1' }}>{actual !== null ? `${actual}/10` : '—'}</div>
-                          </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[10px] font-bold" style={{ color: ss.accent }}>{conf}</span>
+                          <input type="range" min="1" max="10" value={conf}
+                            onChange={e => {
+                              const next = { ...subjectConfidence, [ss.name]: parseInt(e.target.value) };
+                              setSubjectConfidence(next);
+                              window.storage.set(STORE.confidence, JSON.stringify(next)).catch(() => {});
+                            }}
+                            className="flex-1 h-1 rounded-full appearance-none cursor-pointer"
+                            style={{ accentColor: ss.accent, background: `linear-gradient(90deg, ${ss.accent} ${(conf/10)*100}%, #e2e8f0 ${(conf/10)*100}%)` }} />
+                          <span className="text-[10px] font-bold" style={{ color: gapColor }}>{gapLabel}</span>
+                        </div>
+                        <div className="flex justify-between mt-1">
+                          <span className="text-[8px] text-slate-400">You: {conf}/10</span>
+                          <span className="text-[8px]" style={{ color: actual !== null ? ss.accent : '#cbd5e1' }}>AI: {actual !== null ? `${actual}/10` : '—'}</span>
                         </div>
                       </div>
                     );
@@ -20772,7 +20769,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                 const dk2 = s.date?.slice(0,10); if (!dk2) return;
                 if (!bDayTotals[dk2]) bDayTotals[dk2] = { count: 0, minutes: 0 };
                 bDayTotals[dk2].count++;
-                bDayTotals[dk2].minutes += s.totalTime ? Math.round(s.totalTime/60) : 0;
+                bDayTotals[dk2].minutes += s.totalTime ? Math.round((s.totalTime > 100000 ? s.totalTime / 1000 : s.totalTime) / 60) : 0;
               });
               const bLast30 = bStudySessions.filter(s => (Date.now() - new Date(s.date)) < 30*86400000);
               return (
@@ -21514,7 +21511,7 @@ function RepoRow({ entry, onDelete }) {
           {entry.grading&&<div className="text-sm bg-slate-50/50 rounded-lg p-3 mt-2">{renderMd(entry.grading)}</div>}</>}
         {entry.type==='study' && <><div className="flex items-center gap-3 mb-2 text-xs text-slate-500">
           <span>{entry.presetLabel}</span>{entry.grade&&<span className="font-bold" style={{color:gradeColor(entry.grade)}}>Grade {entry.grade}</span>}
-          {entry.totalTime&&<span>{Math.floor(entry.totalTime/60)}m</span>}</div>
+          {entry.totalTime&&<span>{Math.floor((entry.totalTime>100000?entry.totalTime/1000:entry.totalTime)/60)}m</span>}</div>
           {(entry.questions||[]).map((q,i)=><div key={i} className="mb-2"><div className="text-xs text-slate-500">Q{i+1} {q.skipped?<span className="text-red-400">(skipped)</span>:''}</div>
             <div className="text-xs bg-slate-50/50 rounded p-2">{q.text?.slice(0,150)}{q.text?.length>150?'…':''}</div></div>)}
           {entry.grading&&<div className="text-sm bg-slate-50/50 rounded-lg p-3 mt-2">{renderMd(entry.grading)}</div>}</>}
