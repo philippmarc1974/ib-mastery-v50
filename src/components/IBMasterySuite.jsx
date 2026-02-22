@@ -10527,6 +10527,12 @@ Address ${profile?.name || 'the student'} by name. Be concrete and subject-speci
     return { ...sub, cat, accent: subAccent, boundary: subBoundary, weights: wts, subsections: subSections, totalQ: subQ, avgGrade: subAvg, practiced, totalSections: subSections.length, projected, nextExam: nextExam ? { paper: nextExam[0], date: nextExam[1], days: daysToExam } : null, docCount, repoCount, progress: subProgress };
   });
 
+  // Shared helper: get accent color for any subject name
+  const getSubjectColor = (sub) => {
+    const cat = IB_CATALOGUE[sub]; if (cat?.defaultAccent) return cat.defaultAccent;
+    return accent;
+  };
+
   const generateBattlePlan = useCallback(async () => {
     if (battlePlanGenerating) return;
     setBattlePlanGenerating(true);
@@ -14054,11 +14060,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
 
         {/* ═══════════ BATTLE PLAN + PROGRESS (inside planner tab) ═══════════ */}
         {tab === 'planner' && (() => {
-          const SUBJECT_COLORS = { 'Math AI HL': '#3b82f6', 'Sports Science SL': '#10b981', 'History SL': '#f59e0b', 'English Language & Literature SL': '#ec4899' };
-          const getSubjectColor = (sub) => {
-            const cat = IB_CATALOGUE[sub]; if (cat?.defaultAccent) return cat.defaultAccent;
-            return SUBJECT_COLORS[sub] || accent;
-          };
+          // getSubjectColor is now defined at component scope
           const toggleCompliance = async (date, blockIdx) => {
             const bp = { ...battlePlan };
             if (!bp.compliance) bp.compliance = {};
