@@ -9530,14 +9530,10 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
 
   // V83: Auto-start session from Daily Orders
   useEffect(() => {
-    if (sessionAutoStart && selectedSubject && tab === 'study') {
+    if (sessionAutoStart && currentSubject && tab === 'study') {
       setSessionAutoStart(false);
-      // Small delay to ensure state is settled
-      setTimeout(() => {
-        if (typeof startStudySession === 'function') startStudySession();
-      }, 100);
     }
-  }, [sessionAutoStart, selectedSubject, tab]);
+  }, [sessionAutoStart, currentSubject, tab]);
 
   // v52 useEffect — STUDY THIS event listener
   useEffect(() => {
@@ -9730,7 +9726,7 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const updateTutorConfig = (subject, field, value) => { const updated = tutorConfig.some(t => t.subject === subject) ? tutorConfig.map(t => t.subject === subject ? { ...t, [field]: value } : t) : [...tutorConfig, { subject, [field]: value }]; saveTutorConfig(updated); }
   const getNextDeadline = (day, time) => { const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; const targetDay = days.indexOf(day); if (targetDay === -1 || !time) return null; const [h, m] = time.split(':').map(Number); const now = new Date(); const result = new Date(now); result.setHours(h, m, 0, 0); let ahead = targetDay - now.getDay(); if (ahead < 0 || (ahead === 0 && now >= result)) ahead += 7; result.setDate(result.getDate() + ahead); return result; }
   const checkForNewHomework = async () => { setCheckingHomework(true); try { const res = await fetch('/api/ingest-homework', { method: 'POST' }); if (!res.ok) throw new Error(); const data = await res.json(); if (data.ingested > 0) { const newHw = data.homework; /* TUTOR-2: Auto-upload attachments to Drive */ try { const token = await getGdriveToken(); for (const hw of newHw) { if (hw.attachments?.length > 0) { const results = await uploadHomeworkToDrive(token, { subject: hw.subject, attachments: hw.attachments }); if (results.length > 0) { hw.driveFileId = results[0].fileId; hw.driveFileUrl = results[0].webViewLink; } } } } catch (e) { console.warn('[TUTOR-2] Drive upload skipped:', e.message); } saveTutorHomework([...tutorHomework, ...newHw]); addToast(`${data.ingested} new homework assignment${data.ingested > 1 ? 's' : ''} received!`, 'info'); } else { addToast('No new homework found.', 'info'); } } catch { addToast('Could not check for homework. Try again.', 'error'); } finally { setCheckingHomework(false); } }
-  const startTutorBattle = (homework) => { setActiveTutorHomework(homework); safeSetTab('study'); setStudyMode('active'); setSelectedSubject(homework.subject); }
+  const startTutorBattle = (homework) => { setActiveTutorHomework(homework); safeSetTab('study'); setStudyMode('active'); const idx = userSubjects.findIndex(s => s.name === homework.subject); if (idx >= 0) setActiveSubjectIdx(idx); }
   const completeTutorBattle = async (sessionResult) => { if (!activeTutorHomework) return; const cfg = tutorConfig.find(t => t.subject === activeTutorHomework.subject); saveTutorHomework(tutorHomework.map(hw => hw.id === activeTutorHomework.id ? { ...hw, status: 'GRADED', grade: sessionResult.grade, feedback: sessionResult.feedback, weaknessSummary: sessionResult.weakAreas?.[0] ?? null, completedAt: new Date().toISOString(), sessionId: sessionResult.id } : hw)); if (cfg?.tutorEmail) { try { await fetch('/api/ingest-homework', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tutorEmail: cfg.tutorEmail, tutorName: cfg.tutorName ?? 'Tutor', subject: activeTutorHomework.subject, grade: sessionResult.grade, feedbackSummary: sessionResult.weakAreas?.[0] ?? null, driveLink: activeTutorHomework.driveFileUrl ?? null }) }); addToast(`Sent to ${cfg.tutorName ?? 'tutor'}!`, 'info'); } catch { addToast('Grade saved. Email to tutor failed — check connection.', 'warning'); } } setActiveTutorHomework(null); }
 
   // V83: Weakest subject computation for Daily Orders
