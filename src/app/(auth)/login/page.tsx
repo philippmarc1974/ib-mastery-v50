@@ -99,6 +99,22 @@ export default function LoginPage() {
             </Link>
           </p>
         </form>
+
+        <div className="mt-4">
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.setItem("ibm_demo_mode", "true");
+              router.push("/app");
+            }}
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-amber-300 rounded-xl text-sm font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 hover:border-amber-400 transition-colors"
+          >
+            🎮 Demo Mode — Explore with sample data
+          </button>
+          <p className="text-center text-xs text-gray-400 mt-2">
+            History HL, Maths AI HL, Physics HL, English SL · 3 weeks of sessions
+          </p>
+        </div>
       </div>
     </div>
   );

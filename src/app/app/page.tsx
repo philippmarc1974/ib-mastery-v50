@@ -36,8 +36,20 @@ export default function AppPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [ready, setReady] = useState(false);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
   useEffect(() => {
+    // Check for demo mode flag
+    try {
+      if (localStorage.getItem("ibm_demo_mode") === "true") {
+        (window as any).__ibFirebaseName = "Basti";
+        (window as any).__ibDemoMode = true;
+        setIsDemoMode(true);
+        setReady(true);
+        return;
+      }
+    } catch {}
+
     if (!loading && !user) {
       router.replace("/login");
     }
@@ -50,6 +62,7 @@ export default function AppPage() {
   }, [user, loading, router]);
 
   if (loading || !ready) {
+    if (isDemoMode) return <IBApp />;
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
@@ -57,7 +70,7 @@ export default function AppPage() {
     );
   }
 
-  if (!user) return null;
+  if (!user && !isDemoMode) return null;
 
   return <IBApp />;
 }

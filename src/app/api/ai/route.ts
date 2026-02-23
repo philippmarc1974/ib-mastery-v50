@@ -28,8 +28,8 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-const MODEL_SONNET = "claude-sonnet-4-5-20250929";
-const MODEL_HAIKU  = "claude-haiku-4-5-20250929";
+const MODEL_SONNET = "claude-sonnet-4-6";
+const MODEL_HAIKU  = "claude-haiku-4-5-20251001";
 
 /** Pick model: Sonnet for vision or large outputs, Haiku for everything else */
 function pickModel(isVision: boolean, maxTokens: number): string {
