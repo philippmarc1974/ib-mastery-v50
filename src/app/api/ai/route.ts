@@ -28,7 +28,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-const MODEL_SONNET = "claude-sonnet-4-6";
+const MODEL_SONNET = "claude-sonnet-4-5-20250514";
 const MODEL_HAIKU  = "claude-haiku-4-5-20251001";
 
 /** Pick model: Sonnet for vision or large outputs, Haiku for everything else */
@@ -137,10 +137,12 @@ export async function POST(req: NextRequest) {
       .join("\n");
 
     return NextResponse.json({ content: [{ type: "text", text }] });
-  } catch (error) {
-    console.error("[/api/ai] Upstream error:", error);
+  } catch (error: any) {
+    console.error("[/api/ai] Upstream error:", error?.message || error);
+    const msg = error?.message || "Unknown error";
+    const status = error?.status || 500;
     return NextResponse.json(
-      { error: "AI service temporarily unavailable. Please try again." },
+      { error: `AI error (${status}): ${msg.slice(0, 200)}` },
       { status: 500 }
     );
   }

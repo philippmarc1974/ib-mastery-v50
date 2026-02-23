@@ -1990,9 +1990,9 @@ const parseSummary = (text) => {
   }
   return sections;
 };
-const fmtDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-const fmtTime = (d) => new Date(d).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-const dayKey = (d = new Date()) => d.toISOString().slice(0, 10);
+const fmtDate = (d) => { try { return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); } catch { return '—'; } };
+const fmtTime = (d) => { try { return new Date(d).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); } catch { return '—'; } };
+const dayKey = (d = new Date()) => { try { const dt = d instanceof Date ? d : new Date(d); return isNaN(dt.getTime()) ? new Date().toISOString().slice(0, 10) : dt.toISOString().slice(0, 10); } catch { return new Date().toISOString().slice(0, 10); } };
 // Shared grade projection — single source of truth (fixes DRY violation)
 function projectGrade(weights, progressData, boundary) {
   let total = 0, w = 0;
@@ -10415,6 +10415,7 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [gdriveTodoFolderId, setGdriveTodoFolderId] = useState('');
   const [gdriveDoneFolderId, setGdriveDoneFolderId] = useState('');
   const [gdriveClientId, setGdriveClientId] = useState('');
+  const [gvisionApiKey, setGvisionApiKey] = useState('');
   const [gdriveAccessToken, setGdriveAccessToken] = useState(null);
   const [gdriveTokenExpiry, setGdriveTokenExpiry] = useState(null);
   const [gdrivePushing, setGdrivePushing] = useState(false);
@@ -16045,7 +16046,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
         style={{ background: SHELL_BG }}
         onClick={() => { if (sidebarOpen) setSidebarOpen(false); if (showNotifications) setShowNotifications(false); }}>
         {/* V200: BloodSpatterOverlay — behind all content */}
-        <BloodSpatterOverlay daysToExam={daysToExam} isGrandAssault={studyMode === 'combat' && battleType === 'grand_assault'} />
+        <BloodSpatterOverlay daysToExam={daysToExam} isGrandAssault={studyMode === 'combat' && studyPreset === 'full'} />
         {/* V200: Demo mode banner */}
         {demoMode && (
           <div style={{ background:`linear-gradient(90deg,${C_GOLD}20,${C_GOLD}10)`, borderBottom:`1px solid ${C_GOLD}40`, padding:'4px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', position:'sticky', top:0, zIndex:31 }}>
@@ -23390,13 +23391,13 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                       <div>
                         <label className="block text-[10px] text-slate-500 mb-1">Exams folder ID (Push to reMarkable)</label>
                         <input value={gdriveTodoFolderId} onChange={e => setGdriveTodoFolderId(e.target.value)}
-                          onBlur={() => saveRemarkableSettings({ ...remarkableSettings, todoFolderId: gdriveTodoFolderId, doneFolderId: gdriveDoneFolderId })}
+                          onBlur={() => saveRemarkableSettings({ clientId: gdriveClientId, visionApiKey: gvisionApiKey, todoFolderId: gdriveTodoFolderId, doneFolderId: gdriveDoneFolderId })}
                           placeholder="Paste Google Drive folder ID" className="w-full text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 focus:outline-none bg-slate-50 font-mono" />
                       </div>
                       <div>
                         <label className="block text-[10px] text-slate-500 mb-1">Done folder ID (Fetch completed)</label>
                         <input value={gdriveDoneFolderId} onChange={e => setGdriveDoneFolderId(e.target.value)}
-                          onBlur={() => saveRemarkableSettings({ ...remarkableSettings, todoFolderId: gdriveTodoFolderId, doneFolderId: gdriveDoneFolderId })}
+                          onBlur={() => saveRemarkableSettings({ clientId: gdriveClientId, visionApiKey: gvisionApiKey, todoFolderId: gdriveTodoFolderId, doneFolderId: gdriveDoneFolderId })}
                           placeholder="Paste Google Drive folder ID" className="w-full text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 focus:outline-none bg-slate-50 font-mono" />
                       </div>
                     </div>
