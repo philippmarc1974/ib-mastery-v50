@@ -11194,6 +11194,9 @@ Format as markdown with:
     });
   }, []);
 
+  // V201: Hoist savePlanner before generateWeeklyParentReport which depends on it
+  const savePlanner = useCallback(async (p) => { try { await window.storage.set(STORE.planner, JSON.stringify(p)); setPlanner(p); } catch(e) { console.error(e); } }, []);
+
   // V201: Weekly auto-report generator (runs on Sundays or Monday morning)
   const generateWeeklyParentReport = useCallback(async () => {
     const weekAgo = Date.now() - 7 * 86400000;
@@ -11287,7 +11290,6 @@ Format as markdown with:
     return true
   }
 
-  const savePlanner = useCallback(async (p) => { try { await window.storage.set(STORE.planner, JSON.stringify(p)); setPlanner(p); } catch(e) { console.error(e); } }, []);
   const saveRewards = useCallback(async (r) => { try { await window.storage.set(STORE.rewards, JSON.stringify(r)); setRewards(r); } catch(e) { console.error(e); } }, []);
   const saveRewardHistory = useCallback(async (h) => { try { await window.storage.set(STORE.rewardHistory, JSON.stringify(h)); setRewardHistory(h); } catch(e) { console.error(e); } }, []);
   const saveKnowledgeBank = useCallback(async (k) => { try { await window.storage.set(STORE.knowledgeBank, JSON.stringify(compressForStorage(k))); setKnowledgeBank(k); } catch(e) { console.error(e); } }, []);
