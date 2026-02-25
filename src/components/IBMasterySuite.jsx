@@ -9,9 +9,9 @@ import { uploadHomeworkToDrive } from '@/lib/driveUpload';
 /* ═══════════════ V200 DARK IRON SHELL CSS + SCOPED PARCHMENT ═══════════════ */
 const ParchmentCSS = () => (
   <style>{`
-    /* ── V202: Warm Parchment Shell — global light theme ── */
-    ::-webkit-scrollbar-track { background: ${SHELL_BG}; }
-    ::-webkit-scrollbar-thumb { background: #C9A84C60; border-radius: 4px; }
+    /* ── V203: Dual-tone — dark iron shell + warm parchment content ── */
+    ::-webkit-scrollbar-track { background: ${IRON_BG}; }
+    ::-webkit-scrollbar-thumb { background: ${C_GOLD}60; border-radius: 4px; }
     .skin-header { font-family: 'Segoe UI',system-ui,-apple-system,sans-serif !important; }
 
     /* ── V200: Parchment styles SCOPED to scroll interiors only ── */
@@ -53,7 +53,15 @@ const P_ORANGE = "#C05A10";
 const P_SERIF  = "'Georgia','Palatino Linotype',serif";
 const P_SANS   = "'Segoe UI',system-ui,-apple-system,sans-serif";
 
-/* ═══════════════ V202 WARM PARCHMENT SHELL TOKENS ═══════════════ */
+/* ═══════════════ V203 DUAL-TONE: Dark Iron Shell + Warm Parchment Content ═══════════════ */
+/* IRON = sidebar, header, main wrapper (dark tactical shell) */
+const IRON_BG       = "#0E0C0A";
+const IRON_BG2      = "#1A1610";
+const IRON_BG3      = "#181210";
+const IRON_BORDER   = "#3A2E20";
+const IRON_TEXT     = "#C4B89A";
+const IRON_TEXT_DIM = "#8A7A60";
+/* SHELL = content area cards, panels, UI elements (warm parchment) */
 const SHELL_BG     = "#F5F0E8";
 const SHELL_BG2    = "#EDE5D4";
 const SHELL_BG3    = "#E0D5C0";
@@ -1112,7 +1120,7 @@ const SKIN_CSS = {
     .skin-header .text-slate-400 { color: #64748b !important; }
   `,
   spacemarine: `
-    /* ─── V202 WARM PARCHMENT SHELL — readable light theme ─── */
+    /* ─── V203 DUAL-TONE: Dark Iron Shell + Warm Parchment Content ─── */
     .skin-content {
       --card-bg: #FFFDF8;
       --card-border: #C9A84C30;
@@ -1133,12 +1141,14 @@ const SKIN_CSS = {
     }
     .skin-content h1, .skin-content h2, .skin-content h3, .skin-content h4 { color: #8B6914 !important; }
     .skin-header {
-      background: #F5F0E8 !important;
+      background: #0E0C0A !important;
       backdrop-filter: blur(12px) !important;
-      border-bottom: 1px solid rgba(201,168,76,0.3) !important;
+      border-bottom: 1px solid #3A2E20 !important;
     }
-    .skin-header h2 { color: #8B6914 !important; }
-    .skin-header .text-slate-400 { color: #6B5D4D !important; }
+    .skin-header h2 { color: #C9A84C !important; }
+    .skin-header .text-slate-400 { color: #8A7A60 !important; }
+    .skin-header .hover\\:bg-slate-100:hover { background: #1A1610 !important; }
+    .skin-header .text-slate-500 { color: #8A7A60 !important; }
 
     /* ═══ ADAMANTIUM ARMOR-PLATE WITH RIVETS — Parchment ═══ */
     .sm-card {
@@ -1212,7 +1222,7 @@ const SKIN_CSS = {
     .skin-content .text-slate-400, .skin-content .text-gray-400 { color: #8A7A60 !important; }
     .skin-content .shadow-sm, .skin-content .shadow { box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important; }
     .skin-content .rounded-xl, .skin-content .rounded-2xl { border-color: #C9A84C30; }
-    .skin-content .hover\\:bg-slate-50:hover, .skin-content .hover\\:bg-gray-50:hover { background: #1A1610 !important; }
+    .skin-content .hover\\:bg-slate-50:hover, .skin-content .hover\\:bg-gray-50:hover { background: #EDE5D4 !important; }
 
     /* ═══ HELMET VISOR SCAN-LINES ═══ */
     .sm-scanlines::after {
@@ -15525,7 +15535,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
   /* ════════════════════════════════════════════════════════════ */
   /*                     ONBOARDING SCREEN                       */
   /* ════════════════════════════════════════════════════════════ */
-  if (!profileLoaded) return <div className="min-h-screen flex items-center justify-center" style={{ background: SHELL_BG }}><Loader2 className="w-8 h-8 animate-spin" style={{ color: C_GOLD }} /><div style={{ color:SHELL_TEXT_DIM, fontSize:10, fontFamily:SHELL_MONO, marginLeft:10, letterSpacing:'0.1em' }}>COGITATOR INITIALISING...</div></div>;
+  if (!profileLoaded) return <div className="min-h-screen flex items-center justify-center" style={{ background: IRON_BG }}><Loader2 className="w-8 h-8 animate-spin" style={{ color: C_GOLD }} /><div style={{ color:IRON_TEXT_DIM, fontSize:10, fontFamily:SHELL_MONO, marginLeft:10, letterSpacing:'0.1em' }}>COGITATOR INITIALISING...</div></div>;
 
   /* ════════════════════════════════════════════════════════════ */
   /*  v37 — AUTH SCREENS (presentational, no real Firebase calls) */
@@ -15833,7 +15843,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
   /*                       MAIN APP RENDER                       */
   /* ════════════════════════════════════════════════════════════ */
   return (
-    <div className="min-h-screen relative flex sm-scanlines sm-grain" style={{ background: SHELL_BG, fontFamily: P_SANS, color: SHELL_TEXT }}>
+    <div className="min-h-screen relative flex sm-scanlines sm-grain" style={{ background: IRON_BG, fontFamily: P_SANS, color: SHELL_TEXT }}>
       <GrimdarkDefs />
       <ParchmentCSS />
       <ScrollGlitchCSS />
@@ -15974,16 +15984,16 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
 
 
 
-      {/* ═══ V200 LEFT SIDEBAR — Dark Iron Shell ═══ */}
+      {/* ═══ V203 LEFT SIDEBAR — Dark Iron Shell ═══ */}
       <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-all duration-300 ${sidebarOpen ? 'w-[180px]' : 'w-16'} overflow-hidden`}
-        style={{ background: SHELL_BG, borderRight: `1px solid ${SHELL_BORDER}`, backgroundImage: 'repeating-linear-gradient(180deg,transparent,transparent 60px,#1A161008 60px,#1A161008 61px)' }}>
+        style={{ background: IRON_BG, borderRight: `1px solid ${IRON_BORDER}`, backgroundImage: 'repeating-linear-gradient(180deg,transparent,transparent 60px,#1A161008 60px,#1A161008 61px)' }}>
         {/* Logo area */}
-        <div className="flex items-center justify-between px-3 h-14 flex-shrink-0" style={{ borderBottom: `1px solid ${SHELL_BORDER}` }}>
+        <div className="flex items-center justify-between px-3 h-14 flex-shrink-0" style={{ borderBottom: `1px solid ${IRON_BORDER}` }}>
           {sidebarOpen && <div>
             <h1 style={{ fontSize: 13, fontWeight: 900, fontFamily: P_SERIF, color: C_GOLD, letterSpacing: '0.05em' }}>IB MASTERY</h1>
-            <p style={{ fontSize: 9, color: SHELL_TEXT_DIM, fontFamily: P_SANS }}>{profile?.name}</p>
+            <p style={{ fontSize: 9, color: IRON_TEXT_DIM, fontFamily: P_SANS }}>{profile?.name}</p>
           </div>}
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg transition-colors flex-shrink-0" style={{ color: SHELL_TEXT_DIM }}>
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg transition-colors flex-shrink-0" style={{ color: IRON_TEXT_DIM }}>
             {sidebarOpen ? <ChevronLeft className="w-5 h-5" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -15992,8 +16002,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
         <nav className="flex-1 overflow-y-auto py-2 px-1.5" style={{ scrollbarWidth: 'none' }}>
           {sidebarGroups.map((group, gi) => (
             <div key={gi}>
-              {group.label === 'divider' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${SHELL_BORDER},transparent)`, margin:'8px 4px' }} />}
-              {group.label === 'admin' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${SHELL_BORDER},transparent)`, margin:'8px 4px' }} />}
+              {group.label === 'divider' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${IRON_BORDER},transparent)`, margin:'8px 4px' }} />}
+              {group.label === 'admin' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${IRON_BORDER},transparent)`, margin:'8px 4px' }} />}
               {group.items.map(item => {
                 const isActive = item.activeCheck ? item.activeCheck() : tab === item.id;
                 const itemColor = item.color || C_GOLD;
@@ -16015,8 +16025,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   </>}
                   <span style={{ fontSize: sidebarOpen ? 16 : 22, flexShrink:0, width: sidebarOpen ? 20 : 'auto', textAlign:'center' }}>{item.icon}</span>
                   {sidebarOpen && <div style={{ minWidth:0 }}>
-                    <div style={{ color: isActive ? itemColor : SHELL_TEXT, opacity: isActive ? 1 : 0.6, fontSize:12, fontWeight:600, fontFamily:P_SANS, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', transition:'opacity 0.15s' }}>{item.label}</div>
-                    <div style={{ color: isActive ? SHELL_TEXT : SHELL_TEXT_DIM, fontSize:9, fontFamily:P_SANS, letterSpacing:'0.04em' }}>{item.sub}</div>
+                    <div style={{ color: isActive ? itemColor : IRON_TEXT, opacity: isActive ? 1 : 0.6, fontSize:12, fontWeight:600, fontFamily:P_SANS, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', transition:'opacity 0.15s' }}>{item.label}</div>
+                    <div style={{ color: isActive ? IRON_TEXT : IRON_TEXT_DIM, fontSize:9, fontFamily:P_SANS, letterSpacing:'0.04em' }}>{item.sub}</div>
                   </div>}
                 </button>;
               })}
@@ -16025,21 +16035,21 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
         </nav>
 
         {/* Bottom: XP bar */}
-        <div style={{ borderTop:`1px solid ${SHELL_BORDER}`, padding:10, flexShrink:0 }}>
+        <div style={{ borderTop:`1px solid ${IRON_BORDER}`, padding:10, flexShrink:0 }}>
           {sidebarOpen && gamify.xp > 0 && (() => {
             const lv = getLevel(gamify.xp, themeLevels);
             return <div style={{ marginBottom:6 }}>
               <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:11, marginBottom:4 }}>
                 {lv.rankType ? <RankEmblem rank={lv.rankType} size={18} /> : <span style={{ fontSize:14 }}>{lv.emoji}</span>}
-                <span style={{ color:SHELL_TEXT_DIM, fontWeight:500, fontSize:10 }}>{lv.name}</span>
+                <span style={{ color:IRON_TEXT_DIM, fontWeight:500, fontSize:10 }}>{lv.name}</span>
                 <span style={{ color:C_GOLD, marginLeft:'auto', fontSize:10, fontFamily:SHELL_MONO }}>{gamify.xp} XP</span>
               </div>
-              <div style={{ height:5, borderRadius:3, background:SHELL_BG3, overflow:'hidden' }}>
+              <div style={{ height:5, borderRadius:3, background:IRON_BG3, overflow:'hidden' }}>
                 <div style={{ height:'100%', borderRadius:3, width:`${lv.progress*100}%`, background:`linear-gradient(90deg,${C_GOLD}80,${C_GOLD})`, transition:'width 0.3s' }} />
               </div>
               {gamify.streak > 0 && <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginTop:4 }}>
                 <span style={{ fontSize:10, fontWeight:700, color:'#f97316' }}>🔥 {gamify.streak}d streak</span>
-                <span style={{ fontSize:9, color:SHELL_TEXT_DIM }}>{gamify.streak}/{streakGoal}d</span>
+                <span style={{ fontSize:9, color:IRON_TEXT_DIM }}>{gamify.streak}/{streakGoal}d</span>
               </div>}
             </div>;
           })()}
@@ -16065,14 +16075,14 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
           </div>
         )}
         {/* Top bar — dark iron */}
-        <header className="skin-header sticky top-0 z-30" style={{ background: SHELL_BG, borderBottom: `1px solid ${C_GOLD}40` }}>
+        <header className="skin-header sticky top-0 z-30" style={{ background: IRON_BG, borderBottom: `1px solid ${IRON_BORDER}` }}>
           <div className="flex items-center justify-between h-12 px-4 sm:px-6">
             <div className="flex items-center gap-3">
-              {!sidebarOpen && <button onClick={() => setSidebarOpen(true)} className="p-1.5 rounded-lg sm:hidden" style={{ color: SHELL_TEXT_DIM }}><Menu className="w-4 h-4" /></button>}
+              {!sidebarOpen && <button onClick={() => setSidebarOpen(true)} className="p-1.5 rounded-lg sm:hidden" style={{ color: IRON_TEXT_DIM }}><Menu className="w-4 h-4" /></button>}
               <h2 style={{ fontFamily: P_SERIF, fontWeight: 900, fontSize: 15, color: C_GOLD, letterSpacing: '0.05em' }}>
-                <span style={{ color: C_GOLD }}>IB</span><span style={{ color: SHELL_TEXT_DIM }}> ✦ </span><span style={{ color: SHELL_TEXT, fontSize: 12 }}>MASTERY</span>
+                <span style={{ color: C_GOLD }}>IB</span><span style={{ color: IRON_TEXT_DIM }}> ✦ </span><span style={{ color: IRON_TEXT, fontSize: 12 }}>MASTERY</span>
               </h2>
-              <span style={{ color: SHELL_TEXT_DIM, fontSize: 9, letterSpacing: '0.12em', fontFamily: SHELL_MONO }}>{(() => {
+              <span style={{ color: IRON_TEXT_DIM, fontSize: 9, letterSpacing: '0.12em', fontFamily: SHELL_MONO }}>{(() => {
                 const exDates = (userSubjects || []).map(s => s.examDate || (s.examDates && Object.values(s.examDates).find(Boolean))).filter(Boolean);
                 if (exDates.length === 0) return 'v200';
                 const earliest = exDates.sort()[0];
@@ -16152,31 +16162,31 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
           })();
           const urgent = hudDaysToExam !== null && hudDaysToExam < 30;
           return (
-            <div style={{ position:'sticky', top:48, zIndex:29, background:SHELL_BG, borderBottom:`1px solid ${C_GOLD}30`, padding:'0 12px', backgroundImage:'repeating-linear-gradient(0deg,transparent,transparent 3px,#FFFFFF04 3px,#FFFFFF04 4px)' }}>
+            <div style={{ position:'sticky', top:48, zIndex:29, background:IRON_BG, borderBottom:`1px solid ${IRON_BORDER}`, padding:'0 12px', backgroundImage:'repeating-linear-gradient(0deg,transparent,transparent 3px,#FFFFFF04 3px,#FFFFFF04 4px)' }}>
               <div style={{ display:'flex', alignItems:'center', gap:4, height:40, overflowX:'auto' }}>
                 {/* Logo mark */}
-                <div style={{ fontFamily:P_SERIF, fontSize:12, fontWeight:700, color:C_GOLD, letterSpacing:'0.05em', marginRight:6, borderRight:`1px solid ${SHELL_BORDER}`, paddingRight:10, flexShrink:0 }}>
-                  <span style={{ color:C_GOLD }}>IB</span><span style={{ color:SHELL_TEXT_DIM }}> ✦ </span><span style={{ color:SHELL_TEXT, fontSize:10 }}>MASTERY</span>
+                <div style={{ fontFamily:P_SERIF, fontSize:12, fontWeight:700, color:C_GOLD, letterSpacing:'0.05em', marginRight:6, borderRight:`1px solid ${IRON_BORDER}`, paddingRight:10, flexShrink:0 }}>
+                  <span style={{ color:C_GOLD }}>IB</span><span style={{ color:IRON_TEXT_DIM }}> ✦ </span><span style={{ color:IRON_TEXT, fontSize:10 }}>MASTERY</span>
                 </div>
                 {/* HUD stats */}
                 {[
                   { label:'STREAK', value:`${gamify.streak||0}`, unit:'DAYS', col: gamify.streak >= 7 ? C_GOLD : '#C04030' },
                   { label:'XP TODAY', value:`${todayXP}`, unit:'PTS', col: C_GOLD },
-                  { label:'DAYS TO IB', value: hudDaysToExam !== null ? `${hudDaysToExam}` : '??', unit:'', col: urgent ? '#C04030' : SHELL_TEXT, pulse: urgent },
+                  { label:'DAYS TO IB', value: hudDaysToExam !== null ? `${hudDaysToExam}` : '??', unit:'', col: urgent ? '#C04030' : IRON_TEXT, pulse: urgent },
                   { label:'GRADE GAP', value:`${totalGap}`, unit:'PTS', col: totalGap > 10 ? '#C04030' : totalGap > 5 ? C_GOLD : '#2A8A4A' },
                 ].map(({ label, value, unit, col, pulse }) => (
-                  <div key={label} style={{ display:'flex', flexDirection:'column', alignItems:'center', padding:'0 8px', borderRight:`1px solid ${SHELL_BORDER}40`, minWidth:62 }}>
-                    <div style={{ fontSize:7, color:SHELL_TEXT_DIM, letterSpacing:'0.14em', fontFamily:SHELL_MONO, fontWeight:700, textTransform:'uppercase' }}>{label}</div>
+                  <div key={label} style={{ display:'flex', flexDirection:'column', alignItems:'center', padding:'0 8px', borderRight:`1px solid ${IRON_BORDER}40`, minWidth:62 }}>
+                    <div style={{ fontSize:7, color:IRON_TEXT_DIM, letterSpacing:'0.14em', fontFamily:SHELL_MONO, fontWeight:700, textTransform:'uppercase' }}>{label}</div>
                     <div style={{ fontFamily:SHELL_MONO, fontSize:13, fontWeight:700, color:col, textShadow:`0 0 8px ${col}60`, animation: pulse ? 'hudPulse 1.2s ease-in-out infinite' : 'none' }}>
-                      {value}{unit && <span style={{ fontSize:8, marginLeft:2, color:SHELL_TEXT_DIM }}>{unit}</span>}
+                      {value}{unit && <span style={{ fontSize:8, marginLeft:2, color:IRON_TEXT_DIM }}>{unit}</span>}
                     </div>
                   </div>
                 ))}
                 {/* Imperial Writ badge */}
                 <div style={{ marginLeft:'auto', display:'flex', alignItems:'center', gap:6 }}>
-                  <button onClick={() => setScrollWritOpen(true)} style={{ position:'relative', background:SHELL_BG3, border:`1px solid ${SHELL_BORDER}`, borderRadius:6, padding:'4px 10px', cursor:'pointer', display:'flex', alignItems:'center', gap:4 }}>
+                  <button onClick={() => setScrollWritOpen(true)} style={{ position:'relative', background:IRON_BG3, border:`1px solid ${IRON_BORDER}`, borderRadius:6, padding:'4px 10px', cursor:'pointer', display:'flex', alignItems:'center', gap:4 }}>
                     <span style={{ fontSize:13 }}>📜</span>
-                    {sidebarOpen || true ? <span style={{ fontFamily:SHELL_MONO, fontSize:9, color:SHELL_TEXT_DIM }}>WRIT</span> : null}
+                    {sidebarOpen || true ? <span style={{ fontFamily:SHELL_MONO, fontSize:9, color:IRON_TEXT_DIM }}>WRIT</span> : null}
                     {unreadWritCount > 0 && <span style={{ position:'absolute', top:-5, right:-5, width:16, height:16, background:'#C04030', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:8, fontWeight:700, color:'#fff', boxShadow:'0 0 6px #C0403080', animation:'hudPulse 1.2s ease-in-out infinite' }}>{unreadWritCount}</span>}
                   </button>
                   {/* Rank emblem */}
