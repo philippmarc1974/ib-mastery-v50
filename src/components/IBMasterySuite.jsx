@@ -9,9 +9,9 @@ import { uploadHomeworkToDrive } from '@/lib/driveUpload';
 /* ═══════════════ V200 DARK IRON SHELL CSS + SCOPED PARCHMENT ═══════════════ */
 const ParchmentCSS = () => (
   <style>{`
-    /* ── V200: Dark Iron Shell — global dark theme ── */
+    /* ── V202: Warm Parchment Shell — global light theme ── */
     ::-webkit-scrollbar-track { background: ${SHELL_BG}; }
-    ::-webkit-scrollbar-thumb { background: ${SHELL_BORDER}; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: #C9A84C60; border-radius: 4px; }
     .skin-header { font-family: 'Segoe UI',system-ui,-apple-system,sans-serif !important; }
 
     /* ── V200: Parchment styles SCOPED to scroll interiors only ── */
@@ -53,13 +53,13 @@ const P_ORANGE = "#C05A10";
 const P_SERIF  = "'Georgia','Palatino Linotype',serif";
 const P_SANS   = "'Segoe UI',system-ui,-apple-system,sans-serif";
 
-/* ═══════════════ V200 DARK IRON SHELL TOKENS ═══════════════ */
-const SHELL_BG     = "#0E0C0A";
-const SHELL_BG2    = "#1A1610";
-const SHELL_BG3    = "#181210";
-const SHELL_BORDER = "#3A2E20";
-const SHELL_TEXT   = "#C4B89A";
-const SHELL_TEXT_DIM = "#8A7A60";
+/* ═══════════════ V202 WARM PARCHMENT SHELL TOKENS ═══════════════ */
+const SHELL_BG     = "#F5F0E8";
+const SHELL_BG2    = "#EDE5D4";
+const SHELL_BG3    = "#E0D5C0";
+const SHELL_BORDER = "#C9A84C40";
+const SHELL_TEXT   = "#2A1F14";
+const SHELL_TEXT_DIM = "#6B5D4D";
 const C_GOLD    = "#C9A84C";
 const C_RED     = "#8B1A1A";
 const C_TEAL    = "#1A6B5E";
@@ -222,7 +222,7 @@ function ScrollOverlay({ visible, onClose, children, wide }) {
   useEffect(() => { if (visible) setTimeout(() => setShown(true), 30); else setShown(false); }, [visible]);
   if (!visible) return null;
   return (
-    <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 300, background: "#0E0C0ACC", backdropFilter: "blur(7px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 300, background: "#2A1F14CC", backdropFilter: "blur(7px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
       <div onClick={e => e.stopPropagation()} className={shown ? "scroll-glitch-enter" : ""} style={{ width: wide ? "min(780px,97vw)" : "min(560px,96vw)", maxHeight: "92vh", overflowY: "auto", transition: "transform 0.42s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s ease", transform: shown ? "scale(1) translateY(0)" : "scale(0.6) translateY(36px)", opacity: shown ? 1 : 0 }}>
         <ScrollRoller />
         <div className="scroll-interior" style={{ background: "linear-gradient(180deg,#F6EFD6,#EEE4C2,#F6EFD6)", border: `2px solid ${P_PARCH2}`, borderTop: "none", borderBottom: "none", padding: "26px 32px", position: "relative" }}>
@@ -1112,43 +1112,43 @@ const SKIN_CSS = {
     .skin-header .text-slate-400 { color: #64748b !important; }
   `,
   spacemarine: `
-    /* ─── V200 DARK IRON SHELL — Warhammer 40K aesthetic ─── */
+    /* ─── V202 WARM PARCHMENT SHELL — readable light theme ─── */
     .skin-content {
-      --card-bg: #1A1610;
-      --card-border: #3A2E20;
-      --card-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 0 1px rgba(58,46,32,0.3);
-      --stat-bg: #181210;
-      --stat-border: #3A2E20;
-      --bar-bg: #181210;
+      --card-bg: #FFFDF8;
+      --card-border: #C9A84C30;
+      --card-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 0 1px rgba(201,168,76,0.15);
+      --stat-bg: #F5F0E8;
+      --stat-border: #C9A84C30;
+      --bar-bg: #E0D5C0;
       --bar-fill: linear-gradient(90deg, #C9A84C, #E8C050);
-      --input-bg: #0E0C0A;
-      --input-border: #3A2E20;
-      --hover-bg: #1A1610;
-      --text-primary: #C4B89A;
-      --text-secondary: #C4B89A;
-      --text-muted: #8A7A60;
+      --input-bg: #FFFDF8;
+      --input-border: #C9A84C40;
+      --hover-bg: #EDE5D4;
+      --text-primary: #2A1F14;
+      --text-secondary: #4A3F2A;
+      --text-muted: #6B5D4D;
       --text-faint: #8A7A60;
-      --divider: #3A2E20;
-      color: #C4B89A;
+      --divider: #C9A84C30;
+      color: #2A1F14;
     }
-    .skin-content h1, .skin-content h2, .skin-content h3, .skin-content h4 { color: #C9A84C !important; }
+    .skin-content h1, .skin-content h2, .skin-content h3, .skin-content h4 { color: #8B6914 !important; }
     .skin-header {
-      background: #0E0C0A !important;
+      background: #F5F0E8 !important;
       backdrop-filter: blur(12px) !important;
-      border-bottom: 1px solid rgba(201,168,76,0.25) !important;
+      border-bottom: 1px solid rgba(201,168,76,0.3) !important;
     }
-    .skin-header h2 { color: #C9A84C !important; }
-    .skin-header .text-slate-400 { color: #8A7A60 !important; }
+    .skin-header h2 { color: #8B6914 !important; }
+    .skin-header .text-slate-400 { color: #6B5D4D !important; }
 
-    /* ═══ ADAMANTIUM ARMOR-PLATE WITH RIVETS — Dark Iron ═══ */
+    /* ═══ ADAMANTIUM ARMOR-PLATE WITH RIVETS — Parchment ═══ */
     .sm-card {
       border-radius: 0 !important;
       clip-path: polygon(14px 0%, 100% 0%, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0% 100%, 0% 14px) !important;
-      border: 1.5px solid #3A2E20 !important;
+      border: 1.5px solid #C9A84C30 !important;
       box-shadow:
-        0 2px 8px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(201,168,76,0.08) !important;
-      background: #1A1610 !important;
+        0 1px 4px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(201,168,76,0.12) !important;
+      background: #FFFDF8 !important;
     }
     .sm-card::before {
       content: '';
@@ -1187,31 +1187,31 @@ const SKIN_CSS = {
     .sm-input {
       border-radius: 0 !important;
       clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px) !important;
-      background: #0E0C0A !important;
-      border: 1.5px solid #3A2E20 !important;
-      color: #C4B89A !important;
+      background: #FFFDF8 !important;
+      border: 1.5px solid #C9A84C40 !important;
+      color: #2A1F14 !important;
     }
     .sm-input::placeholder { color: #8A7A60 !important; }
     .sm-input:focus { border-color: #C9A84C !important; box-shadow: 0 0 0 2px rgba(201,168,76,0.2) !important; }
     .sm-select {
       border-radius: 0 !important;
-      background: #0E0C0A !important;
-      border: 1.5px solid #3A2E20 !important;
-      color: #C4B89A !important;
+      background: #FFFDF8 !important;
+      border: 1.5px solid #C9A84C40 !important;
+      color: #2A1F14 !important;
     }
 
-    /* V200: Override Tailwind light-mode classes for dark iron shell */
-    .skin-content .bg-white { background: #1A1610 !important; }
-    .skin-content .bg-slate-50, .skin-content .bg-slate-100 { background: #181210 !important; }
-    .skin-content .bg-slate-900 { background: #0E0C0A !important; }
-    .skin-content .border-slate-200, .skin-content .border-slate-300, .skin-content .border-gray-200 { border-color: #3A2E20 !important; }
-    .skin-content .text-slate-800, .skin-content .text-slate-900, .skin-content .text-gray-800, .skin-content .text-gray-900 { color: #C4B89A !important; }
-    .skin-content .text-slate-700, .skin-content .text-gray-700 { color: #C4B89A !important; }
-    .skin-content .text-slate-600, .skin-content .text-gray-600 { color: #A09070 !important; }
-    .skin-content .text-slate-500, .skin-content .text-gray-500 { color: #8A7A60 !important; }
-    .skin-content .text-slate-400, .skin-content .text-gray-400 { color: #6A5A40 !important; }
-    .skin-content .shadow-sm, .skin-content .shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important; }
-    .skin-content .rounded-xl, .skin-content .rounded-2xl { border-color: #3A2E20; }
+    /* V202: Override Tailwind classes for warm parchment shell */
+    .skin-content .bg-white { background: #FFFDF8 !important; }
+    .skin-content .bg-slate-50, .skin-content .bg-slate-100 { background: #F5F0E8 !important; }
+    .skin-content .bg-slate-900 { background: #EDE5D4 !important; }
+    .skin-content .border-slate-200, .skin-content .border-slate-300, .skin-content .border-gray-200 { border-color: #C9A84C30 !important; }
+    .skin-content .text-slate-800, .skin-content .text-slate-900, .skin-content .text-gray-800, .skin-content .text-gray-900 { color: #2A1F14 !important; }
+    .skin-content .text-slate-700, .skin-content .text-gray-700 { color: #2A1F14 !important; }
+    .skin-content .text-slate-600, .skin-content .text-gray-600 { color: #4A3F2A !important; }
+    .skin-content .text-slate-500, .skin-content .text-gray-500 { color: #6B5D4D !important; }
+    .skin-content .text-slate-400, .skin-content .text-gray-400 { color: #8A7A60 !important; }
+    .skin-content .shadow-sm, .skin-content .shadow { box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important; }
+    .skin-content .rounded-xl, .skin-content .rounded-2xl { border-color: #C9A84C30; }
     .skin-content .hover\\:bg-slate-50:hover, .skin-content .hover\\:bg-gray-50:hover { background: #1A1610 !important; }
 
     /* ═══ HELMET VISOR SCAN-LINES ═══ */
@@ -10125,7 +10125,9 @@ const getDailyMissions = (contextSubjects, contextRepo, contextStreak) => {
       { task: 'Complete 10 questions in under 15 minutes', xp: 55, icon: '🔥', type: 'gambit' },
     ];
     const gambit = gambitPool[seed % gambitPool.length];
-    missions.push({ id: 'dyn_gambit', ...gambit, completed: false, progress: 0, description: 'The Emperor\'s Gambit — mystery bonus on completion' });
+    /* V202: Assign subject to gambit missions so they don't show "Daily" */
+    const gambitSubj = subjectGaps.length > 1 ? subjectGaps[1]?.name : subjectGaps[0]?.name;
+    missions.push({ id: 'dyn_gambit', ...gambit, subject: gambitSubj || subjects[0]?.name, completed: false, progress: 0, description: 'The Emperor\'s Gambit — mystery bonus on completion' });
     // Pad with static missions if needed
     while (missions.length < 3) {
       const fallback = MISSION_POOL[seed % MISSION_POOL.length];
@@ -10234,6 +10236,7 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [generatingReport, setGeneratingReport] = useState(null); // 'student' | 'parent' | null
   const [reportContent, setReportContent] = useState(null); // { type, html, generatedAt }
   const [reportTier, setReportTier] = useState('daily'); // V201: Day/Week/Term/Analytics tier selector
+  const [rewardSubTab, setRewardSubTab] = useState('reliquary'); // V202: Hall of Heroes sub-tabs
   const [docFilter, setDocFilter] = useState('all');
   const [docTypeFilter, setDocTypeFilter] = useState('all');
   const [docSearch, setDocSearch] = useState('');
@@ -12276,6 +12279,13 @@ Return ONLY a valid JSON array. For each question:
       const target = subj?.targetGrade || 7;
       const current = subj?.currentGrade || 4;
       if (target - current >= 2 && grade >= target) g.gapsClosed = (g.gapsClosed || 0) + 1;
+    }
+    // V202: Auto-update confidence from session grade
+    if (grade && subjName) {
+      const newConf = Math.min(10, Math.max(1, Math.round(grade * 10 / 7)));
+      const updatedConf = { ...subjectConfidence, [subjName]: newConf };
+      setSubjectConfidence(updatedConf);
+      try { window.storage?.set(STORE.confidence, updatedConf); } catch {}
     }
     // ── POINTS ENGINE ──
     if (grade) {
@@ -16963,17 +16973,37 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                 )}
                 {/* Chat messages */}
                 <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ maxHeight: '500px', minHeight: chatHistory.length > 0 ? '300px' : '180px' }}>
-                  {chatHistory.length === 0 && (
-                    <div className="text-center py-8">
-                      <Brain className="w-10 h-10 text-slate-400 mx-auto mb-3" />
-                      <p className="text-sm text-slate-500 mb-4">Ask anything about {currentSubject.name} {currentSubject.level.toUpperCase()}</p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        {starterQuestions.map(q => (
-                          <button key={q} onClick={() => sendChat(q)} className="text-xs px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">{q}</button>
-                        ))}
+                  {chatHistory.length === 0 && (() => {
+                    /* V202: Context-aware AI greeting referencing last session data */
+                    const lastSess = (repo||[]).filter(s => s.subject === currentSubject?.name && s.type === 'study').sort((a,b) => new Date(b.date) - new Date(a.date))[0];
+                    const detKey = Object.keys(SUBJECT_DETAIL).find(k => k.toLowerCase().includes((currentSubject?.name||'').toLowerCase().split(' ')[0]));
+                    const det = detKey ? SUBJECT_DETAIL[detKey] : null;
+                    const greetingLines = [];
+                    if (lastSess) {
+                      const sessDate = new Date(lastSess.date).toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+                      const grade = lastSess.aiGrade || lastSess.grade;
+                      greetingLines.push(`Your last ${currentSubject.name} session (${sessDate}) scored ${grade ? `Grade ${grade}` : 'no grade recorded'} on "${lastSess.topic || 'General'}".`);
+                    }
+                    if (det?.gap) greetingLines.push(`Focus area: ${det.gap.slice(0, 120)}`);
+                    return (
+                      <div className="text-center py-6">
+                        <Brain className="w-10 h-10 mx-auto mb-3" style={{ color: SHELL_TEXT_DIM }} />
+                        <p className="text-sm mb-2" style={{ color: SHELL_TEXT, fontWeight: 700 }}>Ask anything about {currentSubject.name} {currentSubject.level.toUpperCase()}</p>
+                        {greetingLines.length > 0 && (
+                          <div style={{ background: SHELL_BG3, borderRadius: 8, padding: '8px 14px', marginBottom: 12, maxWidth: 380, margin: '0 auto 12px' }}>
+                            {greetingLines.map((line, i) => (
+                              <p key={i} style={{ color: SHELL_TEXT_DIM, fontSize: 11, margin: '2px 0', lineHeight: 1.5 }}>{line}</p>
+                            ))}
+                          </div>
+                        )}
+                        <div className="flex flex-wrap gap-2 justify-center">
+                          {starterQuestions.map(q => (
+                            <button key={q} onClick={() => sendChat(q)} className="text-xs px-3 py-1.5 rounded-full transition-colors" style={{ background: SHELL_BG3, border: `1px solid ${SHELL_BORDER}`, color: SHELL_TEXT_DIM }}>{q}</button>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    );
+                  })()}
                   {chatHistory.map((msg, i) => (
                     <div key={i} className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       {msg.role === 'assistant' && (
@@ -17015,6 +17045,12 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   <Btn smMode={isSM} accent={accent} onClick={() => sendChat(chatInput)} disabled={chatLoading || !chatInput.trim()} loading={chatLoading} ariaLabel="Send message">
                     <Send className="w-4 h-4" />
                   </Btn>
+                  </div>
+                  {/* V202: Always-visible quick suggestion buttons */}
+                  <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginTop:8 }}>
+                    {['Explain this topic simply', 'Give me a practice question', 'What are common exam mistakes?', 'Help me with my weak areas'].map(q => (
+                      <button key={q} onClick={() => sendChat(q)} style={{ fontSize:10, padding:'4px 10px', borderRadius:12, background:SHELL_BG3, border:`1px solid ${SHELL_BORDER}`, color:SHELL_TEXT_DIM, cursor:'pointer', fontFamily:P_SANS }}>{q}</button>
+                    ))}
                   </div>
                 </div>
               </Card>
@@ -17525,7 +17561,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                               <div style={{ color: P_GOLD, fontSize: 11, fontWeight: 700, fontFamily: P_SANS }}>+{o.xp} XP</div>
                               <button
                                 onClick={() => {
-                                  // Route to the study wizard: pick the subject if available, then go to free engagement
+                                  // V202: Orders ENGAGE — auto-set subject + skip wizard for edicts
                                   if (o.subj && o.subj !== 'Assignment') {
                                     const subjIdx = userSubjects.findIndex(s => s.name === o.subj);
                                     if (subjIdx >= 0) {
@@ -17533,14 +17569,29 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                                       setActiveSubjectIdx(subjIdx);
                                     }
                                   }
-                                  setCruciblePath('free');
+                                  if (o.type === 'edict') {
+                                    // Auto-configure from edict and skip to deploy step
+                                    setStudyPreset('full');
+                                    setStudyTopic(o.task || '');
+                                    setCruciblePath('free');
+                                    setCombatStep(5); // skip straight to deploy
+                                  } else if (o.subj) {
+                                    /* V202: Non-edict orders with known subject — skip to deploy */
+                                    setStudyPreset('quick');
+                                    setStudyTopic(o.task || '');
+                                    setCruciblePath('free');
+                                    setCombatStep(5); // skip straight to deploy
+                                  } else {
+                                    setCruciblePath('free');
+                                    setCombatStep(1); // no subject — start at subject pick
+                                  }
                                 }}
                                 style={{
                                   background: cfg.col,
                                   color: "#fff",
                                   border: "none",
                                   borderRadius: 8,
-                                  padding: "6px 12px",
+                                  padding: "6px 14px",
                                   fontSize: 11,
                                   fontWeight: 700,
                                   fontFamily: P_SANS,
@@ -17548,7 +17599,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                                   whiteSpace: "nowrap",
                                 }}
                               >
-                                GET BRIEFING →
+                                ENGAGE →
                               </button>
                             </div>
                           </div>
@@ -17666,7 +17717,33 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
 
               return (
               <div className="space-y-4">
-                {/* ── QUICK BATTLE HERO — one tap, start immediately ── */}
+                {/* ── V202: WIZARD STEP DOTS ── */}
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:6, padding:'8px 0' }}>
+                  {stepLabels.map((label, i) => {
+                    const stepNum = i + 1;
+                    const isActive = combatStep === stepNum;
+                    const isDone = combatStep > stepNum;
+                    return (
+                      <div key={i} style={{ display:'flex', alignItems:'center', gap:6 }}>
+                        <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:3 }}>
+                          <div style={{
+                            width: 28, height: 28, borderRadius: '50%', display:'flex', alignItems:'center', justifyContent:'center',
+                            background: isDone ? C_GOLD : isActive ? C_GOLD : SHELL_BG3,
+                            border: `2px solid ${isActive ? C_GOLD : isDone ? C_GOLD : SHELL_BORDER}`,
+                            color: isDone || isActive ? '#fff' : SHELL_TEXT_DIM, fontSize: 11, fontWeight: 700,
+                            transition: 'all 0.2s'
+                          }}>
+                            {isDone ? '✓' : stepNum}
+                          </div>
+                          <div style={{ fontSize: 8, fontWeight: 600, color: isActive ? C_GOLD : SHELL_TEXT_DIM, letterSpacing: '0.05em', fontFamily: P_SANS, textTransform: 'uppercase' }}>{label}</div>
+                        </div>
+                        {i < stepLabels.length - 1 && <div style={{ width: 24, height: 2, background: isDone ? C_GOLD : SHELL_BG3, borderRadius: 1, marginBottom: 16 }} />}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* ── RECOMMENDED NEXT SESSION — one tap, start immediately ── */}
                 {combatStep === 1 && (() => {
                   const weakest = subjectStats.reduce((a, b) => ((a.avgGrade || 99) < (b.avgGrade || 99) ? a : b), subjectStats[0]);
                   return (
@@ -17678,16 +17755,14 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                         setCombatStep(3);
                       }}
                       className="w-full p-5 rounded-2xl text-left transition-all hover:-translate-y-0.5 active:scale-[0.99]"
-                      style={{ background: `linear-gradient(135deg, ${weakest.accent}18, ${weakest.accent}08)`, border: `2px solid ${weakest.accent}40` }}>
+                      style={{ background: `linear-gradient(135deg, ${C_GOLD}15, ${C_GOLD}05)`, border: `2px solid ${C_GOLD}50` }}>
+                      <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', color: C_GOLD, fontFamily: P_SANS, marginBottom: 6 }}>RECOMMENDED NEXT SESSION</div>
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: weakest.accent }}>
-                            {isSM ? '⚡ Quick Sortie' : '⚡ Quick Battle'}
-                          </div>
-                          <div className="text-base font-black text-slate-800">{weakest.name}</div>
-                          <div className="text-xs text-slate-500 mt-0.5">4 questions · 15 min · {weakest.avgGrade ? `avg G${weakest.avgGrade}` : 'not yet graded'}</div>
+                          <div className="text-base font-black" style={{ color: SHELL_TEXT }}>{weakest.name} — {weakest.level || 'SL'}</div>
+                          <div className="text-xs mt-0.5" style={{ color: SHELL_TEXT_DIM }}>Weakest area · 15 min · Focus on {weakest.worstTopics?.[0]?.topic || 'priority topics'}</div>
                         </div>
-                        <div className="text-3xl" style={{ color: weakest.accent }}>→</div>
+                        <div style={{ background: C_GOLD, color: '#fff', fontWeight: 700, fontSize: 12, padding: '8px 18px', borderRadius: 8, fontFamily: P_SANS }}>START NOW</div>
                       </div>
                     </button>
                   );
@@ -17705,30 +17780,34 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   </div>
                 )}
 
-                {/* ── STEP 1 — Subject list (compact) ── */}
+                {/* ── STEP 1 — Subject grid with grade circles ── */}
                 {combatStep === 1 && (
-                  <div className="space-y-1.5">
-                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">Or pick a subject</div>
-                    {subjectStats.map((ss, i) => (
-                      <button key={i}
-                        onClick={() => {
-                          setCombatSubject(ss.name);
-                          setActiveSubjectIdx(userSubjects.findIndex(s => s.name === ss.name));
-                          setStudyPreset(null); setStudyTopic(''); setStudyPaperMode(null); setStudyTopics([]);
-                          setCombatStep(2);
-                        }}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all hover:bg-slate-50"
-                        style={{ border: '1px solid #e2e8f0' }}>
-                        <div className="w-2 h-8 rounded-full flex-shrink-0" style={{ background: ss.accent }} />
-                        <div className="flex-1 min-w-0">
-                          <div className="font-bold text-sm text-slate-800">{ss.name}</div>
-                          <div className="text-xs text-slate-400">{ss.level?.toUpperCase()} · {ss.practiced}/{ss.totalSections} topics</div>
-                        </div>
-                        {ss.avgGrade && <div className="text-base font-extrabold" style={{ color: ss.accent }}>{ss.avgGrade}</div>}
-                        {ss.nextExam && ss.nextExam.days <= 14 && <span className="text-[10px] font-bold text-red-400">{ss.nextExam.days}d</span>}
-                        <ChevronRight className="w-4 h-4 text-slate-300 flex-shrink-0" />
-                      </button>
-                    ))}
+                  <div>
+                    <div style={{ fontSize: 10, fontWeight: 700, color: SHELL_TEXT_DIM, letterSpacing: '0.1em', fontFamily: P_SANS, textTransform: 'uppercase', padding: '0 2px', marginBottom: 10 }}>SELECT YOUR BATTLEGROUND</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                      {subjectStats.map((ss, i) => {
+                        const g = ss.avgGrade || 0;
+                        const gradeColor = g >= 7 ? '#7C3AED' : g >= 6 ? '#2F7D3E' : g >= 5 ? '#C9A84C' : g >= 4 ? '#D97706' : '#B83228';
+                        const target = ss.target || 6;
+                        const gap = target - g;
+                        return (
+                          <button key={i}
+                            onClick={() => {
+                              setCombatSubject(ss.name);
+                              setActiveSubjectIdx(userSubjects.findIndex(s => s.name === ss.name));
+                              setStudyPreset(null); setStudyTopic(''); setStudyPaperMode(null); setStudyTopics([]);
+                              setCombatStep(2);
+                            }}
+                            style={{ background: '#FFFDF8', border: `2px solid ${ss.accent}30`, borderLeft: `4px solid ${ss.accent}`, borderRadius: 10, padding: '14px 12px', textAlign: 'center', cursor: 'pointer', transition: 'all 0.15s' }}>
+                            <div style={{ width: 44, height: 44, borderRadius: '50%', border: `3px solid ${gradeColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px', background: `${gradeColor}12` }}>
+                              <span style={{ fontSize: 18, fontWeight: 800, color: gradeColor, fontFamily: P_SANS }}>{g || '?'}</span>
+                            </div>
+                            <div style={{ fontSize: 12, fontWeight: 700, color: SHELL_TEXT, fontFamily: P_SANS, marginBottom: 2 }}>{ss.name}</div>
+                            <div style={{ fontSize: 10, color: SHELL_TEXT_DIM, fontFamily: P_SANS }}>Target: {target} · {gap > 0 ? `Gap: -${gap}` : 'On track'}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
 
@@ -19206,50 +19285,51 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
         {/* ═══════════ REWARDS ═══════════ */}
         {tab === 'rewards' && (
           <div className="space-y-4">
-            {/* Reward progress hero */}
-            <Card smMode={isSM} accent={accent} className="p-6 text-center" style={isSM ? { background: 'linear-gradient(135deg, #f0f9ff 0%, #e8f6f7 50%, #f0f9ff 100%)', border: '1.5px solid #88b8c8' } : { background: `linear-gradient(135deg, ${accent}08, transparent)` }}>
-              {isSM ? (
-                <>
-                  <div className="flex justify-center mb-3 sm-icon-pulse"><SmVoxSkull size={70} /></div>
-                  <h2 className="text-xl font-bold text-teal-700 font-mono uppercase tracking-wider">{getLevel(gamify.xp, themeLevels).name}</h2>
-                  <p className="text-xs text-teal-600/70 font-mono mt-1">RANK {getLevel(gamify.xp, themeLevels).idx} · {gamify.xp || 0} XP ACCUMULATED</p>
-                  <div className="max-w-xs mx-auto mt-3">
-                    <div className="sm-plasma-track h-4">
-                      <div className="sm-plasma-fill h-full transition-all duration-300" style={{ width: `${getLevel(gamify.xp, themeLevels).progress * 100}%` }} />
+            {/* V202: Sub-tabs */}
+            <div style={{ display: 'flex', gap: 4, background: SHELL_BG2, borderRadius: 10, padding: 4 }}>
+              {[['reliquary', 'Reliquary of Honours'], ['quests', 'Sacred Quests'], ['ascension', 'Ascension Ladder'], ['rewards', 'Available Rewards']].map(([key, label]) => (
+                <button key={key} onClick={() => setMedalSubTab?.(key) || setRewardSubTab(key)}
+                  style={{ flex: 1, padding: '8px 4px', borderRadius: 8, fontSize: 10, fontWeight: 700, fontFamily: P_SANS, cursor: 'pointer', border: 'none',
+                    background: (rewardSubTab || 'reliquary') === key ? C_GOLD : 'transparent',
+                    color: (rewardSubTab || 'reliquary') === key ? '#fff' : SHELL_TEXT_DIM,
+                    letterSpacing: '0.03em'
+                  }}>{label}</button>
+              ))}
+            </div>
+
+            {/* V202: Chaplain Header with rank + progress */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, background: '#FFFDF8', border: `1.5px solid ${C_GOLD}30`, borderRadius: 12, padding: 16 }}>
+              <div style={{ width: 56, height: 56, borderRadius: '50%', border: `3px solid ${C_GOLD}`, display: 'flex', alignItems: 'center', justifyContent: 'center', background: `${C_GOLD}10`, flexShrink: 0 }}>
+                {getLevel(gamify.xp, themeLevels).rankType ? <RankEmblem rank={getLevel(gamify.xp, themeLevels).rankType} size={32} /> : <span style={{ fontSize: 24 }}>{getLevel(gamify.xp, themeLevels).emoji}</span>}
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ color: C_GOLD, fontSize: 15, fontWeight: 800, fontFamily: P_SERIF }}>{getLevel(gamify.xp, themeLevels).name}</div>
+                <div style={{ color: SHELL_TEXT_DIM, fontSize: 10, fontFamily: P_SANS, marginBottom: 6 }}>Level {getLevel(gamify.xp, themeLevels).idx} · {gamify.xp || 0} XP · {getLevel(gamify.xp, themeLevels).nextXp - (gamify.xp || 0)} to {getLevel(gamify.xp, themeLevels).nextName}</div>
+                <div style={{ height: 6, background: SHELL_BG3, borderRadius: 4, overflow: 'hidden' }}>
+                  <div style={{ height: '100%', width: `${getLevel(gamify.xp, themeLevels).progress * 100}%`, background: `linear-gradient(90deg, ${C_GOLD}, #E8C050)`, borderRadius: 4 }} />
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, flexShrink: 0 }}>
+                <div style={{ textAlign: 'center' }}><div style={{ fontSize: 18, fontWeight: 900, color: '#f97316' }}>{gamify.streak || 0}</div><div style={{ fontSize: 8, color: SHELL_TEXT_DIM, fontFamily: P_SANS }}>STREAK</div></div>
+                <div style={{ textAlign: 'center' }}><div style={{ fontSize: 18, fontWeight: 900, color: C_GOLD }}>{(gamify.unlockedMedals || []).length}</div><div style={{ fontSize: 8, color: SHELL_TEXT_DIM, fontFamily: P_SANS }}>MEDALS</div></div>
+              </div>
+            </div>
+
+            {/* V202: Medal Grid (4-column) — shown in Reliquary tab */}
+            {(rewardSubTab || 'reliquary') === 'reliquary' && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+                {ACHIEVEMENTS.map((ach) => {
+                  const earned = (gamify.unlockedMedals || gamify.unlocked || []).includes(ach.id);
+                  return (
+                    <div key={ach.id} style={{ background: '#FFFDF8', border: `1.5px solid ${earned ? C_GOLD + '50' : SHELL_BORDER}`, borderRadius: 10, padding: '12px 6px', textAlign: 'center', opacity: earned ? 1 : 0.35, transition: 'all 0.2s' }}>
+                      <div style={{ fontSize: 22, marginBottom: 4 }}>{ach.relic ? <MiniRelicIcon type={ach.relic} size={22} /> : ach.icon}</div>
+                      <div style={{ fontSize: 8, fontWeight: 700, color: earned ? C_GOLD : SHELL_TEXT_DIM, fontFamily: P_SANS, lineHeight: 1.3, marginBottom: 2 }}>{ach.name}</div>
+                      <div style={{ fontSize: 7, color: SHELL_TEXT_DIM, fontFamily: P_SANS, lineHeight: 1.3 }}>{earned ? ach.desc : '???'}</div>
                     </div>
-                    <div className="flex justify-between mt-1">
-                      <span className="text-[10px] font-mono text-cyan-600/50">{getLevel(gamify.xp, themeLevels).name}</span>
-                      <span className="text-[10px] font-mono text-cyan-600/50">{getLevel(gamify.xp, themeLevels).nextName}</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-center gap-3 mt-3">
-                    {gamify.streak > 0 && <div className="inline-flex items-center gap-1.5 px-3 py-1.5 sm-pill" style={{ background: '#f9731610', border: '1px solid #f9731625' }}>
-                      <span className="text-lg">🔥</span><span className="text-sm font-bold font-mono" style={{ color: '#f97316' }}>{gamify.streak}d</span>
-                    </div>}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 sm-pill" style={{ background: '#00737710', border: '1px solid #00737730' }}>
-                      <span className="text-sm">⚡</span><span className="text-sm font-bold font-mono text-teal-700">{gamify.totalQuestions || 0} Qs</span>
-                    </div>
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 sm-pill" style={{ background: '#6d28d910', border: '1px solid #6d28d925' }}>
-                      <span className="text-sm">📜</span><span className="text-sm font-bold font-mono text-violet-700">{(gamify.unlocked || []).length}/{ACHIEVEMENTS.length}</span>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="mb-2">{getLevel(gamify.xp, themeLevels).rankType ? <RankEmblem rank={getLevel(gamify.xp, themeLevels).rankType} size={48} /> : <span className="text-4xl">{getLevel(gamify.xp, themeLevels).emoji}</span>}</div>
-                  <h2 className="text-xl font-bold text-slate-800">{getLevel(gamify.xp, themeLevels).name}</h2>
-                  <p className="text-xs text-slate-500 mt-1">Level {getLevel(gamify.xp, themeLevels).idx} · {gamify.xp || 0} XP</p>
-                  <div className="max-w-xs mx-auto mt-3">
-                    <div className="h-3 rounded-full bg-slate-200 overflow-hidden">
-                      <div className="h-full rounded-full transition-all duration-300" style={{ width: `${getLevel(gamify.xp, themeLevels).progress * 100}%`, background: `linear-gradient(90deg, ${accent}, ${accent}cc)` }} />
-                    </div>
-                  </div>
-                  {gamify.streak > 0 && <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: '#f9731615', border: '1px solid #f9731625' }}>
-                    <span className="text-lg">🔥</span><span className="text-sm font-bold" style={{ color: '#f97316' }}>{gamify.streak}-day streak</span>
-                  </div>}
-                </>
-              )}
-            </Card>
+                  );
+                })}
+              </div>
+            )}
 
             {/* ─── STREAK CALENDAR ─── */}
             <Card smMode={isSM} accent={accent} className="p-4">
@@ -19594,7 +19674,7 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             { id: 'daily', label: '📅 Daily Debrief', desc: "Today's sessions" },
             { id: 'weekly', label: '📊 Weekly Report', desc: 'This week summary' },
             { id: 'term', label: '📈 Term Report', desc: 'Full trajectory' },
-            { id: 'analytics', label: '🔬 Analytics', desc: 'Detailed data' },
+            { id: 'analytics', label: '📜 Imperial Dispatch', desc: 'Parent/Tutor report' },
           ];
           // reportTier state is at component level (see V201 state block)
 
@@ -20019,37 +20099,54 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             {/* V201: DAILY DEBRIEF */}
             {scriptumView === 'student' && reportTier === 'daily' && (
               <div style={{ background:SHELL_BG2, borderRadius:12, padding:20, border:`1px solid ${SHELL_BORDER}`, marginBottom:14 }}>
-                <div style={{ color:P_INK, fontSize:16, fontWeight:800, fontFamily:P_SERIF, marginBottom:12 }}>📅 Daily Debrief — {new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'short' })}</div>
+                {/* V202: Header with effort stars */}
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12 }}>
+                  <div>
+                    <div style={{ fontSize:9, fontWeight:700, color:SHELL_TEXT_DIM, letterSpacing:'0.1em', fontFamily:P_SANS }}>TODAY'S BATTLE REPORT</div>
+                    <div style={{ color:SHELL_TEXT, fontSize:16, fontWeight:800, fontFamily:P_SERIF }}>{new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' })}</div>
+                  </div>
+                  <div style={{ textAlign:'right' }}>
+                    <div style={{ fontSize:16, letterSpacing:2 }}>{(() => { const s = todaySess.length; const effort = Math.min(5, Math.max(1, s >= 4 ? 5 : s >= 3 ? 4 : s >= 2 ? 3 : s >= 1 ? 2 : 1)); return '★'.repeat(effort) + '☆'.repeat(5 - effort); })()}</div>
+                    <div style={{ fontSize:9, color:SHELL_TEXT_DIM, fontFamily:P_SANS }}>Effort: {Math.min(5, todaySess.length >= 4 ? 5 : todaySess.length >= 2 ? todaySess.length + 1 : todaySess.length)}/5</div>
+                  </div>
+                </div>
                 {todaySess.length === 0 ? (
                   <div style={{ color:SHELL_TEXT_DIM, fontSize:12, padding:20, textAlign:'center' }}>No sessions today yet. Start a study session to see your daily debrief.</div>
                 ) : (
                   <>
                     <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:10, marginBottom:14 }}>
                       <div style={{ background:SHELL_BG3, borderRadius:8, padding:'10px 12px', textAlign:'center' }}>
-                        <div style={{ color:SHELL_TEXT_DIM, fontSize:9, fontFamily:SHELL_MONO }}>SESSIONS</div>
+                        <div style={{ color:SHELL_TEXT_DIM, fontSize:9, fontFamily:P_SANS }}>SESSIONS</div>
                         <div style={{ color:SHELL_TEXT, fontSize:22, fontWeight:900, fontFamily:P_SERIF }}>{todaySess.length}</div>
                       </div>
                       <div style={{ background:SHELL_BG3, borderRadius:8, padding:'10px 12px', textAlign:'center' }}>
-                        <div style={{ color:SHELL_TEXT_DIM, fontSize:9, fontFamily:SHELL_MONO }}>SUBJECTS</div>
-                        <div style={{ color:C_GOLD, fontSize:22, fontWeight:900, fontFamily:P_SERIF }}>{dailySubjects.length}</div>
+                        <div style={{ color:SHELL_TEXT_DIM, fontSize:9, fontFamily:P_SANS }}>STUDY TIME</div>
+                        <div style={{ color:C_GOLD, fontSize:22, fontWeight:900, fontFamily:P_SERIF }}>{(todaySess.reduce((s,r)=>s+(r.duration||0),0)/60).toFixed(1)}h</div>
                       </div>
                       <div style={{ background:SHELL_BG3, borderRadius:8, padding:'10px 12px', textAlign:'center' }}>
-                        <div style={{ color:SHELL_TEXT_DIM, fontSize:9, fontFamily:SHELL_MONO }}>AVG GRADE</div>
-                        <div style={{ color:C_TEAL, fontSize:22, fontWeight:900, fontFamily:P_SERIF }}>{todaySess.filter(s=>s.aiGrade||s.grade).length > 0 ? (todaySess.reduce((sum,s)=>sum+(s.aiGrade||s.grade||0),0)/todaySess.length).toFixed(1) : '—'}</div>
+                        <div style={{ color:SHELL_TEXT_DIM, fontSize:9, fontFamily:P_SANS }}>XP EARNED</div>
+                        <div style={{ color:C_TEAL, fontSize:22, fontWeight:900, fontFamily:P_SERIF }}>+{todaySess.reduce((s,r)=>s+(r.xpEarned||r.xp||0),0)}</div>
                       </div>
                     </div>
-                    {todaySess.map((sess, i) => {
-                      const detail = SUBJECT_DETAIL[sess.subject] || SUBJECT_DETAIL[sess.subject + ' HL'] || SUBJECT_DETAIL[sess.subject + ' SL'] || {};
+
+                    {/* V202: Per-subject AI analysis cards */}
+                    {[...new Set(todaySess.map(s => s.subject))].map(subj => {
+                      const subjSess = todaySess.filter(s => s.subject === subj);
+                      const avgG = subjSess.reduce((s,r) => s + (r.aiGrade||r.grade||0), 0) / subjSess.length;
+                      const detail = SUBJECT_DETAIL[subj] || SUBJECT_DETAIL[subj + ' HL'] || SUBJECT_DETAIL[subj + ' SL'] || {};
+                      const col = getSubjectColor(subj);
+                      const gradeCol = avgG >= 6 ? '#2F7D3E' : avgG >= 5 ? '#C9A84C' : avgG >= 4 ? '#D97706' : '#B83228';
                       return (
-                        <div key={i} style={{ borderTop:`1px solid ${SHELL_BORDER}40`, padding:'10px 0' }}>
-                          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-                            <div>
-                              <span style={{ color:SHELL_TEXT, fontSize:12, fontWeight:700 }}>{sess.subject}</span>
-                              <span style={{ color:SHELL_TEXT_DIM, fontSize:11, marginLeft:8 }}>{sess.topic || sess.presetLabel || 'Practice'}</span>
+                        <div key={subj} style={{ borderLeft:`4px solid ${col}`, background:'#FFFDF8', borderRadius:'0 10px 10px 0', padding:'14px 16px', marginBottom:10, border:`1px solid ${SHELL_BORDER}`, borderLeftWidth:4, borderLeftColor:col }}>
+                          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8 }}>
+                            <span style={{ color:SHELL_TEXT, fontSize:13, fontWeight:700, fontFamily:P_SANS }}>{subj}</span>
+                            <div style={{ width:32, height:32, borderRadius:'50%', border:`2px solid ${gradeCol}`, display:'flex', alignItems:'center', justifyContent:'center', background:`${gradeCol}12` }}>
+                              <span style={{ fontSize:14, fontWeight:800, color:gradeCol }}>{avgG.toFixed(0)}</span>
                             </div>
-                            <div style={{ color: (sess.aiGrade||sess.grade||0) >= 5 ? '#2A8A4A' : (sess.aiGrade||sess.grade||0) >= 4 ? C_GOLD : C_RED, fontSize:14, fontWeight:900 }}>G{sess.aiGrade || sess.grade || '?'}</div>
                           </div>
-                          {detail.hints?.[0] && <div style={{ color:C_GOLD+'CC', fontSize:10, fontStyle:'italic', marginTop:4 }}>💡 {detail.hints[0]}</div>}
+                          {detail.achieved && <div style={{ fontSize:10, color:'#2F7D3E', marginBottom:4, fontFamily:P_SANS }}>✅ <strong>What's working:</strong> {detail.achieved.slice(0, 120)}</div>}
+                          {detail.gap && <div style={{ fontSize:10, color:'#B83228', marginBottom:4, fontFamily:P_SANS }}>⚠️ <strong>Critical gap:</strong> {detail.gap.slice(0, 120)}</div>}
+                          {detail.hints?.[0] && <div style={{ fontSize:10, color:'#C9A84C', fontFamily:P_SANS }}>💡 <strong>Quick win:</strong> {detail.hints[0].slice(0, 120)}</div>}
                         </div>
                       );
                     })}
@@ -20089,16 +20186,16 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr 1fr 1fr 1fr', gap:0, padding:'8px 12px', background:SHELL_BG3 }}>
                     {['Subject','Sessions','Avg Grade','Target','Gap','Trend'].map(h => <div key={h} style={{ color:SHELL_TEXT_DIM, fontSize:9, fontWeight:700, fontFamily:SHELL_MONO }}>{h}</div>)}
                   </div>
-                  {weekSubjectData.map(subj => (
-                    <div key={subj.name} onClick={() => { setReportTier('analytics'); setIntelSubTab('readiness'); setIntelSubject(subj.name); }} style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr 1fr 1fr 1fr', gap:0, padding:'8px 12px', borderTop:`1px solid ${SHELL_BORDER}40`, cursor:'pointer', transition:'background 0.2s' }} onMouseOver={e => e.currentTarget.style.background=SHELL_BG3} onMouseOut={e => e.currentTarget.style.background='transparent'}>
-                      <div style={{ color:SHELL_TEXT, fontSize:11, fontWeight:600 }}>{subj.name} <span style={{ color:C_TEAL, fontSize:9 }}>→</span></div>
-                      <div style={{ color:SHELL_TEXT_DIM, fontSize:11 }}>{subj.sessions}</div>
-                      <div style={{ color: subj.avgGrade && subj.avgGrade >= 5 ? '#2A8A4A' : subj.avgGrade && subj.avgGrade >= 4 ? C_GOLD : C_RED, fontSize:11, fontWeight:700 }}>{subj.avgGrade ? subj.avgGrade.toFixed(1) : '—'}</div>
-                      <div style={{ color:SHELL_TEXT_DIM, fontSize:11 }}>G{subj.target}</div>
-                      <div style={{ color: subj.gap && subj.gap > 1 ? C_RED : subj.gap && subj.gap > 0 ? C_GOLD : '#2A8A4A', fontSize:11, fontWeight:700 }}>{subj.gap !== null ? (subj.gap > 0 ? `-${subj.gap.toFixed(1)}` : '✓') : '—'}</div>
-                      <div style={{ color: subj.trend === 'IMPROVING' ? '#2A8A4A' : subj.trend === 'DECLINING' ? C_RED : SHELL_TEXT_DIM, fontSize:10, fontWeight:600 }}>{subj.trend}</div>
-                    </div>
-                  ))}
+                  {weekSubjectData.map(subj => {
+                    const badgeCol = subj.trend === 'IMPROVING' ? '#2F7D3E' : subj.trend === 'DECLINING' ? '#B83228' : subj.gap <= 0 ? '#2F7D3E' : '#6B5D4D';
+                    const badgeText = subj.trend === 'IMPROVING' ? '↑ +1' : subj.trend === 'DECLINING' ? '↓ -1' : subj.gap <= 0 ? 'ON TRACK' : '— same';
+                    return (
+                    <div key={subj.name} onClick={() => { setReportTier('analytics'); setIntelSubTab('readiness'); setIntelSubject(subj.name); }} style={{ display:'flex', alignItems:'center', gap:10, padding:'10px 14px', borderTop:`1px solid ${SHELL_BORDER}40`, cursor:'pointer', transition:'background 0.2s' }} onMouseOver={e => e.currentTarget.style.background=SHELL_BG3} onMouseOut={e => e.currentTarget.style.background='transparent'}>
+                      <div style={{ flex:2, color:SHELL_TEXT, fontSize:12, fontWeight:700 }}>{subj.name}</div>
+                      <div style={{ flex:1, color:SHELL_TEXT_DIM, fontSize:12 }}>{subj.prevGrade || subj.avgGrade?.toFixed(0) || '?'} → <strong style={{ color: subj.avgGrade >= 5 ? '#2F7D3E' : subj.avgGrade >= 4 ? '#C9A84C' : '#B83228' }}>{subj.avgGrade?.toFixed(0) || '?'}</strong></div>
+                      <div style={{ padding:'3px 8px', borderRadius:10, fontSize:9, fontWeight:700, background:`${badgeCol}15`, color:badgeCol, fontFamily:P_SANS }}>{badgeText}</div>
+                    </div>);
+                  })}
                 </div>
                 {weekSubjectData.filter(s => s.hint).map(subj => (
                   <div key={subj.name} style={{ marginTop:8, padding:'8px 12px', background:C_GOLD+'08', borderRadius:8, border:`1px solid ${C_GOLD}20` }}>
@@ -20112,41 +20209,57 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             {/* V201: TERM REPORT */}
             {scriptumView === 'student' && reportTier === 'term' && (
               <div style={{ background:SHELL_BG2, borderRadius:12, padding:20, border:`1px solid ${SHELL_BORDER}`, marginBottom:14 }}>
-                <div style={{ color:P_INK, fontSize:16, fontWeight:800, fontFamily:P_SERIF, marginBottom:12 }}>📈 Term Report — Full Trajectory</div>
+                <div style={{ color:P_INK, fontSize:16, fontWeight:800, fontFamily:P_SERIF, marginBottom:14 }}>📈 Term Report — Full Trajectory</div>
+                {/* V202: 2x2 subject overview cards with large grade + trend + progress bar */}
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginBottom:18 }}>
+                  {userSubjects.filter(s => !isTokEe(s.name)).map(subj => {
+                    const allSess = (repo||[]).filter(s => s.subject === subj.name && s.type === 'study').sort((a,b) => new Date(a.date) - new Date(b.date));
+                    const grades = allSess.map(s => s.aiGrade || s.grade).filter(Boolean);
+                    const firstGrade = grades[0] || subj.currentGrade || 3;
+                    const latestGrade = grades[grades.length - 1] || subj.currentGrade || 3;
+                    const target = subj.targetGrade || 7;
+                    const improvement = latestGrade - firstGrade;
+                    const progress = Math.min(100, Math.max(0, ((latestGrade - 1) / (target - 1)) * 100));
+                    const gradeColor = latestGrade >= 6 ? '#2A8A4A' : latestGrade >= 5 ? C_GOLD : latestGrade >= 4 ? '#D97706' : '#B83228';
+                    const detail = SUBJECT_DETAIL[subj.name] || SUBJECT_DETAIL[subj.name + ' ' + (subj.level||'').toUpperCase()] || {};
+                    return (
+                      <div key={subj.name} style={{ background:'#FFFDF8', border:`1.5px solid ${SHELL_BORDER}`, borderRadius:12, padding:16, textAlign:'center' }}>
+                        <div style={{ color:SHELL_TEXT, fontSize:12, fontWeight:800, fontFamily:P_SERIF, marginBottom:8 }}>{subj.name}</div>
+                        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:6, marginBottom:6 }}>
+                          <span style={{ fontSize:32, fontWeight:900, color:gradeColor, fontFamily:P_SERIF }}>G{latestGrade}</span>
+                          {improvement > 0 && <span style={{ color:'#2A8A4A', fontSize:16, fontWeight:700 }}>▲</span>}
+                          {improvement < 0 && <span style={{ color:'#B83228', fontSize:16, fontWeight:700 }}>▼</span>}
+                          {improvement === 0 && <span style={{ color:SHELL_TEXT_DIM, fontSize:14 }}>—</span>}
+                        </div>
+                        <div style={{ color:SHELL_TEXT_DIM, fontSize:10, marginBottom:8 }}>
+                          {improvement > 0 ? `+${improvement.toFixed(1)} from G${firstGrade}` : improvement < 0 ? `${improvement.toFixed(1)} from G${firstGrade}` : `Holding at G${latestGrade}`} · Target G{target}
+                        </div>
+                        {/* Progress bar toward target */}
+                        <div style={{ background:SHELL_BG3, borderRadius:4, height:6, overflow:'hidden', marginBottom:6 }}>
+                          <div style={{ width:`${progress}%`, height:'100%', borderRadius:4, background: latestGrade >= target ? '#2A8A4A' : `linear-gradient(90deg, ${gradeColor}, ${C_GOLD})`, transition:'width 0.3s' }} />
+                        </div>
+                        <div style={{ display:'flex', justifyContent:'space-between', fontSize:9, color:SHELL_TEXT_DIM }}>
+                          <span>{allSess.length} sessions</span>
+                          <span style={{ color: detail.status === 'ON TRACK' ? '#2A8A4A' : detail.status === 'CRITICAL' ? '#B83228' : C_GOLD, fontWeight:700 }}>{detail.status || 'N/A'}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Detailed cards below the overview grid */}
                 {userSubjects.filter(s => !isTokEe(s.name)).map(subj => {
                   const allSess = (repo||[]).filter(s => s.subject === subj.name && s.type === 'study').sort((a,b) => new Date(a.date) - new Date(b.date));
                   const grades = allSess.map(s => s.aiGrade || s.grade).filter(Boolean);
-                  const firstGrade = grades[0] || subj.currentGrade || 3;
                   const latestGrade = grades[grades.length - 1] || subj.currentGrade || 3;
-                  const improvement = latestGrade - firstGrade;
                   const detail = SUBJECT_DETAIL[subj.name] || SUBJECT_DETAIL[subj.name + ' ' + (subj.level||'').toUpperCase()] || {};
                   return (
-                    <div key={subj.name} style={{ border:`1px solid ${SHELL_BORDER}`, borderRadius:10, padding:16, marginBottom:12 }}>
-                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8 }}>
-                        <div style={{ color:SHELL_TEXT, fontSize:14, fontWeight:800, fontFamily:P_SERIF }}>{subj.name}</div>
-                        <div style={{ display:'flex', gap:8, alignItems:'center' }}>
-                          <span style={{ color:SHELL_TEXT_DIM, fontSize:11 }}>G{firstGrade}</span>
-                          <span style={{ color: improvement > 0 ? '#2A8A4A' : improvement < 0 ? C_RED : SHELL_TEXT_DIM }}>→</span>
-                          <span style={{ color: latestGrade >= 5 ? '#2A8A4A' : C_GOLD, fontSize:14, fontWeight:900 }}>G{latestGrade}</span>
-                          {improvement > 0 && <span style={{ color:'#2A8A4A', fontSize:10, fontWeight:700 }}>▲+{improvement.toFixed(1)}</span>}
-                          {improvement < 0 && <span style={{ color:C_RED, fontSize:10, fontWeight:700 }}>▼{improvement.toFixed(1)}</span>}
-                        </div>
+                    <div key={subj.name} style={{ border:`1px solid ${SHELL_BORDER}`, borderRadius:10, padding:14, marginBottom:10, background:'#FFFDF8' }}>
+                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:6 }}>
+                        <div style={{ color:SHELL_TEXT, fontSize:13, fontWeight:800, fontFamily:P_SERIF }}>{subj.name}</div>
+                        <div style={{ color: latestGrade >= 5 ? '#2A8A4A' : C_GOLD, fontSize:13, fontWeight:900 }}>G{latestGrade}</div>
                       </div>
-                      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8, marginBottom:8 }}>
-                        <div style={{ background:SHELL_BG3, borderRadius:6, padding:'6px 10px' }}>
-                          <div style={{ color:SHELL_TEXT_DIM, fontSize:8 }}>SESSIONS</div>
-                          <div style={{ color:SHELL_TEXT, fontSize:14, fontWeight:700 }}>{allSess.length}</div>
-                        </div>
-                        <div style={{ background:SHELL_BG3, borderRadius:6, padding:'6px 10px' }}>
-                          <div style={{ color:SHELL_TEXT_DIM, fontSize:8 }}>TARGET</div>
-                          <div style={{ color:C_GOLD, fontSize:14, fontWeight:700 }}>G{subj.targetGrade || 7}</div>
-                        </div>
-                        <div style={{ background:SHELL_BG3, borderRadius:6, padding:'6px 10px' }}>
-                          <div style={{ color:SHELL_TEXT_DIM, fontSize:8 }}>STATUS</div>
-                          <div style={{ color: detail.status === 'ON TRACK' ? '#2A8A4A' : detail.status === 'CRITICAL' ? C_RED : C_GOLD, fontSize:11, fontWeight:700 }}>{detail.status || 'N/A'}</div>
-                        </div>
-                      </div>
-                      <div style={{ color:SHELL_TEXT_DIM, fontSize:11, lineHeight:1.6 }}>{detail.predicted || `${allSess.length} sessions completed. ${improvement >= 0 ? 'Positive trajectory.' : 'Needs more focused practice.'}`}</div>
+                      <div style={{ color:SHELL_TEXT_DIM, fontSize:11, lineHeight:1.6 }}>{detail.predicted || `${allSess.length} sessions completed.`}</div>
+                      {detail.gap && <div style={{ color:'#B83228', fontSize:10, marginTop:4 }}>Gap: {detail.gap}</div>}
                     </div>
                   );
                 })}
@@ -24164,6 +24277,50 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   {/* Edict Assignment */}
                   {govTab === 'edict' && (
                     <div style={{ background:SHELL_BG2, borderRadius:12, padding:20, border:`1px solid ${SHELL_BORDER}` }}>
+                      {/* V202: Homework Status Tracker */}
+                      {tutorHomework.length > 0 && (
+                        <div style={{ marginBottom:20 }}>
+                          <div style={{ color:SHELL_TEXT, fontSize:13, fontWeight:800, fontFamily:P_SERIF, marginBottom:10 }}>Homework Status Tracker</div>
+                          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8, marginBottom:14 }}>
+                            {[
+                              { label:'ACTIVE', count: tutorHomework.filter(h => !h.completed && !h.completedAt && h.status !== 'IN_PROGRESS').length, color:'#D97706', bg:'#D9770612' },
+                              { label:'IN PROGRESS', count: tutorHomework.filter(h => h.status === 'IN_PROGRESS').length, color:C_TEAL, bg:C_TEAL+'12' },
+                              { label:'GRADED', count: tutorHomework.filter(h => h.completedAt || h.completed).length, color:'#2A8A4A', bg:'#2A8A4A12' },
+                            ].map(s => (
+                              <div key={s.label} style={{ background:s.bg, border:`1px solid ${s.color}30`, borderRadius:8, padding:'10px 12px', textAlign:'center' }}>
+                                <div style={{ fontSize:20, fontWeight:900, color:s.color }}>{s.count}</div>
+                                <div style={{ fontSize:9, fontWeight:700, color:s.color, letterSpacing:'0.08em' }}>{s.label}</div>
+                              </div>
+                            ))}
+                          </div>
+                          {/* Overdue alert */}
+                          {(() => {
+                            const overdue = tutorHomework.filter(h => !h.completed && !h.completedAt && h.dueDate && new Date(h.dueDate) < new Date());
+                            if (overdue.length === 0) return null;
+                            return (
+                              <div style={{ background:'#B8322810', border:'1px solid #B8322830', borderRadius:8, padding:'8px 12px', marginBottom:12 }}>
+                                <span style={{ color:'#B83228', fontSize:11, fontWeight:700 }}>⚠️ {overdue.length} OVERDUE: </span>
+                                <span style={{ color:'#B83228', fontSize:11 }}>{overdue.map(h => `${h.subject} — ${(h.description||'').slice(0,30)}`).join(', ')}</span>
+                              </div>
+                            );
+                          })()}
+                          {/* Recent homework items with status badges */}
+                          {tutorHomework.slice(-5).reverse().map(hw => {
+                            const isOverdue = !hw.completed && !hw.completedAt && hw.dueDate && new Date(hw.dueDate) < new Date();
+                            const status = hw.completedAt || hw.completed ? 'GRADED' : hw.status === 'IN_PROGRESS' ? 'IN PROGRESS' : isOverdue ? 'OVERDUE' : 'ACTIVE';
+                            const statusColor = status === 'GRADED' ? '#2A8A4A' : status === 'IN PROGRESS' ? C_TEAL : status === 'OVERDUE' ? '#B83228' : '#D97706';
+                            return (
+                              <div key={hw.id} style={{ display:'flex', alignItems:'center', gap:10, padding:'8px 12px', borderRadius:8, background:'#FFFDF8', border:`1px solid ${SHELL_BORDER}40`, marginBottom:4 }}>
+                                <div style={{ flex:1 }}>
+                                  <div style={{ color:SHELL_TEXT, fontSize:11, fontWeight:600 }}>{hw.subject} — {(hw.description||hw.title||'').slice(0,40)}</div>
+                                  <div style={{ color:SHELL_TEXT_DIM, fontSize:9 }}>{hw.dueDate ? `Due: ${new Date(hw.dueDate).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}` : 'No deadline'}{hw.grade ? ` · Grade ${hw.grade}` : ''}</div>
+                                </div>
+                                <span style={{ fontSize:9, fontWeight:700, padding:'3px 8px', borderRadius:6, background:statusColor+'18', color:statusColor, letterSpacing:'0.05em' }}>{status}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                       <div style={{ color:C_GOLD, fontSize:15, fontWeight:800, fontFamily:P_SERIF, marginBottom:14 }}>Issue Magister's Edict</div>
                       <div style={{ color:SHELL_TEXT_DIM, fontSize:11, marginBottom:16 }}>Assign tasks to Basti. These appear in the Imperial Writ and in Trial by Ordeal Box 1.</div>
                       <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
@@ -24579,7 +24736,7 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
               orders.push({ type: 'edict', subj: hw.subject || 'External', task: hw.emailSubject || 'Tutor homework', xp: 50, due: hrs !== null ? (hrs < 24 ? `${Math.round(hrs)}h left` : `${Math.round(hrs / 24)}d left`) : null, hw });
             });
             dailyMissions.filter(m => !m.completed).forEach(m => {
-              orders.push({ type: 'mission', subj: m.subject || 'Daily', task: m.description || m.title || 'Daily mission', xp: m.xp || 25, due: null, subject: m.subject, topic: m.topic || '' });
+              orders.push({ type: 'mission', subj: m.subject || 'Any Subject', task: m.description || m.title || 'Daily mission', xp: m.xp || 25, due: null, subject: m.subject, topic: m.topic || '' });
             });
             return orders;
           })();
@@ -24802,9 +24959,19 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                           <div style={{ color: P_GOLD, fontSize: 12, fontWeight: 700, fontFamily: P_SANS, marginBottom: 7 }}>+{o.xp} XP</div>
                           <button onClick={() => {
                             if (o.type === 'edict' && o.hw) { startTutorBattle(o.hw); return; }
-                            const si = userSubjects.findIndex(s => s.name === (o.subject || o.subj));
-                            if (si >= 0) setActiveSubjectIdx(si);
-                            setStudyTopic(o.topic || '');
+                            /* V202: Strategium ENGAGE — skip wizard, go straight to session */
+                            const subjName = o.subject || o.subj;
+                            const si = userSubjects.findIndex(s => s.name === subjName);
+                            if (si >= 0) { setActiveSubjectIdx(si); setCombatSubject(subjName); }
+                            setStudyTopic(o.topic || o.task || '');
+                            setCruciblePath('free');
+                            setStudyMode('combat');
+                            if (subjName && subjName !== 'Daily' && subjName !== 'General') {
+                              setStudyPreset('quick');
+                              setCombatStep(5); /* skip to deploy — subject + preset + topic all set */
+                            } else {
+                              setCombatStep(1); /* no subject — start at subject pick */
+                            }
                             safeSetTab('study');
                           }} style={{ background: col, border: 'none', borderRadius: 7, padding: '8px 15px', color: col === P_GOLD ? P_INK : '#fff', fontWeight: 700, fontSize: 11, cursor: 'pointer', fontFamily: P_SANS }}>ENGAGE →</button>
                         </div>
@@ -24871,16 +25038,23 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                   {userSubjects.filter(s => !isTokEe(s.name)).map(s => {
                     const col = getSubjectColor(s.name);
                     const conf = subjectConfidence?.[s.name] || 5;
+                    const confColor = conf >= 8 ? '#2F7D3E' : conf >= 5 ? '#C9A84C' : '#B83228';
                     return (
-                      <div key={s.name} style={{ marginBottom: 10 }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                          <span style={{ color: P_INK, fontSize: 12.5, fontWeight: 700, fontFamily: P_SERIF }}>{s.name.split(' ').slice(0, 2).join(' ')}</span>
-                          <span style={{ color: col, fontSize: 12, fontWeight: 700, fontFamily: P_SANS }}>{conf}/10</span>
+                      <div key={s.name} style={{ marginBottom: 12 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                          <span style={{ color: SHELL_TEXT, fontSize: 11, fontWeight: 700, fontFamily: P_SANS }}>{s.name.split(' ').slice(0, 2).join(' ')}</span>
+                          <span style={{ color: confColor, fontSize: 12, fontWeight: 700, fontFamily: P_SANS }}>{conf}/10</span>
                         </div>
-                        <div style={{ height: 5, background: P_PARCH + '40', borderRadius: 4, marginBottom: conf <= 5 ? 5 : 0 }}>
-                          <div style={{ height: '100%', width: `${conf * 10}%`, background: col, borderRadius: 4 }} />
-                        </div>
-                        {conf <= 5 && <div style={{ background: P_RED + '10', border: `1px solid ${P_RED}25`, borderRadius: 6, padding: '5px 9px' }}><span style={{ color: P_RED, fontSize: 10, fontWeight: 700, fontFamily: P_SANS }}>🤖 AI: Low confidence{nextExam ? ` + ${nextExam.days} days` : ''} → Priority 1 this week</span></div>}
+                        <input type="range" min="1" max="10" value={conf}
+                          onChange={(e) => {
+                            const val = parseInt(e.target.value);
+                            const updated = { ...subjectConfidence, [s.name]: val };
+                            setSubjectConfidence(updated);
+                            try { window.storage?.set(STORE.confidence, updated); } catch {}
+                          }}
+                          style={{ width: '100%', height: 6, appearance: 'none', background: `linear-gradient(90deg, ${confColor} ${conf * 10}%, ${SHELL_BG3} ${conf * 10}%)`, borderRadius: 4, outline: 'none', cursor: 'pointer', accentColor: confColor }}
+                        />
+                        {conf <= 4 && <div style={{ background: P_RED + '08', border: `1px solid ${P_RED}20`, borderRadius: 6, padding: '4px 8px', marginTop: 4 }}><span style={{ color: P_RED, fontSize: 9, fontWeight: 600, fontFamily: P_SANS }}>Low confidence → Priority this week</span></div>}
                       </div>
                     );
                   })}
