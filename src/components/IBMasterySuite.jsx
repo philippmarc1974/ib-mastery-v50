@@ -29,6 +29,10 @@ const ParchmentCSS = () => (
     }
     .scroll-interior input::placeholder, .scroll-interior textarea::placeholder { color: #8A7A60AA !important; }
     .scroll-interior .rounded-2xl, .scroll-interior .rounded-xl { border-color: #C8A96E50; }
+
+    /* V204: Content area constraint per spec — max-width 860px, 16px 20px padding */
+    .skin-content > .space-y-4,
+    .skin-content > div > .space-y-4 { max-width: 860px; padding: 16px 20px 80px; }
   `}</style>
 );
 
@@ -6374,6 +6378,21 @@ function getSubjectPromptContext(subject, paperType, mode = 'grading') {
   return ctx;
 }
 
+// V204: 5-tier grade color per spec — 3=red, 4=amber, 5=gold, 6=green, 7=purple
+const GRADE_COLORS = {
+  3: { color: '#DC2626', bg: '#8B1A1A20', label: 'CRITICAL' },
+  4: { color: '#D97706', bg: '#D9770620', label: 'NEEDS WORK' },
+  5: { color: '#C9A84C', bg: '#C9A84C20', label: 'APPROACHING' },
+  6: { color: '#2F7D3E', bg: '#2F7D3E20', label: 'ON TARGET' },
+  7: { color: '#7C3AED', bg: '#7C3AED20', label: 'EXCELLENCE' },
+};
+function getGradeColor(grade) {
+  const g = Math.round(Number(grade));
+  if (g <= 3) return GRADE_COLORS[3];
+  if (g >= 7) return GRADE_COLORS[7];
+  return GRADE_COLORS[g] || GRADE_COLORS[5];
+}
+
 function routeGrading(subject, paperType) {
   const fw = SUBJECT_FRAMEWORKS[subject];
   if (!fw) return 'markByMark';
@@ -10226,7 +10245,13 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [autoFixProgress, setAutoFixProgress] = useState({ done: 0, total: 0 });
   const [kbGenRunning, setKbGenRunning] = useState(false);
   const [ppSearch, setPpSearch] = useState('');
-  const [cruciblePath, setCruciblePath] = useState(null); // null | 'orders' | 'free'
+  const [cruciblePath, setCruciblePath] = useState(null); // null | 'orders' | 'free' | 'audit'
+  const [auditFile, setAuditFile] = useState(null);
+  const [auditOcrText, setAuditOcrText] = useState('');
+  const [auditGrading, setAuditGrading] = useState(null);
+  const [auditLoading, setAuditLoading] = useState(false);
+  const [auditStep, setAuditStep] = useState('subject'); // 'subject' | 'upload' | 'processing' | 'results'
+  const [auditSubject, setAuditSubject] = useState('');
   const [combatStep, setCombatStep] = useState(1); // combat wizard: 1=subject, 2=engagement, 3=topic/paper, 4=difficulty, 5=format
   const [combatSubject, setCombatSubject] = useState(''); // subject selected in combat wizard
   const [pendingFormat, setPendingFormat] = useState(null); // 'online'|'pdf'|'remarkable' — auto-routes after generation
@@ -10264,6 +10289,7 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef(null);
   const folderInputRef = useRef(null);
+  const auditFileRef = useRef(null);
 
   /* ── Tutor (chat) ── */
   const [chatHistory, setChatHistory] = useState([]);
@@ -11082,7 +11108,8 @@ function IBMasterySuite({ firebaseDisplayName } = {}) {
   const updateTutorConfig = (subject, field, value) => { const updated = tutorConfig.some(t => t.subject === subject) ? tutorConfig.map(t => t.subject === subject ? { ...t, [field]: value } : t) : [...tutorConfig, { subject, [field]: value }]; saveTutorConfig(updated); }
   const getNextDeadline = (day, time) => { const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; const targetDay = days.indexOf(day); if (targetDay === -1 || !time) return null; const [h, m] = time.split(':').map(Number); const now = new Date(); const result = new Date(now); result.setHours(h, m, 0, 0); let ahead = targetDay - now.getDay(); if (ahead < 0 || (ahead === 0 && now >= result)) ahead += 7; result.setDate(result.getDate() + ahead); return result; }
   const checkForNewHomework = async () => { setCheckingHomework(true); try { const res = await fetch('/api/ingest-homework', { method: 'POST' }); if (!res.ok) throw new Error(); const data = await res.json(); if (data.ingested > 0) { const newHw = data.homework; /* TUTOR-2: Auto-upload attachments to Drive */ try { const token = await getGdriveToken(); for (const hw of newHw) { if (hw.attachments?.length > 0) { const results = await uploadHomeworkToDrive(token, { subject: hw.subject, attachments: hw.attachments }); if (results.length > 0) { hw.driveFileId = results[0].fileId; hw.driveFileUrl = results[0].webViewLink; } } } } catch (e) { console.warn('[TUTOR-2] Drive upload skipped:', e.message); } saveTutorHomework([...tutorHomework, ...newHw]); addToast(`${data.ingested} new homework assignment${data.ingested > 1 ? 's' : ''} received!`, 'info'); } else { addToast('No new homework found.', 'info'); } } catch { addToast('Could not check for homework. Try again.', 'error'); } finally { setCheckingHomework(false); } }
-  const startTutorBattle = (homework) => { setActiveTutorHomework(homework); safeSetTab('study'); setStudyMode('combat'); const idx = userSubjects.findIndex(s => s.name === homework.subject); if (idx >= 0) { setActiveSubjectIdx(idx); setStudyTopic(homework.title || homework.description || ''); setStudyPreset('quick'); } saveTutorHomework(tutorHomework.map(hw => hw.id === homework.id ? { ...hw, status: 'IN_PROGRESS', startedAt: new Date().toISOString() } : hw)); }
+  // V204: Auto-configure session from homework record + skip wizard (V200 Trace #2 fix)
+  const startTutorBattle = (homework) => { setActiveTutorHomework(homework); safeSetTab('study'); setStudyMode('combat'); const idx = userSubjects.findIndex(s => s.name === homework.subject); if (idx >= 0) { setActiveSubjectIdx(idx); setCombatSubject(homework.subject); setStudyTopic(homework.title || homework.description || ''); setStudyPreset('quick'); setCruciblePath('free'); setCombatStep(5); } saveTutorHomework(tutorHomework.map(hw => hw.id === homework.id ? { ...hw, status: 'IN_PROGRESS', startedAt: new Date().toISOString() } : hw)); }
   const completeTutorBattle = async (sessionResult) => {
     if (!activeTutorHomework) return;
     const cfg = tutorConfig.find(t => t.subject === activeTutorHomework.subject);
@@ -15426,6 +15453,72 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
     setStudyTimerRunning(false); setStudyTimerElapsed(0); setStudyResults(null); setStudyResultGrade(null); setStudyScanData({}); setStudyAnswerModes({}); setExamUploadData(null); setExamUploadGrading(false);
     setStudyPaperMode(null); setStudyTopics([]); setStudyTopic('');
     setCombatStep(1); setCombatSubject(''); setPendingFormat(null); setCruciblePath(null);
+    setAuditFile(null); setAuditOcrText(''); setAuditGrading(null); setAuditLoading(false); setAuditStep('subject'); setAuditSubject('');
+  };
+
+  // V204: Audit of Purity — upload work for AI grading
+  const handleAuditUpload = async (file) => {
+    if (!file || !auditSubject) return;
+    setAuditFile(file);
+    setAuditLoading(true);
+    setAuditStep('processing');
+    setAuditGrading(null);
+    setAuditOcrText('');
+    try {
+      // Read file as base64
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+      const mediaType = file.type || 'image/jpeg';
+      // Find subject detail for context
+      const detKey = Object.keys(SUBJECT_DETAIL).find(k => k.toLowerCase().includes(auditSubject.toLowerCase().split(' ')[0]));
+      const det = detKey ? SUBJECT_DETAIL[detKey] : null;
+      const subProgress = progress?.[auditSubject];
+      const currentGrade = subProgress?.currentGrade || subProgress?.grade || 'Unknown';
+      // V204: Wire partialCreditRules + visualStandards via getSubjectPromptContext (E1 fix)
+      const complianceCtx = getSubjectPromptContext(auditSubject, null, 'grading');
+      // Send directly to vision-capable model for grading
+      const gradingPrompt = `You are an expert IB examiner grading student work for ${auditSubject}.
+${det ? `Student context: Currently Grade ${currentGrade}. Known weakness: ${det.gap?.slice(0, 200)}` : `Currently Grade ${currentGrade}.`}
+${complianceCtx ? `\n${complianceCtx}` : ''}
+
+Analyse this uploaded student work (it may be handwritten, typed, or a scanned PDF). Provide your assessment as JSON:
+{
+  "grade": <number 1-7>,
+  "percentage": <number 0-100>,
+  "summary": "<2-3 sentence overall assessment>",
+  "strengths": ["<strength 1>", "<strength 2>"],
+  "improvements": ["<specific improvement 1>", "<specific improvement 2>", "<specific improvement 3>"],
+  "detailedFeedback": "<paragraph of detailed examiner feedback referencing specific parts of the work>"
+}
+Return ONLY valid JSON, no markdown fences.`;
+      const res = await fetch('/api/ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ base64, mediaType, prompt: gradingPrompt, max_tokens: 4000 })
+      });
+      const data = await res.json();
+      const text = data?.content?.[0]?.text || data?.text || '';
+      // Parse JSON from response
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        setAuditGrading(parsed);
+        setAuditStep('results');
+      } else {
+        setAuditGrading({ grade: null, summary: text, strengths: [], improvements: [], detailedFeedback: text });
+        setAuditStep('results');
+      }
+    } catch (err) {
+      console.error('Audit grading error:', err);
+      addToast('Grading failed — please try again', 'error');
+      setAuditStep('upload');
+    } finally {
+      setAuditLoading(false);
+    }
   };
 
   // Flashcard generation
@@ -15511,19 +15604,19 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
   };
 
   // Hint for study questions
-  // v200: Sidebar nav — V201: dual-label (L4) — functional names primary, lore names secondary
+  // v200: Sidebar nav — V204: lore names primary, functional names as subtitle — 64px icon-only when collapsed
   const sidebarGroups = [
     { label: '', items: [
-      { id: 'today',         label: isSM ? 'The Strategium' : 'Today',           sub: isSM ? 'Dashboard' : 'The Strategium',   color: C_GOLD,   icon: '🏰' },
-      { id: 'study',         label: isSM ? 'Trial by Ordeal' : 'Study',          sub: isSM ? 'Practice' : 'Trial by Ordeal',   color: C_RED,    icon: '⚔️' },
-      { id: 'tutor',         label: isSM ? 'The Logic-Engine' : 'AI Tutor',      sub: isSM ? 'AI Tutor' : 'The Logic-Engine',  color: C_PURPLE, icon: '🤖' },
-      { id: 'intel',         label: isSM ? 'Scriptum Illuminatus' : 'Reports',   sub: isSM ? 'Reports' : 'Scriptum Illuminatus', color: C_BLUE, icon: '📊' },
-      { id: 'archivum',      label: isSM ? 'The Archivum' : 'Resources',         sub: isSM ? 'Resources' : 'The Archivum',    color: C_TEAL,   icon: '📚' },
+      { id: 'today',         label: 'The Strategium',       sub: 'Dashboard',     color: C_GOLD,   icon: '🏰' },
+      { id: 'study',         label: 'Trial by Ordeal',      sub: 'Practice',      color: C_RED,    icon: '⚔️' },
+      { id: 'tutor',         label: 'Logic-Engine',         sub: 'AI Tutor',      color: C_PURPLE, icon: '🤖' },
+      { id: 'intel',         label: 'Scriptum Illuminatus', sub: 'Reports',       color: C_BLUE,   icon: '📊' },
+      { id: 'archivum',      label: 'The Archivum',         sub: 'Resources',     color: C_TEAL,   icon: '📚' },
     ]},
     { label: 'divider', items: [
-      { id: 'repository',    label: isSM ? 'Annals of Conflict' : 'History',     sub: isSM ? 'History' : 'Annals of Conflict', color: '#2A5A4A', icon: '📜' },
-      { id: 'medal_cabinet', label: isSM ? 'Hall of Heroes' : 'Achievements',    sub: isSM ? 'Achievements' : 'Hall of Heroes', color: C_GOLD,  icon: '🎖' },
-      { id: 'planner',       label: isSM ? 'Logis-Prophetia' : 'Study Plan',     sub: isSM ? 'Study Plan' : 'Logis-Prophetia', color: '#B8860B', icon: '📋' },
+      { id: 'repository',    label: 'Annals of Conflict',   sub: 'History',       color: '#2A5A4A', icon: '📜' },
+      { id: 'medal_cabinet', label: 'Hall of Heroes',       sub: 'Achievements', color: C_GOLD,   icon: '🎖' },
+      { id: 'planner',       label: 'Logis-Prophetia',     sub: 'Study Plan',   color: '#B8860B', icon: '📋' },
     ]},
     { label: 'admin', items: [
       ...(parentMode ? [
@@ -15985,25 +16078,25 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
 
 
       {/* ═══ V203 LEFT SIDEBAR — Dark Iron Shell ═══ */}
-      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-all duration-300 ${sidebarOpen ? 'w-[180px]' : 'w-16'} overflow-hidden`}
-        style={{ background: IRON_BG, borderRight: `1px solid ${IRON_BORDER}`, backgroundImage: 'repeating-linear-gradient(180deg,transparent,transparent 60px,#1A161008 60px,#1A161008 61px)' }}>
+      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-all duration-300 overflow-hidden`}
+        style={{ width: sidebarOpen ? 190 : 60, background: '#080604', borderRight: `1px solid ${IRON_BORDER}`, backgroundImage: 'repeating-linear-gradient(180deg,transparent,transparent 60px,#1A161008 60px,#1A161008 61px)' }}>
         {/* Logo area */}
-        <div className="flex items-center justify-between px-3 h-14 flex-shrink-0" style={{ borderBottom: `1px solid ${IRON_BORDER}` }}>
-          {sidebarOpen && <div>
+        <div className="flex items-center justify-between h-14 flex-shrink-0" style={{ borderBottom: `1px solid ${IRON_BORDER}`, padding: sidebarOpen ? '0 12px' : '0 8px' }}>
+          {sidebarOpen ? <div>
             <h1 style={{ fontSize: 13, fontWeight: 900, fontFamily: P_SERIF, color: C_GOLD, letterSpacing: '0.05em' }}>IB MASTERY</h1>
             <p style={{ fontSize: 9, color: IRON_TEXT_DIM, fontFamily: P_SANS }}>{profile?.name}</p>
-          </div>}
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg transition-colors flex-shrink-0" style={{ color: IRON_TEXT_DIM }}>
-            {sidebarOpen ? <ChevronLeft className="w-5 h-5" /> : <Menu className="w-6 h-6" />}
-          </button>
+          </div> : <div style={{ fontFamily: P_SERIF, fontSize: 11, color: C_GOLD, fontWeight: 900, letterSpacing: '0.06em', textAlign: 'center', width: '100%' }}>IB<span style={{ color: IRON_TEXT_DIM }}>M</span></div>}
+          {sidebarOpen && <button onClick={() => setSidebarOpen(false)} className="p-2 rounded-lg transition-colors flex-shrink-0" style={{ color: IRON_TEXT_DIM }}>
+            <ChevronLeft className="w-5 h-5" />
+          </button>}
         </div>
 
         {/* Nav groups */}
-        <nav className="flex-1 overflow-y-auto py-2 px-1.5" style={{ scrollbarWidth: 'none' }}>
+        <nav className="flex-1 overflow-y-auto py-2" style={{ scrollbarWidth: 'none', padding: sidebarOpen ? '8px 6px' : '8px 2px' }}>
           {sidebarGroups.map((group, gi) => (
             <div key={gi}>
-              {group.label === 'divider' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${IRON_BORDER},transparent)`, margin:'8px 4px' }} />}
-              {group.label === 'admin' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${IRON_BORDER},transparent)`, margin:'8px 4px' }} />}
+              {group.label === 'divider' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${IRON_BORDER},transparent)`, margin: sidebarOpen ? '8px 4px' : '6px auto', width: sidebarOpen ? 'auto' : 36 }} />}
+              {group.label === 'admin' && <div style={{ height:1, background:`linear-gradient(90deg,transparent,${IRON_BORDER},transparent)`, margin: sidebarOpen ? '8px 4px' : '6px auto', width: sidebarOpen ? 'auto' : 36 }} />}
               {group.items.map(item => {
                 const isActive = item.activeCheck ? item.activeCheck() : tab === item.id;
                 const itemColor = item.color || C_GOLD;
@@ -16013,19 +16106,26 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   setSidebarOpen(false);
                 };
                 return <button key={item.id} onClick={handleClick}
-                  className={`w-full flex items-center ${sidebarOpen ? 'gap-2.5 px-2.5' : 'justify-center px-1'} py-2.5 rounded-lg text-sm font-medium transition-all duration-150 mb-0.5`}
-                  style={isActive
-                    ? { background: '#2A2018', borderLeft: `3px solid ${itemColor}`, paddingLeft: sidebarOpen ? 9 : 3, position:'relative' }
-                    : { borderLeft: '3px solid transparent', paddingLeft: sidebarOpen ? 9 : 3 }}
+                  className="w-full rounded-lg text-sm font-medium transition-all duration-150 mb-0.5"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: sidebarOpen ? 'flex-start' : 'center',
+                    flexDirection: sidebarOpen ? 'row' : 'column',
+                    gap: sidebarOpen ? 10 : 1,
+                    padding: sidebarOpen ? '10px 14px' : '8px 2px',
+                    width: sidebarOpen ? 170 : 44, height: sidebarOpen ? 38 : 44,
+                    margin: sidebarOpen ? '0 0 2px 0' : '0 auto 2px auto',
+                    borderRadius: 8,
+                    ...(isActive
+                      ? { background: '#C9A84C25', color: C_GOLD }
+                      : { background: 'transparent', color: IRON_TEXT_DIM })
+                  }}
                   title={!sidebarOpen ? `${item.label} — ${item.sub}` : undefined}>
-                  {isActive && <>
-                    {[[2,2],[2,null],[null,2],[null,null]].map(([t,l],ri) => (
-                      <div key={ri} style={{ position:'absolute', top:t!==null?t:'auto', bottom:t===null?2:'auto', left:l!==null?l:'auto', right:l===null?2:'auto', width:4, height:4, borderRadius:'50%', background:'#6A5A30' }} />
-                    ))}
-                  </>}
-                  <span style={{ fontSize: sidebarOpen ? 16 : 22, flexShrink:0, width: sidebarOpen ? 20 : 'auto', textAlign:'center' }}>{item.icon}</span>
+                  <span style={{ fontSize: sidebarOpen ? 16 : 18, flexShrink:0, textAlign:'center' }}>{item.icon}</span>
+                  {/* Collapsed: tiny label under icon */}
+                  {!sidebarOpen && <span style={{ fontSize: 7, fontWeight: 600, letterSpacing: '0.04em', color: isActive ? C_GOLD : IRON_TEXT_DIM, lineHeight: 1 }}>{item.sub?.split(' ')[0]?.toUpperCase() || ''}</span>}
+                  {/* Expanded: full lore name + functional subtitle */}
                   {sidebarOpen && <div style={{ minWidth:0 }}>
-                    <div style={{ color: isActive ? itemColor : IRON_TEXT, opacity: isActive ? 1 : 0.6, fontSize:12, fontWeight:600, fontFamily:P_SANS, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', transition:'opacity 0.15s' }}>{item.label}</div>
+                    <div style={{ color: isActive ? itemColor : IRON_TEXT, opacity: isActive ? 1 : 0.6, fontSize:11, fontWeight:600, fontFamily:P_SANS, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', transition:'opacity 0.15s' }}>{item.label}</div>
                     <div style={{ color: isActive ? IRON_TEXT : IRON_TEXT_DIM, fontSize:9, fontFamily:P_SANS, letterSpacing:'0.04em' }}>{item.sub}</div>
                   </div>}
                 </button>;
@@ -16062,8 +16162,8 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
       {/* ═══ MAIN CONTENT ═══ */}
       {/* Overlay to close sidebar when open */}
       {sidebarOpen && <div className="fixed inset-0 z-40" onClick={() => setSidebarOpen(false)} />}
-      <div className={`skin-content flex-1 min-h-screen transition-all duration-300 ${sidebarOpen ? 'ml-[180px]' : 'ml-16'} ${fontSize === 'large' ? 'text-base' : fontSize === 'small' ? 'text-xs' : 'text-sm'}`}
-        style={{ background: SHELL_BG }}
+      <div className={`skin-content flex-1 min-h-screen transition-all duration-300 ${sidebarOpen ? 'ml-[190px]' : 'ml-[60px]'} ${fontSize === 'large' ? 'text-base' : fontSize === 'small' ? 'text-xs' : 'text-sm'}`}
+        style={{ background: IRON_BG }}
         onClick={() => { if (sidebarOpen) setSidebarOpen(false); if (showNotifications) setShowNotifications(false); }}>
         {/* V200: BloodSpatterOverlay — behind all content */}
         <BloodSpatterOverlay daysToExam={daysToExam} isGrandAssault={studyMode === 'combat' && studyPreset === 'full'} />
@@ -16074,65 +16174,49 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             <button onClick={() => { try { localStorage.removeItem('ibm_demo_mode'); delete window.__ibDemoMode; } catch {} window.location.href = '/login'; }} style={{ background:'transparent', border:`1px solid ${C_GOLD}60`, borderRadius:4, padding:'2px 8px', color:C_GOLD, fontSize:9, fontWeight:700, cursor:'pointer', fontFamily:SHELL_MONO }}>EXIT DEMO</button>
           </div>
         )}
-        {/* Top bar — dark iron */}
-        <header className="skin-header sticky top-0 z-30" style={{ background: IRON_BG, borderBottom: `1px solid ${IRON_BORDER}` }}>
-          <div className="flex items-center justify-between h-12 px-4 sm:px-6">
-            <div className="flex items-center gap-3">
-              {!sidebarOpen && <button onClick={() => setSidebarOpen(true)} className="p-1.5 rounded-lg sm:hidden" style={{ color: IRON_TEXT_DIM }}><Menu className="w-4 h-4" /></button>}
-              <h2 style={{ fontFamily: P_SERIF, fontWeight: 900, fontSize: 15, color: C_GOLD, letterSpacing: '0.05em' }}>
-                <span style={{ color: C_GOLD }}>IB</span><span style={{ color: IRON_TEXT_DIM }}> ✦ </span><span style={{ color: IRON_TEXT, fontSize: 12 }}>MASTERY</span>
-              </h2>
-              <span style={{ color: IRON_TEXT_DIM, fontSize: 9, letterSpacing: '0.12em', fontFamily: SHELL_MONO }}>{(() => {
-                const exDates = (userSubjects || []).map(s => s.examDate || (s.examDates && Object.values(s.examDates).find(Boolean))).filter(Boolean);
-                if (exDates.length === 0) return 'v200';
-                const earliest = exDates.sort()[0];
-                const days = Math.max(0, Math.round((new Date(earliest) - new Date()) / 86400000));
-                return `${days} DAYS`;
-              })()}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              {/* Font size toggle (Option E) */}
-              <button onClick={() => setFontSize(fs => fs === 'normal' ? 'large' : fs === 'large' ? 'small' : 'normal')}
-                className="p-1.5 rounded-lg transition-colors hover:bg-slate-100 text-slate-400"
-                title={`Font size: ${fontSize}`}>
-                <span className="font-bold" style={{ fontSize: fontSize === 'large' ? '14px' : fontSize === 'small' ? '10px' : '11px' }}>Aa</span>
+        {/* V204: Header bar — 44px sticky, spec-compliant */}
+        <header className="skin-header sticky top-0 z-30" style={{ background: '#080604', borderBottom: `1px solid ${IRON_BORDER}`, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {!sidebarOpen && <button onClick={() => setSidebarOpen(true)} className="p-1.5 rounded-lg sm:hidden" style={{ color: IRON_TEXT_DIM }}><Menu className="w-4 h-4" /></button>}
+            <span style={{ fontFamily: P_SERIF, fontWeight: 900, fontSize: 14, color: C_GOLD, letterSpacing: '0.04em' }}>IB MASTERY</span>
+            <span style={{ color: IRON_TEXT_DIM, fontSize: 12, fontFamily: P_SANS }}> — {profile?.name || 'Basti'}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            {/* XP badge */}
+            {gamify.xp > 0 && <span style={{ background: '#C9A84C20', color: C_GOLD, fontSize: 9, fontWeight: 700, padding: '3px 8px', borderRadius: 10, letterSpacing: '0.06em' }}>⚡ {gamify.xp.toLocaleString()} XP</span>}
+            {/* Streak */}
+            {gamify.streak > 0 && <span style={{ color: '#f97316', fontSize: 11, fontWeight: 700 }}>🔥 {gamify.streak}</span>}
+            {/* Bell */}
+            <div className="relative">
+              <button onClick={() => setShowNotifications(!showNotifications)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, color: IRON_TEXT_DIM, padding: 0, display: 'flex', alignItems: 'center' }}>
+                🔔
+                {notifications.filter(n => !n.read).length > 0 && <span style={{ position: 'absolute', top: -4, right: -4, width: 14, height: 14, borderRadius: '50%', background: '#DC2626', color: '#fff', fontSize: 8, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{notifications.filter(n => !n.read).length}</span>}
               </button>
-              {/* Notifications bell (Option E) */}
-              <div className="relative">
-                <button onClick={() => setShowNotifications(!showNotifications)}
-                  className="p-1.5 rounded-lg transition-colors hover:bg-slate-100 text-slate-400 relative"
-                  title="Notifications">
-                  <Bell className="w-4 h-4" />
-                  {notifications.filter(n => !n.read).length > 0 && <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-red-500 text-white text-[8px] font-bold flex items-center justify-center">{notifications.filter(n => !n.read).length}</span>}
-                </button>
-                {showNotifications && <div className={`absolute right-0 top-full mt-2 w-72 border shadow-xl z-50 overflow-hidden ${isSM ? 'sm-card bg-[#1a1e26] border-cyan-500/15' : 'rounded-xl border-slate-200 bg-white'}`}>
-                  <div className="px-3 py-2 border-b border-slate-100 flex items-center justify-between">
-                    <span className={`text-xs font-semibold ${isSM ? 'text-teal-700 font-mono uppercase' : 'text-slate-700'}`}>{v('Notifications')}</span>
-                    {notifications.length > 0 && <button onClick={() => setNotifications(n => n.map(x => ({...x, read: true})))} className="text-xs" style={{color: accent}}>{v('Mark all read')}</button>}
-                  </div>
-                  <div className="max-h-64 overflow-y-auto">
-                    {notifications.length === 0 ? <div className={`px-3 py-4 text-xs text-center ${isSM ? 'text-slate-600' : 'text-slate-400'}`}>{v('All caught up!')}</div> :
-                    notifications.map((n, i) => (
-                      <div key={i} onClick={() => { setNotifications(ns => ns.map((x, j) => j === i ? {...x, read: true} : x)); setShowNotifications(false); }}
-                        className={`px-3 py-2.5 cursor-pointer transition-colors border-b border-slate-100 last:border-0 hover:bg-slate-50 ${n.read ? '' : 'bg-blue-50/50'}`}>
-                        <div className="flex items-start gap-2">
-                          <span className="text-sm flex-shrink-0 mt-0.5">{n.icon}</span>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-xs font-medium text-slate-700">{n.title}</div>
-                            <div className="text-xs mt-0.5 text-slate-400">{n.message}</div>
-                          </div>
-                          {!n.read && <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0 mt-1.5" />}
+              {showNotifications && <div style={{ position: 'absolute', right: 0, top: '100%', marginTop: 8, width: 288, background: IRON_BG2, border: `1px solid ${IRON_BORDER}`, borderRadius: 10, boxShadow: '0 8px 24px #00000060', zIndex: 50, overflow: 'hidden' }}>
+                <div style={{ padding: '8px 12px', borderBottom: `1px solid ${IRON_BORDER}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: IRON_TEXT, fontFamily: P_SANS }}>Notifications</span>
+                  {notifications.length > 0 && <button onClick={() => setNotifications(n => n.map(x => ({...x, read: true})))} style={{ fontSize: 10, color: C_GOLD, background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}>Mark all read</button>}
+                </div>
+                <div style={{ maxHeight: 256, overflowY: 'auto' }}>
+                  {notifications.length === 0 ? <div style={{ padding: '16px 12px', fontSize: 11, textAlign: 'center', color: IRON_TEXT_DIM }}>All caught up!</div> :
+                  notifications.map((n, i) => (
+                    <div key={i} onClick={() => { setNotifications(ns => ns.map((x, j) => j === i ? {...x, read: true} : x)); setShowNotifications(false); }}
+                      style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: `1px solid ${IRON_BORDER}30`, background: n.read ? 'transparent' : '#C9A84C08' }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                        <span style={{ fontSize: 13, flexShrink: 0, marginTop: 2 }}>{n.icon}</span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: 11, fontWeight: 600, color: IRON_TEXT }}>{n.title}</div>
+                          <div style={{ fontSize: 10, marginTop: 2, color: IRON_TEXT_DIM }}>{n.message}</div>
                         </div>
+                        {!n.read && <div style={{ width: 6, height: 6, borderRadius: '50%', background: C_GOLD, flexShrink: 0, marginTop: 6 }} />}
                       </div>
-                    ))}
-                  </div>
-                </div>}
-              </div>
-              {currentSubject && <div className="flex items-center gap-2 ml-1">
-                <span className="text-xs" style={{ color: accent }}>{IB_CATALOGUE[currentSubject.name]?.icon}</span>
-                <span className="text-xs text-slate-500 hidden sm:inline">{currentSubject.name} {currentSubject.level?.toUpperCase()}</span>
+                    </div>
+                  ))}
+                </div>
               </div>}
             </div>
+            {/* Avatar circle */}
+            <div style={{ width: 28, height: 28, borderRadius: '50%', background: C_GOLD, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 900, color: '#000' }}>{(profile?.name || 'B')[0].toUpperCase()}</div>
           </div>
         </header>
 
@@ -16870,6 +16954,21 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                   <div style={{ color: isSM ? PHOSPHOR+'90' : SHELL_TEXT_DIM, fontSize: 11, fontFamily: isSM ? SHELL_MONO : P_SANS }}>
                     {isSM ? 'MACHINE SPIRIT ACTIVE // COGITATOR ONLINE' : 'Your AI subject tutor'}
                   </div>
+                  {/* V204: Subject performance context line — sidebar header weight */}
+                  {currentSubject && (() => {
+                    const detKey = Object.keys(SUBJECT_DETAIL).find(k => k.toLowerCase().includes((currentSubject.name||'').toLowerCase().split(' ')[0]));
+                    const det = detKey ? SUBJECT_DETAIL[detKey] : null;
+                    const p = progress?.[currentSubject.name];
+                    const grade = p?.currentGrade || p?.grade;
+                    if (!grade && !det?.gap) return null;
+                    const gradeCol = grade ? getGradeColor(grade).color : IRON_TEXT_DIM;
+                    return (
+                      <div style={{ color: SHELL_TEXT_DIM, fontSize: 11, fontWeight: 600, fontFamily: P_SANS, marginTop: 4, letterSpacing: '0.02em' }}>
+                        <span style={{ color: gradeCol, fontWeight: 700 }}>{currentSubject.name}{grade ? ` · Grade ${grade}` : ''}</span>
+                        {det?.gap ? <span style={{ opacity: 0.75 }}> — {det.gap.slice(0, 80)}{det.gap.length > 80 ? '...' : ''}</span> : ''}
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
               {/* V200: Spirit Resonance status bar */}
@@ -17426,22 +17525,23 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
               const totalOrders = edictCount + combatCount + drillCount;
 
               return (
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 24 }}>
-                  {/* Follow Your Orders card */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 24 }}>
+                  {/* Follow Your Orders card — parchment texture + gold border */}
                   <button
                     onClick={() => setCruciblePath('orders')}
                     style={{
-                      background: "#FFFBF0",
-                      border: `2px solid ${P_PARCH2}`,
+                      background: `linear-gradient(135deg, ${SHELL_BG} 0%, ${SHELL_BG2} 100%)`,
+                      border: `1px solid ${C_GOLD}`,
                       borderRadius: 14,
                       padding: "22px 20px",
                       cursor: "pointer",
                       textAlign: "left",
                       transition: "all 0.2s",
-                      boxShadow: `0 2px 12px ${P_PARCH}30`,
+                      boxShadow: `0 2px 12px ${C_GOLD}20`,
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E")`,
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 20px ${P_PARCH}50`; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 12px ${P_PARCH}30`; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 20px ${C_GOLD}40`; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 12px ${C_GOLD}20`; }}
                   >
                     <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 11 }}>
                       <span style={{ fontSize: 36, lineHeight: 1 }}>📜</span>
@@ -17461,21 +17561,22 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     </div>
                   </button>
 
-                  {/* Free Crusade card */}
+                  {/* Free Crusade card — parchment texture + gold border */}
                   <button
                     onClick={() => setCruciblePath('free')}
                     style={{
-                      background: "#FFFFFF90",
-                      border: `2px solid ${P_PARCH}70`,
+                      background: `linear-gradient(135deg, ${SHELL_BG} 0%, ${SHELL_BG2} 100%)`,
+                      border: `1px solid ${C_GOLD}`,
                       borderRadius: 14,
                       padding: "22px 20px",
                       cursor: "pointer",
                       textAlign: "left",
                       transition: "all 0.2s",
-                      boxShadow: `0 2px 12px ${P_PARCH}20`,
+                      boxShadow: `0 2px 12px ${C_GOLD}20`,
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E")`,
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 20px ${P_PARCH}40`; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 12px ${P_PARCH}20`; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 20px ${C_GOLD}40`; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 12px ${C_GOLD}20`; }}
                   >
                     <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 11 }}>
                       <span style={{ fontSize: 36, lineHeight: 1 }}>⚡</span>
@@ -17490,6 +17591,40 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
                     <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                       <span style={{ fontSize: 10, fontWeight: 700, fontFamily: P_SANS, padding: "3px 8px", borderRadius: 6, background: P_PURPLE + "18", color: P_PURPLE, letterSpacing: "0.06em" }}>ANY SUBJECT</span>
                       <span style={{ fontSize: 10, fontWeight: 700, fontFamily: P_SANS, padding: "3px 8px", borderRadius: 6, background: P_BLUE + "18", color: P_BLUE, letterSpacing: "0.06em" }}>ANY TYPE</span>
+                    </div>
+                  </button>
+
+                  {/* V204: Audit of Purity card — parchment texture + gold border */}
+                  <button
+                    onClick={() => { setCruciblePath('audit'); setAuditStep('subject'); setAuditGrading(null); setAuditFile(null); }}
+                    style={{
+                      background: `linear-gradient(135deg, ${SHELL_BG} 0%, ${SHELL_BG2} 100%)`,
+                      border: `1px solid ${C_GOLD}`,
+                      borderRadius: 14,
+                      padding: "22px 20px",
+                      cursor: "pointer",
+                      textAlign: "left",
+                      transition: "all 0.2s",
+                      boxShadow: `0 2px 12px ${C_GOLD}20`,
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E")`,
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 20px ${C_GOLD}40`; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 12px ${C_GOLD}20`; }}
+                  >
+                    <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 11 }}>
+                      <span style={{ fontSize: 36, lineHeight: 1 }}>&#x2696;&#xFE0F;</span>
+                      <div>
+                        <div style={{ color: P_INK3, fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", fontFamily: P_SANS, marginBottom: 4 }}>UPLOAD FOR GRADING</div>
+                        <div style={{ color: P_INK, fontSize: 17, fontWeight: 900, fontFamily: P_SERIF }}>Audit of Purity</div>
+                      </div>
+                    </div>
+                    <div style={{ color: P_INK2, fontSize: 12.5, lineHeight: 1.65, fontFamily: P_SANS, marginBottom: 14 }}>
+                      Upload your handwritten or typed work and receive AI examiner-grade feedback and a predicted grade.
+                    </div>
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: 10, fontWeight: 700, fontFamily: P_SANS, padding: "3px 8px", borderRadius: 6, background: P_PURPLE + "18", color: P_PURPLE, letterSpacing: "0.06em" }}>PDF</span>
+                      <span style={{ fontSize: 10, fontWeight: 700, fontFamily: P_SANS, padding: "3px 8px", borderRadius: 6, background: P_PURPLE + "18", color: P_PURPLE, letterSpacing: "0.06em" }}>HANDWRITTEN</span>
+                      <span style={{ fontSize: 10, fontWeight: 700, fontFamily: P_SANS, padding: "3px 8px", borderRadius: 6, background: P_PURPLE + "18", color: P_PURPLE, letterSpacing: "0.06em" }}>PHOTO</span>
                     </div>
                   </button>
                 </div>
@@ -17624,6 +17759,192 @@ Extract as much as possible. For mark schemes, capture the EXACT marking criteri
             })()}
 
             {/* v100: Back button for free engagement path */}
+            {/* V204: Audit of Purity path */}
+            {!studyMode && cruciblePath === 'audit' && (
+              <div>
+                <button
+                  onClick={() => { setCruciblePath(null); setAuditStep('subject'); setAuditGrading(null); setAuditFile(null); setAuditSubject(''); }}
+                  style={{ background: "none", border: "none", cursor: "pointer", color: P_INK3, fontSize: 12, fontFamily: P_SANS, fontWeight: 600, marginBottom: 14, padding: "4px 0", display: "flex", alignItems: "center", gap: 4 }}
+                >
+                  ← Back to path picker
+                </button>
+
+                {/* V204: Iron-dark panel with parchment interior cards */}
+                <div style={{ background: IRON_BG, border: `1px solid ${C_GOLD}40`, borderRadius: 14, padding: '22px 24px', marginBottom: 16 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                    <span style={{ fontSize: 28 }}>&#x2696;&#xFE0F;</span>
+                    <div>
+                      <div style={{ color: C_GOLD, fontSize: 18, fontWeight: 900, fontFamily: P_SERIF, letterSpacing: '0.03em' }}>Audit of Purity</div>
+                      <div style={{ color: IRON_TEXT_DIM, fontSize: 11, fontFamily: P_SANS }}>Upload your work for AI examiner grading</div>
+                    </div>
+                  </div>
+
+                  {/* Step 1: Subject selector */}
+                  {auditStep === 'subject' && (
+                    <div>
+                      <div style={{ color: C_GOLD, fontSize: 12, fontWeight: 700, fontFamily: P_SANS, marginBottom: 10, letterSpacing: '0.1em' }}>SELECT SUBJECT</div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 8 }}>
+                        {userSubjects.filter(s => !['TOK','Extended Essay'].includes(s.name)).map(sub => {
+                          const detKey = Object.keys(SUBJECT_DETAIL).find(k => k.toLowerCase().includes(sub.name.toLowerCase().split(' ')[0]));
+                          const det = detKey ? SUBJECT_DETAIL[detKey] : null;
+                          const p = progress?.[sub.name];
+                          const subGrade = p?.currentGrade || p?.grade;
+                          const gradeCol = subGrade ? getGradeColor(subGrade).color : IRON_TEXT_DIM;
+                          return (
+                            <button key={sub.name} onClick={() => { setAuditSubject(sub.name); setAuditStep('upload'); }}
+                              style={{
+                                background: auditSubject === sub.name ? C_GOLD : IRON_BG2,
+                                color: auditSubject === sub.name ? IRON_BG : IRON_TEXT,
+                                border: `1px solid ${auditSubject === sub.name ? C_GOLD : IRON_BORDER}`,
+                                borderRadius: 10, padding: '12px 14px', cursor: 'pointer', textAlign: 'left', transition: 'all 0.15s'
+                              }}>
+                              <div style={{ fontSize: 13, fontWeight: 700, fontFamily: P_SANS }}>{sub.name}</div>
+                              <div style={{ fontSize: 10, color: auditSubject === sub.name ? IRON_BG+'CC' : gradeCol, marginTop: 2, fontWeight: 600 }}>Grade {subGrade || '?'} · {sub.level}</div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 2: File upload zone — mockup-compliant drop zone */}
+                  {auditStep === 'upload' && (
+                    <div>
+                      <div style={{ color: IRON_TEXT, fontSize: 11, fontFamily: P_SANS, marginBottom: 12 }}>
+                        Uploading for: <strong style={{ color: C_GOLD }}>{auditSubject}</strong>
+                        <button onClick={() => setAuditStep('subject')} style={{ marginLeft: 8, color: C_GOLD, background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600 }}>Change</button>
+                      </div>
+                      <input type="file" ref={auditFileRef} accept="image/*,application/pdf" style={{ display: 'none' }}
+                        onChange={e => { if (e.target.files?.[0]) handleAuditUpload(e.target.files[0]); }} />
+                      {/* Drop zone: 2px dashed gold, 30px padding per mockup */}
+                      <div
+                        onClick={() => auditFileRef.current?.click()}
+                        style={{
+                          background: IRON_BG2, border: `2px dashed ${C_GOLD}`, borderRadius: 10,
+                          padding: 30, textAlign: 'center', cursor: 'pointer', transition: 'all 0.2s', marginBottom: 10
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.background = IRON_BG3; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = IRON_BG2; }}
+                      >
+                        <div style={{ fontSize: 32, marginBottom: 8 }}>📤</div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: C_GOLD, marginBottom: 6 }}>Drop exam paper here or click to upload</div>
+                        <div style={{ fontSize: 10, color: IRON_TEXT_DIM, marginBottom: 12 }}>PDF, JPG, PNG · Handwritten or digital · Auto-OCR enabled</div>
+                        <div style={{ display: 'flex', gap: 6, justifyContent: 'center', flexWrap: 'wrap' }}>
+                          <button onClick={e => { e.stopPropagation(); auditFileRef.current?.click(); }} style={{ background: '#C9A84C12', border: `1.5px solid ${C_GOLD}`, borderRadius: 7, padding: '7px 12px', color: C_GOLD, fontWeight: 700, fontSize: 10, cursor: 'pointer' }}>📷 Camera</button>
+                          <button onClick={e => { e.stopPropagation(); auditFileRef.current?.click(); }} style={{ background: '#C9A84C12', border: `1.5px solid ${C_GOLD}`, borderRadius: 7, padding: '7px 12px', color: C_GOLD, fontWeight: 700, fontSize: 10, cursor: 'pointer' }}>📄 From reMarkable</button>
+                          <button onClick={e => { e.stopPropagation(); auditFileRef.current?.click(); }} style={{ background: '#C9A84C12', border: `1.5px solid ${C_GOLD}`, borderRadius: 7, padding: '7px 12px', color: C_GOLD, fontWeight: 700, fontSize: 10, cursor: 'pointer' }}>💾 Files</button>
+                        </div>
+                      </div>
+                      {/* Recent uploads from repo */}
+                      {(() => {
+                        const recentGraded = (repo || []).filter(s => s.grade != null && s.subject).slice(0, 3);
+                        if (recentGraded.length === 0) return null;
+                        return (
+                          <div style={{ background: IRON_BG2, border: `1.5px solid ${IRON_BORDER}60`, borderRadius: 10, padding: 14, marginTop: 10 }}>
+                            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', color: IRON_TEXT_DIM, marginBottom: 8 }}>RECENT UPLOADS</div>
+                            {recentGraded.map((s, i) => {
+                              const gc = getGradeColor(s.grade);
+                              return (
+                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 0', borderBottom: i < recentGraded.length - 1 ? `1px solid ${IRON_BORDER}30` : 'none' }}>
+                                  <div style={{ width: 32, height: 32, borderRadius: '50%', background: gc.bg, border: `2px solid ${gc.color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 900, fontFamily: P_SERIF, color: gc.color, flexShrink: 0 }}>{s.grade}</div>
+                                  <div style={{ flex: 1, fontSize: 11, color: IRON_TEXT }}><b>{s.subject}</b>{s.paper ? ` — ${s.paper}` : ''}<br/><span style={{ fontSize: 9, color: IRON_TEXT_DIM }}>{s.date ? new Date(s.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : ''}</span></div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+
+                  {/* Step 3: Processing */}
+                  {auditStep === 'processing' && (
+                    <div style={{ textAlign: 'center', padding: '30px 0' }}>
+                      <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" style={{ color: C_GOLD }} />
+                      <div style={{ color: IRON_TEXT, fontSize: 14, fontWeight: 700, fontFamily: P_SANS, marginBottom: 4 }}>
+                        {auditFile?.type?.includes('pdf') ? 'Analysing document...' : 'Reading your handwriting...'}
+                      </div>
+                      <div style={{ color: IRON_TEXT_DIM, fontSize: 11, fontFamily: P_SANS }}>The Machine Spirit is grading your work against IB criteria</div>
+                    </div>
+                  )}
+
+                  {/* Step 4: Results — 5-tier grade colors per spec */}
+                  {auditStep === 'results' && auditGrading && (() => {
+                    const g = auditGrading.grade;
+                    const gc = g != null ? getGradeColor(g) : { color: C_GOLD, bg: IRON_BG2, label: '' };
+                    const gradeColor = gc.color;
+                    const gradeBg = gc.bg;
+                    const gradeLabel = gc.label;
+                    return (
+                    <div>
+                      <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start', marginBottom: 18 }}>
+                        {/* Grade circle with RAG color */}
+                        <div style={{
+                          width: 80, height: 80, borderRadius: '50%', flexShrink: 0,
+                          background: `conic-gradient(${gradeColor} ${(auditGrading.percentage || 0) * 3.6}deg, ${IRON_BORDER} 0deg)`,
+                          display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        }}>
+                          <div style={{
+                            width: 66, height: 66, borderRadius: '50%', background: IRON_BG,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'
+                          }}>
+                            <div style={{ color: gradeColor, fontSize: 24, fontWeight: 900, fontFamily: P_SERIF, lineHeight: 1 }}>{g || '?'}</div>
+                            <div style={{ color: IRON_TEXT_DIM, fontSize: 8, fontWeight: 700, letterSpacing: '0.1em' }}>GRADE</div>
+                          </div>
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          {gradeLabel && <div style={{ display: 'inline-block', background: gradeBg, color: gradeColor, fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', fontFamily: P_SANS, padding: '3px 10px', borderRadius: 6, marginBottom: 6 }}>{gradeLabel}</div>}
+                          <div style={{ color: IRON_TEXT, fontSize: 14, fontWeight: 700, fontFamily: P_SANS, marginBottom: 6 }}>{auditGrading.summary}</div>
+                          {auditGrading.percentage && <div style={{ color: IRON_TEXT_DIM, fontSize: 11, fontFamily: P_SANS }}>{auditGrading.percentage}% · {auditSubject}</div>}
+                        </div>
+                      </div>
+
+                      {/* Strengths — parchment interior card */}
+                      {auditGrading.strengths?.length > 0 && (
+                        <div style={{ background: SHELL_BG, border: `1px solid ${C_GOLD}30`, borderRadius: 10, padding: '14px 16px', marginBottom: 12 }}>
+                          <div style={{ color: P_GREEN, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', fontFamily: P_SANS, marginBottom: 6 }}>STRENGTHS</div>
+                          {auditGrading.strengths.map((s, i) => (
+                            <div key={i} style={{ color: P_INK2, fontSize: 12, fontFamily: P_SANS, lineHeight: 1.6, paddingLeft: 12, borderLeft: `2px solid ${P_GREEN}40`, marginBottom: 4 }}>{s}</div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Improvements — parchment interior card */}
+                      {auditGrading.improvements?.length > 0 && (
+                        <div style={{ background: SHELL_BG, border: `1px solid ${C_GOLD}30`, borderRadius: 10, padding: '14px 16px', marginBottom: 12 }}>
+                          <div style={{ color: P_RED, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', fontFamily: P_SANS, marginBottom: 6 }}>AREAS FOR IMPROVEMENT</div>
+                          {auditGrading.improvements.map((s, i) => (
+                            <div key={i} style={{ color: P_INK2, fontSize: 12, fontFamily: P_SANS, lineHeight: 1.6, paddingLeft: 12, borderLeft: `2px solid ${P_RED}30`, marginBottom: 4 }}>{s}</div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Detailed feedback — parchment interior card */}
+                      {auditGrading.detailedFeedback && (
+                        <div style={{ background: SHELL_BG, border: `1px solid ${C_GOLD}30`, borderRadius: 10, padding: '14px 16px', marginBottom: 14 }}>
+                          <div style={{ color: P_INK3, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', fontFamily: P_SANS, marginBottom: 6 }}>DETAILED FEEDBACK</div>
+                          <div style={{ color: P_INK2, fontSize: 12, fontFamily: P_SANS, lineHeight: 1.7 }}>{auditGrading.detailedFeedback}</div>
+                        </div>
+                      )}
+
+                      {/* Action buttons */}
+                      <div style={{ display: 'flex', gap: 10 }}>
+                        <button onClick={() => { setAuditStep('upload'); setAuditGrading(null); setAuditFile(null); }}
+                          style={{ background: C_GOLD, color: IRON_BG, border: 'none', borderRadius: 10, padding: '10px 20px', cursor: 'pointer', fontSize: 12, fontWeight: 700, fontFamily: P_SANS }}>
+                          Upload Another
+                        </button>
+                        <button onClick={() => { setCruciblePath(null); setAuditStep('subject'); setAuditGrading(null); setAuditFile(null); setAuditSubject(''); }}
+                          style={{ background: 'transparent', color: IRON_TEXT_DIM, border: `1px solid ${IRON_BORDER}`, borderRadius: 10, padding: '10px 20px', cursor: 'pointer', fontSize: 12, fontWeight: 700, fontFamily: P_SANS }}>
+                          Back to Crucible
+                        </button>
+                      </div>
+                    </div>
+                    );
+                  })()}
+                </div>
+              </div>
+            )}
+
             {!studyMode && cruciblePath === 'free' && (
               <button
                 onClick={() => { setCruciblePath(null); setCombatStep(1); setCombatSubject(''); }}
@@ -24890,6 +25211,68 @@ Return JSON array: [{"text":"full question with all data inline","marks":4,"topi
                 </div>
               ))}
             </div>
+
+            {/* ═══ V204: TODAY'S BATTLE PLAN ═══ */}
+            {(() => {
+              const todayStr = dayKey();
+              const battleTasks = [];
+              // Helper: one-tap start — set subject, preset, topic, skip to deploy step 5
+              const oneTapStart = (subj, task, preset) => {
+                if (subj) {
+                  const subjIdx = userSubjects.findIndex(s => s.name === subj);
+                  if (subjIdx >= 0) { setCombatSubject(subj); setActiveSubjectIdx(subjIdx); }
+                }
+                setStudyPreset(preset || 'quick');
+                setStudyTopic(task || '');
+                safeSetTab('study');
+                setCruciblePath('free');
+                setCombatStep(5); // skip straight to deploy — bypasses the 5-step wizard
+              };
+              // Tutor homework (edicts)
+              if (tutorHomework?.length > 0) {
+                tutorHomework.filter(h => !h.completed).forEach(h => {
+                  battleTasks.push({ id: 'hw-' + (h.id || Math.random()), label: h.title || h.task || 'Tutor Assignment', subject: h.subject || '', type: 'EDICT', typeColor: C_GOLD, done: false, action: () => oneTapStart(h.subject, h.title || h.task, 'full') });
+                });
+              }
+              // Daily missions
+              if (dailyMissions?.length > 0) {
+                dailyMissions.filter(m => !m.completed).forEach(m => {
+                  battleTasks.push({ id: m.id || 'dm-' + Math.random(), label: m.task, subject: '', type: 'MISSION', typeColor: C_RED, done: false, action: () => oneTapStart('', m.task, 'quick') });
+                });
+              }
+              // Planner tasks
+              const todayPlan = planner?.days?.[todayStr] || [];
+              if (todayPlan.length > 0) {
+                todayPlan.forEach(t => {
+                  battleTasks.push({ id: 'plan-' + (t.id || Math.random()), label: t.title || t.task || 'Study task', subject: t.subject || '', type: 'DRILL', typeColor: C_TEAL, done: !!t.done, action: () => oneTapStart(t.subject, t.title || t.task, 'quick') });
+                });
+              }
+              if (battleTasks.length === 0) return null;
+              return (
+                <div style={{ background: SHELL_BG2, border: `1px solid ${SHELL_BORDER}`, borderRadius: 12, padding: '16px 18px', marginBottom: 8 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                    <span style={{ fontSize: 16 }}>🗡️</span>
+                    <span style={{ color: C_GOLD, fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', fontFamily: SHELL_MONO }}>TODAY&apos;S BATTLE PLAN</span>
+                    <span style={{ marginLeft: 'auto', color: SHELL_TEXT_DIM, fontSize: 10, fontFamily: P_SANS }}>{battleTasks.filter(t => t.done).length}/{battleTasks.length} completed</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {battleTasks.slice(0, 8).map(task => (
+                      <div key={task.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px', background: task.done ? SHELL_BG3 : 'transparent', border: `1px solid ${task.done ? SHELL_BORDER : SHELL_BORDER + '80'}`, borderRadius: 8, opacity: task.done ? 0.55 : 1 }}>
+                        <div style={{ width: 18, height: 18, borderRadius: '50%', border: `2px solid ${task.done ? '#2A8A4A' : SHELL_BORDER}`, background: task.done ? '#2A8A4A' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          {task.done && <span style={{ color: '#fff', fontSize: 10, fontWeight: 900 }}>✓</span>}
+                        </div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ color: SHELL_TEXT, fontSize: 12, fontWeight: 600, fontFamily: P_SANS, textDecoration: task.done ? 'line-through' : 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{task.label}</div>
+                          {task.subject && <div style={{ color: SHELL_TEXT_DIM, fontSize: 10, fontFamily: P_SANS }}>{task.subject}</div>}
+                        </div>
+                        <span style={{ fontSize: 9, fontWeight: 700, fontFamily: P_SANS, padding: '2px 7px', borderRadius: 5, background: task.typeColor + '18', color: task.typeColor, letterSpacing: '0.06em', flexShrink: 0 }}>{task.type}</span>
+                        {!task.done && <button onClick={task.action} style={{ background: C_GOLD, color: '#fff', border: 'none', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 10, fontWeight: 700, fontFamily: P_SANS, flexShrink: 0 }}>START</button>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* ═══ V201: P3.26 BEAT YOUR GHOST — self-competition ═══ */}
             {(() => {

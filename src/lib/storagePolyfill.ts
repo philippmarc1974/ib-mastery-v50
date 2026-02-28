@@ -11,12 +11,12 @@ export function installStoragePolyfill() {
   if ((window as any).storage) return; // already installed
 
   (window as any).storage = {
-    get: (key: string): Promise<{ value: string | null }> => {
+    // Returns raw string (not { value }) — matches what all consumers expect
+    get: (key: string): Promise<string | null> => {
       try {
-        const value = localStorage.getItem(key);
-        return Promise.resolve({ value });
+        return Promise.resolve(localStorage.getItem(key));
       } catch {
-        return Promise.resolve({ value: null });
+        return Promise.resolve(null);
       }
     },
     set: (key: string, value: string): Promise<void> => {
